@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6d93ac399848a42af05d6c7223984c, type: 3}
+  m_Name: ClearCorpse
+  m_EditorClassIdentifier: 
+  DisplayName: Bunker ( Clear Corpse )
+  Icon: {fileID: 21300000, guid: 958e37651040f8a4a9adac756f46d2ca, type: 3}
+  Size: {x: 150, y: 110}
+  Position: {x: 0, y: 0}
+  DetailImage: {fileID: 21300000, guid: 0fd31caea24c6204c9a6606be05e59eb, type: 3}
+  HeatGainOnLoot: -10
+  BaseSafeness: 95
+  SaftnessGainPreExtraBot: 5
+  MinRawMaterial: 0
+  MaxRawMaterial: 50
+  MinScrapMaterial: 0
+  MaxScrapMaterial: 50
+  MinChemMaterial: 0
+  MaxChemMaterial: 50
+  MinElectronicMaterial: 0
+  MaxElectronicMaterial: 50

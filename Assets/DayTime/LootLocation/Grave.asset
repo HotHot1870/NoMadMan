@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6d93ac399848a42af05d6c7223984c, type: 3}
+  m_Name: Grave
+  m_EditorClassIdentifier: 
+  DisplayName: Grave
+  Icon: {fileID: 21300000, guid: 9387f52159bd80549a956ceaebb87d9d, type: 3}
+  Size: {x: 150, y: 150}
+  Position: {x: 50, y: 200}
+  DetailImage: {fileID: 21300000, guid: a36216fa1c5177342979204163aff966, type: 3}
+  HeatGainOnLoot: 10
+  BaseSafeness: 50
+  SaftnessGainPreExtraBot: 13
+  MinRawMaterial: 0
+  MaxRawMaterial: 500
+  MinScrapMaterial: 0
+  MaxScrapMaterial: 0
+  MinChemMaterial: 0
+  MaxChemMaterial: 0
+  MinElectronicMaterial: 0
+  MaxElectronicMaterial: 0

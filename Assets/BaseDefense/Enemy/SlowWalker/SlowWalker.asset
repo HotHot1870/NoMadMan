@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e9543349118c4ba624738b61e5bc4, type: 3}
+  m_Name: SlowWalker
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 4339766195583184542, guid: 81cbf7669c0ae5f42877a24c9b37a158, type: 3}
+  MaxHp: 100
+  Damage: 33
+  MoveSpeed: 3
+  AnimatorForImage: {fileID: 9100000, guid: 86772a20f2505d149bb44f713e434d16, type: 2}
+  AnimatorForHitBox: {fileID: 9100000, guid: b233f068d87880f4f8385eae452ef8c7, type: 2}
+  TargetTotalHeatForSpawn: 0
+  HeatGainForSpawn: 2

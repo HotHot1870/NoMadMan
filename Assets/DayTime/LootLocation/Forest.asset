@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6d93ac399848a42af05d6c7223984c, type: 3}
+  m_Name: Forest
+  m_EditorClassIdentifier: 
+  DisplayName: Forest
+  Icon: {fileID: 21300000, guid: d54a4f361097a7e43a7df62d4cdd366e, type: 3}
+  Size: {x: 150, y: 150}
+  Position: {x: -150, y: -150}
+  DetailImage: {fileID: 21300000, guid: 0dd44702c44226247a46ffa58f28d2b0, type: 3}
+  HeatGainOnLoot: 2
+  BaseSafeness: 75
+  SaftnessGainPreExtraBot: 10
+  MinRawMaterial: 500
+  MaxRawMaterial: 3000
+  MinScrapMaterial: 0
+  MaxScrapMaterial: 100
+  MinChemMaterial: 0
+  MaxChemMaterial: 500
+  MinElectronicMaterial: 0
+  MaxElectronicMaterial: 100
