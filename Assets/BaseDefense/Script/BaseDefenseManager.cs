@@ -40,6 +40,7 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
+    [SerializeField] private CrosshairControl m_CrosshairControl;
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 

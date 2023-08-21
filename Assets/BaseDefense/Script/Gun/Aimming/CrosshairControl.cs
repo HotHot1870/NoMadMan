@@ -39,6 +39,9 @@ public class CrosshairControl : MonoBehaviour
         });
     }
 
+    private void Update() {
+        OnCrosshairMove();
+    }
     public void OnCrosshairMove(){
         m_AimDragMouseEndPos = Input.mousePosition;
 
@@ -65,6 +68,16 @@ public class CrosshairControl : MonoBehaviour
 
         // light follow crossHair
         //var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
+        OutOffBountPrevention();
+    }
+
+    private void OutOffBountPrevention(){
+        float border = 80f;
+        m_CrosshairParent.position = new Vector3(
+            Mathf.Clamp(m_CrosshairParent.position.x, border, Screen.width-border - border),
+            Mathf.Clamp(m_CrosshairParent.position.y, border, Screen.height-border - border),
+            0
+            );
     }
 
 
