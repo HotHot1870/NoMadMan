@@ -38,6 +38,7 @@ public class CrosshairControl : MonoBehaviour
         {
             m_AimDragMouseStartPos = Vector2.zero;
             m_MousePreviousPos = Vector3.zero;
+            m_CrossHairDragStartPos = m_CrosshairParent.position;
         });
     }
 
