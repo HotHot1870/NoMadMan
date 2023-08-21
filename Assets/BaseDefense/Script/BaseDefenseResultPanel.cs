@@ -59,7 +59,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
             if(isLose){
                 DamageReport();
             }else{
-                BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
+                //BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
             }
         });
     }
@@ -75,7 +75,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
 
         m_NextBtn.onClick.AddListener(() =>
         {
-            BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
+            //BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
         });
     }
 }

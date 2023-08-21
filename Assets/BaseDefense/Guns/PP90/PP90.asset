@@ -13,36 +13,18 @@ MonoBehaviour:
   m_Name: PP90
   m_EditorClassIdentifier: 
   DisplayName: PP90
-  Description: '+ Fast Reload
-
-    + Stable on rapid fire'
   DisplaySprite: {fileID: 21300000, guid: 19fee6b83a29ed345a7a4e1ab09be400, type: 3}
   Damage: 5.5
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 20
   FPSSprite: {fileID: 21300000, guid: 7232e5dcf09836646be2e58bd1ba6058, type: 3}
-  ResourceUseOnFullyReload:
-    Raw: 10
-    Scrap: 20
-    Chem: 25
-    Electronic: 0
-    Bot: 0
-    Heat: 0
-  ResourceUseOnReloadOne:
-    Raw: 0
-    Scrap: 0
-    Chem: 0
-    Electronic: 0
-    Bot: 0
-    Heat: 0
-  LightSizeGainOnShoot: 6
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 4
   CameraShakeAmount: 10
   IsSemiAuto: 1
   FireRate: 5.5
-  Accuracy: 85
+  Accuracy: 100
   RecoilControl: 85
   Stability: 85
   Handling: 85

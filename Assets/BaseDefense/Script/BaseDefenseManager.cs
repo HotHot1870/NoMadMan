@@ -40,7 +40,6 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
-    [SerializeField] private BaseDefenseTimmyPanel m_BaseDefenseTimmyPanel;
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 
@@ -138,9 +137,6 @@ public class BaseDefenseManager : MonoBehaviour
         }
     }
 
-    public void SetTimmyAssitancePanel(){
-        m_BaseDefenseTimmyPanel.Init();
-    }
 
     public void ChangeGameStage(BaseDefenseStage newStage){
         switch (m_GameStage)
