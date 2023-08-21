@@ -19,6 +19,8 @@ public class CrosshairControl : MonoBehaviour
     private Vector3 m_CrossHairDragStartPos;
     private Vector3 m_MousePreviousPos = Vector3.zero;
 
+        float tmp = 50f;
+
     private void Start() {
         m_AimBtn.onDown.AddListener(() =>
         {
@@ -40,7 +42,13 @@ public class CrosshairControl : MonoBehaviour
     }
 
     private void Update() {
-        OnCrosshairMove();
+        tmp = Time.deltaTime*25f + tmp;
+        if(tmp>100f){
+            tmp = 0;
+        }
+
+        SetCrosshairByRecoil(tmp);
+        //OnCrosshairMove();
     }
     public void OnCrosshairMove(){
         m_AimDragMouseEndPos = Input.mousePosition;
@@ -82,12 +90,11 @@ public class CrosshairControl : MonoBehaviour
 
 
 
-    public void SetUpCrosshair(Vector2 screenPos, float recoil){
-        m_CrosshairParent.position = screenPos;
+    public void SetCrosshairByRecoil(float recoil){
         m_Top.localPosition = new Vector3(0,recoil,0);
-        m_Left.localPosition = new Vector3(0,recoil,0);
-        m_Right.localPosition = new Vector3(0,recoil,0);
-        m_Down.localPosition = new Vector3(0,recoil,0);
+        m_Left.localPosition = new Vector3(-recoil,0,0);
+        m_Right.localPosition = new Vector3(recoil,0,0);
+        m_Down.localPosition = new Vector3(0,-recoil,0);
 
     }
 
