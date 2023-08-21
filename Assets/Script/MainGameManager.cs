@@ -13,58 +13,6 @@ namespace MainGameNameSpace
         public GunScriptable Gun;
         public bool IsOwned = false;
     }
-    [System.Serializable]
-    public class ResourcesRecord
-    {
-        public float Raw = 0;
-        public float Scrap = 0;
-        public float Chem = 0;
-        public float Electronic = 0;
-        public int Bot = 0;
-        public float Heat = 0;
-
-        public ResourcesRecord GetReverse()
-        {
-            var ans = new ResourcesRecord
-            {
-                Raw = Raw * -1,
-                Scrap = Scrap * -1,
-                Chem = Chem * -1,
-                Electronic = Electronic * -1,
-                Bot = Bot * -1,
-                Heat = Heat * -1,
-            };
-            return ans;
-        }
-
-        public bool IsEnough(ResourcesRecord record)
-        {
-            return Raw >= record.Raw && Scrap >= record.Scrap && Chem >= record.Chem &&
-                 Electronic >= record.Electronic && Bot >= record.Bot && Heat >= record.Heat;
-        }
-
-        public ResourcesRecord Multiply(float multiplyBy){
-            return new ResourcesRecord{
-                Raw = Raw * multiplyBy,
-                Scrap = Scrap * multiplyBy,
-                Chem = Chem * multiplyBy,
-                Electronic = Electronic * multiplyBy,
-                Bot = (int) (Bot * multiplyBy),
-                Heat = Heat * multiplyBy,
-            };
-
-        }
-
-        public void Change(ResourcesRecord record)
-        {
-            Raw += record.Raw;
-            Scrap += record.Scrap;
-            Chem += record.Chem;
-            Electronic += record.Electronic;
-            Bot += record.Bot;
-            Heat += record.Heat;
-        }
-    }
 }
 
 public class MainGameManager : MonoBehaviour
@@ -77,19 +25,6 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
 
-    private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n" +
-        " - High cap at 1000 \n" +
-        " - Low cap at 15 \n" +
-        " - 30 seconds per wave \n" + // EnemySpawnController >> m_TimePassed 
-        " - Random select vaild enemy(s) until it reach Wave heat \n" +
-        " - All selected enemy will spawn within the first 20 seconds \n" +
-        " - Wave heat = TotalHeat / 3 \n" + // EnemySpawnController >> TotalWave
-        " - To next day it player clear all 3 waves";
-
-    //[Header(TotalHeatHeader)]
-    //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
-
-    [SerializeField] private ResourcesRecord m_OwnedResource = new ResourcesRecord();
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
     [SerializeField][Range(2,4)] private int m_WeaponSlotOwned = 2;
     
@@ -129,15 +64,6 @@ public class MainGameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this.gameObject);
-        m_OwnedResource = new ResourcesRecord
-        {
-            Raw = 5000,
-            Scrap = 5000,
-            Chem = 5000,
-            Electronic = 5000,
-            Bot = 10,
-            Heat = 35
-        };
     }
 
     private void Start()
@@ -192,31 +118,12 @@ public class MainGameManager : MonoBehaviour
         return m_AimSensitivity;
     }
 
-
-    public float GetHeat()
-    {
-        if (m_OwnedResource.Heat > 1000)
-        {
-            m_OwnedResource.Heat = 1000;
-        }
-        if (m_OwnedResource.Heat < 15)
-        {
-            m_OwnedResource.Heat = 15;
-        }
-        return m_OwnedResource.Heat;
-    }
-
     public void AddNewAudioSource(AudioSource audioSource)
     {
         m_AllAudioSource.Add(audioSource);
         audioSource.volume = m_Volume;
 
         UpdateVolume();
-    }
-
-    public int GetOwnedBotCount()
-    {
-        return m_OwnedResource.Bot;
     }
 
     public void UpdateVolume()
@@ -237,16 +144,6 @@ public class MainGameManager : MonoBehaviour
         {
             m_AllAudioSource.RemoveAt(toBeRemove[i] - i);
         }
-    }
-
-    public void GainResources(ResourcesRecord gain)
-    {
-        m_OwnedResource.Change(gain);
-    }
-
-    public ResourcesRecord GetOwnedResources()
-    {
-        return m_OwnedResource;
     }
 
 }

@@ -66,21 +66,6 @@ public class GunReloadController : MonoBehaviour
         }
     }
 
-    private void SetResourceUsedText(ResourcesRecord used){
-        m_ResourceCanvasGroup.alpha = 1;
-        var ownedResourceBefore = MainGameManager.GetInstance().GetOwnedResources();
-        m_Raw.text = $"{ (int)ownedResourceBefore.Raw } - ({(int)used.Raw})";
-        m_Scrap.text =$"{(int)ownedResourceBefore.Scrap} - ({(int)used.Scrap})";
-        m_Chem.text =$"{(int)ownedResourceBefore.Chem} - ({(int)used.Chem})";
-        m_Electronic.text =$"{(int)ownedResourceBefore.Electronic} - ({(int)used.Electronic})";
-        m_Bot.text =$"{(int)ownedResourceBefore.Bot} - ({(int)used.Bot})";
-        if(m_ResourceFadeCourtine != null){
-            StopCoroutine(m_ResourceFadeCourtine);
-        }
-        if(this.isActiveAndEnabled)
-            m_ResourceFadeCourtine = StartCoroutine(ResourceGroupFadeOut());
-    }
-
     private IEnumerator ResourceGroupFadeOut(){
         float passedTime = 0;
         float duration = 4;
@@ -332,40 +317,13 @@ public class GunReloadController : MonoBehaviour
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.GainOneAmmo ) ){
             // Gain one ammo 
-            
-            if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnReloadOne)){
-                SetResourceUsedText(m_Config.GunScriptable.ResourceUseOnReloadOne);
-                MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnReloadOne.GetReverse());
-                m_Config.GainAmmo?.Invoke(1);
-            }else{
-                Debug.LogError("Not enough resourses for reloading");
-                if(m_IsTryReload){
-                    return;
-                }
-                BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
-                return ;
-            }
-
-            // to next phase if ammo is full
-            if(m_Config.IsFullClipAmmo() && actionEnum != (actionEnum | GunReloadActionResult.CancelReload)
-                && actionEnum != ( actionEnum | GunReloadActionResult.ToNextPhase )){
-                actionEnum &= ~ GunReloadActionResult.RefreshThisPhase;
-                ResultAction(GunReloadActionResult.ToNextPhase);
-            }
-            
+            m_Config.GainAmmo?.Invoke(1);
         }
 
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.FullAmmoReload ) ){
             // Full Ammo Reload
-            if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnFullyReload)){
-                SetResourceUsedText(m_Config.GunScriptable.ResourceUseOnFullyReload);
-                MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnFullyReload.GetReverse());
-                m_Config.SetAmmoToFull?.Invoke();
-            }else{
-                Debug.LogError("Not enough resourses for reloading");
-            }
-            
+            m_Config.SetAmmoToFull?.Invoke();
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.RefreshThisPhase ) ){

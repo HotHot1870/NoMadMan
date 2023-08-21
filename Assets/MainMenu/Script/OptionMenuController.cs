@@ -20,7 +20,7 @@ public class OptionMenuController : MonoBehaviour
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1.5f,m_AimSensitivitySlider.normalizedValue) );
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 4f,m_AimSensitivitySlider.normalizedValue) );
         });
 
         m_VolumeSlider.onValueChanged.AddListener((x)=>{

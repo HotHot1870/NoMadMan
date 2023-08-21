@@ -10,7 +10,6 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private List<EnemyScriptable> m_AllEnemyTypes = new List<EnemyScriptable>();
     [SerializeField] private Transform m_EnemyParent;
 
-    private float m_WaveHeat = 0;
     private int m_WaveCount = 0;
     private float m_TimePassed = 0;
     private const int TotalWave = 3;
@@ -20,9 +19,8 @@ public class EnemySpawnController : MonoBehaviour
     private float m_LastSpawnEnemyDelayTime = 0;
 
     private void Start() {
-        m_WaveHeat = MainGameManager.GetInstance().GetHeat() / TotalWave ;
         // filter out enemy type that need too much heat
-        m_VaildEnemies = new List<EnemyScriptable>(m_AllEnemyTypes.Where(x=>x.TargetTotalHeatForSpawn<= MainGameManager.GetInstance().GetHeat()).ToList());
+        //m_VaildEnemies = new List<EnemyScriptable>(m_AllEnemyTypes.Where(x=>x.TargetTotalHeatForSpawn<= MainGameManager.GetInstance().GetHeat()).ToList());
         BaseDefenseManager.GetInstance().m_UpdateAction += EnemySpawnUpdate;
     }
 
@@ -61,9 +59,8 @@ public class EnemySpawnController : MonoBehaviour
         }
     }
     private void WaveHandler(){
-        float totalHeatOfThisWave = 0;
         m_LastSpawnEnemyCoroutine = null;
-        m_LastSpawnEnemyDelayTime = 0;
+        m_LastSpawnEnemyDelayTime = 0;/*
         while (totalHeatOfThisWave<m_WaveHeat )
         {
             // select random enemy
@@ -80,7 +77,7 @@ public class EnemySpawnController : MonoBehaviour
             // gain heat 
             totalHeatOfThisWave += targetEnemyScriptable.HeatGainForSpawn;
 
-        }
+        }*/
         m_LastSpawnEnemyCoroutine = StartCoroutine(LastSpawnEnemyDelay(m_LastSpawnEnemyDelayTime));
 
         m_TimePassed = 30;

@@ -28,23 +28,6 @@ public class BaseDefenseTimmyPanel : MonoBehaviour
     public void Init()
     {
         m_Self.SetActive(true);
-        // before
-        var resourceData = MainGameManager.GetInstance().GetOwnedResources();
-        m_Wall.Before.text = ((int)MainGameManager.GetInstance().GetWallCurHp()).ToString();
-        m_Bot.Before.text = resourceData.Bot.ToString();
-
-        // changes
-        float wallHpGain = MainGameManager.GetInstance().GetWallMaxHp() * Random.Range(0.1f,0.2f);
-        MainGameManager.GetInstance().ChangeWallHp(wallHpGain);
-        m_Wall.Changes.text = "+"+((int)wallHpGain).ToString();
-
-        int botGain = Random.Range(1, 4);
-        MainGameManager.GetInstance().GetOwnedResources().Change(new ResourcesRecord { Bot = botGain });
-        m_Bot.Changes.text = $"+{botGain.ToString()}";
-
-        // after
-        m_Wall.After.text = ((int)MainGameManager.GetInstance().GetWallCurHp()).ToString();
-        m_Bot.After.text = MainGameManager.GetInstance().GetOwnedResources().Bot.ToString();
 
     }
 }
