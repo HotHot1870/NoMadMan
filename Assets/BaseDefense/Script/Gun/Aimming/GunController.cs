@@ -254,7 +254,7 @@ public class GunController : MonoBehaviour
             
             // acc lose on shoot            
             BaseDefenseManager.GetInstance().SetAccruacy(
-                BaseDefenseManager.GetInstance().GetAccruacy()-100+m_SelectedGun.RecoilControl
+                BaseDefenseManager.GetInstance().GetAccruacy()-m_SelectedGun.Recoil
             );
             /*
             shotPoint.transform.SetParent(m_ShootDotParent);
@@ -296,6 +296,11 @@ public class GunController : MonoBehaviour
         ChangeAmmoCount(-1, false);
     }
 
+
+    public float GetShootCoolDown(){
+        return m_CurrentShootCoolDown;
+    }
+
     private void ChangeAmmoCount(float num, bool isSetAmmoCount = false)
     {
         if (isSetAmmoCount)
@@ -313,37 +318,9 @@ public class GunController : MonoBehaviour
 
         m_AmmoText.text = $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}";
     }
-
-
-/*
-    private void CrossHairOutOfBoundPrevention()
-    {
-        if (m_CrossHair.position.x < 0)
-        {
-            // Left out of bound
-            m_CrossHair.position = new Vector3(0, m_CrossHair.position.y, 0);
-        }
-
-        if (m_CrossHair.position.x > Screen.width)
-        {
-            // Right out of bound
-            m_CrossHair.position = new Vector3(Screen.width, m_CrossHair.position.y, 0);
-        }
-
-
-        if (m_CrossHair.position.y > Screen.height)
-        {
-            // Top out of bound
-            m_CrossHair.position = new Vector3(m_CrossHair.position.x, Screen.height, 0);
-        }
-
-
-        if (m_CrossHair.position.y < 0)
-        {
-            // Down out of bound
-            m_CrossHair.position = new Vector3(m_CrossHair.position.x, 0, 0);
-        }
-    }*/
+    public GunScriptable GetSelectedGun(){
+        return m_SelectedGun;
+    }
 
 
     private void OnDestroy()

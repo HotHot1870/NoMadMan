@@ -56,12 +56,23 @@ public class CrosshairControl : MonoBehaviour
             OnCrosshairMove();
             curAcc = BaseDefenseManager.GetInstance().GetAccruacy();
         }else if( curAcc < 100 ){
-            curAcc += Time.deltaTime*120f;
+            curAcc = GainAccOvertime(curAcc);
         }
         
         BaseDefenseManager.GetInstance().SetAccruacy( curAcc );
 
-        SetCrosshairAccuracy(100f-curAcc);
+        SetCrosshairAccuracy(100f-BaseDefenseManager.GetInstance().GetAccruacy());
+    }
+
+    private float GainAccOvertime(float curAcc){
+        
+        if(BaseDefenseManager.GetInstance().GetGunController().GetShootCoolDown()>0){
+            // gain less acc on shoot cool down
+            curAcc += Time.deltaTime*50f;
+        }else{
+            curAcc += Time.deltaTime*120f;
+        }
+        return curAcc;
     }
 
     public Vector3 GetCrosshairPos(){
@@ -82,7 +93,7 @@ public class CrosshairControl : MonoBehaviour
         if (mouseCurToPassDiatance <=0f)
         {
             // draging but not moving , gain accruacy over time
-            curAcc += Time.deltaTime*120f;
+            curAcc = GainAccOvertime(curAcc);
         }
         else
         {

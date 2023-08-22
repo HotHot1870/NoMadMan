@@ -189,7 +189,11 @@ public class BaseDefenseManager : MonoBehaviour
         return m_CurrentAccruacy;
     }
     public void SetAccruacy(float newAccuracy){
-        m_CurrentAccruacy = Mathf.Clamp(newAccuracy,0f,100f);
+        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunController.GetSelectedGun().RecoilControl , m_GunController.GetSelectedGun().Accuracy);
+    }
+
+    public GunController GetGunController(){
+        return m_GunController;
     }
 
     public void OnWallHit(float damage){
