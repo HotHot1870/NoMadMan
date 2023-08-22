@@ -63,6 +63,11 @@ public class CrosshairControl : MonoBehaviour
 
         SetCrosshairAccuracy(100f-curAcc);
     }
+
+    public Vector3 GetCrosshairPos(){
+        return m_CrosshairParent.position;
+    }
+
     public void OnCrosshairMove(){
         var curAcc = BaseDefenseManager.GetInstance().GetAccruacy();
 

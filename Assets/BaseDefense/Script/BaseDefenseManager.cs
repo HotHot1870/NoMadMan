@@ -140,6 +140,11 @@ public class BaseDefenseManager : MonoBehaviour
         }
     }
 
+    
+    public Vector3 GetCrosshairPos(){
+        return m_CrosshairControl.GetCrosshairPos();
+    }
+
 
     public void ChangeGameStage(BaseDefenseStage newStage){
         switch (m_GameStage)

@@ -4516,6 +4516,7 @@ MonoBehaviour:
   m_GunModel: {fileID: 770695002}
   m_AmmoText: {fileID: 32751031}
   m_ShotPointPrefab: {fileID: 7986785765533447240, guid: fb144ac4a18f4ca408a0b367c0d9f785, type: 3}
+  m_ShotDotParent: {fileID: 466679860}
   m_ShootAudioSource: {fileID: 1238169346}
   m_ShootBtn: {fileID: 61383350}
   m_ReloadBtn: {fileID: 482977486}
@@ -5950,9 +5951,9 @@ MonoBehaviour:
   m_EnemySpawnController: {fileID: 824272815}
   m_GunController: {fileID: 1238169345}
   m_ReloadController: {fileID: 7275961}
-  m_CameraController: {fileID: 0}
+  m_CameraController: {fileID: 822869639}
   m_BaseDefenseResultPanel: {fileID: 709838543}
-  m_CrosshairControl: {fileID: 0}
+  m_CrosshairControl: {fileID: 653484385}
   m_OptionBtn: {fileID: 293644552}
   m_OptionPanel: {fileID: 510727737}
   m_ReloadControllerPanel: {fileID: 7275959}

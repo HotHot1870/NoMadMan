@@ -27,6 +27,7 @@ public class GunController : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
+    [SerializeField] private Transform m_ShotDotParent;
     [SerializeField] private AudioSource m_ShootAudioSource;
     [SerializeField] private Button2D m_ShootBtn;
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
@@ -236,22 +237,25 @@ public class GunController : MonoBehaviour
         for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
         {
             // random center to point distance
-            /*
-            float centerToPointDistance = Mathf.Lerp(0, targetMaxRadius, Random.Range(0, 1f));
+            
+            float randomDistance = Random.Range(0, 100f-BaseDefenseManager.GetInstance().GetAccruacy());
             float randomAngle = Random.Range(0, 360f);
             Vector3 accuracyOffset = new Vector3(
-                Mathf.Sin(randomAngle * Mathf.Deg2Rad) * centerToPointDistance,
-                Mathf.Cos(randomAngle * Mathf.Deg2Rad) * centerToPointDistance,
+                Mathf.Sin(randomAngle * Mathf.Deg2Rad) * randomDistance,
+                Mathf.Cos(randomAngle * Mathf.Deg2Rad) * randomDistance,
                 0
-            );*/
+            );
+
+
+            // spawn dot for player to see
+            var shotPoint = Instantiate(m_ShotPointPrefab,m_ShotDotParent);
+            shotPoint.GetComponent<RectTransform>().position = accuracyOffset + BaseDefenseManager.GetInstance().GetCrosshairPos();
 
             
+            // acc lose on shoot            
             BaseDefenseManager.GetInstance().SetAccruacy(
                 BaseDefenseManager.GetInstance().GetAccruacy()-100+m_SelectedGun.RecoilControl
             );
-
-            // spawn dot for player to see
-            var shotPoint = Instantiate(m_ShotPointPrefab);
             /*
             shotPoint.transform.SetParent(m_ShootDotParent);
             var targetPosForPoint = Camera.main.ScreenToWorldPoint(m_CrossHair.position + accuracyOffset);
