@@ -238,8 +238,9 @@ public class GunController : MonoBehaviour
         {
             // random center to point distance
             
-            float randomDistance = Random.Range(0, BaseDefenseManager.GetInstance().GetCrosshairControl().m_MaxAccuracyLose
-                - BaseDefenseManager.GetInstance().GetAccruacy()) ;//* BaseDefenseManager.GetInstance().m_MaxAccuracyLose;
+            float randomDistance = Random.Range(0, 
+                BaseDefenseManager.GetInstance().GetCrosshairControl().m_MaxAccuracyLose * 
+                ( 1 - Mathf.InverseLerp(0f,100f, BaseDefenseManager.GetInstance().GetAccruacy() ))) ;
             float randomAngle = Random.Range(0, 360f);
             Vector3 accuracyOffset = new Vector3(
                 Mathf.Sin(randomAngle * Mathf.Deg2Rad) * randomDistance,
