@@ -58,9 +58,6 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private HpBar m_WallHpBar;
     private float m_TotalWallHpBarStayTime = 0;
 
-
-
-
     
     #region UpdateAction
     public Action m_ShootUpdatreAction = null;
@@ -143,6 +140,10 @@ public class BaseDefenseManager : MonoBehaviour
     
     public Vector3 GetCrosshairPos(){
         return m_CrosshairControl.GetCrosshairPos();
+    }
+
+    public CrosshairControl GetCrosshairControl(){
+        return m_CrosshairControl;
     }
 
 

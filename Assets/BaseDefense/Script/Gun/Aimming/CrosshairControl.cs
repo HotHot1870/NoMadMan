@@ -21,6 +21,8 @@ public class CrosshairControl : MonoBehaviour
     private bool m_IsCrosshairMoving = false;
 
 
+    public float m_MaxAccuracyLose = 150f;
+
     private void Start() {
         m_AimBtn.onDown.AddListener(() =>
         {
@@ -60,8 +62,7 @@ public class CrosshairControl : MonoBehaviour
         }
         
         BaseDefenseManager.GetInstance().SetAccruacy( curAcc );
-
-        SetCrosshairAccuracy(100f-BaseDefenseManager.GetInstance().GetAccruacy());
+        SetCrosshairAccuracy(m_MaxAccuracyLose * ( 1 - Mathf.InverseLerp(0f,100f, BaseDefenseManager.GetInstance().GetAccruacy() )) );
     }
 
     private float GainAccOvertime(float curAcc){
@@ -117,7 +118,7 @@ public class CrosshairControl : MonoBehaviour
     }
 
     public void SetCrosshairAccuracy(float accuracyLose){
-        accuracyLose = Mathf.Clamp(accuracyLose,0f,100f);
+        accuracyLose = Mathf.Clamp(accuracyLose,0f,m_MaxAccuracyLose);
         m_Top.localPosition = new Vector3(0,accuracyLose,0);
         m_Left.localPosition = new Vector3(-accuracyLose,0,0);
         m_Right.localPosition = new Vector3(accuracyLose,0,0);
