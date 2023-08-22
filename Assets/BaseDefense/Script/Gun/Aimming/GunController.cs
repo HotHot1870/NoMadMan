@@ -111,11 +111,7 @@ public class GunController : MonoBehaviour
         }
 
 
-        m_SemiAutoShootCoroutine = null;/*
-        m_Self.transform.position = m_GunFpsImagePos + m_FieldCenter;
-        m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
-        m_ScreenCenterToCornerDistance = Mathf.Sqrt(Screen.height / 2 * Screen.height / 2 + Screen.width / 2 * Screen.width / 2);
-        m_MainCameraStartPos = m_MainCamera.transform.position;*/
+        m_SemiAutoShootCoroutine = null;
 
         m_ReloadBtn.onClick.AddListener(() =>
         {
@@ -197,63 +193,8 @@ public class GunController : MonoBehaviour
             return;
         }
         // aim
-        /*
-        if (m_AimDragMouseStartPos != Vector2.zero)
-        {
-            MoveCrossHair(Input.mousePosition);
-        }
-        else
-        {
-            AccruacyGainOvertime();
-        }*/
-        if (m_CurrentAccruacy < 0)
-            m_CurrentAccruacy = 0;
-
-        float targetCrossHairSize = Mathf.InverseLerp(100, 0, m_CurrentAccruacy);
-        targetCrossHairSize = Mathf.Lerp(m_CrossHairMinSize, m_CrossHairMaxSize, targetCrossHairSize);
-        //m_CrossHair.sizeDelta = Vector2.one * targetCrossHairSize;
+        // recoil
     }
-/*
-    private void MoveCrossHair(Vector3 mousePos ){
-         m_AimDragMouseEndPos = mousePos;
-
-            Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) * 3;
-            m_CrossHair.position = m_CrossHairDragStartPos + offset;
-
-            // accrucy lose for moving
-            float mouseMoveAmound = Vector3.Distance(m_MousePreviousPos, mousePos) /
-                (Mathf.Sqrt(Screen.height * Screen.height + Screen.width * Screen.width) / 2) * 1000;
-
-            if (mouseMoveAmound == 0)
-            {
-                // draging but not moving , gain accruacy over time
-                AccruacyGainOvertime();
-            }
-            else
-            {
-                m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (100 - m_SelectedGun.Stability) * 0.75f;
-                m_MousePreviousPos = mousePos;
-            }
-
-            //CrossHairOutOfBoundPrevention();
-
-            // light follow crossHair
-            var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
-
-            // aim to camera effect
-            m_AimDirection = (m_CrossHair.position - new Vector3(Screen.width, Screen.height, 0)).normalized;
-            m_AimDistanceNormalized = Vector3.Distance(m_CrossHair.position, new Vector3(Screen.width, Screen.height, 0)) /
-                m_ScreenCenterToCornerDistance;
-            m_MainCamera.transform.position = m_MainCameraStartPos + m_AimDirection * m_AimDistanceNormalized;*/
-
-            // aim to weapon effect
-            /*
-            float gunScaleX = 0.1f * ((m_CrossHair.position.x - Screen.width / 2) / (Screen.width / 2));
-            m_GunModel.localScale = new Vector3(1 - gunScaleX, 1, 1);
-
-            float gunRotationZ = -5 * (m_CrossHair.position.y - Screen.height / 2) / (Screen.height / 2);
-            m_GunModel.localEulerAngles = new Vector3(0, 0, gunRotationZ);
-    }*/
 
 
     private void ShootCoolDown()
