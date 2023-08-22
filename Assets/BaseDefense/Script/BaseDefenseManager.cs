@@ -38,7 +38,7 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private EnemySpawnController m_EnemySpawnController;
     [SerializeField] private GunController m_GunController;
     [SerializeField] private GunReloadController m_ReloadController;
-    [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
+    [SerializeField] private CameraController m_CameraController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
     [SerializeField] private CrosshairControl m_CrosshairControl;
     [SerializeField] private Button m_OptionBtn;
@@ -46,6 +46,8 @@ public class BaseDefenseManager : MonoBehaviour
 
     
     [SerializeField] private GameObject m_ReloadControllerPanel;
+
+    private float m_CurrentAccruacy = 100f;
 
 
     [Header("Enemy Hp Bars")]
@@ -176,6 +178,13 @@ public class BaseDefenseManager : MonoBehaviour
     public void GameOver(bool isLose = false){
         ChangeGameStage(BaseDefenseStage.Result);
         m_BaseDefenseResultPanel.ShowResult(isLose);
+    }
+
+    public float GetAccruacy(){
+        return m_CurrentAccruacy;
+    }
+    public void SetAccruacy(float newAccuracy){
+        m_CurrentAccruacy = Mathf.Clamp(newAccuracy,0f,100f);
     }
 
     public void OnWallHit(float damage){

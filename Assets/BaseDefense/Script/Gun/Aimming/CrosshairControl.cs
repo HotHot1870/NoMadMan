@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BaseDefenseNameSpace;
 using ExtendedButtons;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,6 @@ public class CrosshairControl : MonoBehaviour
     private Vector3 m_MousePreviousPos = Vector3.zero;
     private bool m_IsCrosshairMoving = false;
 
-    private float m_CurrentAccruacy = 100f;
 
     private void Start() {
         m_AimBtn.onDown.AddListener(() =>
@@ -47,16 +47,25 @@ public class CrosshairControl : MonoBehaviour
     }
 
     private void Update() {
+        if(BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.Result){
+            // game over already
+            return;
+        }
+        var curAcc = BaseDefenseManager.GetInstance().GetAccruacy();
         if(m_IsCrosshairMoving){
             OnCrosshairMove();
-        }else if( m_CurrentAccruacy < 100 ){
-            m_CurrentAccruacy += Time.deltaTime*120f;
+            curAcc = BaseDefenseManager.GetInstance().GetAccruacy();
+        }else if( curAcc < 100 ){
+            curAcc += Time.deltaTime*120f;
         }
         
-        m_CurrentAccruacy = Mathf.Clamp(m_CurrentAccruacy,0f,100f);
-        SetCrosshairAccuracy(100f-m_CurrentAccruacy);
+        BaseDefenseManager.GetInstance().SetAccruacy( curAcc );
+
+        SetCrosshairAccuracy(100f-curAcc);
     }
     public void OnCrosshairMove(){
+        var curAcc = BaseDefenseManager.GetInstance().GetAccruacy();
+
         m_AimDragMouseEndPos = Input.mousePosition;
         Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) * 3;
         m_CrosshairParent.position = m_CrossHairDragStartPos + offset;
@@ -68,15 +77,14 @@ public class CrosshairControl : MonoBehaviour
         if (mouseCurToPassDiatance <=0f)
         {
             // draging but not moving , gain accruacy over time
-            m_CurrentAccruacy += Time.deltaTime*120f;
+            curAcc += Time.deltaTime*120f;
         }
         else
         {
-            m_CurrentAccruacy -= Time.deltaTime*mouseCurToPassDiatance*10f;
-
+            curAcc -= Time.deltaTime*mouseCurToPassDiatance*20f;
             m_MousePreviousPos = m_AimDragMouseEndPos;
         }
-
+        BaseDefenseManager.GetInstance().SetAccruacy(curAcc);
     }
 
     private void OutOffBountPrevention(){

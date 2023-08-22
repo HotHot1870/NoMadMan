@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
 using UnityEngine;
-using EZCameraShake;
 using BaseDefenseNameSpace;
 
-public class SwitchWeaponController : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private Button2D m_LookDownBtn;
     [SerializeField] private Button2D m_LookUpBtn;
     [SerializeField] private Transform m_CameraParent;
-    [SerializeField] private CameraShaker m_CameraShaker;
     [SerializeField] private GameObject m_ShootPanel;
     [SerializeField][Range(0.1f, 1.5f)] private float m_LookDownTime = 0.3f;
     private float m_TimePassAfterLookDownNormalized = 0;
@@ -45,6 +43,8 @@ public class SwitchWeaponController : MonoBehaviour
             m_CameraParent.eulerAngles = m_LookedUpCameraRot;
         });
 
+        m_CameraParent.position = m_LookedUpCameraPos;
+        m_CameraParent.eulerAngles = m_LookedUpCameraRot;
 
         m_LookUpBtn.gameObject.SetActive(false);
     }
@@ -52,7 +52,6 @@ public class SwitchWeaponController : MonoBehaviour
     private void ChangeGameStageToSwitchWeapon()
     {
         m_IsLookUp = false;
-        m_CameraShaker.enabled = false;
         m_CameraParent.position = m_LookedUpCameraPos;
         m_CameraParent.eulerAngles = m_LookedUpCameraRot;
         m_ShootPanel.SetActive(false);
@@ -64,7 +63,6 @@ public class SwitchWeaponController : MonoBehaviour
     {
         m_LookUpBtn.gameObject.SetActive(false);
         m_ShootPanel.SetActive(true);
-        m_CameraShaker.enabled = true;
         m_CameraParent.position = m_LookedUpCameraPos;
         m_CameraParent.eulerAngles = m_LookedUpCameraRot;
     }
@@ -114,8 +112,6 @@ public class SwitchWeaponController : MonoBehaviour
         }
         else
         {
-            m_CameraShaker.RestPositionOffset = m_LookedUpCameraPos;
-            m_CameraShaker.RestRotationOffset = m_LookedUpCameraRot;
             m_CameraParent.position = m_LookedUpCameraPos;
             m_CameraParent.eulerAngles = m_LookedUpCameraRot;
             BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);

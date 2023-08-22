@@ -179,36 +179,6 @@ MonoBehaviour:
   m_ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}
   m_IsTryReload: 0
   m_GunReloadAudioSource: {fileID: 488054940}
-  m_ResourceCanvasGroup: {fileID: 0}
-  m_ResourceCanvasGroupFade:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_Raw: {fileID: 0}
-  m_Scrap: {fileID: 0}
-  m_Chem: {fileID: 0}
-  m_Electronic: {fileID: 0}
-  m_Bot: {fileID: 0}
   m_MainGunImage: {fileID: 796377264}
   m_DragIcon: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
   m_TapIcon: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
@@ -3421,6 +3391,7 @@ GameObject:
   - component: {fileID: 822869636}
   - component: {fileID: 822869635}
   - component: {fileID: 822869638}
+  - component: {fileID: 822869639}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3501,7 +3472,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 488054941}
-  m_Father: {fileID: 2002239082}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &822869638
 MonoBehaviour:
@@ -3547,6 +3518,27 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &822869639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822869634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27d979c44bb1194096a1df8da6ac520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LookDownBtn: {fileID: 1400379373}
+  m_LookUpBtn: {fileID: 2138075528}
+  m_CameraParent: {fileID: 822869637}
+  m_ShootPanel: {fileID: 2029508071}
+  m_LookDownTime: 0.2
+  m_LookedDownCameraPos: {x: 0, y: -6, z: -13}
+  m_LookedDownCameraRot: {x: 30, y: 0, z: 0}
+  m_LookedUpCameraPos: {x: 0, y: 5, z: -10}
+  m_LookedUpCameraRot: {x: 20, y: 0, z: 0}
 --- !u!1 &824272813
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,8 +4513,6 @@ MonoBehaviour:
   m_FPSImage: {fileID: 568205203}
   m_Self: {fileID: 1238169342}
   m_GunFpsImagePos: {x: 8, y: -4.5, z: 0}
-  m_CrossHairMaxSize: 300
-  m_CrossHairMinSize: 50
   m_GunModel: {fileID: 770695002}
   m_AmmoText: {fileID: 32751031}
   m_ShotPointPrefab: {fileID: 7986785765533447240, guid: fb144ac4a18f4ca408a0b367c0d9f785, type: 3}
@@ -5960,7 +5950,7 @@ MonoBehaviour:
   m_EnemySpawnController: {fileID: 824272815}
   m_GunController: {fileID: 1238169345}
   m_ReloadController: {fileID: 7275961}
-  m_SwitchWeaponController: {fileID: 2097067216}
+  m_CameraController: {fileID: 0}
   m_BaseDefenseResultPanel: {fileID: 709838543}
   m_CrosshairControl: {fileID: 0}
   m_OptionBtn: {fileID: 293644552}
@@ -7356,55 +7346,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001144652}
   m_CullTransparentMesh: 1
---- !u!1 &2002239081
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2002239082}
-  - component: {fileID: 2002239083}
-  m_Layer: 0
-  m_Name: CameraParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2002239082
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002239081}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 822869637}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2002239083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002239081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
-  DefaultRotInfluence: {x: 1, y: 1, z: 1}
-  RestPositionOffset: {x: 0, y: 0, z: 0}
-  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &2029508071
 GameObject:
   m_ObjectHideFlags: 0
@@ -7567,7 +7508,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2097067217}
-  - component: {fileID: 2097067216}
   m_Layer: 0
   m_Name: SwitchWeapon
   m_TagString: Untagged
@@ -7575,28 +7515,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2097067216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097067215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a27d979c44bb1194096a1df8da6ac520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LookDownBtn: {fileID: 1400379373}
-  m_LookUpBtn: {fileID: 2138075528}
-  m_CameraParent: {fileID: 2002239082}
-  m_CameraShaker: {fileID: 2002239083}
-  m_ShootPanel: {fileID: 2029508071}
-  m_LookDownTime: 0.2
-  m_LookedDownCameraPos: {x: 0, y: -6, z: -13}
-  m_LookedDownCameraRot: {x: 30, y: 0, z: 0}
-  m_LookedUpCameraPos: {x: 0, y: 5, z: -10}
-  m_LookedUpCameraRot: {x: 20, y: 0, z: 0}
 --- !u!4 &2097067217
 Transform:
   m_ObjectHideFlags: 0
@@ -8293,7 +8211,7 @@ SceneRoots:
   - {fileID: 1629870517}
   - {fileID: 1877350769}
   - {fileID: 1794693721}
-  - {fileID: 2002239082}
+  - {fileID: 822869637}
   - {fileID: 824272814}
   - {fileID: 1238169344}
   - {fileID: 2097067217}

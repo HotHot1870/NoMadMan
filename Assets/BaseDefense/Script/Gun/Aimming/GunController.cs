@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using ExtendedButtons;
 using TMPro;
 using System.Linq;
-using EZCameraShake;
 using BaseDefenseNameSpace;
 using UnityEngine.Rendering.Universal;
 
@@ -17,27 +16,9 @@ public class GunController : MonoBehaviour
     [SerializeField] private Vector3 m_GunFpsImagePos = new Vector3(8, -4.5f, 0);
 
 
-    [Header("Drag to aim")]
-    [SerializeField][Range(10f, 500f)] private float m_CrossHairMaxSize = 300f;
-    [SerializeField][Range(10f, 300f)] private float m_CrossHairMinSize = 50f;
-    /*
-    [SerializeField] private RectTransform m_CrossHair;
-    [SerializeField] private Transform m_ShootDotParent;*/
-/*
-    [Header("Aim effect for camera")]
-    [SerializeField] private Camera m_MainCamera;
-    [SerializeField] private Vector3 m_FieldCenter;
-    private Vector3 m_MainCameraStartPos;
-    private Vector3 m_AimDirection = Vector3.zero;
-    private float m_AimDistanceNormalized = 0;
-    private float m_ScreenCenterToCornerDistance = 10;*/
 
     [Header("Aim effect for gun")]
     [SerializeField] private Transform m_GunModel;
-
-
-    [Header("Accracy")]
-    private float m_CurrentAccruacy = 0;
 
     [Header("Ammo")]
     [SerializeField] private TextMeshProUGUI m_AmmoText;
@@ -63,7 +44,6 @@ public class GunController : MonoBehaviour
 
     private void Start()
     {
-        BaseDefenseManager.GetInstance().m_ShootUpdatreAction += UpdateCrossHair;
         BaseDefenseManager.GetInstance().m_ChangeToShootAction += ShowWeaponModel;
         BaseDefenseManager.GetInstance().m_ChangeFromShootAction += HideWeaponModel;
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
@@ -185,18 +165,6 @@ public class GunController : MonoBehaviour
         m_FPSImage.gameObject.SetActive(true);
     }
 
-    public void UpdateCrossHair()
-    {
-        
-        if(BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.Result){
-            // game over already
-            return;
-        }
-        // aim
-        // recoil
-    }
-
-
     private void ShootCoolDown()
     {
         // fire rate
@@ -211,7 +179,7 @@ public class GunController : MonoBehaviour
         m_SelectedGun = gun;
          m_CurrentWeaponSlotIndex = slotIndex;
 
-        m_CurrentAccruacy = m_SelectedGun.Accuracy;
+        BaseDefenseManager.GetInstance().SetAccruacy(m_SelectedGun.Accuracy);
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
@@ -253,9 +221,6 @@ public class GunController : MonoBehaviour
         if (m_CurrentShootCoolDown > 0)
             return;
 
-        // shake camera
-        CameraShaker.Instance.ShakeOnce(m_SelectedGun.CameraShakeStrength, m_SelectedGun.CameraShakeAmount, 0.1f, 0.1f);
-
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
@@ -265,18 +230,24 @@ public class GunController : MonoBehaviour
             * Mathf.Lerp(0, Screen.height / 100, (100 - m_SelectedGun.RecoilControl) / 100);*/
 
         //CrossHairOutOfBoundPrevention();
-
+/*
         float targetCrossHairScale = Mathf.InverseLerp(100, 0, m_CurrentAccruacy);
-        float targetMaxRadius = Mathf.Lerp(0, m_CrossHairMaxSize / 2 - m_CrossHairMinSize / 2, targetCrossHairScale);
+        float targetMaxRadius = Mathf.Lerp(0, m_CrossHairMaxSize / 2 - m_CrossHairMinSize / 2, targetCrossHairScale);*/
         for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
         {
             // random center to point distance
+            /*
             float centerToPointDistance = Mathf.Lerp(0, targetMaxRadius, Random.Range(0, 1f));
             float randomAngle = Random.Range(0, 360f);
             Vector3 accuracyOffset = new Vector3(
                 Mathf.Sin(randomAngle * Mathf.Deg2Rad) * centerToPointDistance,
                 Mathf.Cos(randomAngle * Mathf.Deg2Rad) * centerToPointDistance,
                 0
+            );*/
+
+            
+            BaseDefenseManager.GetInstance().SetAccruacy(
+                BaseDefenseManager.GetInstance().GetAccruacy()-100+m_SelectedGun.RecoilControl
             );
 
             // spawn dot for player to see
@@ -315,7 +286,7 @@ public class GunController : MonoBehaviour
 
 
 
-        m_CurrentAccruacy -= (100 - m_SelectedGun.RecoilControl);
+        //m_CurrentAccruacy -= (100 - m_SelectedGun.RecoilControl);
 
         m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
         ChangeAmmoCount(-1, false);
@@ -339,18 +310,6 @@ public class GunController : MonoBehaviour
         m_AmmoText.text = $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}";
     }
 
-
-    private void AccruacyGainOvertime()
-    {
-        if (m_CurrentAccruacy < m_SelectedGun.Accuracy)
-        {
-            m_CurrentAccruacy += Time.deltaTime * m_SelectedGun.Handling;
-        }
-        else
-        {
-            m_CurrentAccruacy = m_SelectedGun.Accuracy;
-        }
-    }
 
 /*
     private void CrossHairOutOfBoundPrevention()

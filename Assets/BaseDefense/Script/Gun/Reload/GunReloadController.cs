@@ -16,16 +16,6 @@ public class GunReloadController : MonoBehaviour
     [SerializeField] private bool m_IsTryReload = false;
     private GunReloadControllerConfig m_Config=null; 
     [SerializeField] private AudioSource m_GunReloadAudioSource;
-
-    [Header("Resources")]
-    [SerializeField] private CanvasGroup m_ResourceCanvasGroup;
-    [SerializeField] private AnimationCurve m_ResourceCanvasGroupFade;
-    [SerializeField] private TMP_Text m_Raw;
-    [SerializeField] private TMP_Text m_Scrap;
-    [SerializeField] private TMP_Text m_Chem;
-    [SerializeField] private TMP_Text m_Electronic;
-    [SerializeField] private TMP_Text m_Bot;
-    private Coroutine m_ResourceFadeCourtine = null;
     
     [Header("Reload")]
     [SerializeField] private Image m_MainGunImage;
@@ -66,23 +56,8 @@ public class GunReloadController : MonoBehaviour
         }
     }
 
-    private IEnumerator ResourceGroupFadeOut(){
-        float passedTime = 0;
-        float duration = 4;
-        while (passedTime < duration)
-        {
-            m_ResourceCanvasGroup.alpha = m_ResourceCanvasGroupFade.Evaluate (1-passedTime/duration) ;
-            passedTime += Time.deltaTime;
-            yield return null;
-        }
-        m_ResourceFadeCourtine = null;
-    }
 
     private void SetStartReloadPanel(){
-        if(m_ResourceFadeCourtine != null){
-            StopCoroutine(m_ResourceFadeCourtine);
-        }
-        m_ResourceCanvasGroup.alpha = 0;
         m_ReloadScriptable = m_Config.GunScriptable.ReloadScriptable;
         m_CurReloadPhase = 0;
         m_MainGunImage.sprite = m_ReloadScriptable.StartMainGunImage;
