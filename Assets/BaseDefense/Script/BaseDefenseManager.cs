@@ -41,6 +41,7 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private CameraController m_CameraController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
     [SerializeField] private CrosshairControl m_CrosshairControl;
+    [SerializeField] private GunModelComtroller m_GunModelController;
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 
@@ -182,6 +183,10 @@ public class BaseDefenseManager : MonoBehaviour
         }
 
         m_GameStage = newStage;
+    }
+
+    public GunModelComtroller GetGunModelController(){
+        return m_GunModelController;
     }
 
     public void GameOver(bool isLose = false){

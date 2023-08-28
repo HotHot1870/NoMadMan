@@ -11,14 +11,8 @@ using UnityEngine.Rendering.Universal;
 public class GunController : MonoBehaviour
 {
     private GunScriptable m_SelectedGun = null;
-    [SerializeField] private SpriteRenderer m_FPSImage;
-    [SerializeField] private GameObject m_Self;
-    [SerializeField] private Vector3 m_GunFpsImagePos = new Vector3(8, -4.5f, 0);
 
 
-
-    [Header("Aim effect for gun")]
-    [SerializeField] private Transform m_GunModel;
 
     [Header("Ammo")]
     [SerializeField] private TextMeshProUGUI m_AmmoText;
@@ -150,7 +144,7 @@ public class GunController : MonoBehaviour
         });
 
         ChangeAmmoCount(0, true);
-        m_FPSImage.sprite = m_SelectedGun.FPSSprite;
+        //m_FPSImage.sprite = m_SelectedGun.FPSSprite;
         //var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
         var screenCenter = new Vector3(Screen.width/2f,Screen.height/2f,0);
         //MoveCrossHair( screenCenter );
@@ -158,12 +152,12 @@ public class GunController : MonoBehaviour
 
     private void HideWeaponModel()
     {
-        m_FPSImage.gameObject.SetActive(false);
+        //m_FPSImage.gameObject.SetActive(false);
     }
 
     private void ShowWeaponModel()
     {
-        m_FPSImage.gameObject.SetActive(true);
+        //m_FPSImage.gameObject.SetActive(true);
     }
 
     private void ShootCoolDown()
@@ -183,7 +177,7 @@ public class GunController : MonoBehaviour
         BaseDefenseManager.GetInstance().SetAccruacy(m_SelectedGun.Accuracy);
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
-        m_FPSImage.sprite = m_SelectedGun.FPSSprite;
+        //m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
     private void GainAmmo(int changes)
     {

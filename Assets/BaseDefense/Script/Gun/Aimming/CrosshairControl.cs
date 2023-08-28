@@ -98,12 +98,12 @@ public class CrosshairControl : MonoBehaviour
         }
         else
         {
-            BaseDefenseManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(
-                new Vector2(
+            Vector2 OffsetNormalized = new Vector2(
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
-                ) * 2f
-            );
+                ) * 2f ;
+            BaseDefenseManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(OffsetNormalized);
+            BaseDefenseManager.GetInstance().GetGunModelController().GunModelOffset(OffsetNormalized);
             curAcc -= Time.deltaTime*mouseCurToPassDiatance*20f;
             m_MousePreviousPos = m_AimDragMouseEndPos;
         }
