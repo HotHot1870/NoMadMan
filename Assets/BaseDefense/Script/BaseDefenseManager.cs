@@ -146,6 +146,9 @@ public class BaseDefenseManager : MonoBehaviour
         return m_CrosshairControl;
     }
 
+    public CameraController GetCameraController(){
+        return m_CameraController;
+    }
 
     public void ChangeGameStage(BaseDefenseStage newStage){
         switch (m_GameStage)

@@ -2,82 +2,81 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
 using UnityEngine;
+using Cinemachine;
 using BaseDefenseNameSpace;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Button2D m_LookDownBtn;
     [SerializeField] private Button2D m_LookUpBtn;
-    [SerializeField] private Transform m_CameraParent;
     [SerializeField] private GameObject m_ShootPanel;
-    [SerializeField][Range(0.1f, 1.5f)] private float m_LookDownTime = 0.3f;
-    private float m_TimePassAfterLookDownNormalized = 0;
-    private bool m_IsLookUp = false;
-    [SerializeField] private Vector3 m_LookedDownCameraPos = new Vector3(0, 1f, -11f);
-    [SerializeField] private Vector3 m_LookedDownCameraRot = new Vector3(0, 0f, 0);
-    [SerializeField] private Vector3 m_LookedUpCameraPos = new Vector3(0, 0f, -11f);
-    [SerializeField] private Vector3 m_LookedUpCameraRot = new Vector3(10f, 0f, 0);
+    [SerializeField] private CinemachineBrain m_CameraBrain;
+
+    [SerializeField] private CinemachineVirtualCamera m_ShootCamera;
+    [SerializeField] private CinemachineVirtualCamera m_SwitchWeaponCamera;
+    private Vector3 m_ShootCameraStartPos;
+
 
 
     private void Start()
     {
         BaseDefenseManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
-        BaseDefenseManager.GetInstance().m_ChangeToSwitchWeaponAction += ChangeGameStageToSwitchWeapon;
-        BaseDefenseManager.GetInstance().m_ChangeFromSwitchWeaponAction += ChangeGameStageFromSwitchweapon;
-
+        m_ShootCameraStartPos = m_ShootCamera.transform.position;
 
         m_LookDownBtn.onDown.AddListener(() =>
         {
-            BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.SwitchWeapon);
+            if (m_CameraBrain.IsBlending)
+                return;
+
+            SetAllCameraPriorityToZero();
+            m_SwitchWeaponCamera.Priority = 1;
+            
+            m_ShootPanel.SetActive(false);
+            m_LookUpBtn.gameObject.SetActive(true);
+
+            SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.SwitchWeapon);
         });
 
         m_LookUpBtn.onDown.AddListener(() =>
         {
-            // cannot leave switch weapon panel while looking up / down           
-            if (m_TimePassAfterLookDownNormalized < 1)
+            if (m_CameraBrain.IsBlending)
                 return;
 
-            m_IsLookUp = true;
-            m_TimePassAfterLookDownNormalized = 1;
-            m_CameraParent.position = m_LookedUpCameraPos;
-            m_CameraParent.eulerAngles = m_LookedUpCameraRot;
+            SetAllCameraPriorityToZero();
+            m_ShootCamera.Priority = 1;
+            
+            m_ShootPanel.SetActive(true);
+            m_LookUpBtn.gameObject.SetActive(false);
+
+            SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
+
+
         });
 
-        m_CameraParent.position = m_LookedUpCameraPos;
-        m_CameraParent.eulerAngles = m_LookedUpCameraRot;
+        SetAllCameraPriorityToZero();
+        m_ShootCamera.Priority = 1;
+
 
         m_LookUpBtn.gameObject.SetActive(false);
     }
 
-    private void ChangeGameStageToSwitchWeapon()
-    {
-        m_IsLookUp = false;
-        m_CameraParent.position = m_LookedUpCameraPos;
-        m_CameraParent.eulerAngles = m_LookedUpCameraRot;
-        m_ShootPanel.SetActive(false);
-        m_LookUpBtn.gameObject.SetActive(true);
-        m_TimePassAfterLookDownNormalized = 0;
+    private void SetAllCameraPriorityToZero(){
+        m_ShootCamera.Priority = 0;
+        m_SwitchWeaponCamera.Priority = 0;
     }
 
-    private void ChangeGameStageFromSwitchweapon()
-    {
-        m_LookUpBtn.gameObject.SetActive(false);
-        m_ShootPanel.SetActive(true);
-        m_CameraParent.position = m_LookedUpCameraPos;
-        m_CameraParent.eulerAngles = m_LookedUpCameraRot;
+    public void ShootCameraMoveByCrosshair(Vector2 crosshairPosNormalized){
+        m_ShootCamera.transform.position = m_ShootCameraStartPos + new Vector3(
+            crosshairPosNormalized.x,
+            crosshairPosNormalized.y,
+            0);
     }
 
     public void SwitchWeaponUpdate()
     {
-
-        if (m_IsLookUp)
+        // can switch weapon when camera done blending 
+        if (!m_CameraBrain.IsBlending)
         {
-            LookingUp();
-
-        }
-        else
-        {
-            LookingDown();
             SwitchWeaponInputHandler();
         }
     }
@@ -85,7 +84,7 @@ public class CameraController : MonoBehaviour
     private void SwitchWeaponInputHandler()
     {
         // select weapon
-        if (Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf && m_TimePassAfterLookDownNormalized > 1)
+        if (Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf )
         {
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -102,39 +101,15 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void LookingUp()
+    private IEnumerator SetGameStage(float waitTime, BaseDefenseStage gameStage)
     {
-        if (m_TimePassAfterLookDownNormalized > 0)
-        {
-            m_CameraParent.position = Vector3.Lerp(m_LookedUpCameraPos, m_LookedDownCameraPos, m_TimePassAfterLookDownNormalized);
-            m_CameraParent.eulerAngles = Vector3.Lerp(m_LookedUpCameraRot, m_LookedDownCameraRot, m_TimePassAfterLookDownNormalized);
-            m_TimePassAfterLookDownNormalized -= Time.deltaTime / m_LookDownTime;
-        }
-        else
-        {
-            m_CameraParent.position = m_LookedUpCameraPos;
-            m_CameraParent.eulerAngles = m_LookedUpCameraRot;
-            BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
-        }
-    }
-
-    private void LookingDown()
-    {
-        if (m_TimePassAfterLookDownNormalized < 1)
-        {
-            m_CameraParent.position = Vector3.Lerp(m_LookedUpCameraPos, m_LookedDownCameraPos, m_TimePassAfterLookDownNormalized);
-            m_CameraParent.eulerAngles = Vector3.Lerp(m_LookedUpCameraRot, m_LookedDownCameraRot, m_TimePassAfterLookDownNormalized);
-            m_TimePassAfterLookDownNormalized += Time.deltaTime / m_LookDownTime;
-        }
-        else
-        {
-            m_CameraParent.position = m_LookedDownCameraPos;
-            m_CameraParent.eulerAngles = m_LookedDownCameraRot;
-        }
+        yield return new WaitForSeconds(waitTime);
+        BaseDefenseManager.GetInstance().ChangeGameStage(gameStage);
     }
 
     private void SwitchWeapon(GunScriptable gun, int slotIndex)
     {
         BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun, slotIndex);
+        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
     }
 }
