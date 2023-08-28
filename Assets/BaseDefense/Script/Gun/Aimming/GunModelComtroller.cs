@@ -7,6 +7,8 @@ public class GunModelComtroller : MonoBehaviour
 {
     [SerializeField] private Transform m_ModelParent;
     [SerializeField] private Vector3 m_CrosshairOffsetStrength = Vector3.one;
+    [SerializeField] private float m_Speed;
+    [SerializeField] private float m_Amount;
 
     private Vector3 m_ModelStartPos;
 
@@ -23,9 +25,16 @@ public class GunModelComtroller : MonoBehaviour
             m_ModelParent.LookAt(hit.point);
         }
 
+        GunModelParentOffsetHandler();
+
     }
 
-    public void GunModelOffset(Vector2 crosshairPosNormalized){
+    private void GunModelParentOffsetHandler(){
+        GunModelOffset(BaseDefenseManager.GetInstance().GetCrosshairControl().GetCrosshairToScreenOffsetNormalized());
+
+    }
+
+    private void GunModelOffset(Vector2 crosshairPosNormalized){
         // x offset 
         var startPos = new Vector3(
             m_ModelStartPos.x + Mathf.Abs(crosshairPosNormalized.x) *3f,
@@ -41,3 +50,4 @@ public class GunModelComtroller : MonoBehaviour
     }
 
 }
+

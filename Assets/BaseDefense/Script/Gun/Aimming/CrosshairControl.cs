@@ -20,6 +20,8 @@ public class CrosshairControl : MonoBehaviour
     private Vector3 m_MousePreviousPos = Vector3.zero;
     private bool m_IsCrosshairMoving = false;
 
+    private Vector2 m_CrosshairToScreenOffsetNormalized = Vector2.zero;
+
 
     public float m_MaxAccuracyLose = 150f;
 
@@ -98,16 +100,19 @@ public class CrosshairControl : MonoBehaviour
         }
         else
         {
-            Vector2 OffsetNormalized = new Vector2(
+            m_CrosshairToScreenOffsetNormalized = new Vector2(
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
                 ) * 2f ;
-            BaseDefenseManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(OffsetNormalized);
-            BaseDefenseManager.GetInstance().GetGunModelController().GunModelOffset(OffsetNormalized);
+            BaseDefenseManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
             curAcc -= Time.deltaTime*mouseCurToPassDiatance*20f;
             m_MousePreviousPos = m_AimDragMouseEndPos;
         }
         BaseDefenseManager.GetInstance().SetAccruacy(curAcc);
+    }
+
+    public Vector2 GetCrosshairToScreenOffsetNormalized(){
+        return m_CrosshairToScreenOffsetNormalized;
     }
 
     private void OutOffBountPrevention(){
