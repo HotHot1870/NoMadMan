@@ -7,12 +7,12 @@ public class GunModelComtroller : MonoBehaviour
 {
     [SerializeField] private Transform m_ModelParent;
     [SerializeField] private Vector3 m_CrosshairOffsetStrength = Vector3.one;
-    [SerializeField] private float m_Speed;
-    [SerializeField] private float m_Amount;
 
     private Vector3 m_ModelStartPos;
 
     private void Start() {
+        BaseDefenseManager.GetInstance().m_ChangeToShootAction += ShowFPSGunModel;
+        BaseDefenseManager.GetInstance().m_ChangeFromShootAction += HideFPSGunModel;
         m_ModelStartPos = m_ModelParent.position;
     }
 
@@ -20,6 +20,7 @@ public class GunModelComtroller : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(BaseDefenseManager.GetInstance().GetCrosshairPos());
         RaycastHit hit;
+        // hit Environment
         if (Physics.Raycast(ray, out hit, 100, 1<<10))
         {
             m_ModelParent.LookAt(hit.point);
@@ -29,8 +30,16 @@ public class GunModelComtroller : MonoBehaviour
 
     }
 
+    private void HideFPSGunModel(){
+        m_ModelParent.gameObject.SetActive(false);
+    }
+
+    private void ShowFPSGunModel(){
+        m_ModelParent.gameObject.SetActive(true);
+    }
+
     private void GunModelParentOffsetHandler(){
-        GunModelOffset(BaseDefenseManager.GetInstance().GetCrosshairControl().GetCrosshairToScreenOffsetNormalized());
+        GunModelOffset(BaseDefenseManager.GetInstance().GetCrosshairController().GetCrosshairToScreenOffsetNormalized());
 
     }
 

@@ -10,12 +10,14 @@ public class GunScriptable : ScriptableObject
 {
     public string DisplayName;
     [Header("For Weapon selection panel in DayTime scene")]
-    public Sprite DisplaySprite;
+    public GameObject FPSPrefab;
     public float Damage;
     public int PelletPerShot = 1;
     public AudioClip ShootSound;
     public float ClipSize;
-    public Sprite FPSSprite;
+    public Vector3 ReloadPos;
+    public Vector3 ReloadRot;
+    public Vector3 ReloadScale;
     public AudioClip OutOfAmmoSound;
     [Header("True if holding down shoot btn will shoot continuously")]
     public bool IsSemiAuto = true;

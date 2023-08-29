@@ -13,34 +13,18 @@ MonoBehaviour:
   m_Name: Flingomatic
   m_EditorClassIdentifier: 
   DisplayName: Flingomatic
-  DisplaySprite: {fileID: 21300000, guid: 02677ce304973034d9ebe003fb1c826f, type: 3}
+  FPSPrefab: {fileID: 4705162678586017364, guid: 5d882575f3acdd044a6e82fb8b87bd6e, type: 3}
   Damage: 10
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   ClipSize: 15
-  FPSSprite: {fileID: 21300000, guid: 02677ce304973034d9ebe003fb1c826f, type: 3}
-  ResourceUseOnFullyReload:
-    Raw: 0
-    Scrap: 0
-    Chem: 0
-    Electronic: 0
-    Bot: 0
-    Heat: 0
-  ResourceUseOnReloadOne:
-    Raw: 0
-    Scrap: 0
-    Chem: 0
-    Electronic: 0
-    Bot: 0
-    Heat: 0
-  LightSizeGainOnShoot: 1
+  ReloadPos: {x: 0, y: 0, z: 0}
+  ReloadRot: {x: 0, y: 0, z: 0}
+  ReloadScale: {x: 0, y: 0, z: 0}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
-  CameraShakeStrength: 2
-  CameraShakeAmount: 10
   IsSemiAuto: 0
   FireRate: 4
   Accuracy: 75
   RecoilControl: 50
-  Stability: 50
-  Handling: 100
+  Recoil: 50
   ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

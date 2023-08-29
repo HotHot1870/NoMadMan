@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using BaseDefenseNameSpace;
 
@@ -36,14 +35,12 @@ public class BaseDefenseManager : MonoBehaviour
 {
     public static BaseDefenseManager m_Instance = null;
     [SerializeField] private EnemySpawnController m_EnemySpawnController;
-    [SerializeField] private GunController m_GunController;
+    [SerializeField] private GunShootController m_GunShootController;
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private CameraController m_CameraController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
     [SerializeField] private CrosshairControl m_CrosshairControl;
     [SerializeField] private GunModelComtroller m_GunModelController;
-    [SerializeField] private Button m_OptionBtn;
-    [SerializeField] private GameObject m_OptionPanel;
 
     
     [SerializeField] private GameObject m_ReloadControllerPanel;
@@ -102,9 +99,6 @@ public class BaseDefenseManager : MonoBehaviour
 
     private void Start() {
         m_ChangeFromReloadAction += CloseReloadPanel;
-        m_OptionBtn.onClick.AddListener(()=>{
-            m_OptionPanel.SetActive(true);
-        });
         // set wall hp
         m_WallHpBar.m_CanvasGroup.alpha = 0;
         m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
@@ -143,7 +137,7 @@ public class BaseDefenseManager : MonoBehaviour
         return m_CrosshairControl.GetCrosshairPos();
     }
 
-    public CrosshairControl GetCrosshairControl(){
+    public CrosshairControl GetCrosshairController(){
         return m_CrosshairControl;
     }
 
@@ -198,11 +192,11 @@ public class BaseDefenseManager : MonoBehaviour
         return m_CurrentAccruacy;
     }
     public void SetAccruacy(float newAccuracy){
-        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunController.GetSelectedGun().RecoilControl , m_GunController.GetSelectedGun().Accuracy);
+        //m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().RecoilControl , m_GunShootController.GetSelectedGun().Accuracy);
     }
 
-    public GunController GetGunController(){
-        return m_GunController;
+    public GunShootController GetGunShootController(){
+        return m_GunShootController;
     }
 
     public void OnWallHit(float damage){
@@ -232,6 +226,6 @@ public class BaseDefenseManager : MonoBehaviour
     }
 
     public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
-        m_GunController.SetSelectedGun(gun, slotIndex);
+        m_GunShootController.SetSelectedGun(gun, slotIndex);
     }
 }

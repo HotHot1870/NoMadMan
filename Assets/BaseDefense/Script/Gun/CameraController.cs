@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedButtons;
 using UnityEngine;
 using Cinemachine;
 using BaseDefenseNameSpace;
+using System;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Button2D m_LookDownBtn;
-    [SerializeField] private Button2D m_LookUpBtn;
-    [SerializeField] private GameObject m_ShootPanel;
     [SerializeField] private CinemachineBrain m_CameraBrain;
 
     [SerializeField] private CinemachineVirtualCamera m_ShootCamera;
@@ -20,44 +17,37 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        BaseDefenseManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
+        //BaseDefenseManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
         m_ShootCameraStartPos = m_ShootCamera.transform.position;
-
-        m_LookDownBtn.onDown.AddListener(() =>
-        {
-            if (m_CameraBrain.IsBlending)
-                return;
-
-            SetAllCameraPriorityToZero();
-            m_SwitchWeaponCamera.Priority = 1;
-            
-            m_ShootPanel.SetActive(false);
-            m_LookUpBtn.gameObject.SetActive(true);
-
-            SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.SwitchWeapon);
-        });
-
-        m_LookUpBtn.onDown.AddListener(() =>
-        {
-            if (m_CameraBrain.IsBlending)
-                return;
-
-            SetAllCameraPriorityToZero();
-            m_ShootCamera.Priority = 1;
-            
-            m_ShootPanel.SetActive(true);
-            m_LookUpBtn.gameObject.SetActive(false);
-
-            SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
-
-
-        });
 
         SetAllCameraPriorityToZero();
         m_ShootCamera.Priority = 1;
+    }
 
 
-        m_LookUpBtn.gameObject.SetActive(false);
+    public void OnClickLookUpBtn(Action UIUpdate){
+        if (m_CameraBrain.IsBlending)
+            return;
+
+        SetAllCameraPriorityToZero();
+        m_ShootCamera.Priority = 1;
+        
+        UIUpdate?.Invoke();
+
+        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
+    }
+
+
+    public void OnClickLookDownBtn(Action UIUpdate){
+        if (m_CameraBrain.IsBlending)
+            return;
+
+        SetAllCameraPriorityToZero();
+        m_SwitchWeaponCamera.Priority = 1;
+        
+        UIUpdate?.Invoke();
+
+        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.SwitchWeapon);
     }
 
     private void SetAllCameraPriorityToZero(){
@@ -71,7 +61,7 @@ public class CameraController : MonoBehaviour
             crosshairPosNormalized.y,
             0);
     }
-
+/*
     public void SwitchWeaponUpdate()
     {
         // can switch weapon when camera done blending 
@@ -99,7 +89,7 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private IEnumerator SetGameStage(float waitTime, BaseDefenseStage gameStage)
     {

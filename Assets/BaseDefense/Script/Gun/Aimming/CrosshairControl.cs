@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BaseDefenseNameSpace;
-using ExtendedButtons;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CrosshairControl : MonoBehaviour
 {
@@ -13,7 +11,6 @@ public class CrosshairControl : MonoBehaviour
     [SerializeField] private RectTransform m_Down;
     [SerializeField] private RectTransform m_CrosshairParent;
  
-    [SerializeField] private Button2D m_AimBtn;    
     private Vector2 m_AimDragMouseStartPos = Vector2.zero;
     private Vector2 m_AimDragMouseEndPos = Vector2.zero;
     private Vector3 m_CrossHairDragStartPos;
@@ -25,32 +22,27 @@ public class CrosshairControl : MonoBehaviour
 
     public float m_MaxAccuracyLose = 150f;
 
-    private void Start() {
-        m_AimBtn.onDown.AddListener(() =>
-        {
-            m_IsCrosshairMoving = true;
-            m_MousePreviousPos = Input.mousePosition;
-            m_AimDragMouseStartPos = Input.mousePosition;
-            m_CrossHairDragStartPos = m_CrosshairParent.position;
-        });
-        m_AimBtn.onUp.AddListener(() =>
-        {
-            m_IsCrosshairMoving = false;
-            m_AimDragMouseStartPos = Vector2.zero;
-            m_MousePreviousPos = Vector3.zero;
-            m_CrossHairDragStartPos = m_CrosshairParent.position;
-        });
 
-        m_AimBtn.onExit.AddListener(() =>
-        {
-            m_IsCrosshairMoving = false;
-            m_AimDragMouseStartPos = Vector2.zero;
-            m_MousePreviousPos = Vector3.zero;
-            m_CrossHairDragStartPos = m_CrosshairParent.position;
-        });
+    public void OnAimBtnDown(){
+        m_IsCrosshairMoving = true;
+        m_MousePreviousPos = Input.mousePosition;
+        m_AimDragMouseStartPos = Input.mousePosition;
+        m_CrossHairDragStartPos = m_CrosshairParent.position;
     }
 
-    private void Update() {
+    public void OnAimBtnUp(){
+        m_IsCrosshairMoving = false;
+        m_AimDragMouseStartPos = Vector2.zero;
+        m_MousePreviousPos = Vector3.zero;
+        m_CrossHairDragStartPos = m_CrosshairParent.position;
+    }
+
+
+    private void Start() {
+        BaseDefenseManager.GetInstance().m_ShootUpdatreAction += OnShootUpdate;
+    }
+
+    public void OnShootUpdate() {
         if(BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.Result){
             // game over already
             return;
@@ -69,7 +61,7 @@ public class CrosshairControl : MonoBehaviour
 
     private float GainAccOvertime(float curAcc){
         
-        if(BaseDefenseManager.GetInstance().GetGunController().GetShootCoolDown()>0){
+        if(BaseDefenseManager.GetInstance().GetGunShootController().GetShootCoolDown()>0){
             // gain less acc on shoot cool down
             curAcc += Time.deltaTime*50f;
         }else{
