@@ -8,16 +8,21 @@ using MainGameNameSpace;
 [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable/Weapon", order = 1)]
 public class GunScriptable : ScriptableObject
 {
-    public string DisplayName;
     [Header("For Weapon selection panel in DayTime scene")]
+    public string DisplayName;
     public GameObject FPSPrefab;
+    public Vector3 FPSPos;
+    public Vector3 FPSRot;
+    public Vector3 FPSScale = Vector3.one;
     public float Damage;
     public int PelletPerShot = 1;
     public AudioClip ShootSound;
     public float ClipSize;
+
+    [Header("In switch weapon panel")]
     public Vector3 ReloadPos;
     public Vector3 ReloadRot;
-    public Vector3 ReloadScale;
+    public Vector3 ReloadScale = Vector3.one;
     public AudioClip OutOfAmmoSound;
     [Header("True if holding down shoot btn will shoot continuously")]
     public bool IsSemiAuto = true;

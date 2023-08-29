@@ -39,7 +39,7 @@ public class CrosshairControl : MonoBehaviour
 
 
     private void Start() {
-        BaseDefenseManager.GetInstance().m_ShootUpdatreAction += OnShootUpdate;
+        BaseDefenseManager.GetInstance().m_ShootUpdateAction += OnShootUpdate;
     }
 
     public void OnShootUpdate() {

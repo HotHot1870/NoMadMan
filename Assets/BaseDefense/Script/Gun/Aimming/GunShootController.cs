@@ -111,7 +111,7 @@ public class GunShootController : MonoBehaviour
     public void SetUpGun(int slotIndex , GunScriptable gun){
         m_GunsClipAmmo.Add(slotIndex, gun.ClipSize);
         if(m_SelectedGun == null){
-            SetSelectedGun(gun, slotIndex);
+            BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun, slotIndex);
 
         }
     }

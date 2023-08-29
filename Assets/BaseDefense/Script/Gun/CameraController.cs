@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        //BaseDefenseManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
         m_ShootCameraStartPos = m_ShootCamera.transform.position;
 
         SetAllCameraPriorityToZero();
@@ -61,42 +60,11 @@ public class CameraController : MonoBehaviour
             crosshairPosNormalized.y,
             0);
     }
-/*
-    public void SwitchWeaponUpdate()
-    {
-        // can switch weapon when camera done blending 
-        if (!m_CameraBrain.IsBlending)
-        {
-            SwitchWeaponInputHandler();
-        }
-    }
-
-    private void SwitchWeaponInputHandler()
-    {
-        // select weapon
-        if (Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf )
-        {
-
-            RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            for (int i = 0; i < hits.Length; i++)
-            {
-                hits[i].collider.TryGetComponent<WeaponToBeSwitch>(out var weaponToBeSwitch);
-                if (weaponToBeSwitch != null && weaponToBeSwitch.m_Gun != null)
-                {
-                    SwitchWeapon(weaponToBeSwitch.m_Gun, weaponToBeSwitch.m_SlotIndex);
-                    m_LookUpBtn.onDown.Invoke();
-                    return;
-                }
-            }
-        }
-    }*/
 
     private IEnumerator SetGameStage(float waitTime, BaseDefenseStage gameStage)
     {
-        Debug.Log(waitTime);
         yield return new WaitForSeconds(waitTime);
         
-        Debug.Log(waitTime);
         BaseDefenseManager.GetInstance().ChangeGameStage(gameStage);
     }
 

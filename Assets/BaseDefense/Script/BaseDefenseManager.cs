@@ -59,7 +59,7 @@ public class BaseDefenseManager : MonoBehaviour
 
     
     #region UpdateAction
-    public Action m_ShootUpdatreAction = null;
+    public Action m_ShootUpdateAction = null;
     public Action m_SwitchWeaponUpdateAction = null;
     public Action m_ReloadUpdateAction = null;
     public Action m_UpdateAction = null;
@@ -109,7 +109,7 @@ public class BaseDefenseManager : MonoBehaviour
         switch (m_GameStage)
         {
             case BaseDefenseStage.Shoot:
-                m_ShootUpdatreAction?.Invoke();
+                m_ShootUpdateAction?.Invoke();
             break;
             case BaseDefenseStage.SwitchWeapon:
                 m_SwitchWeaponUpdateAction?.Invoke();
@@ -236,5 +236,6 @@ public class BaseDefenseManager : MonoBehaviour
 
     public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
         m_GunShootController.SetSelectedGun(gun, slotIndex);
+        m_GunModelController.ChangeGunModel(gun);
     }
 }

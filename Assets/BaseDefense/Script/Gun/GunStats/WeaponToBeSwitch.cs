@@ -21,8 +21,8 @@ public class WeaponToBeSwitch : MonoBehaviour
             return;
 
         m_GunModel = Instantiate(Gun.FPSPrefab, m_Self).transform;
-        m_GunModel.position = Gun.ReloadPos;
-        m_GunModel.eulerAngles = Gun.ReloadRot;
+        m_GunModel.localPosition = Gun.ReloadPos;
+        m_GunModel.localEulerAngles = Gun.ReloadRot;
         m_GunModel.localScale = Gun.ReloadScale;
 
         m_Gun = Gun;
@@ -36,7 +36,7 @@ public class WeaponToBeSwitch : MonoBehaviour
         }
     }
 
-    public bool IsGunDaraEmpty(){
+    public bool IsGunDataEmpty(){
         return m_GunModel == null;
     }
 }
