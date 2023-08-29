@@ -35,6 +35,7 @@ public class BaseDefenseManager : MonoBehaviour
 {
     public static BaseDefenseManager m_Instance = null;
     [SerializeField] private EnemySpawnController m_EnemySpawnController;
+    [SerializeField] private BaseDefenseUIController m_BaseDefenseUIController;
     [SerializeField] private GunShootController m_GunShootController;
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private CameraController m_CameraController;
@@ -132,6 +133,10 @@ public class BaseDefenseManager : MonoBehaviour
         }
     }
 
+    public BaseDefenseUIController GetBaseDefenseUIController(){
+        return m_BaseDefenseUIController;
+    }
+
     
     public Vector3 GetCrosshairPos(){
         return m_CrosshairControl.GetCrosshairPos();
@@ -192,7 +197,7 @@ public class BaseDefenseManager : MonoBehaviour
         return m_CurrentAccruacy;
     }
     public void SetAccruacy(float newAccuracy){
-        //m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().RecoilControl , m_GunShootController.GetSelectedGun().Accuracy);
+        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().RecoilControl , m_GunShootController.GetSelectedGun().Accuracy);
     }
 
     public GunShootController GetGunShootController(){
@@ -212,6 +217,10 @@ public class BaseDefenseManager : MonoBehaviour
         
         if(wallCurHp<=0)
             GameOver(true);
+    }
+
+    public void LookUp(){
+        m_CameraController.OnClickLookUpBtn(m_BaseDefenseUIController.OnClickLookUp );
     }
 
 

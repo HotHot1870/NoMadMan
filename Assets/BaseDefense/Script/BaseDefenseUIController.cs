@@ -57,7 +57,7 @@ public class BaseDefenseUIController : MonoBehaviour
         m_LookUpBtn.gameObject.SetActive(false);
     }
 
-    private void OnClickLookUp(){
+    public void OnClickLookUp(){
         m_ShootPanel.SetActive(true);
         m_LookUpBtn.gameObject.SetActive(false);
     }
@@ -65,5 +65,9 @@ public class BaseDefenseUIController : MonoBehaviour
     private void OnClickLookDown(){
         m_ShootPanel.SetActive(false);
         m_LookUpBtn.gameObject.SetActive(true);
+    }
+
+    public void SetAmmoText(string text){
+        m_AmmoText.text = text;
     }
 }

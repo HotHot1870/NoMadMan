@@ -29,20 +29,9 @@ public class GunShootController : MonoBehaviour
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
         MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 
-        
-
-
         m_SemiAutoShootCoroutine = null;
 
-
-
-
-
-        ChangeAmmoCount(0, true);
-        //m_FPSImage.sprite = m_SelectedGun.FPSSprite;
-        //var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
-        var screenCenter = new Vector3(Screen.width/2f,Screen.height/2f,0);
-        //MoveCrossHair( screenCenter );
+        //ChangeAmmoCount(0, true);
     }
 
 
@@ -107,7 +96,6 @@ public class GunShootController : MonoBehaviour
 
     public void SetSelectedGun(GunScriptable gun, int slotIndex)
     {
-        
         if (m_SelectedGun != null)
             m_GunsClipAmmo[m_CurrentWeaponSlotIndex] = m_CurrentAmmo;
 
@@ -118,6 +106,16 @@ public class GunShootController : MonoBehaviour
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
     }
+
+    // on start ammo set up 
+    public void SetUpGun(int slotIndex , GunScriptable gun){
+        m_GunsClipAmmo.Add(slotIndex, gun.ClipSize);
+        if(m_SelectedGun == null){
+            SetSelectedGun(gun, slotIndex);
+
+        }
+    }
+
     private void GainAmmo(int changes)
     {
         ChangeAmmoCount(changes, false);
@@ -196,7 +194,7 @@ public class GunShootController : MonoBehaviour
 
     private void ChangeAmmoCount(float num, bool isSetAmmoCount = false)
     {
-        /*
+        
         if (isSetAmmoCount)
         {
             m_CurrentAmmo = num;
@@ -210,7 +208,7 @@ public class GunShootController : MonoBehaviour
             m_CurrentAmmo = m_SelectedGun.ClipSize;
         }
 
-        m_AmmoText.text = $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}";*/
+        BaseDefenseManager.GetInstance().GetBaseDefenseUIController().SetAmmoText( $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}" );
     }
     public GunScriptable GetSelectedGun(){
         return m_SelectedGun;

@@ -13,6 +13,7 @@ public class SwitchWeaponController : MonoBehaviour
     private void Start() {
         var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
 
+        // set selected weapon into Slot
         for (int i = 0; i < allSelectedWeapon.Count; i++)
         {
             int index = i;
@@ -22,7 +23,7 @@ public class SwitchWeaponController : MonoBehaviour
                     allSelectedWeapon[i],
                     index
                 ); 
-                //m_GunsClipAmmo.Add(index, 0);
+                BaseDefenseManager.GetInstance().GetGunShootController().SetUpGun(index,allSelectedWeapon[i] );
             }else{
                 m_AllWeaponSlot[index].Init(
                     null,
@@ -62,14 +63,17 @@ public class SwitchWeaponController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.SwitchWeapon )
         {
-            //Debug.Log("");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             // hit SwitchWeapon
             if (Physics.Raycast(ray, out hit, 100, 1<<11))
             {
                 if(hit.transform.TryGetComponent<WeaponToBeSwitch>(out var weaponData)){
-                    Debug.Log(hit.transform.position);
+                    // switch weapon 
+                    weaponData.OnClickWeapon();
+
+                    // look up 
+                    BaseDefenseManager.GetInstance().LookUp();
                 }
             }
         }

@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
         
         UIUpdate?.Invoke();
 
-        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
+        StartCoroutine(SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot));
     }
 
 
@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour
         
         UIUpdate?.Invoke();
 
-        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.SwitchWeapon);
+        StartCoroutine(SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.SwitchWeapon));
     }
 
     private void SetAllCameraPriorityToZero(){
@@ -93,7 +93,10 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator SetGameStage(float waitTime, BaseDefenseStage gameStage)
     {
+        Debug.Log(waitTime);
         yield return new WaitForSeconds(waitTime);
+        
+        Debug.Log(waitTime);
         BaseDefenseManager.GetInstance().ChangeGameStage(gameStage);
     }
 
