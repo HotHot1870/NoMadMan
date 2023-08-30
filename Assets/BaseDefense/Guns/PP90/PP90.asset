@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PP90
   m_EditorClassIdentifier: 
   DisplayName: PP90
+  ShakeAmount: 0.1
   FPSPrefab: {fileID: 4723895810438305759, guid: f5a52fa68e330264abdc179f5ed1c0f5, type: 3}
-  FPSPos: {x: 0, y: 0, z: 0}
+  FPSPos: {x: 0, y: 2, z: 3}
   FPSRot: {x: 0, y: 0, z: 0}
   FPSScale: {x: 1, y: 1, z: 1}
   Damage: 5.5
@@ -26,7 +27,7 @@ MonoBehaviour:
   ReloadScale: {x: 0.4, y: 0.4, z: 0.4}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 1
-  FireRate: 14.47
+  FireRate: 10.77
   Accuracy: 75
   RecoilControl: 0
   Recoil: 10

@@ -72,7 +72,7 @@ public class GunModelComtroller : MonoBehaviour
         m_ModelShake.localPosition = Vector3.zero;
     }
 
-    private void HideFPSGunModel(){
+    public void HideFPSGunModel(){
         m_ModelAim.gameObject.SetActive(false);
     }
 
@@ -89,6 +89,7 @@ public class GunModelComtroller : MonoBehaviour
         m_PosOffset = gun.FPSPos;
         gunTrans.localEulerAngles = gun.FPSRot;
         gunTrans.localScale = gun.FPSScale;
+        
     }
 
     private void GunModelParentOffsetHandler(){

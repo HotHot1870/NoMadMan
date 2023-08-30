@@ -1951,6 +1951,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318149774}
   m_CullTransparentMesh: 1
+--- !u!1 &321752854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 321752856}
+  - component: {fileID: 321752855}
+  m_Layer: 0
+  m_Name: EnemySpawnController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &321752855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321752854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3460a69a0ce47cc418028237efe7c993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyParent: {fileID: 824272814}
+  m_WavesData: {fileID: 11400000, guid: 9e640597abf516a48951f428b0c7fcac, type: 2}
+  m_GroundSpawnerCenter: {fileID: 670607847}
+  m_GroundSpawnerWidth: 40
+--- !u!4 &321752856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321752854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 824272814}
+  - {fileID: 670607847}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323216232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3235,37 @@ MonoBehaviour:
   m_Down: {fileID: 1010153207}
   m_CrosshairParent: {fileID: 653484384}
   m_MaxAccuracyLose: 150
+--- !u!1 &670607846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670607847}
+  m_Layer: 0
+  m_Name: GroundSpawnCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &670607847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670607846}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -14, z: 80}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 321752856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &696075543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,7 +3802,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824272814}
-  - component: {fileID: 824272815}
   m_Layer: 0
   m_Name: EnemyParent
   m_TagString: Untagged
@@ -3737,29 +3817,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824272813}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 321752856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &824272815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824272813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3460a69a0ce47cc418028237efe7c993, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AllEnemyTypes:
-  - {fileID: 11400000, guid: be3daa2f33058c548a697a0bad35bdb8, type: 2}
-  - {fileID: 11400000, guid: 316246d8dca31814e9cfccdeb66dfa0e, type: 2}
-  m_EnemyParent: {fileID: 824272814}
 --- !u!4 &933183126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4078281505180318637, guid: bc135f8d8cfe26647b0ea1478f8a2983, type: 3}
@@ -6255,7 +6319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0d5c8587f9b3f4f9658aef7be75b93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemySpawnController: {fileID: 824272815}
+  m_EnemySpawnController: {fileID: 0}
   m_BaseDefenseUIController: {fileID: 1794693722}
   m_GunShootController: {fileID: 1238169345}
   m_ReloadController: {fileID: 7275961}
@@ -8727,7 +8791,7 @@ SceneRoots:
   - {fileID: 1794693721}
   - {fileID: 813147456}
   - {fileID: 822869637}
-  - {fileID: 824272814}
+  - {fileID: 321752856}
   - {fileID: 1238169344}
   - {fileID: 2097067217}
   - {fileID: 957743537}

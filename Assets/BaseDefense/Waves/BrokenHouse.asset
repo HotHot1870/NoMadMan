@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: BrokenHouse
   m_EditorClassIdentifier: 
   NormalWavesCount: 2
-  NormalWavesStrength: 10
-  NormalWaveEnemy: []
-  FinalWavesStrength: 10
-  FinalWaveEnemy: []
+  NormalWavesDangerValue: 10
+  NormalWaveEnemy:
+  - {fileID: 11400000, guid: fddc537df9f28ab4898399fa53e74fed, type: 2}
+  FinalWavesDangerValue: 10
+  FinalWaveEnemy:
+  - {fileID: 11400000, guid: fddc537df9f28ab4898399fa53e74fed, type: 2}

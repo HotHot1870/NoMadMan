@@ -63,6 +63,7 @@ public class BaseDefenseUIController : MonoBehaviour
     }
 
     private void OnClickLookDown(){
+        BaseDefenseManager.GetInstance().GetGunModelController().HideFPSGunModel();
         m_ShootPanel.SetActive(false);
         m_LookUpBtn.gameObject.SetActive(true);
     }
