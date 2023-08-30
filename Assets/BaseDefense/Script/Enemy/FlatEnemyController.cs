@@ -14,4 +14,8 @@ public class FlatEnemyController : MonoBehaviour
         m_Destination = destination;
     }
 
+    private void Start() {
+        
+    }
+
 }
