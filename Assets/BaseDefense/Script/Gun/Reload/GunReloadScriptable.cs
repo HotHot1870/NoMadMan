@@ -65,7 +65,7 @@ namespace GunReloadScriptableNameSpace
         GainOneAmmo = 1 << 2 , // do nothing if ammo already reach maximum 
         FullAmmoReload = 1 << 3 ,
         ToNextPhase = 1 << 4 ,
-        RefreshThisPhase = 1 << 5 , // for shotgun
+        PhaseChangeByAmmo = 1 << 5 , // for shotgun
         SetClipAmmoToZero = 1 << 6 ,
 
 

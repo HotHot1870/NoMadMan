@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class GunModelComtroller : MonoBehaviour
 {
-    [SerializeField] private Transform m_ModelParent;
+    [SerializeField] private Transform m_ModelAim;
+    [SerializeField] private Transform m_ModelShake;
     [SerializeField] private Vector3 m_CrosshairOffsetStrength = Vector3.one;
     private GameObject m_GunModel;
-
     private Vector3 m_ModelStartPos;
-
     private Vector3 m_PosOffset = Vector3.zero;
+    private Coroutine m_ShakeRecover = null;
+
+
 
     private void Start() {
         BaseDefenseManager.GetInstance().m_ChangeToShootAction += ShowFPSGunModel;
         BaseDefenseManager.GetInstance().m_ChangeFromShootAction += HideFPSGunModel;
         BaseDefenseManager.GetInstance().m_ShootUpdateAction += ShootUpdate;
-        m_ModelStartPos = m_ModelParent.position;
+        m_ModelStartPos = m_ModelAim.position;
     }
 
     private void ShootUpdate() {
@@ -25,28 +27,64 @@ public class GunModelComtroller : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(BaseDefenseManager.GetInstance().GetCrosshairPos());
         RaycastHit hit;
         // hit Environment
-        if (Physics.Raycast(ray, out hit, 100, 1<<10))
+        if (Physics.Raycast(ray, out hit, 500, 1<<10))
         {
-            m_ModelParent.LookAt(hit.point);
+            m_ModelAim.LookAt(hit.point);
         }
 
         GunModelParentOffsetHandler();
 
     }
 
+    public void ShakeGunByShoot(float shakeAmount){
+        if(m_ShakeRecover != null){
+            StopCoroutine(m_ShakeRecover);
+        }
+        m_ShakeRecover = StartCoroutine(ShakeGun(shakeAmount));
+    }
+
+    private IEnumerator ShakeGun(float shakeAmount){
+        Vector3 randomRot = new Vector3(
+            UnityEngine.Random.Range(-10f,10f),
+            UnityEngine.Random.Range(-10f,10f),
+            UnityEngine.Random.Range(-10f,10f)
+        ) * shakeAmount ;
+
+        Vector3 randomPos = new Vector3(
+            UnityEngine.Random.Range(-0.5f,-0.5f),
+            UnityEngine.Random.Range(0f,1f),
+            UnityEngine.Random.Range(-1.5f,0f)
+        ) * shakeAmount ;
+        m_ModelShake.localEulerAngles = randomRot;
+        m_ModelShake.localPosition = randomPos;
+
+        float timePass = 0;
+        float recoverTime = 0.15f;
+        while (recoverTime>timePass)
+        {
+            timePass += Time.deltaTime;
+            yield return null;
+            // shake recover
+            m_ModelShake.localEulerAngles = Vector3.Lerp(randomRot, Vector3.zero,timePass/recoverTime );
+            m_ModelShake.localPosition = Vector3.Lerp(randomPos, Vector3.zero,timePass/recoverTime );
+        }
+        m_ModelShake.localEulerAngles = Vector3.zero;
+        m_ModelShake.localPosition = Vector3.zero;
+    }
+
     private void HideFPSGunModel(){
-        m_ModelParent.gameObject.SetActive(false);
+        m_ModelAim.gameObject.SetActive(false);
     }
 
     private void ShowFPSGunModel(){
-        m_ModelParent.gameObject.SetActive(true);
+        m_ModelAim.gameObject.SetActive(true);
     }
 
     public void ChangeGunModel(GunScriptable gun){
         if(m_GunModel != null){
             Destroy(m_GunModel);
         }
-        m_GunModel = Instantiate(gun.FPSPrefab,m_ModelParent);
+        m_GunModel = Instantiate(gun.FPSPrefab,m_ModelShake);
         var gunTrans = m_GunModel.transform;
         m_PosOffset = gun.FPSPos;
         gunTrans.localEulerAngles = gun.FPSRot;
@@ -66,12 +104,12 @@ public class GunModelComtroller : MonoBehaviour
             m_ModelStartPos.z
         );
 
-        m_ModelParent.position = startPos + new Vector3(
+        m_ModelAim.position = startPos + new Vector3(
             crosshairPosNormalized.x * m_CrosshairOffsetStrength.x,
             crosshairPosNormalized.y * m_CrosshairOffsetStrength.y,
             crosshairPosNormalized.y*-1f * m_CrosshairOffsetStrength.z
         ) ;
-        m_ModelParent.localPosition += m_PosOffset;
+        m_ModelAim.localPosition += m_PosOffset;
 
     }
 

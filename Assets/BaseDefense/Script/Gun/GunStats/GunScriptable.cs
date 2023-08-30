@@ -10,6 +10,7 @@ public class GunScriptable : ScriptableObject
 {
     [Header("For Weapon selection panel in DayTime scene")]
     public string DisplayName;
+    [Range(0,1f)]public float ShakeAmount = 0.1f;
     public GameObject FPSPrefab;
     public Vector3 FPSPos;
     public Vector3 FPSRot;
@@ -45,5 +46,4 @@ public class GunScriptable : ScriptableObject
     [Header("Reload")]
     public GunReloadScriptable ReloadScriptable;
     
-
 }

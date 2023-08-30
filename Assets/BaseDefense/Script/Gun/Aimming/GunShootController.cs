@@ -155,6 +155,7 @@ public class GunShootController : MonoBehaviour
 
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
+        BaseDefenseManager.GetInstance().GetGunModelController().ShakeGunByShoot(m_SelectedGun.ShakeAmount);
 
         for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
         {
@@ -176,12 +177,13 @@ public class GunShootController : MonoBehaviour
             shotPoint.GetComponent<RectTransform>().position = accuracyOffset + BaseDefenseManager.GetInstance().GetCrosshairPos();
 
             
+            Destroy(shotPoint, 1);
+        }
+        
             // acc lose on shoot            
             BaseDefenseManager.GetInstance().SetAccruacy(
                 BaseDefenseManager.GetInstance().GetAccruacy()-m_SelectedGun.Recoil
             );
-            Destroy(shotPoint, 1);
-        }
 
         m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
         ChangeAmmoCount(-1, false);

@@ -301,22 +301,21 @@ public class GunReloadController : MonoBehaviour
             m_Config.SetAmmoToFull?.Invoke();
         }
 
-        if(actionEnum == ( actionEnum | GunReloadActionResult.RefreshThisPhase ) ){
-            // Refresh This Phase
-            Debug.Log("Refresh This Phase");
+        if(actionEnum == ( actionEnum | GunReloadActionResult.PhaseChangeByAmmo ) ){
+            // if ammo full , to next phase , refreash otherwise
+            if(m_Config.IsFullClipAmmo.Invoke()){
+                ++m_CurReloadPhase;
+            }
             SetReloadPhase();   
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.SetClipAmmoToZero ) ){
             // Set Clip Ammo To Zero
             m_Config.SetAmmoToZero?.Invoke();
-            
-
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.ToNextPhase ) ){
             // To Next Phase
-            Debug.Log("To Next Phase");
             ++m_CurReloadPhase;
             SetReloadPhase();
         }
