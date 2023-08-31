@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
     protected EnemyScriptable Scriptable;
     protected float CurHp;
@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
         Debug.Log(CurHp);
         if( CurHp<=0 ){
             // dead
+            OnDead();
         }
     }
+    protected abstract void OnDead();
 }

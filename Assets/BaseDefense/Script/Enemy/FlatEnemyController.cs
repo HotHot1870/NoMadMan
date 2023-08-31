@@ -29,5 +29,8 @@ public class FlatEnemyController : EnemyController
                 m_Self.transform.position, m_Destination, moveDistance);
         }
     }
+    protected override void OnDead(){
+        Destroy(m_Self);
+    }
 
 }
