@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -19,6 +20,9 @@ public class FlatEnemyController : EnemyController
     }
 
     private void Update() {
+        if( IsDead )
+            return;
+
         if(Vector2.Distance( new Vector2(m_Self.transform.position.x,m_Self.transform.position.z) , m_Destination)<0.25f){
            // close enough for attack 
 
@@ -30,7 +34,8 @@ public class FlatEnemyController : EnemyController
         }
     }
     protected override void OnDead(){
-        Destroy(m_Self);
+        m_OnDead?.Invoke();
+        Destroy(m_Self,1);
     }
 
 }
