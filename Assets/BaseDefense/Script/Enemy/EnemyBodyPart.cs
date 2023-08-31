@@ -32,10 +32,10 @@ public class EnemyBodyPart : MonoBehaviour
         {
             passedTime += Time.deltaTime;
             yield return null;
-            m_Renderer.material.SetFloat("_Normalized", (fadeTimeNeeded - passedTime) / fadeTimeNeeded);
+            m_Renderer.material.SetFloat("_Normalized",  passedTime / fadeTimeNeeded);
 
         }
-        m_Renderer.material.SetFloat("_Normalized", 0);
+        m_Renderer.material.SetFloat("_Normalized", 1);
 
     }
 

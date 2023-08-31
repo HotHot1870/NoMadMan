@@ -8,12 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Burn
-  m_Shader: {fileID: -6465566751694194690, guid: 4f2ba2382e7d3d448809a6eb28ace819, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: cce3b9efdd12e264a8aa0afce34b26d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -97,13 +96,22 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FullBrunNormalized: 0
+    - _FullBurnBorderSize: 0.1
+    - _FullBurnDensity: 47.8
+    - _FullBurnSize: 0.36
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _LineBurnBorderSize: 1
+    - _LineBurnNormalized: 0.36
+    - _LineBurnRotation: 0
     - _Metallic: 0
-    - _Normalized: 1
+    - _Normalized: 0
     - _OcclusionStrength: 1
+    - _OutlineThiccness: 0.027
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rotation: 0
@@ -120,6 +128,10 @@ Material:
     - _BorderColor: {r: 3.9999998, g: 0.49624735, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FullBurnBorderColor: {r: 5.3403134, g: 0.6073298, b: 0, a: 1}
+    - _FullBurnColor: {r: 1.7610962, g: 0.21206918, b: 0, a: 1}
+    - _LineBurnBorderColor: {r: 5.3403134, g: 0.6073298, b: 0, a: 1}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &8054788603518425279

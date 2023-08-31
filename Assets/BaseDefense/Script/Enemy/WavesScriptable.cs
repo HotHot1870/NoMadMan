@@ -11,7 +11,7 @@ public class WavesScriptable : ScriptableObject
     public float NormalWavesDangerValue = 10f;
     public List<EnemyScriptable> NormalWaveEnemy = new List<EnemyScriptable>();
     [Header("Final")]
-    public float FinalWavesDangerValue = 10f;
+    public float FinalWaveDangerValue = 50f;
     public List<EnemyScriptable> FinalWaveEnemy = new List<EnemyScriptable>();
 
 
