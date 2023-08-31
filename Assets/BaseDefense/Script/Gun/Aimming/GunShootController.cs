@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using BaseDefenseNameSpace;
 using UnityEngine.Rendering.Universal;
+using System.Runtime.InteropServices;
 
 public class GunShootController : MonoBehaviour
 {
@@ -74,19 +75,6 @@ public class GunShootController : MonoBehaviour
         };
         BaseDefenseManager.GetInstance().StartReload(gunReloadConfig);
     }
-/*
-
-    gun model controller
-
-    private void HideWeaponModel()
-    {
-        m_FPSImage.gameObject.SetActive(false);
-    }
-
-    private void ShowWeaponModel()
-    {
-        m_FPSImage.gameObject.SetActive(true);
-    }*/
 
     private void ShootCoolDown()
     {
@@ -171,10 +159,11 @@ public class GunShootController : MonoBehaviour
                 0
             );
 
-
             // spawn dot for player to see
             var shotPoint = Instantiate(m_ShotPointPrefab,m_ShotDotParent);
-            shotPoint.GetComponent<RectTransform>().position = accuracyOffset + BaseDefenseManager.GetInstance().GetCrosshairPos();
+            var dotPos = accuracyOffset + BaseDefenseManager.GetInstance().GetCrosshairPos();
+            shotPoint.GetComponent<RectTransform>().position = dotPos;
+            CaseRayWithShootDot(dotPos);
 
             
             Destroy(shotPoint, 1);
@@ -187,6 +176,18 @@ public class GunShootController : MonoBehaviour
 
         m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
         ChangeAmmoCount(-1, false);
+    }
+
+    private void CaseRayWithShootDot(Vector3 dotPos){
+        Ray ray = Camera.main.ScreenPointToRay(dotPos);
+        RaycastHit hit;
+        // hit Enemy
+        if (Physics.Raycast(ray, out hit, 500, 1<<12))
+        {
+            if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
+                bodyPart.OnHit(m_SelectedGun.Damage);
+            }
+        }
     }
 
 
