@@ -16,6 +16,8 @@ public class BaseDefenseUIController : MonoBehaviour
     [SerializeField] private Button2D m_ShootBtn;
     [SerializeField] private Button2D m_LookDownBtn;
     [SerializeField] private Button2D m_LookUpBtn;
+    [SerializeField] private Image m_WallHpBar;
+    [SerializeField] private TMP_Text m_WallHpText;
 
     
     [Header("OptionPanel")]
@@ -70,5 +72,11 @@ public class BaseDefenseUIController : MonoBehaviour
 
     public void SetAmmoText(string text){
         m_AmmoText.text = text;
+    }
+
+
+    public void SetWallHpBar(float curHp, float maxHp) {
+        m_WallHpBar.fillAmount = curHp/maxHp;
+        m_WallHpText.text = $"{curHp} / {maxHp}";
     }
 }
