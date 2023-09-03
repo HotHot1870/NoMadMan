@@ -7,6 +7,7 @@ public class EnemyBodyPart : MonoBehaviour
     [SerializeField] private EnemyController m_EnemyController;
     [SerializeField] private MeshRenderer m_Renderer;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
+    [SerializeField] private bool m_IsShield = false;
 
     private void Start()
     {
@@ -16,6 +17,10 @@ public class EnemyBodyPart : MonoBehaviour
     public void OnHit(float damage)
     {
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
+    }
+
+    public bool IsShield(){
+        return m_IsShield;
     }
 
     public void OnDead()

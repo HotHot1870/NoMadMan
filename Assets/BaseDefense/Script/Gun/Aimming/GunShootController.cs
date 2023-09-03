@@ -163,7 +163,7 @@ public class GunShootController : MonoBehaviour
             var shotPoint = Instantiate(m_ShotPointPrefab,m_ShotDotParent);
             var dotPos = accuracyOffset + BaseDefenseManager.GetInstance().GetCrosshairPos();
             shotPoint.GetComponent<RectTransform>().position = dotPos;
-            CaseRayWithShootDot(dotPos);
+            CaseRayWithShootDot(dotPos, shotPoint.GetComponent<ShootDotController>() );
 
             
             Destroy(shotPoint, 1);
@@ -178,15 +178,22 @@ public class GunShootController : MonoBehaviour
         ChangeAmmoCount(-1, false);
     }
 
-    private void CaseRayWithShootDot(Vector3 dotPos){
+    private void CaseRayWithShootDot(Vector3 dotPos, ShootDotController dotController){
         Ray ray = Camera.main.ScreenPointToRay(dotPos);
         RaycastHit hit;
         // hit Enemy
         if (Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
+                if(bodyPart.IsShield()){
+                    dotController.OnHitShield();
+                }else{
+                    dotController.OnHit();
+                }
                 bodyPart.OnHit(m_SelectedGun.Damage);
             }
+        }else{
+            dotController.OnMiss();
         }
     }
 

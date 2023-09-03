@@ -10,6 +10,7 @@ public class ShootDotController : MonoBehaviour
     [SerializeField] private Color m_MissColor = Color.grey;
     [SerializeField] private Color m_HitColor = Color.yellow;
     [SerializeField] private Color m_CritColor = Color.red;
+    [SerializeField] private Color m_HitShieldColor = Color.blue;
 
     public void OnMiss(){
         m_Image.color = m_MissColor;
@@ -21,5 +22,9 @@ public class ShootDotController : MonoBehaviour
 
     public void OnCrit(){
         m_Image.color = m_CritColor;
+    }
+
+    public void OnHitShield(){
+        m_Image.color = m_HitShieldColor;
     }
 }
