@@ -18,7 +18,7 @@ MonoBehaviour:
   FPSPos: {x: 0, y: 0, z: 0}
   FPSRot: {x: 0, y: 0, z: 0}
   FPSScale: {x: 1, y: 1, z: 1}
-  Damage: 3
+  Damage: 15
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 69
@@ -27,7 +27,7 @@ MonoBehaviour:
   ReloadScale: {x: 0.4, y: 0.4, z: 0.4}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 1
-  FireRate: 7.17
+  FireRate: 12
   Accuracy: 100
   RecoilControl: 0
   Recoil: 50

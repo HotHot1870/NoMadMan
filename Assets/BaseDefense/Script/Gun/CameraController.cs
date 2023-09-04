@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    public void OnClickLookUpBtn(Action UIUpdate){
+    public void CameraLookUp(Action UIUpdate){
         if (m_CameraBrain.IsBlending)
             return;
 
@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    public void OnClickLookDownBtn(Action UIUpdate){
+    public void CameraLookDown(Action UIUpdate){
         if (m_CameraBrain.IsBlending)
             return;
 

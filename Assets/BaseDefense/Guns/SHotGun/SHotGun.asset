@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SHotGun
   m_EditorClassIdentifier: 
   DisplayName: SHotGun
+  ShakeAmount: 0.1
   FPSPrefab: {fileID: 5973581222493145179, guid: 402c419fdb199c64b96870e759cf86c7, type: 3}
   FPSPos: {x: 0, y: 0, z: 0}
   FPSRot: {x: 0, y: 0, z: 0}
   FPSScale: {x: 1, y: 1, z: 1}
-  Damage: 1.5
+  Damage: 4
   PelletPerShot: 20
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   ClipSize: 8

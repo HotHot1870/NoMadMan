@@ -230,7 +230,7 @@ public class BaseDefenseManager : MonoBehaviour
     }
 
     public void LookUp(){
-        m_CameraController.OnClickLookUpBtn(m_BaseDefenseUIController.OnClickLookUp );
+        m_CameraController.CameraLookUp(m_BaseDefenseUIController.OnClickLookUp );
     }
 
 
@@ -247,10 +247,7 @@ public class BaseDefenseManager : MonoBehaviour
     public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
         m_GunShootController.SetSelectedGun(gun, slotIndex);
         m_GunModelController.ChangeGunModel(gun);
-        ChangeGameStage(BaseDefenseStage.Shoot);
+        m_CameraController.CameraLookUp(m_BaseDefenseUIController.OnClickLookUp);
     }
 
-    private void SwitchWeapon(){
-        
-    }
 }

@@ -59,12 +59,12 @@ public class BaseDefenseUIController : MonoBehaviour
         var cameraController = BaseDefenseManager.GetInstance().GetCameraController();
 
         m_LookDownBtn.onDown.AddListener(() =>
-            cameraController.OnClickLookDownBtn(
+            cameraController.CameraLookDown(
                 OnClickLookDown
             ));
 
         m_LookUpBtn.onDown.AddListener(() =>
-            cameraController.OnClickLookUpBtn(
+            cameraController.CameraLookUp(
                 OnClickLookUp
             ));
             
