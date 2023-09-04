@@ -23,6 +23,10 @@ public class EnemyBodyPart : MonoBehaviour
         return m_IsShield;
     }
 
+    public bool IsDead(){
+        return m_EnemyController.IsDead();
+    }
+
     public void OnDead()
     {
         // burn effect

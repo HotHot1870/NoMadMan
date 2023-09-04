@@ -8,22 +8,28 @@ public abstract class EnemyController : MonoBehaviour
     protected EnemyScriptable Scriptable;
     protected float CurHp;
     public Action m_OnDead = null;
-    protected bool IsDead = false;
+    protected bool m_IsDead = false;
 
     /// <summary>
     /// use negative for damage
     /// </summary>
     public void ChangeHp(float changes){
-        if( IsDead )
+        if( m_IsDead )
             return;
 
         CurHp += changes;
         CurHp = Mathf.Clamp(CurHp,0f,Scriptable.MaxHp);
         if( CurHp<=0 ){
             // dead
-            IsDead = true;
+            m_IsDead = true;
             OnDead();
         }
     }
+
+    public bool IsDead(){
+        return m_IsDead;
+    }
+
+
     protected abstract void OnDead();
 }

@@ -32,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -90,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Image: {fileID: 7986785765533447239}
-  m_MissColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  m_MissColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_HitColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_CritColor: {r: 1, g: 0, b: 0, a: 1}
+  m_HitShieldColor: {r: 0, g: 1, b: 1, a: 1}

@@ -185,12 +185,16 @@ public class GunShootController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
-                if(bodyPart.IsShield()){
-                    dotController.OnHitShield();
+                if(!bodyPart.IsDead()){
+                    if(bodyPart.IsShield()){
+                        dotController.OnHitShield();
+                    }else{
+                        dotController.OnHit();
+                    }
+                    bodyPart.OnHit(m_SelectedGun.Damage);
                 }else{
-                    dotController.OnHit();
+                    dotController.OnMiss();
                 }
-                bodyPart.OnHit(m_SelectedGun.Damage);
             }
         }else{
             dotController.OnMiss();

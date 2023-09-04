@@ -48,6 +48,8 @@ public class BaseDefenseManager : MonoBehaviour
 
     private float m_CurrentAccruacy = 100f;
 
+    private bool m_IsWin = false;
+
 
     [Header("Enemy Hp Bars")]
     [SerializeField] private Transform m_EnemyHpBarParent;

@@ -23,7 +23,7 @@ public class FlatEnemyController : EnemyController
     }
 
     private void Update() {
-        if( IsDead )
+        if( m_IsDead )
             return;
 
         if(Vector2.Distance( new Vector2(m_Self.transform.position.x,m_Self.transform.position.z) , m_Destination)<0.25f){

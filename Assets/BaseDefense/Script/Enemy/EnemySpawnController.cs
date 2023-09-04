@@ -28,19 +28,20 @@ public class EnemySpawnController : MonoBehaviour
     }
 
     private void EnemySpawnUpdate(){
-        if(m_IsFinalWaveStarted){
-            if(m_EnemyParent.childCount<=0){
-                // all dead
-                Debug.Log("win");
-            }
-            return;
-        }
 
         // check time pass to prevent all wave start at begin
         if(m_TimePassed>=m_MaxSpawnDelay){
             // is all enemy dead
             if(m_EnemyParent.childCount<=0){
                 // all dead
+                
+                // win
+                if(m_IsFinalWaveStarted){
+                        // all dead
+                        Debug.Log("win");
+                    return;
+                }
+
                 m_TimePassed = 0;
                 StartNextNormalWave();
             }
@@ -69,7 +70,6 @@ public class EnemySpawnController : MonoBehaviour
 
     private IEnumerator SpawnEnemy(float delay, EnemyScriptable enemyData)
     {
-        Debug.Log("");
         float passedTime = 0;
         while (passedTime < delay)
         {
