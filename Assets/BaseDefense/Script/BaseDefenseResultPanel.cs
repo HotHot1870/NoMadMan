@@ -7,7 +7,7 @@ using MainGameNameSpace;
 using UnityEngine.SceneManagement;
 
 public class BaseDefenseResultPanel : MonoBehaviour
-{
+{/*
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Image m_Bg;
 
@@ -78,4 +78,5 @@ public class BaseDefenseResultPanel : MonoBehaviour
             //BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
         });
     }
+    */
 }

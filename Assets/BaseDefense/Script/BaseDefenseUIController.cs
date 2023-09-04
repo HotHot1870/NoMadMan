@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ExtendedButtons;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BaseDefenseUIController : MonoBehaviour
@@ -16,16 +17,27 @@ public class BaseDefenseUIController : MonoBehaviour
     [SerializeField] private Button2D m_ShootBtn;
     [SerializeField] private Button2D m_LookDownBtn;
     [SerializeField] private Button2D m_LookUpBtn;
-    [SerializeField] private Image m_WallHpBar;
-    [SerializeField] private TMP_Text m_WallHpText;
 
     
     [Header("OptionPanel")]
     [SerializeField] private GameObject m_OptionPanel;
 
+    [Header("Wall")]
+    [SerializeField] private GameObject m_WallParent;
+    [SerializeField] private Image m_HpBarFiller;
+    [SerializeField] private TMP_Text m_WallHpText;
+
+    [Header("Result")]
+    [SerializeField] private GameObject m_ResultParent;
+    [SerializeField] private TMP_Text m_ResultTitle;
+    [SerializeField] private Button2D m_BackFromResultBtn;
+
 
 
     private void Start() {
+        m_ResultParent.SetActive(false);
+        m_BackFromResultBtn.onClick.AddListener(OnClickBackFromResult);
+
         var crosshairController = BaseDefenseManager.GetInstance().GetCrosshairController();
 
         m_AimBtn.onDown.AddListener(crosshairController.OnAimBtnDown);
@@ -74,9 +86,24 @@ public class BaseDefenseUIController : MonoBehaviour
         m_AmmoText.text = text;
     }
 
+    public void SetWallHpUI(){
+        float wallHp = MainGameManager.GetInstance().GetWallCurHp();
+        float wallMapHp = MainGameManager.GetInstance().GetWallMaxHp();
+        WallUISetActive(true);
+        m_WallHpText.text = $"{wallHp} / {wallMapHp}";
+        m_HpBarFiller.fillAmount = wallHp/wallMapHp;
+    }
 
-    public void SetWallHpBar(float curHp, float maxHp) {
-        m_WallHpBar.fillAmount = curHp/maxHp;
-        m_WallHpText.text = $"{curHp} / {maxHp}";
+    public void WallUISetActive(bool isActive){
+        m_WallParent.SetActive(isActive);
+    }
+
+    public void OnClickBackFromResult(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SetResultPanel(bool isWin){
+        m_ResultParent.SetActive(true);
+        m_ResultTitle.text = isWin?"You Win":"Loser";
     }
 }

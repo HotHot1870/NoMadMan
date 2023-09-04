@@ -55,8 +55,8 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
 
-    [Header("Wall")]
-    [SerializeField] private HpBar m_WallHpBar;
+    //[Header("Wall")]
+    //[SerializeField] private WallController m_WallController;
     private float m_TotalWallHpBarStayTime = 0;
 
     
@@ -101,10 +101,12 @@ public class BaseDefenseManager : MonoBehaviour
 
 
     private void Start() {
+        //m_WallController.Init(m_WallController.GetWallMaxHp());
+
         m_ChangeFromReloadAction += CloseReloadPanel;
-        // set wall hp
-        m_WallHpBar.m_CanvasGroup.alpha = 0;
-        m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
+        //m_WallController.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
+
+
     }
 
     private void Update() {
@@ -131,7 +133,7 @@ public class BaseDefenseManager : MonoBehaviour
         if(m_TotalWallHpBarStayTime>0){
             m_TotalWallHpBarStayTime -= Time.deltaTime;
         }else{
-            m_WallHpBar.m_CanvasGroup.alpha = 0;
+            m_BaseDefenseUIController.WallUISetActive(false);
         }
     }
 
@@ -192,7 +194,7 @@ public class BaseDefenseManager : MonoBehaviour
 
     public void GameOver(bool isLose = false){
         ChangeGameStage(BaseDefenseStage.Result);
-        m_BaseDefenseResultPanel.ShowResult(isLose);
+        //m_BaseDefenseResultPanel.ShowResult(isLose);
     }
 
     public float GetAccruacy(){
@@ -211,14 +213,20 @@ public class BaseDefenseManager : MonoBehaviour
             // game over already
             return;
         }
-        m_WallHpBar.m_CanvasGroup.alpha = 1;
-        MainGameManager.GetInstance().ChangeWallHp(-damage);
-        float wallCurHp = MainGameManager.GetInstance().GetWallCurHp();
-        m_WallHpBar.m_HpBarFiller.fillAmount =  wallCurHp / MainGameManager.GetInstance().GetWallMaxHp();
         m_TotalWallHpBarStayTime = 4;
+        MainGameManager.GetInstance().ChangeWallHp(-damage);
+        //float wallCurHp = MainGameManager.GetInstance().GetWallCurHp();
+        //m_WallController.ChangeHp(-damage);
+        m_BaseDefenseUIController.SetWallHpUI();
+        if(MainGameManager.GetInstance().GetWallCurHp()<=0){
+            // lose 
+            m_GameStage = BaseDefenseStage.Result;
+            m_BaseDefenseUIController.SetResultPanel(false);
+        }
         
+        /*
         if(wallCurHp<=0)
-            GameOver(true);
+            GameOver(true);*/
     }
 
     public void LookUp(){
@@ -239,5 +247,10 @@ public class BaseDefenseManager : MonoBehaviour
     public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
         m_GunShootController.SetSelectedGun(gun, slotIndex);
         m_GunModelController.ChangeGunModel(gun);
+        ChangeGameStage(BaseDefenseStage.Shoot);
+    }
+
+    private void SwitchWeapon(){
+        
     }
 }

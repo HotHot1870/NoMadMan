@@ -67,10 +67,4 @@ public class CameraController : MonoBehaviour
         
         BaseDefenseManager.GetInstance().ChangeGameStage(gameStage);
     }
-
-    private void SwitchWeapon(GunScriptable gun, int slotIndex)
-    {
-        BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun, slotIndex);
-        SetGameStage(m_CameraBrain.m_DefaultBlend.m_Time,BaseDefenseStage.Shoot);
-    }
 }

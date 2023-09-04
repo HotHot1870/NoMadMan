@@ -35,10 +35,10 @@ public class EnemySpawnController : MonoBehaviour
             if(m_EnemyParent.childCount<=0){
                 // all dead
                 
-                // win
                 if(m_IsFinalWaveStarted){
                         // all dead
-                        Debug.Log("win");
+                        BaseDefenseManager.GetInstance().GetBaseDefenseUIController().SetResultPanel(true);
+                        BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Result);
                     return;
                 }
 

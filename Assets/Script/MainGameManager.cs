@@ -26,7 +26,6 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
 
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
-    [SerializeField][Range(2,4)] private int m_WeaponSlotOwned = 2;
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
@@ -89,9 +88,6 @@ public class MainGameManager : MonoBehaviour
     }
 
 
-    public int GetWeaponSlotOwned(){
-        return m_WeaponSlotOwned;
-    }
 
     public void ChangeSelectedWeapon(int slotIndex, GunScriptable newWeapon)
     {

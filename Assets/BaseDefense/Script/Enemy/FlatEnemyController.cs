@@ -26,7 +26,7 @@ public class FlatEnemyController : EnemyController
         if( m_IsDead )
             return;
 
-        if(Vector2.Distance( new Vector2(m_Self.transform.position.x,m_Self.transform.position.z) , m_Destination)<0.25f){
+        if(Vector3.Distance(m_Self.transform.position , m_Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
            // close enough for attack 
            m_CanAttack = true;
         }else{
@@ -40,12 +40,18 @@ public class FlatEnemyController : EnemyController
         if(m_CanAttack){
             if(m_AttackDelay <=0){
                 // attack
-                
+                Attack();
             }else{
                 // wait
                 m_AttackDelay -= Time.deltaTime;
+                
             }
         }
+    }
+
+    public void Attack(){
+        m_AttackDelay = Scriptable.AttackDelay;
+        BaseDefenseManager.GetInstance().OnWallHit(Scriptable.Damage);
     }
 
     protected override void OnDead(){
