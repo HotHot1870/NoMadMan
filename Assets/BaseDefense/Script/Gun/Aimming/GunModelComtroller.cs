@@ -100,7 +100,7 @@ public class GunModelComtroller : MonoBehaviour
     private void GunModelOffset(Vector2 crosshairPosNormalized){
         // x offset 
         var startPos = new Vector3(
-            m_ModelStartPos.x + Mathf.Abs(crosshairPosNormalized.x) *3f,
+            m_ModelStartPos.x + Mathf.Clamp(crosshairPosNormalized.x,0,10f) *3f,
             m_ModelStartPos.y,
             m_ModelStartPos.z
         );

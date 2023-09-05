@@ -15,16 +15,16 @@ MonoBehaviour:
   DisplayName: PP90
   ShakeAmount: 0.1
   FPSPrefab: {fileID: 4723895810438305759, guid: f5a52fa68e330264abdc179f5ed1c0f5, type: 3}
-  FPSPos: {x: 0, y: 2, z: 3}
+  FPSPos: {x: 0, y: 0.25, z: -0.5}
   FPSRot: {x: 0, y: 0, z: 0}
-  FPSScale: {x: 1, y: 1, z: 1}
+  FPSScale: {x: 3, y: 3, z: 3}
   Damage: 5
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 999
-  ReloadPos: {x: 0, y: 0, z: 0}
+  ReloadPos: {x: 0.7, y: 0.3, z: 0}
   ReloadRot: {x: 0, y: 80, z: 0}
-  ReloadScale: {x: 0.4, y: 0.4, z: 0.4}
+  ReloadScale: {x: 1.5, y: 1.5, z: 1.5}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 1
   FireRate: 25

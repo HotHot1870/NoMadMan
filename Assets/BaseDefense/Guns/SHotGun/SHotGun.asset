@@ -15,16 +15,16 @@ MonoBehaviour:
   DisplayName: SHotGun
   ShakeAmount: 0.1
   FPSPrefab: {fileID: 5973581222493145179, guid: 402c419fdb199c64b96870e759cf86c7, type: 3}
-  FPSPos: {x: 0, y: 0, z: 0}
+  FPSPos: {x: 0, y: 0.25, z: -0.5}
   FPSRot: {x: 0, y: 0, z: 0}
-  FPSScale: {x: 1, y: 1, z: 1}
+  FPSScale: {x: 3, y: 3, z: 3}
   Damage: 4
   PelletPerShot: 20
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   ClipSize: 8
-  ReloadPos: {x: 0.6, y: 0.2, z: 0.15}
+  ReloadPos: {x: 0.7, y: 0.3, z: 0}
   ReloadRot: {x: 0, y: 80, z: 0}
-  ReloadScale: {x: 0.4, y: 0.4, z: 0.4}
+  ReloadScale: {x: 1.5, y: 1.5, z: 1.5}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 0
   FireRate: 2.5
