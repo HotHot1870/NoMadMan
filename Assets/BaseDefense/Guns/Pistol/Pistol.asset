@@ -15,15 +15,15 @@ MonoBehaviour:
   DisplayName: Pistol
   ShakeAmount: 0.1
   FPSPrefab: {fileID: 5453511822727306906, guid: 8327b15de67580a4eb849d623b332b64, type: 3}
-  FPSPos: {x: 0, y: 0, z: -0.5}
-  FPSRot: {x: 0, y: 270, z: 0}
+  FPSPos: {x: 0, y: 0.5, z: -0.25}
+  FPSRot: {x: 0, y: 0, z: 0}
   FPSScale: {x: 3, y: 3, z: 3}
   Damage: 30
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   ClipSize: 15
-  ReloadPos: {x: 0.7, y: 0.3, z: 0}
-  ReloadRot: {x: 0, y: 340, z: 0}
+  ReloadPos: {x: 1, y: 0.3, z: 0}
+  ReloadRot: {x: 0, y: 80, z: 0}
   ReloadScale: {x: 1.5, y: 1.5, z: 1.5}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 0

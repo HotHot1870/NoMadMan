@@ -45,15 +45,15 @@ public class GunModelComtroller : MonoBehaviour
 
     private IEnumerator ShakeGun(float shakeAmount){
         Vector3 randomRot = new Vector3(
-            UnityEngine.Random.Range(-10f,10f),
-            UnityEngine.Random.Range(-10f,10f),
-            UnityEngine.Random.Range(-10f,10f)
+            UnityEngine.Random.Range(-25f,0f),
+            0,
+            0
         ) * shakeAmount ;
 
         Vector3 randomPos = new Vector3(
-            UnityEngine.Random.Range(-0.5f,-0.5f),
-            UnityEngine.Random.Range(0f,1f),
-            UnityEngine.Random.Range(-1.5f,0f)
+            UnityEngine.Random.Range(-0.05f,0.05f),
+            UnityEngine.Random.Range(0f,01f),
+            UnityEngine.Random.Range(-0.15f,0f)
         ) * shakeAmount ;
         m_ModelShake.localEulerAngles = randomRot;
         m_ModelShake.localPosition = randomPos;
@@ -100,11 +100,10 @@ public class GunModelComtroller : MonoBehaviour
     private void GunModelOffset(Vector2 crosshairPosNormalized){
         // x offset 
         var startPos = new Vector3(
-            m_ModelStartPos.x + Mathf.Clamp(crosshairPosNormalized.x,0,10f) *3f,
+            m_ModelStartPos.x + Mathf.Clamp(crosshairPosNormalized.x,0f,10f) *3f,
             m_ModelStartPos.y,
             m_ModelStartPos.z
         );
-
         m_ModelAim.position = startPos + new Vector3(
             crosshairPosNormalized.x * m_CrosshairOffsetStrength.x,
             crosshairPosNormalized.y * m_CrosshairOffsetStrength.y,

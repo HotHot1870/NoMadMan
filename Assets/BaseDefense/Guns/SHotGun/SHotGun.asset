@@ -22,9 +22,9 @@ MonoBehaviour:
   PelletPerShot: 20
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   ClipSize: 8
-  ReloadPos: {x: 0.7, y: 0.3, z: 0}
+  ReloadPos: {x: 1.5, y: 0.3, z: -0.15}
   ReloadRot: {x: 0, y: 80, z: 0}
-  ReloadScale: {x: 1.5, y: 1.5, z: 1.5}
+  ReloadScale: {x: 1, y: 1, z: 1}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 0
   FireRate: 2.5
