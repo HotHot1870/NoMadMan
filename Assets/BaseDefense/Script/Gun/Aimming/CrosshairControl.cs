@@ -10,6 +10,7 @@ public class CrosshairControl : MonoBehaviour
     [SerializeField] private RectTransform m_Right;
     [SerializeField] private RectTransform m_Down;
     [SerializeField] private RectTransform m_CrosshairParent;
+    [SerializeField] private float m_CrosshairAffectGunPosStrength=0.5f;
  
     private Vector2 m_AimDragMouseStartPos = Vector2.zero;
     private Vector2 m_AimDragMouseEndPos = Vector2.zero;
@@ -95,7 +96,7 @@ public class CrosshairControl : MonoBehaviour
             m_CrosshairToScreenOffsetNormalized = new Vector2(
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
-                ) * 2f ;
+                ) * m_CrosshairAffectGunPosStrength ;
             BaseDefenseManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
             curAcc -= Time.deltaTime*mouseCurToPassDiatance*20f;
             m_MousePreviousPos = m_AimDragMouseEndPos;
