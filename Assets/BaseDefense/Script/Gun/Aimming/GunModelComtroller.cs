@@ -52,8 +52,8 @@ public class GunModelComtroller : MonoBehaviour
 
         Vector3 randomPos = new Vector3(
             UnityEngine.Random.Range(-0.05f,0.05f),
-            UnityEngine.Random.Range(0f,01f),
-            UnityEngine.Random.Range(-0.15f,0f)
+            UnityEngine.Random.Range(-0.05f,0.05f),
+            UnityEngine.Random.Range(-0.05f,0.05f)
         ) * shakeAmount ;
         m_ModelShake.localEulerAngles = randomRot;
         m_ModelShake.localPosition = randomPos;
