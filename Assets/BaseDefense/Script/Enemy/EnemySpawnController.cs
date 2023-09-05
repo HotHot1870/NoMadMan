@@ -81,7 +81,7 @@ public class EnemySpawnController : MonoBehaviour
 
         var targetPos = new Vector3( m_WallCenter.position.x, m_GroundSpawnerCenter.position.y ,m_WallCenter.position.z) 
             + Vector3.right * Random.Range(m_WallWidth * -1f, m_WallWidth) +
-            Vector3.forward * Random.Range(0f, 0.2f);
+            Vector3.forward * Random.Range(0f, 0.4f);
         newEnemy.GetComponent<FlatEnemyController>().Init(enemyData, targetPos);
 
         newEnemy.transform.position = m_GroundSpawnerCenter.position +

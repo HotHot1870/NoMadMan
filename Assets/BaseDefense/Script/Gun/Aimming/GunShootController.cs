@@ -166,7 +166,7 @@ public class GunShootController : MonoBehaviour
             CaseRayWithShootDot(dotPos, shotPoint.GetComponent<ShootDotController>() );
 
             
-            Destroy(shotPoint, 1);
+            Destroy(shotPoint, 0.3f);
         }
         
             // acc lose on shoot            

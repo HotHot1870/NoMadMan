@@ -6,6 +6,7 @@ public class EnemyBodyPart : MonoBehaviour
 {
     [SerializeField] private EnemyController m_EnemyController;
     [SerializeField] private MeshRenderer m_Renderer;
+    [SerializeField] private Collider m_Collider;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
     [SerializeField] private bool m_IsShield = false;
 
@@ -29,6 +30,8 @@ public class EnemyBodyPart : MonoBehaviour
 
     public void OnDead()
     {
+        // prevent blocking bullet after dead
+        m_Collider.enabled = false;
         // burn effect
         StartCoroutine(BurnOut());
     }

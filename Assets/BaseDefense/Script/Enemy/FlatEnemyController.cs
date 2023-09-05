@@ -29,12 +29,6 @@ public class FlatEnemyController : EnemyController
         if(Vector3.Distance(m_Self.transform.position , m_Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
            // close enough for attack 
            m_CanAttack = true;
-           // preventgoing through wall
-           m_Self.transform.position = new Vector3(
-                m_Self.transform.position.x,
-                m_Self.transform.position.y,
-                Mathf.Clamp(m_Self.transform.position.z,m_Destination.z,100f)
-           );
         }else{
             // move
             float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
@@ -44,11 +38,6 @@ public class FlatEnemyController : EnemyController
 
         // attack wall handler
         if(m_CanAttack){
-           m_Self.transform.position = new Vector3(
-                m_Self.transform.position.x,
-                m_Self.transform.position.y,
-                Mathf.Clamp(m_Self.transform.position.z,m_Destination.z,100f)
-           );
             if(m_AttackDelay <=0){
                 // attack
                 Attack();
