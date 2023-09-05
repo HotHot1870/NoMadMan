@@ -16,7 +16,7 @@ public class OptionMenuController : MonoBehaviour
     void Start()
     {
         m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,1.5f, MainGameManager.GetInstance().GetAimSensitivity() );
-        m_VolumeSlider.normalizedValue = Mathf.InverseLerp(0.1f,1.5f, MainGameManager.GetInstance().GetVolume() );
+        m_VolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
@@ -24,7 +24,7 @@ public class OptionMenuController : MonoBehaviour
         });
 
         m_VolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetVolume( Mathf.Lerp(0.1f, 1.5f,m_VolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().SetVolume( Mathf.Lerp(0f, 1f,m_VolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateVolume();
         });
         
