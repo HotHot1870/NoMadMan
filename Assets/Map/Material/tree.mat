@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bush
+  m_Name: tree
   m_Shader: {fileID: -6465566751694194690, guid: cce3b9efdd12e264a8aa0afce34b26d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d63738a7ab3b1a145a98e56358ea4fe4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 57707fe4cf52b7c4f86d006079715516, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -108,15 +108,15 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FullBurnDensity: 35
-    - _FullBurnSize: 0.15
+    - _FullBurnDensity: 29
+    - _FullBurnSize: 0.161
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _Normalized: 0
     - _OcclusionStrength: 1
-    - _OutlineThiccness: 0.0217
+    - _OutlineThiccness: 0.0162
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

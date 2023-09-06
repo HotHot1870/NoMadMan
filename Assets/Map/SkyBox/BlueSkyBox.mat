@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5544099855272419771
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!114 &-1046241344953329833
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlueSkyBox
+  m_Shader: {fileID: -6465566751694194690, guid: 6016d768239da5845b1dd0ff2dc1e7be,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MoonTex:
+        m_Texture: {fileID: 2800000, guid: 98e5c8832e763364c87eb943e809d2c3, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0.5, y: 0.5}
+    - _SkyTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SunTex:
+        m_Texture: {fileID: 2800000, guid: 38e57df74dd5af043a8c5c0a3dd0c8b4, type: 3}
+        m_Scale: {x: 0.1, y: 0.1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 72bb2a04a1563d148aeb905d0f1cf560, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _BaseFade: 11.1
+    - _BaseYOffset: 0.98
+    - _CloudCutOut: -0.06
+    - _CloudDensity: 79.2
+    - _CloudDistanceFade: 1
+    - _CloudSize: 1.95
+    - _CloudSpeed: -0.2
+    - _CloudYOffset: 0.26
+    - _DistanceFade: 2.44
+    - _MainLightRotation: 180
+    - _MainLightRotationX: 334
+    - _MainLightRotationY: 37
+    - _MoonRotation: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _StarAmount: 162
+    - _StarCutOut: 1
+    - _StarDensity: 50
+    - _StarDistanceFade: 10
+    - _StarOffset: 0.77
+    - _StarSize: 46
+    - _StarSpeed: 0.09
+    - _SunAlpha: 1
+    - _SunExponent: 1
+    - _SunIntensity: 5
+    - _SunOffset: 0.12
+    - _SunPointA: 0.03
+    - _SunPointB: 0.05
+    - _SunSize: 0.074
+    m_Colors:
+    - _BottomColor: {r: 0.35506406, g: 0.6159965, b: 0.745283, a: 0}
+    - _CloudColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _MainLightRotation: {r: 0, g: 0, b: 1, a: 0}
+    - _MainLightVector3: {r: 0, g: 0, b: 1, a: 0}
+    - _MoonColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MoonRotation: {r: 0, g: 0, b: 1, a: 0}
+    - _StarColor: {r: 14.259475, g: 14.259475, b: 14.259475, a: 0}
+    - _SubCloudColor: {r: 4, g: 0, b: 0, a: 0}
+    - _SunColor: {r: 2.9960785, g: 1.1921569, b: 0, a: 0}
+    - _SunPos: {r: 0, g: 0, b: 0, a: 0}
+    - _SunVector: {r: 0.02, g: 1, b: 0.1, a: 0}
+    - _TopColor: {r: 0.25, g: 0.6630434, b: 1, a: 0}
+  m_BuildTextureStacks: []
