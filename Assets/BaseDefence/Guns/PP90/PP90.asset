@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: PP90
+  m_EditorClassIdentifier: 
+  DisplayName: PP90
+  ShakeAmount: 0.348
+  DisplayImage: {fileID: 21300000, guid: 981a3fcd61ab16646892a86a738d8cdf, type: 3}
+  FPSPrefab: {fileID: 4723895810438305759, guid: f5a52fa68e330264abdc179f5ed1c0f5, type: 3}
+  FPSPos: {x: 0, y: 0.25, z: -1}
+  FPSRot: {x: 3, y: 0, z: 0}
+  FPSScale: {x: 3, y: 3, z: 3}
+  Damage: 5
+  PelletPerShot: 1
+  ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
+  ClipSize: 999
+  ReloadPos: {x: 0.85, y: 0.3, z: -0.08}
+  ReloadRot: {x: 0, y: 80, z: 0}
+  ReloadScale: {x: 1, y: 1, z: 1}
+  OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
+  IsSemiAuto: 1
+  FireRate: 25
+  Accuracy: 75
+  RecoilControl: 0
+  Recoil: 10
+  ReloadScriptable: {fileID: 11400000, guid: 6aeec434a9a04114cbb6796231172f18, type: 2}

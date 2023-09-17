@@ -16,7 +16,7 @@ public class MainMenuController : MonoBehaviour
     void Start()
     {
         m_StartGameBtn.onClick.AddListener(()=>{
-            SceneManager.LoadScene("BaseDefense");
+            MainGameManager.GetInstance().SetMapScene();
         });
         
         m_OptionBtn.onClick.AddListener(()=>{

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MainGameNameSpace;
+using UnityEngine.SceneManagement;
+using System;
 
 
 
@@ -70,12 +72,27 @@ public class MainGameManager : MonoBehaviour
 
     }
 
+    public void SetBaseDefenceScene(MapLocationScriptable location){
+        SceneManager.LoadScene("baseDefence");
+        StartCoroutine(StartWave(location));
+    }
+
+    private IEnumerator StartWave(MapLocationScriptable location){
+        yield return null;
+        BaseDefenceManager.GetInstance().StartWave(location);
+
+    }
+
     public float GetWallCurHp(){
         return m_WallCurrentHp;
     }
 
     public float GetWallMaxHp(){
         return m_WallMaxHp;
+    }
+
+    public void SetMapScene(){
+        SceneManager.LoadScene("Map");
     }
 
     public void ChangeWallHp(float changes){
