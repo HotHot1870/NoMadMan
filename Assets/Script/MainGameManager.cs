@@ -27,7 +27,7 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
 
-    [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
+    [SerializeField] private List<WeaponOwnership> m_AllWeapon = new List<WeaponOwnership>();
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
@@ -42,13 +42,16 @@ public class MainGameManager : MonoBehaviour
         return m_Instance;
     }
 
-    public List<WeaponOwnership> GetAllWeaponOwnership()
+    public List<WeaponOwnership> GetAllWeapon()
     {
-        return m_AllWeaponOwnership;
+        return m_AllWeapon;
     }
 
     public List<GunScriptable> GetAllSelectedWeapon()
     {
+        if(m_AllSelectedWeapon.Count>4){
+            m_AllSelectedWeapon = new List<GunScriptable>(m_AllSelectedWeapon.GetRange(0,4));
+        }
         return m_AllSelectedWeapon;
     }
 

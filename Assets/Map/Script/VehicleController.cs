@@ -19,7 +19,7 @@ public class VehicleController : MonoBehaviour
 
     private Vector3 m_MousePosOnDown;
 
-    private bool m_CanSetDestination = true;
+    private bool m_CanMove = true;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class VehicleController : MonoBehaviour
 
     private void MoveVehicle()
     {
-        if (m_MoveToTarget.gameObject.activeSelf && Vector3.Distance(m_Self.position, m_LookTarget) > 0.25f)
+        if (m_MoveToTarget.gameObject.activeSelf && Vector3.Distance(m_Self.position, m_LookTarget) > 0.25f && m_CanMove )
         {
             m_Self.position += m_Self.forward * m_MoveSpeed * Time.deltaTime;
             MapManager.GetInstance().SetNearestLocation(m_Self.position);
@@ -57,7 +57,7 @@ public class VehicleController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             // check if click without drag
-            if (Vector3.Distance(m_MousePosOnDown, Input.mousePosition) < 25f && m_CanSetDestination)
+            if (Vector3.Distance(m_MousePosOnDown, Input.mousePosition) < 25f && m_CanMove)
             {
                 // set move to location        
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -79,8 +79,16 @@ public class VehicleController : MonoBehaviour
 
     }
 
+    public void StopMoving(){
+         m_LookTarget = m_Self.position;
+        m_MoveToTarget.position = m_Self.position;
+    }
+
     public void ChangeMovable(bool canMove){
-        m_CanSetDestination = canMove;
+        m_CanMove = canMove;
+        if(!canMove){
+            StopMoving();
+        }
     }
 
     private void VehicleBounce()

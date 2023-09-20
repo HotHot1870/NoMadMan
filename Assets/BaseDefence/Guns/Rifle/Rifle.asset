@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
-  m_Name: SHotGun
+  m_Name: Rifle
   m_EditorClassIdentifier: 
-  DisplayName: SHotGun
-  ShakeAmount: 0.1
-  DisplayImage: {fileID: 21300000, guid: ba1eceb9675b370408c9f6b3312f5c8b, type: 3}
-  FPSPrefab: {fileID: 5973581222493145179, guid: 402c419fdb199c64b96870e759cf86c7, type: 3}
-  FPSPos: {x: 0, y: 0.25, z: -0.5}
+  DisplayName: Rifle
+  ShakeAmount: 0.348
+  DisplayImage: {fileID: 21300000, guid: 981a3fcd61ab16646892a86a738d8cdf, type: 3}
+  FPSPrefab: {fileID: 2269120045649779972, guid: 1898f12da84927a4f8cb985c3da80128, type: 3}
+  FPSPos: {x: 0, y: 0.25, z: -1}
   FPSRot: {x: 3, y: 0, z: 0}
   FPSScale: {x: 3, y: 3, z: 3}
-  Damage: 4
-  PelletPerShot: 20
-  ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
-  ClipSize: 8
-  ReloadPos: {x: 1.05, y: 0.3, z: -0.15}
+  Damage: 125
+  PelletPerShot: 1
+  ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
+  ClipSize: 5
+  ReloadPos: {x: 1.2, y: 0.25, z: -0.08}
   ReloadRot: {x: 0, y: 80, z: 0}
   ReloadScale: {x: 1, y: 1, z: 1}
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   IsSemiAuto: 0
-  FireRate: 2.5
-  Accuracy: 25
+  FireRate: 0.75
+  Accuracy: 100
   RecoilControl: 0
   Recoil: 50
-  ReloadScriptable: {fileID: 11400000, guid: 13b778b1d24a02048bc58b1731fc2d57, type: 2}
+  ReloadScriptable: {fileID: 11400000, guid: 6aeec434a9a04114cbb6796231172f18, type: 2}

@@ -20,8 +20,8 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private TMP_Text m_EnemyText;  
     [SerializeField] private Transform m_EnemyList; 
     [SerializeField] private Button m_FortifyBtn;  
-    [SerializeField] private Button m_StartWaveBtn;
-    [SerializeField] private Button m_CancelBtn;
+    [SerializeField] private Button m_DefenceBtn;
+    [SerializeField] private Button m_CancelLocationDetailBtn;
 
     [Header("Fortify Detail")]
     [SerializeField] private GameObject m_FortifyPanel; 
@@ -30,6 +30,20 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private Image m_RewardImageInDetail;
     [SerializeField] private Button m_YesFortifyBtn;  
     [SerializeField] private Button m_NoFortifyBtn;  
+
+    [Header("ChooseWeapon")]
+    [SerializeField] private GameObject m_ChooseWeaponPanel;
+    [SerializeField] private List<MapChooseWeaponSlot> m_ChooseWeaponBtns = new List<MapChooseWeaponSlot>();
+    [SerializeField] private Transform m_ChooseWeaponEnemyList;
+    [SerializeField] private Button m_StartDefenceBtn;  
+    [SerializeField] private Button m_CancelChooseWeaponBtn;  
+
+    [Header("Weaponlist")]
+    [SerializeField] private GameObject m_WeaponListPanel;
+    [SerializeField] private Image m_SelectedSlotWeapon;
+    [SerializeField] private Transform m_WeaponListSlotParent;
+    [SerializeField] private GameObject m_WeaponListSlotPrefab;
+    [SerializeField] private Button m_ComfirmWeaponChangeBtn;  
 
 
 
@@ -46,17 +60,26 @@ public class MapUIController : MonoBehaviour
 
         // location detail
         m_FortifyBtn.onClick.AddListener(OnClickFortify);
-        m_StartWaveBtn.onClick.AddListener(OnClickStartWave);
-        m_CancelBtn.onClick.AddListener(CancelLocationDetail);
+        m_DefenceBtn.onClick.AddListener(OnClickDefence);
+        m_CancelLocationDetailBtn.onClick.AddListener(CancelLocationDetail);
 
         // fortify detail panel
         m_NoFortifyBtn.onClick.AddListener(OnClickFortifyNo);
         m_YesFortifyBtn.onClick.AddListener(OnClickFortifyYes);
+
+        // choose weapon
+        m_StartDefenceBtn.onClick.AddListener(OnClickStartDefence);
+        m_CancelChooseWeaponBtn.onClick.AddListener(OnClickCancelInChooseWeapon);
+
+        // weapon list panel
+        m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);
     }
 
     private void CancelLocationDetail() {
         m_LocationDetailPanel.SetActive(false);
+        MapManager.GetInstance().GetNearestLocationController().SetLocationCameraPiority(0);
         StartCoroutine(SetMovable());
+        
     }
 
     private IEnumerator SetMovable(){
@@ -66,7 +89,34 @@ public class MapUIController : MonoBehaviour
 
     }
 
-    private void OnClickStartWave() {
+    private void OnClickDefence(){
+        TurnOffAllPanel();
+
+        // set choose weapon panel
+        m_ChooseWeaponPanel.SetActive(true);
+
+        var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        for (int i = 0; i < 4; i++)
+        {
+            int index = i;
+            var selectedWeapon = allSelectedWeapon[i];
+            if(selectedWeapon!=null){
+                m_ChooseWeaponBtns[i].Init(index ,selectedWeapon.DisplayImage);
+            }
+        }
+    }
+
+    private void OnClickComfirmInWeaponList(){
+        TurnOffAllPanel();
+        m_ChooseWeaponPanel.SetActive(true);
+    }
+
+    private void OnClickCancelInChooseWeapon(){
+        m_ChooseWeaponPanel.SetActive(false);
+        m_LocationDetailPanel.SetActive(true);
+    }
+
+    private void OnClickStartDefence() {
         MapLocationScriptable locationData = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
         if(locationData==null)
             return;
@@ -93,10 +143,38 @@ public class MapUIController : MonoBehaviour
         // TODO : enemy list
         MapManager.GetInstance().GetVehicleController().ChangeMovable(false);
 
+        m_CheckLocationBtn.gameObject.SetActive(false);
+
+    }
+
+    public void ShowWeaponListPanel(int weaponSlotIndex){
+        TurnOffAllPanel();
+        m_WeaponListPanel.SetActive(true);
+        var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        m_SelectedSlotWeapon.sprite = allSelectedWeawpon[weaponSlotIndex].DisplayImage;
+
+        var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
+        for (int i = 0; i < m_WeaponListSlotParent.childCount; i++)
+        {
+            Destroy(m_WeaponListSlotParent.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < allWeapon.Count; i++)
+        {
+            // >>>>  check if other slot have the smae weapon  <<<<<
+            if(allWeapon[i].IsOwned && !allSelectedWeawpon.Contains(allWeapon[i].Gun)){
+                var newWeaponListSlot = Instantiate(m_WeaponListSlotPrefab, m_WeaponListSlotParent);
+                newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i].Gun,weaponSlotIndex);
+            }
+        }
     }
 
     public void ChangeCheckLocationActive(bool isActive){
-        m_CheckLocationBtn.gameObject.SetActive(isActive);
+        if(m_LocationDetailPanel.activeSelf){
+            // no check location btn if already checking
+            return;
+        }
+            m_CheckLocationBtn.gameObject.SetActive(isActive);
     }
 
 
@@ -113,9 +191,16 @@ public class MapUIController : MonoBehaviour
     }
 
     private void OnClickFortifyYes(){
-        // comfirm fortify
+        // TODO : comfirm fortify
     }
 
+    public void OnClickWeaponListSlot(GunScriptable selectedGunScriptable, int weaponSlotIndex, MapWeaponListGrid mapWeaponListGrid) {
+        var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
+        mapWeaponListGrid.Init(allSelectedWeawpon[weaponSlotIndex], weaponSlotIndex);
+
+        MainGameManager.GetInstance().ChangeSelectedWeapon(weaponSlotIndex, selectedGunScriptable);
+    }
 
     private void OnClickFortifyNo(){
         // cancel fortify
@@ -124,7 +209,9 @@ public class MapUIController : MonoBehaviour
     }
 
     private void TurnOffAllPanel(){
+        m_ChooseWeaponPanel.SetActive(false);
         m_LocationDetailPanel.SetActive(false);
         m_FortifyPanel.SetActive(false);
+        m_WeaponListPanel.SetActive(false);
     }
 }

@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class MapLocationController : MonoBehaviour
 {
-    [SerializeField] private CinemachineFreeLook m_LocationCamera;
+    [SerializeField] private CinemachineVirtualCamera m_LocationCamera;
     [SerializeField] private MapLocationScriptable m_Scriptable;
 
 

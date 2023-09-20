@@ -30,7 +30,7 @@ public class GunScriptable : ScriptableObject
     public bool IsSemiAuto = true;
 
     [Header("How many ammo could be shot out every 1 second")]
-    [Range (1,25)]public float FireRate = 2;
+    [Range (0.1f,25)]public float FireRate = 2;
 
     [Header("Max accuracy , 100 = always hit center")]
     [Range (0,100)]public float Accuracy = 50; 
