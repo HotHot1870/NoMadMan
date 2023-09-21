@@ -603,7 +603,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: No Mad Cat
+  m_text: No Mad Man
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2126,7 +2126,7 @@ MonoBehaviour:
   - Gun: {fileID: 11400000, guid: a73eb6e0f56e0c942aa69cf1f18418c2, type: 2}
     IsOwned: 1
   - Gun: {fileID: 11400000, guid: 2d110c50545dab24eba04a0c199c2214, type: 2}
-    IsOwned: 1
+    IsOwned: 0
   - Gun: {fileID: 11400000, guid: 6b634ced2e9ab644ba6db175e9b0cd14, type: 2}
     IsOwned: 1
   - Gun: {fileID: 11400000, guid: b42fa34babf3b974d8d4023567485070, type: 2}
@@ -2135,6 +2135,7 @@ MonoBehaviour:
     IsOwned: 1
   m_WallCurrentHp: 1000
   m_WallMaxHp: 1000
+  m_GooAmount: 10
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0

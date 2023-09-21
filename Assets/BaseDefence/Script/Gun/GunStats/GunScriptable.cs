@@ -8,6 +8,7 @@ using MainGameNameSpace;
 [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable/Weapon", order = 1)]
 public class GunScriptable : ScriptableObject
 {
+    public int Id ;
     [Header("For Weapon selection panel in DayTime scene")]
     public string DisplayName;
     [Range(0,1f)]public float ShakeAmount = 0.1f;

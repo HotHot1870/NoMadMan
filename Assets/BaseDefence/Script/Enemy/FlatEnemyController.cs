@@ -55,6 +55,8 @@ public class FlatEnemyController : EnemyController
     }
 
     protected override void OnDead(){
+        MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetGooText();
         m_OnDead?.Invoke();
         Destroy(m_Self,1);
     }

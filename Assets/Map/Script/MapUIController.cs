@@ -41,14 +41,28 @@ public class MapUIController : MonoBehaviour
     [Header("Weaponlist")]
     [SerializeField] private GameObject m_WeaponListPanel;
     [SerializeField] private Image m_SelectedSlotWeapon;
+
+    [SerializeField] private TMP_Text m_SelectedWeaponName;
+    [SerializeField] private TMP_Text m_SelectedWeaponDamage;
+    [SerializeField] private TMP_Text m_SelectedWeaponClipSize;
+    [SerializeField] private TMP_Text m_SelectedWeaponAcc;
+    [SerializeField] private TMP_Text m_SelectedWeaponRecoil;
+    [SerializeField] private TMP_Text m_SelectedWeaponHandling;
+    [SerializeField] private TMP_Text m_SelectedWeaponFireRate;
+
+
     [SerializeField] private Transform m_WeaponListSlotParent;
     [SerializeField] private GameObject m_WeaponListSlotPrefab;
     [SerializeField] private Button m_ComfirmWeaponChangeBtn;  
+
+    [Header("Goo")]
+    [SerializeField] private TMP_Text m_GooText;
 
 
 
 
     private void Start() {
+        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
         m_CheckLocationBtn.gameObject.SetActive(false);
         TurnOffAllPanel();
         var freeCameraController = MapManager.GetInstance().GetMapFreeCameraController();
@@ -134,9 +148,22 @@ public class MapUIController : MonoBehaviour
 
         m_LocationDetailPanel.SetActive(true);
         m_LocationName.text = locationData.LocationName;
-        m_FortifyCost.text = "Fortify Cost : "+locationData.FortifyCost;
-        m_FortifyRewardText.text = "Fortify Reward : "+locationData.Reward.DisplayName;
 
+
+
+        
+        var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
+
+        if(allWeapon.Find(x=>x.Gun.Id == locationData.Reward.Id).IsOwned){
+            // already own weapon
+            m_FortifyCost.text = "Fortified";
+            m_FortifyBtn.gameObject.SetActive(false);
+        }else{
+            m_FortifyCost.text = "Fortify Cost : "+locationData.FortifyCost;
+            m_FortifyBtn.gameObject.SetActive(true);
+        }
+
+        m_FortifyRewardText.text = "Fortify Reward : "+locationData.Reward.DisplayName;
 
         m_RewardImage.sprite = locationData.Reward.DisplayImage;
         m_EnemyText.text = " Enemy : ( Danger "+locationData.WaveData.NormalWavesDangerValue+","+locationData.WaveData.FinalWaveDangerValue+" )";
@@ -151,7 +178,8 @@ public class MapUIController : MonoBehaviour
         TurnOffAllPanel();
         m_WeaponListPanel.SetActive(true);
         var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
-        m_SelectedSlotWeapon.sprite = allSelectedWeawpon[weaponSlotIndex].DisplayImage;
+
+        SetWeaponlistSelectedWeaponData(allSelectedWeawpon[weaponSlotIndex]);
 
         var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
         for (int i = 0; i < m_WeaponListSlotParent.childCount; i++)
@@ -183,23 +211,61 @@ public class MapUIController : MonoBehaviour
         if(locationData==null)
             return;
 
+        // if alredy unlocked No Show
+        if( MainGameManager.GetInstance().GetAllWeapon().Find(x=>x.Gun.Id == locationData.Reward.Id).IsOwned ){
+            Debug.Log("already unlocked gun"+locationData.Reward.DisplayName);
+            return;
+        }
+
+
         // show fortify reward
         m_FortifyPanel.SetActive(true);
-        m_FortifyCostInDetail.text = "Fortify Cost : "+locationData.FortifyCost;
+        var gooOwned = MainGameManager.GetInstance().GetGooAmount();
+        m_FortifyCostInDetail.text = "Fortify Cost : "+locationData.FortifyCost+" ("+gooOwned.ToString()+")";
         m_RewardName.text = "Fortify Reward : "+locationData.Reward.DisplayName;
         m_RewardImageInDetail.sprite = locationData.Reward.DisplayImage;
+        if( gooOwned < locationData.FortifyCost ){
+            m_YesFortifyBtn.gameObject.SetActive(false);
+        }else{
+            m_YesFortifyBtn.gameObject.SetActive(true);
+        }
     }
 
     private void OnClickFortifyYes(){
-        // TODO : comfirm fortify
+        var locationScriptable = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
+        MainGameManager.GetInstance().ChangeGooAmount(
+            locationScriptable.FortifyCost * -1f
+        );
+
+        MainGameManager.GetInstance().UnlockGun(locationScriptable.Reward.Id);
+
+        Debug.Log("fortify");
+        m_FortifyPanel.SetActive(false);
+        m_LocationDetailPanel.SetActive(true);
+        
+        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
     }
 
     public void OnClickWeaponListSlot(GunScriptable selectedGunScriptable, int weaponSlotIndex, MapWeaponListGrid mapWeaponListGrid) {
+
+        SetWeaponlistSelectedWeaponData(selectedGunScriptable);
         var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
-        m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
         mapWeaponListGrid.Init(allSelectedWeawpon[weaponSlotIndex], weaponSlotIndex);
 
         MainGameManager.GetInstance().ChangeSelectedWeapon(weaponSlotIndex, selectedGunScriptable);
+    }
+
+
+    private void SetWeaponlistSelectedWeaponData(GunScriptable selectedGunScriptable){
+        m_SelectedWeaponName.text = "Name : "+selectedGunScriptable.DisplayName;
+        m_SelectedWeaponFireRate.text = "Fire Rate : "+selectedGunScriptable.FireRate;
+        m_SelectedWeaponDamage.text = "Damage : "+selectedGunScriptable.Damage+" x "+selectedGunScriptable.PelletPerShot.ToString();
+        m_SelectedWeaponClipSize.text = "Clip Size : "+selectedGunScriptable.ClipSize;
+        m_SelectedWeaponAcc.text = "Acc : "+selectedGunScriptable.Accuracy.ToString();
+        m_SelectedWeaponRecoil.text = "Recoil : "+selectedGunScriptable.Recoil.ToString();
+        m_SelectedWeaponHandling.text = "Handling : "+selectedGunScriptable.RecoilControl.ToString();
+        m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
+
     }
 
     private void OnClickFortifyNo(){

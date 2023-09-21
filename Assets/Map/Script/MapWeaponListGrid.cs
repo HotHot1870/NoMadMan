@@ -27,7 +27,6 @@ public class MapWeaponListGrid : MonoBehaviour
 
     private void OnClickBtn(){
         // Change Weapon
-        Debug.Log(m_GunScriptable.DisplayName);
         MapManager.GetInstance().GetMapUIController().OnClickWeaponListSlot(m_GunScriptable, m_WeaponSlotIndex, this);
     }
 

@@ -11,4 +11,5 @@ public class EnemyScriptable : ScriptableObject
     [Range(0.1f,5f)] public float AttackDelay = 1.5f;
     [Range(1, 25)] public float MoveSpeed = 5;
     [Range(1f, 100)]public float DangerValue;
+    [Range(0f, 1000)]public float GooOnKill=10;
 }

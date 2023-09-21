@@ -32,9 +32,15 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private TMP_Text m_ResultTitle;
     [SerializeField] private Button2D m_BackFromResultBtn;
 
+    [Header("Goo")]
+    [SerializeField] private CanvasGroup m_GooCanvasGroup;
+    [SerializeField] private TMP_Text m_GooText;
+
+
 
 
     private void Start() {
+        SetGooText();
         m_ResultParent.SetActive(false);
         m_BackFromResultBtn.onClick.AddListener(OnClickBackFromResult);
 
@@ -69,6 +75,10 @@ public class BaseDefenceUIController : MonoBehaviour
             ));
             
         m_LookUpBtn.gameObject.SetActive(false);
+    }
+
+    public void SetGooText(){
+        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
     }
 
     public void OnClickLookUp(){

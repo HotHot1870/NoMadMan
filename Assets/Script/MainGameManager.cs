@@ -4,6 +4,7 @@ using UnityEngine;
 using MainGameNameSpace;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
 
 
 
@@ -31,6 +32,7 @@ public class MainGameManager : MonoBehaviour
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
+    [SerializeField]private float m_GooAmount=10000;
 
 
     public static MainGameManager GetInstance()
@@ -73,6 +75,21 @@ public class MainGameManager : MonoBehaviour
     private void Start()
     {
 
+    }
+
+
+    public void UnlockGun(int id){
+        var tmp = m_AllWeapon.Find(x=>x.Gun.Id==id);
+        tmp.IsOwned = true;
+    }
+
+
+    public void ChangeGooAmount(float gooChanges){
+        m_GooAmount += gooChanges;
+    }
+
+    public float GetGooAmount(){
+        return m_GooAmount;
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
