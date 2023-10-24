@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   DisplayName: SHotGun
-  ShakeAmount: 0.3
   DisplayImage: {fileID: 21300000, guid: 8eb14259e0b997d45ad4f5a7e5807c39, type: 3}
   FPSPrefab: {fileID: 5973581222493145179, guid: 402c419fdb199c64b96870e759cf86c7, type: 3}
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   GunStats:
     DamagePerPellet: 3
     PelletPerShot: 15
-    ClipSize: 8
+    ClipSize: 99999
     IsSemiAuto: 1
     FireRate: 3.5
     Accuracy: 10

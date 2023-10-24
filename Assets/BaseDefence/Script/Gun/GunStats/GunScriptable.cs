@@ -11,7 +11,6 @@ public class GunScriptable : ScriptableObject
     public int Id ;
     [Header("For Weapon selection panel in DayTime scene")]
     public string DisplayName;
-    [Range(0,1f)]public float ShakeAmount = 0.1f;
     public Sprite DisplayImage;
     public GameObject FPSPrefab;
     public AudioClip ShootSound;

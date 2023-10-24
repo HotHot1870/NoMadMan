@@ -2850,7 +2850,6 @@ MonoBehaviour:
   m_Right: {fileID: 589565323}
   m_Down: {fileID: 1010153207}
   m_CrosshairParent: {fileID: 653484384}
-  m_CrosshairAffectGunPosStrength: 0.5
   m_MaxAccuracyLose: 150
 --- !u!1 &670607846
 GameObject:
@@ -7963,7 +7962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ModelAim: {fileID: 1277644638}
   m_ModelShake: {fileID: 1081951596}
-  m_CrosshairOffsetStrength: {x: 1.5, y: 0.25, z: -0.5}
+  m_CrosshairOffsetStrength: {x: 10, y: 10}
 --- !u!1 &2121934165
 GameObject:
   m_ObjectHideFlags: 0

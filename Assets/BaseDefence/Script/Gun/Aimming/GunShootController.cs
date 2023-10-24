@@ -145,7 +145,7 @@ public class GunShootController : MonoBehaviour
 
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
-        BaseDefenceManager.GetInstance().GetGunModelController().ShakeGunByShoot(m_SelectedGun.ShakeAmount);
+        BaseDefenceManager.GetInstance().GetGunModelController().ShakeGunByShoot();
 
         for (int j = 0; j < m_SelectedGun.GunStats.PelletPerShot; j++)
         {
@@ -183,7 +183,7 @@ public class GunShootController : MonoBehaviour
     private void CaseRayWithShootDot(Vector3 dotPos, ShootDotController dotController){
         Ray ray = Camera.main.ScreenPointToRay(dotPos);
         RaycastHit hit;
-        Physics.Raycast(ray,out hit);
+        Physics.Raycast(ray,out hit,500, 1<<12);
         // hit Enemy
         if (hit.transform != null)//Physics.Raycast(ray, out hit, 500, 1<<12))
         {

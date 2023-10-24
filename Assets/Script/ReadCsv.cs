@@ -206,36 +206,48 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Gun").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 13;
+        int collumeCount = 12;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
+            int colume = index;
             // create scriptable 
             GunScriptable gunStat = ScriptableObject.CreateInstance<GunScriptable>();
-            string displayName = contents[index+1].Trim();
+
+            colume++;
+            string displayName = contents[colume].Trim();
             AssetDatabase.CreateAsset(gunStat, m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
             gunStat.Id = int.Parse(contents[index]);
             gunStat.DisplayName = displayName;
-            gunStat.ShakeAmount = float.Parse(contents[index+2]);
 
             gunStat.DisplayImage = Resources.Load<Sprite>("Gun/DisplayImage/"+displayName.Replace(" ", ""));
             gunStat.FPSPrefab = Resources.Load<GameObject>("Gun/3DModel/"+displayName.Replace(" ", ""));
 
             var stats = new GunScriptableStats();
-            stats.DamagePerPellet =  float.Parse(contents[index+3]);
-            stats.PelletPerShot =  int.Parse(contents[index+4]);
-            stats.ClipSize =  int.Parse(contents[index+5]);
-            stats.IsSemiAuto = contents[index+6].Trim() == "y";
-            stats.FireRate =  float.Parse(contents[index+7]);
-            stats.Accuracy =  float.Parse(contents[index+8]);
-            stats.Handling =  float.Parse(contents[index+9]);
-            stats.Recoil =  float.Parse(contents[index+10]);
+            colume++;
+            stats.DamagePerPellet =  float.Parse(contents[colume]);
+            colume++;
+            stats.PelletPerShot =  int.Parse(contents[colume]);
+            colume++;
+            stats.ClipSize =  int.Parse(contents[colume]);
+            colume++;
+            stats.IsSemiAuto = contents[colume].Trim() == "y";
+            colume++;
+            stats.FireRate =  float.Parse(contents[colume]);
+            colume++;
+            stats.Accuracy =  float.Parse(contents[colume]);
+            colume++;
+            stats.Handling =  float.Parse(contents[colume]);
+            colume++;
+            stats.Recoil =  float.Parse(contents[colume]);
 
-            // is AP contents[index+11]
-            gunStat.ShootSound = m_AllShootSound.Single(x=>x.clipName == contents[index+12].Trim().Replace(" ", "")).audioClip;
+            colume++;
+            // is AP contents[colume]
+            colume++;
+            gunStat.ShootSound = m_AllShootSound.Single(x=>x.clipName == contents[colume].Trim().Replace(" ", "")).audioClip;
 
             gunStat.ReloadScriptable = AssetDatabase.LoadAssetAtPath<GunReloadScriptable>(m_ScriptablePath+"/Reload/"+displayName.Replace(" ", "")+"_Reload.asset");
 

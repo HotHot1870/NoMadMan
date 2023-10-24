@@ -20,7 +20,7 @@ public class EnemyController : EnemyControllerBase
     }
 
     private void Start() {
-        m_Animator.Play("Moving");
+        //m_Animator.Play("Moving");
         
     }
 
@@ -52,7 +52,7 @@ public class EnemyController : EnemyControllerBase
     }
 
     public void Attack(){
-        m_Animator.Play("Attack");
+        //m_Animator.Play("Attack");
         m_AttackDelay = Scriptable.AttackDelay;
         BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
     }
