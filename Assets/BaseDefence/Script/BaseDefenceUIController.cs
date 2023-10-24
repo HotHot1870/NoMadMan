@@ -31,9 +31,12 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private GameObject m_ResultParent;
     [SerializeField] private TMP_Text m_ResultTitle;
     [SerializeField] private Button2D m_BackFromResultBtn;
+    
+
+    [Header("Switch weapon")]
+    [SerializeField] private Animator m_SwitchWeaponAnimator;
 
     [Header("Goo")]
-    [SerializeField] private CanvasGroup m_GooCanvasGroup;
     [SerializeField] private TMP_Text m_GooText;
 
 
@@ -64,32 +67,25 @@ public class BaseDefenceUIController : MonoBehaviour
 
         var cameraController = BaseDefenceManager.GetInstance().GetCameraController();
 
-        m_LookDownBtn.onDown.AddListener(() =>
-            cameraController.CameraLookDown(
-                OnClickLookDown
-            ));
+        m_LookDownBtn.onDown.AddListener(OnClickShowSwitchWeaponPanel);
 
-        m_LookUpBtn.onDown.AddListener(() =>
-            cameraController.CameraLookUp(
-                OnClickLookUp
-            ));
-            
-        m_LookUpBtn.gameObject.SetActive(false);
+        m_LookUpBtn.onDown.AddListener(OnClickCloseSwitchWeaponPanel);
     }
 
     public void SetGooText(){
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
     }
 
-    public void OnClickLookUp(){
+    public void OnClickCloseSwitchWeaponPanel(){
+        m_SwitchWeaponAnimator.Play("Down");
+        BaseDefenceManager.GetInstance().ChangeGameStage(BaseDefenceNameSpace.BaseDefenceStage.Shoot);
         m_ShootPanel.SetActive(true);
-        m_LookUpBtn.gameObject.SetActive(false);
     }
 
-    private void OnClickLookDown(){
-        BaseDefenceManager.GetInstance().GetGunModelController().HideFPSGunModel();
+    private void OnClickShowSwitchWeaponPanel(){
+        m_SwitchWeaponAnimator.Play("Up");
+        BaseDefenceManager.GetInstance().ChangeGameStage(BaseDefenceNameSpace.BaseDefenceStage.SwitchWeapon);
         m_ShootPanel.SetActive(false);
-        m_LookUpBtn.gameObject.SetActive(true);
     }
 
     public void SetAmmoText(string text){
@@ -109,7 +105,7 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     public void OnClickBackFromResult(){
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Map");
     }
 
     public void SetResultPanel(bool isWin){

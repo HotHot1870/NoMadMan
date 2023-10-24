@@ -10,7 +10,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] private MapUIController m_MapUIController;
     [SerializeField] private VehicleController m_VehicleController;
     [SerializeField] private Transform m_MapLocationParent;
-    [SerializeField] private List<MapLocationScriptable> m_AllLocationScriptable = new List<MapLocationScriptable>();
     private Dictionary<MapLocationScriptable,MapLocationController> m_AllLocation = new Dictionary<MapLocationScriptable,MapLocationController>();
     private MapLocationController m_NearestLocationController = null;
     [SerializeField] private float m_LocationToVehicleMaxDistance = 3f;
@@ -77,7 +76,7 @@ public class MapManager : MonoBehaviour
 
     public void SpawnAllLocation()
     {
-        foreach (var item in m_AllLocationScriptable)
+        foreach (var item in MainGameManager.GetInstance().GetAllLocation())
         {
             var newLocation = Instantiate(item.Prefab, m_MapLocationParent);
             newLocation.transform.position = item.Pos;

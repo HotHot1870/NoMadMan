@@ -1267,14 +1267,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e58daef5d8e6325438b5984bb3381161, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f5a83f922007dd42abc731d3c48057d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1536,10 +1536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1641,14 +1641,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ab4196e3e5a58ca41b422598016b6058, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1917,7 +1917,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f5a83f922007dd42abc731d3c48057d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2079,6 +2079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1526301686}
   - component: {fileID: 1526301687}
+  - component: {fileID: 1526301688}
   m_Layer: 0
   m_Name: MainGameManager
   m_TagString: Untagged
@@ -2116,26 +2117,56 @@ MonoBehaviour:
   m_Volume: 0.35
   m_AimSensitivity: 0.55
   m_AllSelectedWeapon:
-  - {fileID: 11400000, guid: 6b634ced2e9ab644ba6db175e9b0cd14, type: 2}
-  - {fileID: 11400000, guid: b42fa34babf3b974d8d4023567485070, type: 2}
-  - {fileID: 11400000, guid: a73eb6e0f56e0c942aa69cf1f18418c2, type: 2}
-  - {fileID: 11400000, guid: eba13c2066a5f004aaff924ef240f620, type: 2}
+  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
+  - {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
+  - {fileID: 11400000, guid: 146bf88fe60f33a4ba45ffa87e1ea6a6, type: 2}
+  - {fileID: 11400000, guid: 67384cc299e1e2648bb7af46c47196d7, type: 2}
   m_AllWeapon:
-  - Gun: {fileID: 11400000, guid: 1cfa085abb5872848aaa28cea4af1ff1, type: 2}
+  - Gun: {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
     IsOwned: 1
-  - Gun: {fileID: 11400000, guid: a73eb6e0f56e0c942aa69cf1f18418c2, type: 2}
+  - Gun: {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
     IsOwned: 1
-  - Gun: {fileID: 11400000, guid: 2d110c50545dab24eba04a0c199c2214, type: 2}
+  - Gun: {fileID: 11400000, guid: 146bf88fe60f33a4ba45ffa87e1ea6a6, type: 2}
+    IsOwned: 1
+  - Gun: {fileID: 11400000, guid: 67384cc299e1e2648bb7af46c47196d7, type: 2}
+    IsOwned: 1
+  - Gun: {fileID: 11400000, guid: 92d3677e177a4b64e91a8403c9ced862, type: 2}
     IsOwned: 0
-  - Gun: {fileID: 11400000, guid: 6b634ced2e9ab644ba6db175e9b0cd14, type: 2}
-    IsOwned: 1
-  - Gun: {fileID: 11400000, guid: b42fa34babf3b974d8d4023567485070, type: 2}
-    IsOwned: 1
-  - Gun: {fileID: 11400000, guid: eba13c2066a5f004aaff924ef240f620, type: 2}
-    IsOwned: 1
+  - Gun: {fileID: 11400000, guid: 3f81a476499063849ae93920dfc87f6a, type: 2}
+    IsOwned: 0
+  m_AllLocation:
+  - {fileID: 11400000, guid: 66a4900c13c2c1f4c884f738d2bb22e5, type: 2}
+  - {fileID: 11400000, guid: e7f68f4d03f46714f8a16305e744c493, type: 2}
+  m_AllWave:
+  - {fileID: 11400000, guid: ba0ed8d88e727ec43be62b3e48e716a3, type: 2}
+  - {fileID: 11400000, guid: b2896054044c1cf49b06eae68acc130c, type: 2}
+  m_AllEnemy:
+  - {fileID: 11400000, guid: b901ec02e5f853a49bf77c6f3e799b39, type: 2}
   m_WallCurrentHp: 1000
   m_WallMaxHp: 1000
-  m_GooAmount: 10
+  m_GooAmount: 17929
+--- !u!114 &1526301688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526301685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb7421078afbae43bc9580ea1b031bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ResourcesPath: Assets/Resources
+  m_ScriptablePath: Assets/Scriptable
+  m_MainGameManager: {fileID: 1526301687}
+  m_AllShootSound:
+  - clipName: Silencer
+    audioClip: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
+  - clipName: ShotGun
+    audioClip: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
+  - clipName: AssultRifle
+    audioClip: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,7 +2375,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2389,7 +2420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f5a83f922007dd42abc731d3c48057d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2644,7 +2675,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f5a83f922007dd42abc731d3c48057d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2787,7 +2818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit Game
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2814,7 +2845,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 67.7
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3408,7 +3439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9f5a83f922007dd42abc731d3c48057d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

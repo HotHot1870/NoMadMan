@@ -109,7 +109,8 @@ public class GunReloadController : MonoBehaviour
         {
             SpawnUIObjectForReloadPhaseConfig extraItemConfig = new SpawnUIObjectForReloadPhaseConfig{
                 Prefab = currentGunReloadPhase.ExtraImages[i].ImagePrefab,
-                Position = currentGunReloadPhase.ExtraImages[i].Position
+                Position = currentGunReloadPhase.ExtraImages[i].Position,
+                Size = currentGunReloadPhase.ExtraImages[i].Size
             };
             SpawnUIObjectForReloadPhase( extraItemConfig );
         }
@@ -132,6 +133,9 @@ public class GunReloadController : MonoBehaviour
         spawnedUIObject.transform.SetParent(m_GrayWhileDragPanel);
         spawnedUIObject.GetComponent<RectTransform>().anchoredPosition = config.Position;
         m_AllSpawnedImage.Add(spawnedUIObject);
+
+        spawnedUIObject.GetComponent<RectTransform>().sizeDelta = config.Size;
+
         if(spawnedUIObject.TryGetComponent<ReloadIcon>(out var reloadIcon))
             reloadIcon.m_UnderText.text = config.UnderText;
 
@@ -169,6 +173,22 @@ public class GunReloadController : MonoBehaviour
         startDragIcon.onDown.AddListener(()=>{
             OnDownStartDrag(dragFunction);
         });
+
+        
+        // Spawn arrow
+        SpawnUIObjectForReloadPhaseConfig arrowConfig = new SpawnUIObjectForReloadPhaseConfig{
+            Prefab = m_ArrowPrefab,
+            Position = dragFunction.StartDragPosition
+
+        };
+        m_DragArrow = SpawnUIObjectForReloadPhase( arrowConfig );
+        m_DragArrow.transform.SetParent(m_NotGrayWhileDragPanel);
+        m_DragArrow.GetComponent<RectTransform>().sizeDelta = new Vector2(
+            m_DragArrow.GetComponent<RectTransform>().sizeDelta.x,
+            Vector2.Distance(dragFunction.EndDragPosition , dragFunction.StartDragPosition)
+        );
+        Vector2 lookAngle = dragFunction.EndDragPosition - dragFunction.StartDragPosition;
+        m_DragArrow.GetComponent<RectTransform>().localEulerAngles = new Vector3(0,0, Mathf.Rad2Deg * Mathf.Atan2(lookAngle.y,lookAngle.x) -90 );
 
         startDragIcon.onUp.AddListener(()=>{
                 OnUpStartDrag(dragFunction);
@@ -235,7 +255,7 @@ public class GunReloadController : MonoBehaviour
         // change main gun sprite
         m_MainGunImage.sprite = dragFunction.MainGunSpriteOnStart;
 
-
+/*
         // Spawn arrow
         SpawnUIObjectForReloadPhaseConfig arrowConfig = new SpawnUIObjectForReloadPhaseConfig{
             Prefab = m_ArrowPrefab,
@@ -250,8 +270,8 @@ public class GunReloadController : MonoBehaviour
         );
         Vector2 lookAngle = dragFunction.EndDragPosition - dragFunction.StartDragPosition;
         m_DragArrow.GetComponent<RectTransform>().localEulerAngles = new Vector3(0,0, Mathf.Rad2Deg * Mathf.Atan2(lookAngle.y,lookAngle.x) -90 );
-
-        // spawn cursor imager
+*/
+        // spawn cursor image
         if(dragFunction.DragCursorPrefab != null){
             SpawnUIObjectForReloadPhaseConfig cursorConfig = new SpawnUIObjectForReloadPhaseConfig{
                 Prefab = dragFunction.DragCursorPrefab,

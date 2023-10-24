@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 public class GunShootController : MonoBehaviour
 {
     private GunScriptable m_SelectedGun = null;
+    [SerializeField] private AudioClip m_OutOfAmmoSound;
 
     [Header("Ammo")]
     private float m_CurrentAmmo = 0;
@@ -39,12 +40,12 @@ public class GunShootController : MonoBehaviour
     public void OnShootBtnDown(){
         if (m_CurrentAmmo <= 0)
         {
-            m_ShootAudioSource.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
+            m_ShootAudioSource.PlayOneShot(m_OutOfAmmoSound);
         }
         else
         {
             m_SemiAutoShootCoroutine = null;
-            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.IsSemiAuto)
+            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GunStats.IsSemiAuto)
             {
                 m_SemiAutoShootCoroutine = StartCoroutine(SemiAutoShoot());
                 return;
@@ -65,6 +66,7 @@ public class GunShootController : MonoBehaviour
         if (IsFullClipAmmo())
             return;
 
+        Debug.Log("");
         GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig
         {
             GunScriptable = m_SelectedGun,
@@ -90,16 +92,16 @@ public class GunShootController : MonoBehaviour
         m_SelectedGun = gun;
          m_CurrentWeaponSlotIndex = slotIndex;
 
-        BaseDefenceManager.GetInstance().SetAccruacy(m_SelectedGun.Accuracy);
+        BaseDefenceManager.GetInstance().SetAccruacy(m_SelectedGun.GunStats.Accuracy);
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
     }
 
     // on start ammo set up 
     public void SetUpGun(int slotIndex , GunScriptable gun){
-        m_GunsClipAmmo.Add(slotIndex, gun.ClipSize);
+        m_GunsClipAmmo.Add(slotIndex, gun.GunStats.ClipSize);
         if(m_SelectedGun == null){
-            BaseDefenceManager.GetInstance().SwitchSelectedWeapon(gun, slotIndex);
+            BaseDefenceManager.GetInstance().SwitchSelectedWeapon(slotIndex);
 
         }
     }
@@ -111,7 +113,7 @@ public class GunShootController : MonoBehaviour
 
     private bool IsFullClipAmmo()
     {
-        return m_CurrentAmmo >= m_SelectedGun.ClipSize;
+        return m_CurrentAmmo >= m_SelectedGun.GunStats.ClipSize;
     }
 
     private void SetClipAmmoToZero()
@@ -121,7 +123,7 @@ public class GunShootController : MonoBehaviour
 
     private void SetClipAmmoToFull()
     {
-        ChangeAmmoCount(m_SelectedGun.ClipSize, true);
+        ChangeAmmoCount(m_SelectedGun.GunStats.ClipSize, true);
     }
     private IEnumerator SemiAutoShoot()
     {
@@ -131,7 +133,7 @@ public class GunShootController : MonoBehaviour
             yield return null;
         }
 
-        m_ShootAudioSource.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
+        m_ShootAudioSource.PlayOneShot(m_OutOfAmmoSound);
     }
 
 
@@ -145,7 +147,7 @@ public class GunShootController : MonoBehaviour
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
         BaseDefenceManager.GetInstance().GetGunModelController().ShakeGunByShoot(m_SelectedGun.ShakeAmount);
 
-        for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
+        for (int j = 0; j < m_SelectedGun.GunStats.PelletPerShot; j++)
         {
             // random center to point distance
             
@@ -171,27 +173,43 @@ public class GunShootController : MonoBehaviour
         
             // acc lose on shoot            
             BaseDefenceManager.GetInstance().SetAccruacy(
-                BaseDefenceManager.GetInstance().GetAccruacy()-m_SelectedGun.Recoil
+                BaseDefenceManager.GetInstance().GetAccruacy()-m_SelectedGun.GunStats.Recoil
             );
 
-        m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
+        m_CurrentShootCoolDown = 1 / m_SelectedGun.GunStats.FireRate;
         ChangeAmmoCount(-1, false);
     }
 
     private void CaseRayWithShootDot(Vector3 dotPos, ShootDotController dotController){
         Ray ray = Camera.main.ScreenPointToRay(dotPos);
         RaycastHit hit;
+        Physics.Raycast(ray,out hit);
         // hit Enemy
-        if (Physics.Raycast(ray, out hit, 500, 1<<12))
+        if (hit.transform != null)//Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
                 if(!bodyPart.IsDead()){
+                    switch (bodyPart.GetBodyType())
+                    {
+                        case EnemyBodyPartEnum.Body:
+                            dotController.OnHit();
+                        break;
+                        case EnemyBodyPartEnum.Shield:
+                            dotController.OnHitShield();
+                        break;
+                        case EnemyBodyPartEnum.Crit:
+                            dotController.OnCrit();
+                        break;
+                        default:
+                        break;
+                    }
+                    /*
                     if(bodyPart.IsShield()){
                         dotController.OnHitShield();
                     }else{
                         dotController.OnHit();
-                    }
-                    bodyPart.OnHit(m_SelectedGun.Damage);
+                    }*/
+                    bodyPart.OnHit(m_SelectedGun.GunStats.DamagePerPellet);
                 }else{
                     dotController.OnMiss();
                 }
@@ -217,12 +235,12 @@ public class GunShootController : MonoBehaviour
         {
             m_CurrentAmmo += num;
         }
-        if (m_CurrentAmmo > m_SelectedGun.ClipSize)
+        if (m_CurrentAmmo > m_SelectedGun.GunStats.ClipSize)
         {
-            m_CurrentAmmo = m_SelectedGun.ClipSize;
+            m_CurrentAmmo = m_SelectedGun.GunStats.ClipSize;
         }
 
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText( $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}" );
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText( $"{m_CurrentAmmo} / {m_SelectedGun.GunStats.ClipSize}" );
     }
     public GunScriptable GetSelectedGun(){
         return m_SelectedGun;

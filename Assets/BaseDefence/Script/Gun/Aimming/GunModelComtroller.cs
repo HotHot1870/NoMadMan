@@ -86,9 +86,10 @@ public class GunModelComtroller : MonoBehaviour
         }
         m_GunModel = Instantiate(gun.FPSPrefab,m_ModelShake);
         var gunTrans = m_GunModel.transform;
-        m_PosOffset = gun.FPSPos;
-        gunTrans.localEulerAngles = gun.FPSRot;
-        gunTrans.localScale = gun.FPSScale;
+        /*
+        m_PosOffset = gun.GunFPS.FPSPos;
+        gunTrans.localEulerAngles = gun.GunFPS.FPSRot;
+        gunTrans.localScale = gun.GunFPS.FPSScale;*/
         
     }
 

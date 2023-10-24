@@ -12,29 +12,32 @@ public class CrosshairControl : MonoBehaviour
     [SerializeField] private RectTransform m_CrosshairParent;
     [SerializeField] private float m_CrosshairAffectGunPosStrength=0.5f;
  
-    private Vector2 m_AimDragMouseStartPos = Vector2.zero;
-    private Vector2 m_AimDragMouseEndPos = Vector2.zero;
+    private Vector2 m_AimDragTouchStartPos = Vector2.zero;
+    private Vector2 m_AimDragTouchEndPos = Vector2.zero;
     private Vector3 m_CrossHairDragStartPos;
-    private Vector3 m_MousePreviousPos = Vector3.zero;
+    private Vector3 m_AimTouchPreviousPos = Vector3.zero;
     private bool m_IsCrosshairMoving = false;
+    private int m_TouchIndex = -1;
 
     private Vector2 m_CrosshairToScreenOffsetNormalized = Vector2.zero;
 
 
-    public float m_MaxAccuracyLose = 150f;
+    public float m_MaxAccuracyLose = 100f;
 
 
     public void OnAimBtnDown(){
         m_IsCrosshairMoving = true;
-        m_MousePreviousPos = Input.mousePosition;
-        m_AimDragMouseStartPos = Input.mousePosition;
         m_CrossHairDragStartPos = m_CrosshairParent.position;
+
+        m_AimTouchPreviousPos = Input.mousePosition;
+        m_AimDragTouchStartPos = Input.mousePosition;
     }
 
     public void OnAimBtnUp(){
         m_IsCrosshairMoving = false;
-        m_AimDragMouseStartPos = Vector2.zero;
-        m_MousePreviousPos = Vector3.zero;
+        m_TouchIndex = -1;
+        m_AimDragTouchStartPos = Vector2.zero;
+        m_AimTouchPreviousPos = Vector3.zero;
         m_CrossHairDragStartPos = m_CrosshairParent.position;
     }
 
@@ -66,7 +69,7 @@ public class CrosshairControl : MonoBehaviour
             // gain less acc on shoot cool down
             curAcc += Time.deltaTime*50f;
         }else{
-            curAcc += Time.deltaTime*120f;
+            curAcc += Time.deltaTime*100f;
         }
         return curAcc;
     }
@@ -76,31 +79,48 @@ public class CrosshairControl : MonoBehaviour
     }
 
     public void OnCrosshairMove(){
+        /*
+        if(m_TouchIndex<0){
+            m_TouchIndex = Input.touchCount-1;
+            if(m_TouchIndex<0){
+                // no touch detected
+                return;
+            }
+            m_AimTouchPreviousPos = Input.GetTouch(m_TouchIndex).position;
+            m_AimDragTouchStartPos = Input.GetTouch(m_TouchIndex).position;
+        }*/
+
+
         var curAcc = BaseDefenceManager.GetInstance().GetAccruacy();
 
-        m_AimDragMouseEndPos = Input.mousePosition;
-        Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) * 3;
+        m_AimDragTouchEndPos = Input.mousePosition;
+        //m_AimDragTouchEndPos = Input.GetTouch(m_TouchIndex).position;
+        Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragTouchEndPos - m_AimDragTouchStartPos) * 3;
         m_CrosshairParent.position = m_CrossHairDragStartPos + offset;
 
         OutOffBountPrevention();
         // accrucy lose for moving
-        float mouseCurToPassDiatance = Vector3.Distance(m_MousePreviousPos,m_AimDragMouseEndPos);
+        float mouseCurToPassDiatance = Vector3.Distance(m_AimTouchPreviousPos,m_AimDragTouchEndPos);
 
-        if (mouseCurToPassDiatance <=0f)
-        {
-            // draging but not moving , gain accruacy over time
+        //if (mouseCurToPassDiatance <=0f)
+        //{
+            // draging but almost not moving , gain accruacy over time
             curAcc = GainAccOvertime(curAcc);
-        }
-        else
-        {
             m_CrosshairToScreenOffsetNormalized = new Vector2(
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
                 ) * m_CrosshairAffectGunPosStrength ;
             BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
-            curAcc -= Time.deltaTime*mouseCurToPassDiatance*20f;
-            m_MousePreviousPos = m_AimDragMouseEndPos;
-        }
+        //}
+        /*
+        else
+        {
+            BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
+            // acc lose
+            curAcc -= Time.deltaTime*mouseCurToPassDiatance*1f;
+            curAcc = GainAccOvertime(curAcc);
+            m_AimTouchPreviousPos = m_AimDragTouchEndPos;
+        }*/
         BaseDefenceManager.GetInstance().SetAccruacy(curAcc);
     }
 
@@ -118,7 +138,7 @@ public class CrosshairControl : MonoBehaviour
     }
 
     public void SetCrosshairRecoil(Vector2 recoil){
-        m_AimDragMouseStartPos += recoil;
+        m_AimDragTouchStartPos += recoil;
     }
 
     public void SetCrosshairAccuracy(float accuracyLose){

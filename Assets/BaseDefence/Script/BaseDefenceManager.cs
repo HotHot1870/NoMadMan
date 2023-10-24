@@ -10,6 +10,7 @@ namespace BaseDefenceNameSpace
     {
         public GameObject Prefab;
         public Vector2 Position;
+        public Vector2 Size = new Vector2 (150,150);
         public string UnderText;
     }
 
@@ -110,9 +111,8 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void StartWave(MapLocationScriptable locationInfo){
-        Debug.Log(m_EnemySpawnController);
 
-        m_EnemySpawnController.StartWave(locationInfo.WaveData);
+        m_EnemySpawnController.StartWave( MainGameManager.GetInstance().GetAllWave()[locationInfo.WaveId]);
     }
 
     private void Update() {
@@ -207,7 +207,7 @@ public class BaseDefenceManager : MonoBehaviour
         return m_CurrentAccruacy;
     }
     public void SetAccruacy(float newAccuracy){
-        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().RecoilControl , m_GunShootController.GetSelectedGun().Accuracy);
+        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().GunStats.Handling , m_GunShootController.GetSelectedGun().GunStats.Accuracy);
     }
 
     public GunShootController GetGunShootController(){
@@ -235,12 +235,13 @@ public class BaseDefenceManager : MonoBehaviour
             GameOver(true);*/
     }
 
-    public void LookUp(){
-        m_CameraController.CameraLookUp(m_BaseDefenceUIController.OnClickLookUp );
+    public void DoneSwitchWeapon(){
+        m_CameraController.CameraLookUp(m_BaseDefenceUIController.OnClickCloseSwitchWeaponPanel );
     }
 
 
     public void StartReload(GunReloadControllerConfig gunReloadConfig){
+        Debug.Log("StartReload");
         m_ReloadControllerPanel.SetActive(true);
         m_ReloadController.StartReload( gunReloadConfig );
     }
@@ -250,10 +251,10 @@ public class BaseDefenceManager : MonoBehaviour
 
     }
 
-    public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
+    public void SwitchSelectedWeapon(int slotIndex){
+        GunScriptable gun = MainGameManager.GetInstance().GetAllSelectedWeapon()[slotIndex];
         m_GunShootController.SetSelectedGun(gun, slotIndex);
         m_GunModelController.ChangeGunModel(gun);
-        m_CameraController.CameraLookUp(m_BaseDefenceUIController.OnClickLookUp);
     }
 
 }

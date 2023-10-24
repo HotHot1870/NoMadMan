@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemySpawnController : MonoBehaviour
 {
     [SerializeField] private Transform m_EnemyParent;
-    [SerializeField] private WavesScriptable m_WavesData;
+    [SerializeField] private WaveScriptable m_WavesData;
     [SerializeField] private Transform m_GroundSpawnerCenter;
     [SerializeField] private float m_GroundSpawnerWidth = 40;
     [SerializeField] private Transform m_WallCenter;
@@ -25,7 +25,7 @@ public class EnemySpawnController : MonoBehaviour
         BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;
     }
 
-    public void StartWave(WavesScriptable waesData){
+    public void StartWave(WaveScriptable waesData){
         m_WavesData = waesData;
         StartNextNormalWave();
     }
@@ -58,13 +58,23 @@ public class EnemySpawnController : MonoBehaviour
         if(m_WaveCount>=m_WavesData.NormalWavesCount){
             m_IsFinalWaveStarted = true;
         }
-        float dangerValue = m_IsFinalWaveStarted?m_WavesData.FinalWaveDangerValue:m_WavesData.NormalWavesDangerValue;
-        List<EnemyScriptable> taregtEnemyTypes = m_IsFinalWaveStarted?m_WavesData.FinalWaveEnemy:m_WavesData.NormalWaveEnemy;
-        while (dangerValue > 0)
+        float Strength = m_IsFinalWaveStarted?m_WavesData.FinalWaveStrength:m_WavesData.NormalWavesStrength;
+        List<int> taregtEnemyTypes = m_IsFinalWaveStarted?m_WavesData.FinalWaveEnemy:m_WavesData.NormalWaveEnemy;
+        Dictionary<int,EnemyScriptable> allPossibleEnemy = new Dictionary<int,EnemyScriptable>();
+        var allenemy = MainGameManager.GetInstance().GetAllEnemy();
+        foreach (var item in taregtEnemyTypes)
         {
-            var targetEnemy = taregtEnemyTypes[Random.Range(0, taregtEnemyTypes.Count)];
-            StartCoroutine(SpawnEnemy(Random.Range(0f, m_MaxSpawnDelay), targetEnemy));
-            dangerValue -= targetEnemy.DangerValue;
+            allPossibleEnemy.Add(item, allenemy.Find(x=>x.Id == item));
+        }
+        while (Strength > 0)
+        {
+            var targetEnemyId = taregtEnemyTypes[Random.Range(0, taregtEnemyTypes.Count)];
+
+            // last enemy spawn time 
+            float spawnTime = Random.Range(0f, m_MaxSpawnDelay);
+            m_MaxSpawnDelay = Mathf.Max(m_MaxSpawnDelay,spawnTime);
+            StartCoroutine(SpawnEnemy(spawnTime, allPossibleEnemy[targetEnemyId]));
+            Strength -=  allPossibleEnemy[targetEnemyId].DangerValue;
         }
         m_WaveCount++;
 
@@ -85,7 +95,7 @@ public class EnemySpawnController : MonoBehaviour
         var targetPos = new Vector3( m_WallCenter.position.x, m_GroundSpawnerCenter.position.y ,m_WallCenter.position.z) 
             + Vector3.right * Random.Range(m_WallWidth * -1f, m_WallWidth) +
             Vector3.forward * Random.Range(0f, 0.4f);
-        newEnemy.GetComponent<FlatEnemyController>().Init(enemyData, targetPos);
+        newEnemy.GetComponent<EnemyController>().Init(enemyData, targetPos);
 
         newEnemy.transform.position = m_GroundSpawnerCenter.position +
             Random.Range(m_GroundSpawnerWidth * -1f, m_GroundSpawnerWidth) * Vector3.right;

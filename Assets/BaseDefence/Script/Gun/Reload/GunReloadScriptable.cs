@@ -43,6 +43,7 @@ namespace GunReloadScriptableNameSpace
     public class GunReloadExtraImage
     {
         public Vector2 Position;
+        public Vector2 Size = new Vector2(100,100);
         public GameObject ImagePrefab;
 
     }

@@ -10,7 +10,7 @@ public class MapChooseWeaponSlot : MonoBehaviour
     [SerializeField] private Image m_Border;
     [SerializeField] private Button m_Btn;
     [SerializeField] private Image m_WeaponDisplayImage;
-    private int m_Index = -1;
+    protected int m_Index = -1;
 
     private void Start() {
         m_Btn.onClick.AddListener(OnClickWeaponSlot);
@@ -26,7 +26,7 @@ public class MapChooseWeaponSlot : MonoBehaviour
 
     
 
-    private void OnClickWeaponSlot(){
+    public virtual void OnClickWeaponSlot(){
         // TODO : show weapon list
         MapManager.GetInstance().GetMapUIController().ShowWeaponListPanel(m_Index);
     }

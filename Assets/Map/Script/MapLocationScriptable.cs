@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Location", menuName = "Scriptable/Location", order = 3)]
 public class MapLocationScriptable : ScriptableObject
 {
-    public string LocationName;
-    public WavesScriptable WaveData;
+    public int Id;
+    public string DisplayName;
+    public int WaveId;
     public GameObject Prefab;
     public Vector3 Pos;
-    public GunScriptable Reward;
+    public int RewardGunId;
     [Range(10,100000)]public float FortifyCost = 1000f;
  
 }

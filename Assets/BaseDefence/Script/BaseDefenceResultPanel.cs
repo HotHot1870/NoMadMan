@@ -7,8 +7,9 @@ using MainGameNameSpace;
 using UnityEngine.SceneManagement;
 
 public class BaseDefenceResultPanel : MonoBehaviour
-{/*
+{
     [SerializeField] private GameObject m_Self;
+    /*
     [SerializeField] private Image m_Bg;
 
     [SerializeField] private TMP_Text m_Title;
@@ -21,13 +22,13 @@ public class BaseDefenceResultPanel : MonoBehaviour
     [SerializeField] private BaseDefenceResultPanelRowContent m_Bot;
     [SerializeField] private BaseDefenceResultPanelRowContent m_Heat;
     private float m_BeforeBattleWallHp;
-
+*/
     private void Start()
     {
-        RecordBeforeBattleData();
+        //RecordBeforeBattleData();
         m_Self.SetActive(false);
     }
-
+/*
     public void RecordBeforeBattleData()
     {
         m_BeforeBattleWallHp = MainGameManager.GetInstance().GetWallCurHp();

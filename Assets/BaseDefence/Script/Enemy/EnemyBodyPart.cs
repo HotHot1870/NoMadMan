@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyBodyPartEnum
+{
+    Body = 0,
+    Shield = 1,
+    Crit = 2
+}
+
+
 public class EnemyBodyPart : MonoBehaviour
 {
     [SerializeField] private EnemyController m_EnemyController;
-    [SerializeField] private MeshRenderer m_Renderer;
+    //[SerializeField] private SpriteRenderer m_Renderer;
     [SerializeField] private Collider m_Collider;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
-    [SerializeField] private bool m_IsShield = false;
+    [SerializeField] private EnemyBodyPartEnum m_BodyType;
 
     private void Start()
     {
         m_EnemyController.m_OnDead += OnDead;
+        //m_Renderer.material.SetFloat("_Seed", Random.Range(0f,1f));
     }
 
     public void OnHit(float damage)
@@ -20,8 +29,8 @@ public class EnemyBodyPart : MonoBehaviour
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
     }
 
-    public bool IsShield(){
-        return m_IsShield;
+    public EnemyBodyPartEnum GetBodyType(){
+        return m_BodyType;
     }
 
     public bool IsDead(){
@@ -44,10 +53,10 @@ public class EnemyBodyPart : MonoBehaviour
         {
             passedTime += Time.deltaTime;
             yield return null;
-            m_Renderer.material.SetFloat("_Normalized",  passedTime / fadeTimeNeeded);
+            //m_Renderer.material.SetFloat("_Normalized",  passedTime / fadeTimeNeeded);
 
         }
-        m_Renderer.material.SetFloat("_Normalized", 1);
+        //m_Renderer.material.SetFloat("_Normalized", 1);
 
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class VehicleController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class VehicleController : MonoBehaviour
     [SerializeField][Range(0f, 50f)] private float m_BounceSpeed = 5f;
     [SerializeField][Range(0f, 0.9f)] private float m_BounceAmount = 0.15f;
     [SerializeField] private Transform m_BounceTarget;
+    
+    [SerializeField] private GameObject m_DragMapBtn;
     private float m_BounceNormalized = 0;
     private float m_PassedTime = 0;
 
@@ -56,6 +59,12 @@ public class VehicleController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if(EventSystem.current.IsPointerOverGameObject()){
+                if(EventSystem.current.currentSelectedGameObject != m_DragMapBtn){
+                    // click on ui
+                    return;
+                }
+            }
             // check if click without drag
             if (Vector3.Distance(m_MousePosOnDown, Input.mousePosition) < 25f && m_CanMove)
             {

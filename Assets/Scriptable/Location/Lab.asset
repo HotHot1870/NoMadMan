@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
+  m_Name: Lab
+  m_EditorClassIdentifier: 
+  Id: 1
+  DisplayName: Lab
+  WaveId: 1
+  Prefab: {fileID: 2207747424733897394, guid: 6e1f647ba7a7e634e9035db417c29ee4, type: 3}
+  Pos: {x: -5, y: 2, z: 1}
+  RewardGunId: 5
+  FortifyCost: 1000

@@ -29,6 +29,9 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
 
     [SerializeField] private List<WeaponOwnership> m_AllWeapon = new List<WeaponOwnership>();
+    [SerializeField] private List<MapLocationScriptable> m_AllLocation = new List<MapLocationScriptable>();
+    [SerializeField] private List<WaveScriptable> m_AllWave = new List<WaveScriptable>();
+    [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
@@ -49,12 +52,56 @@ public class MainGameManager : MonoBehaviour
         return m_AllWeapon;
     }
 
+    public List<MapLocationScriptable> GetAllLocation(){
+        return m_AllLocation;
+    }
+
     public List<GunScriptable> GetAllSelectedWeapon()
     {
         if(m_AllSelectedWeapon.Count>4){
             m_AllSelectedWeapon = new List<GunScriptable>(m_AllSelectedWeapon.GetRange(0,4));
         }
         return m_AllSelectedWeapon;
+    }
+
+    
+    public List<WaveScriptable> GetAllWave() {
+        return m_AllWave;
+    }
+
+    
+    public List<EnemyScriptable> GetAllEnemy(){
+        return m_AllEnemy;
+    }
+
+    public void SetAllWeapon(List<WeaponOwnership> allWeapon){
+        // TODO : check Ownership
+        m_AllWeapon = allWeapon;
+        m_AllSelectedWeapon.Clear();
+
+        for (int i = 0; i < m_AllWeapon.Count; i++)
+        {
+            if(m_AllWeapon[i].IsOwned){
+                m_AllSelectedWeapon.Add(m_AllWeapon[i].Gun);
+            }
+            if(m_AllSelectedWeapon.Count>=4)
+                break;
+        } 
+        if(m_AllSelectedWeapon.Count<4){
+            Debug.Log("Not enough owned gun");
+        }
+    }
+
+    public void SetAllLocation(List<MapLocationScriptable> allLocation){
+        m_AllLocation = allLocation;
+    }
+
+    public void SetAllWave(List<WaveScriptable> allWave) {
+        m_AllWave = allWave;
+    }
+
+    public void SetAllEnemy(List<EnemyScriptable> allEnemy){
+        m_AllEnemy = allEnemy;
     }
 
 

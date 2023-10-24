@@ -6,7 +6,6 @@ using UnityEngine;
 public class SwitchWeaponController : MonoBehaviour
 {
 
-    [Header("Switch Weapon")]
     [SerializeField] private List<WeaponToBeSwitch> m_AllWeaponSlot = new List<WeaponToBeSwitch>();
     private int m_CurrentWeaponSlotIndex = 0;
 
@@ -16,26 +15,26 @@ public class SwitchWeaponController : MonoBehaviour
         var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
 
         // set selected weapon into Slot
-        for (int i = 0; i < allSelectedWeapon.Count; i++)
+        for (int i = 0; i < m_AllWeaponSlot.Count; i++)
         {
             int index = i;
-            if (allSelectedWeapon[i] != null)
+            if (allSelectedWeapon[index] != null)
             {
                 m_AllWeaponSlot[index].Init(
-                    allSelectedWeapon[i],
-                    index
+                    index,
+                    allSelectedWeapon[index].DisplayImage
                 ); 
-                BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,allSelectedWeapon[i] );
+                BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,allSelectedWeapon[index] );
             }else{
                 m_AllWeaponSlot[index].Init(
-                    null,
-                    index
+                    index,
+                    allSelectedWeapon[index].DisplayImage
                 ); 
             }
             index++;
 
             // TODO : check slot owned in main game manager 
-            if (index >= m_AllWeaponSlot.Count)
+            if (index >= allSelectedWeapon.Count)
                 break;
 
         }
@@ -49,7 +48,7 @@ public class SwitchWeaponController : MonoBehaviour
             for (int i = 0; i < m_AllWeaponSlot.Count; i++)
             {
                 if(m_AllWeaponSlot[i].IsGunDataEmpty()){
-                    m_AllWeaponSlot[i].OnClickWeapon();
+                    m_AllWeaponSlot[i].OnClickWeaponSlot();
                     m_CurrentWeaponSlotIndex = i;
                     break;
                 }
@@ -57,7 +56,7 @@ public class SwitchWeaponController : MonoBehaviour
         }
     }
 
-    private void SwitchWeaponUpdate() {
+    private void SwitchWeaponUpdate() {/*
         if (Input.GetMouseButtonDown(0) && BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon )
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -67,12 +66,12 @@ public class SwitchWeaponController : MonoBehaviour
             {
                 if(hit.transform.TryGetComponent<WeaponToBeSwitch>(out var weaponData)){
                     // switch weapon 
-                    weaponData.OnClickWeapon();
+                    weaponData.OnClickWeaponSlot();
 
                     // look up 
-                    BaseDefenceManager.GetInstance().LookUp();
+                    //BaseDefenceManager.GetInstance().LookUp();
                 }
             }
-        }
+        }*/
     }
 }

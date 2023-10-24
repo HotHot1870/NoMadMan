@@ -1,35 +1,68 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+//using System.IO.Ports;
 using UnityEngine;
 
-public abstract class EnemyController : MonoBehaviour
+public class EnemyController : EnemyControllerBase
 {
-    protected EnemyScriptable Scriptable;
-    protected float CurHp;
-    public Action m_OnDead = null;
-    protected bool m_IsDead = false;
+    [SerializeField] private GameObject m_Self;
+    [SerializeField] private Animator m_Animator;
+    private Vector3 m_Destination;
+    private bool m_CanAttack = false;
+    private float m_AttackDelay = 0;
 
-    /// <summary>
-    /// use negative for damage
-    /// </summary>
-    public void ChangeHp(float changes){
+    public void Init(EnemyScriptable scriptable, Vector3 destination){
+        Scriptable = scriptable;
+        m_Destination = destination;
+        CurHp = Scriptable.MaxHp;
+        m_AttackDelay = scriptable.AttackDelay;
+    }
+
+    private void Start() {
+        m_Animator.Play("Moving");
+        
+    }
+
+    private void Update() {
         if( m_IsDead )
             return;
 
-        CurHp += changes;
-        CurHp = Mathf.Clamp(CurHp,0f,Scriptable.MaxHp);
-        if( CurHp<=0 ){
-            // dead
-            m_IsDead = true;
-            OnDead();
+        if(Vector3.Distance(m_Self.transform.position , m_Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
+           // close enough for attack 
+           m_CanAttack = true;
+        }else{
+            // move
+            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
+            m_Self.transform.position = Vector3.MoveTowards(
+                m_Self.transform.position, m_Destination, moveDistance);
+        }
+
+        // attack wall handler
+        if(m_CanAttack){
+            if(m_AttackDelay <=0){
+                // attack
+                Attack();
+            }else{
+                // wait
+                m_AttackDelay -= Time.deltaTime;
+                
+            }
         }
     }
 
-    public bool IsDead(){
-        return m_IsDead;
+    public void Attack(){
+        m_Animator.Play("Attack");
+        m_AttackDelay = Scriptable.AttackDelay;
+        BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
     }
 
+    protected override void OnDead(){
+        m_Animator.enabled = false;
+        MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetGooText();
+        m_OnDead?.Invoke();
+        Destroy(m_Self,1);
+    }
 
-    protected abstract void OnDead();
 }

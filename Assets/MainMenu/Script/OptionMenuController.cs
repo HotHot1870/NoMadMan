@@ -15,12 +15,13 @@ public class OptionMenuController : MonoBehaviour
 
     void Start()
     {
-        m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,1.5f, MainGameManager.GetInstance().GetAimSensitivity() );
+        m_OptionPanel.SetActive(false);
+        m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,1f, MainGameManager.GetInstance().GetAimSensitivity() );
         m_VolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 4f,m_AimSensitivitySlider.normalizedValue) );
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1f,m_AimSensitivitySlider.normalizedValue) );
         });
 
         m_VolumeSlider.onValueChanged.AddListener((x)=>{
@@ -35,10 +36,20 @@ public class OptionMenuController : MonoBehaviour
 
         
         m_QuitGameBtn.onClick.AddListener(()=>{
-            Application.Quit();
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "BaseDefence":
+                SceneManager.LoadScene("Map");
+                return;
+                case "Map":
+                SceneManager.LoadScene("MainMenu");
+                return;
+                default:
+                    m_OptionPanel.SetActive(false);
+                break;
+            }
         });
 
         
-        m_OptionPanel.SetActive(false);
     }
 }
