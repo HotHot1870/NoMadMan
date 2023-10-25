@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 524508658097958966}
+  - component: {fileID: 8916264492814986581}
   m_Layer: 12
   m_Name: B-hand.L
   m_TagString: Untagged
@@ -35,6 +36,27 @@ Transform:
   - {fileID: 7034851312647729661}
   m_Father: {fileID: 8598914640257436151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8916264492814986581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122216609511437039}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.25, z: 0.12}
+  m_Center: {x: -0.2, y: 0, z: 0.02}
 --- !u!1 &353965235968066832
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1959873114705829565}
+  - component: {fileID: 8012292619664494227}
   m_Layer: 12
   m_Name: B-thigh.R
   m_TagString: Untagged
@@ -162,6 +185,27 @@ Transform:
   - {fileID: 5717135140015944639}
   m_Father: {fileID: 178210572451823053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8012292619664494227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832750279147425204}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.15, z: 0.15}
+  m_Center: {x: -0.2, y: 0, z: 0}
 --- !u!1 &854476322975419334
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9134421083208736802}
+  - component: {fileID: 6374671965465899394}
   m_Layer: 12
   m_Name: B-thigh.L
   m_TagString: Untagged
@@ -226,6 +271,27 @@ Transform:
   - {fileID: 309877014661261531}
   m_Father: {fileID: 178210572451823053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6374671965465899394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039948478019882839}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.15, z: 0.15}
+  m_Center: {x: -0.2, y: 0, z: 0}
 --- !u!1 &1103269174707581560
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2495886703417646929}
+  - component: {fileID: 2559700295348583410}
   m_Layer: 12
   m_Name: B-upper_arm.R
   m_TagString: Untagged
@@ -290,6 +357,27 @@ Transform:
   - {fileID: 3631060950297928056}
   m_Father: {fileID: 690781899437144383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2559700295348583410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173907804037999456}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.12, z: 0.12}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &1441905739675993080
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7352128221358592883}
+  - component: {fileID: 528051500585761333}
   m_Layer: 12
   m_Name: B-spine
   m_TagString: Untagged
@@ -904,6 +993,27 @@ Transform:
   - {fileID: 5806843713637856125}
   m_Father: {fileID: 178210572451823053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &528051500585761333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997920334148194351}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.35, z: 0.25}
+  m_Center: {x: 0.05, y: 0, z: 0}
 --- !u!1 &4101614470669635088
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3125100218988295461}
+  - component: {fileID: 4745018482420214045}
   m_Layer: 12
   m_Name: B-hand.R
   m_TagString: Untagged
@@ -939,6 +1050,27 @@ Transform:
   - {fileID: 939214367400468165}
   m_Father: {fileID: 3631060950297928056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4745018482420214045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101614470669635088}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.25, z: 0.12}
+  m_Center: {x: -0.2, y: 0, z: 0.02}
 --- !u!1 &4146817470569732411
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +1112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5717135140015944639}
+  - component: {fileID: 7059517225245423282}
   m_Layer: 12
   m_Name: B-shin.R
   m_TagString: Untagged
@@ -1003,6 +1136,27 @@ Transform:
   - {fileID: 4340486245521083725}
   m_Father: {fileID: 1959873114705829565}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7059517225245423282
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4161214643200191749}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.15, z: 0.15}
+  m_Center: {x: -0.2, y: 0, z: 0}
 --- !u!1 &4429290726920777914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,6 +1389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 309877014661261531}
+  - component: {fileID: 695056187471860618}
   m_Layer: 12
   m_Name: B-shin.L
   m_TagString: Untagged
@@ -1258,6 +1413,27 @@ Transform:
   - {fileID: 3072254749967959381}
   m_Father: {fileID: 9134421083208736802}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &695056187471860618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689803932624404473}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.15, z: 0.15}
+  m_Center: {x: -0.2, y: 0, z: 0}
 --- !u!1 &5761872656368678522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8019271236150499735}
+  - component: {fileID: 1868208150960266181}
   m_Layer: 12
   m_Name: B-head
   m_TagString: Untagged
@@ -1504,6 +1681,27 @@ Transform:
   - {fileID: 4822358001295704678}
   m_Father: {fileID: 7657498570101568398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1868208150960266181
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706243165121194363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.22, z: 0.25}
+  m_Center: {x: -0.05, y: 0, z: 0}
 --- !u!1 &6758295183542947031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3631060950297928056}
+  - component: {fileID: 3054224873868313020}
   m_Layer: 12
   m_Name: B-forearm.R
   m_TagString: Untagged
@@ -1568,6 +1767,27 @@ Transform:
   - {fileID: 3125100218988295461}
   m_Father: {fileID: 2495886703417646929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3054224873868313020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930354556062733006}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.12, z: 0.12}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &6999536319591033567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,6 +2116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7041470344963930052}
+  - component: {fileID: 2976434145827391930}
   m_Layer: 12
   m_Name: B-upper_arm.L
   m_TagString: Untagged
@@ -1919,6 +2140,27 @@ Transform:
   - {fileID: 8598914640257436151}
   m_Father: {fileID: 4236027711430655119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2976434145827391930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675567781875993162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.12, z: 0.12}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &7739080241071693583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,6 +2201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5806843713637856125}
+  - component: {fileID: 8306682570573580247}
   m_Layer: 12
   m_Name: B-chest
   m_TagString: Untagged
@@ -1984,6 +2227,27 @@ Transform:
   - {fileID: 690781899437144383}
   m_Father: {fileID: 7352128221358592883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8306682570573580247
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897419968461232042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.4, z: 0.25}
+  m_Center: {x: -0.1, y: 0, z: 0.05}
 --- !u!1 &8168805320062804159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +2321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8598914640257436151}
+  - component: {fileID: 4141570331262767742}
   m_Layer: 12
   m_Name: B-forearm.L
   m_TagString: Untagged
@@ -2080,6 +2345,27 @@ Transform:
   - {fileID: 524508658097958966}
   m_Father: {fileID: 7041470344963930052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4141570331262767742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251479896209081791}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.12, z: 0.12}
+  m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &8466820807918122904
 GameObject:
   m_ObjectHideFlags: 0
