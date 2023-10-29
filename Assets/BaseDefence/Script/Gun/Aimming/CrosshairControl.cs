@@ -130,7 +130,7 @@ public class CrosshairControl : MonoBehaviour
     private void OutOffBountPrevention(){
         float border = 80f;
         m_CrosshairParent.position = new Vector3(
-            Mathf.Clamp(m_CrosshairParent.position.x, border, Screen.width-border - border),
+            Mathf.Clamp(m_CrosshairParent.position.x, Screen.width - Screen.height*16f/9f +border , Screen.height*16f/9f-border ),
             Mathf.Clamp(m_CrosshairParent.position.y, border, Screen.height-border - border),
             0
             );

@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     }
 
     public void ShootCameraMoveByCrosshair(Vector2 crosshairPosNormalized){
+        
         m_ShootCamera.transform.position = m_ShootCameraStartPos + new Vector3(
             crosshairPosNormalized.x,
             crosshairPosNormalized.y,

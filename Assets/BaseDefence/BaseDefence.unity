@@ -3541,7 +3541,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2040243167}
-  - {fileID: 1238169344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1 &814098068
@@ -4559,37 +4558,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051993477}
   m_CullTransparentMesh: 1
---- !u!1 &1081951595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1081951596}
-  m_Layer: 0
-  m_Name: ModelShake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1081951596
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081951595}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1277644638}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110161652
 GameObject:
   m_ObjectHideFlags: 0
@@ -4904,13 +4872,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238169342}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08715578, y: -0, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: -2.3175128, z: 2.69335}
+  m_LocalRotation: {x: -0.04361941, y: -0, z: -0, w: 0.99904823}
+  m_LocalPosition: {x: 0, y: -0.8, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2113294478}
-  m_Father: {fileID: 813147456}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1238169345
 MonoBehaviour:
@@ -5186,8 +5154,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1081951596}
+  m_Children: []
   m_Father: {fileID: 2113294478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1283784840
@@ -8060,7 +8027,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ModelAim: {fileID: 1277644638}
-  m_ModelShake: {fileID: 1081951596}
   m_CrosshairOffsetStrength: {x: 25, y: 25}
 --- !u!1 &2121934165
 GameObject:
@@ -8639,3 +8605,4 @@ SceneRoots:
   - {fileID: 957743537}
   - {fileID: 2139008082}
   - {fileID: 1385615522}
+  - {fileID: 1238169344}

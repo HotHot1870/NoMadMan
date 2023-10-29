@@ -6,12 +6,13 @@ using UnityEngine;
 public class GunModelComtroller : MonoBehaviour
 {
     [SerializeField] private Transform m_ModelAim;
-    [SerializeField] private Transform m_ModelShake;
+    //[SerializeField] private Transform m_ModelShake;
     [SerializeField] private Vector2 m_CrosshairOffsetStrength = Vector2.one;
     private GameObject m_GunModel;
+    /*
     private Vector3 m_ModelStartPos;
     private Vector3 m_PosOffset = Vector3.zero;
-    private Coroutine m_ShakeRecover = null;
+    private Coroutine m_ShakeRecover = null;*/
     private Vector3 m_ModelAimStartRotation ; 
     private Animator m_GunModelAnimator=null;
 
@@ -48,15 +49,22 @@ public class GunModelComtroller : MonoBehaviour
         if(m_GunModel != null){
             Destroy(m_GunModel);
         }
-        m_GunModel = Instantiate(gun.FPSPrefab,m_ModelShake);
+        m_GunModel = Instantiate(gun.FPSPrefab,m_ModelAim);
         var gunTrans = m_GunModel.transform;
+
+        Debug.Log("");
+        Debug.Log(m_ModelAim.position);
+        Debug.Log(gunTrans.position);
         
-        m_ModelAim.localPosition = m_GunModel.transform.localPosition;
-        m_GunModel.transform.localPosition = Vector3.zero;
+        m_ModelAim.localPosition = gunTrans.localPosition;
+        gunTrans.localPosition = Vector3.zero;
         
-        m_ModelAim.localEulerAngles = m_GunModel.transform.localEulerAngles;
-        m_ModelAimStartRotation = m_GunModel.transform.localEulerAngles;
-        m_GunModel.transform.localEulerAngles = Vector3.zero;
+        m_ModelAim.localEulerAngles = gunTrans.localEulerAngles;
+        m_ModelAimStartRotation = gunTrans.localEulerAngles;
+        gunTrans.localEulerAngles = Vector3.zero;
+
+        Debug.Log(m_ModelAim.position);
+        Debug.Log(gunTrans.position);
 
         m_GunModelAnimator = m_GunModel.GetComponent<Animator>();
     }
@@ -68,6 +76,7 @@ public class GunModelComtroller : MonoBehaviour
 
     private void GunModelOffset(Vector2 crosshairPosNormalized){
         // offset by scrosshair
+        
         m_ModelAim.localEulerAngles = m_ModelAimStartRotation + new Vector3(
             crosshairPosNormalized.y * -m_CrosshairOffsetStrength.x,
             crosshairPosNormalized.x * m_CrosshairOffsetStrength.y,
