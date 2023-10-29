@@ -13,6 +13,7 @@ public class GunModelComtroller : MonoBehaviour
     private Vector3 m_PosOffset = Vector3.zero;
     private Coroutine m_ShakeRecover = null;
     private Vector3 m_ModelAimStartRotation ; 
+    private Animator m_GunModelAnimator=null;
 
 
 
@@ -28,13 +29,8 @@ public class GunModelComtroller : MonoBehaviour
 
     }
 
-    public void ShakeGunByShoot(){
-        // TODO : Shake animation
-        /*
-        if(m_ShakeRecover != null){
-            StopCoroutine(m_ShakeRecover);
-        }
-        m_ShakeRecover = StartCoroutine(ShakeGun(shakeAmount));*/
+    public Animator GetCurrentGunAnimator(){
+        return m_GunModelAnimator;
     }
 
     public void HideFPSGunModel(){
@@ -61,7 +57,8 @@ public class GunModelComtroller : MonoBehaviour
         m_ModelAim.localEulerAngles = m_GunModel.transform.localEulerAngles;
         m_ModelAimStartRotation = m_GunModel.transform.localEulerAngles;
         m_GunModel.transform.localEulerAngles = Vector3.zero;
-        
+
+        m_GunModelAnimator = m_GunModel.GetComponent<Animator>();
     }
 
     private void GunModelParentOffsetHandler(){
@@ -70,7 +67,7 @@ public class GunModelComtroller : MonoBehaviour
     }
 
     private void GunModelOffset(Vector2 crosshairPosNormalized){
-        // x offset 
+        // offset by scrosshair
         m_ModelAim.localEulerAngles = m_ModelAimStartRotation + new Vector3(
             crosshairPosNormalized.y * -m_CrosshairOffsetStrength.x,
             crosshairPosNormalized.x * m_CrosshairOffsetStrength.y,

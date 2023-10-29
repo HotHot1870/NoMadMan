@@ -96,7 +96,7 @@ public class BaseDefenceUIController : MonoBehaviour
         float wallHp = MainGameManager.GetInstance().GetWallCurHp();
         float wallMapHp = MainGameManager.GetInstance().GetWallMaxHp();
         WallUISetActive(true);
-        m_WallHpText.text = $"{wallHp} / {wallMapHp}";
+        m_WallHpText.text = $"{wallHp.ToString("0.0")} / {wallMapHp}";
         m_HpBarFiller.fillAmount = wallHp/wallMapHp;
     }
 

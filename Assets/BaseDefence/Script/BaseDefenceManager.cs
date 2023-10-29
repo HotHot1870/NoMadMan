@@ -251,10 +251,15 @@ public class BaseDefenceManager : MonoBehaviour
 
     }
 
+
+    public Animator GetCurrentGunAnimator(){
+        return m_GunModelController.GetCurrentGunAnimator();
+    }
+
     public void SwitchSelectedWeapon(int slotIndex){
         GunScriptable gun = MainGameManager.GetInstance().GetAllSelectedWeapon()[slotIndex];
-        m_GunShootController.SetSelectedGun(gun, slotIndex);
         m_GunModelController.ChangeGunModel(gun);
+        m_GunShootController.SetSelectedGun(gun, slotIndex);
     }
 
 }

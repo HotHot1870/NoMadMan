@@ -40,6 +40,7 @@ public class GunShootController : MonoBehaviour
     public void OnShootBtnDown(){
         if (m_CurrentAmmo <= 0)
         {
+            // do not shoot if out of ammo
             m_ShootAudioSource.PlayOneShot(m_OutOfAmmoSound);
         }
         else
@@ -48,8 +49,10 @@ public class GunShootController : MonoBehaviour
             if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GunStats.IsSemiAuto)
             {
                 m_SemiAutoShootCoroutine = StartCoroutine(SemiAutoShoot());
+                // semi auto 
                 return;
             }
+            //single shot
             Shoot();
         }
     }
@@ -90,7 +93,7 @@ public class GunShootController : MonoBehaviour
             m_GunsClipAmmo[m_CurrentWeaponSlotIndex] = m_CurrentAmmo;
 
         m_SelectedGun = gun;
-         m_CurrentWeaponSlotIndex = slotIndex;
+        m_CurrentWeaponSlotIndex = slotIndex;
 
         BaseDefenceManager.GetInstance().SetAccruacy(m_SelectedGun.GunStats.Accuracy);
         m_SemiAutoShootCoroutine = null;
@@ -145,7 +148,11 @@ public class GunShootController : MonoBehaviour
 
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
-        BaseDefenceManager.GetInstance().GetGunModelController().ShakeGunByShoot();
+
+        var gunModelAnimator = BaseDefenceManager.GetInstance().GetCurrentGunAnimator();
+        if(gunModelAnimator!=null){
+            gunModelAnimator.Play("Shoot");
+        }
 
         for (int j = 0; j < m_SelectedGun.GunStats.PelletPerShot; j++)
         {

@@ -138,6 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8339565237857062509}
+  - component: {fileID: 6682136541333962138}
   m_Layer: 0
   m_Name: PP90
   m_TagString: Untagged
@@ -161,6 +162,27 @@ Transform:
   - {fileID: 3294383099070498244}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15, y: 15, z: 0}
+--- !u!95 &6682136541333962138
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723895810438305759}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5342a3523dcf3b744b2bdb152f91cdb4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4900806295231377409
 GameObject:
   m_ObjectHideFlags: 0

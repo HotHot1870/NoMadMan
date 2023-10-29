@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 9565982823592555}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0.419}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 553290714315392885}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -220,6 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 252604386749333509}
+  - component: {fileID: 7410533028968418908}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -243,6 +244,27 @@ Transform:
   - {fileID: 3184561721680416232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15, y: 15, z: 0}
+--- !u!95 &7410533028968418908
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269120045649779972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 090e2038d7c8e9e46b5ed9d3eb5be91c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5531362738696545318
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +321,7 @@ Transform:
   m_GameObject: {fileID: 7739509178158628017}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.001010742, y: -0.14908153, z: -0.36835834}
+  m_LocalPosition: {x: -0.0010107383, y: -0.14900002, z: 0.051}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:

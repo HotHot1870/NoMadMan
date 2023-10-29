@@ -314,6 +314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 821716607060089433}
+  - component: {fileID: 743216047172711178}
   m_Layer: 0
   m_Name: AK69
   m_TagString: Untagged
@@ -337,6 +338,27 @@ Transform:
   - {fileID: 4189951123247955607}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15, y: 15, z: 0}
+--- !u!95 &743216047172711178
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705162678586017364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 60f91e8a320e6764c855672e2e8ac942, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6223984580574272162
 GameObject:
   m_ObjectHideFlags: 0
