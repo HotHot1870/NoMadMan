@@ -13,10 +13,11 @@ public enum EnemyBodyPartEnum
 public class EnemyBodyPart : MonoBehaviour
 {
     [SerializeField] private EnemyController m_EnemyController;
-    //[SerializeField] private SpriteRenderer m_Renderer;
+    [SerializeField] private ParticleSystem m_OnHitEffect=null;
     [SerializeField] private Collider m_Collider;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
+    private float m_EmissionDelay = 0;
 
     private void Start()
     {
@@ -27,6 +28,26 @@ public class EnemyBodyPart : MonoBehaviour
     public void OnHit(float damage)
     {
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
+
+        // hit effect
+        if(m_OnHitEffect != null && m_EmissionDelay<=0){
+            var hitEffect = Instantiate(m_OnHitEffect,this.transform);
+            hitEffect.Play();
+            hitEffect.transform.position = this.transform.position;
+            Destroy(hitEffect.gameObject,3f);
+            // prevent shotgun emit too much 
+            m_EmissionDelay = 0.1f;
+            StartCoroutine(EmitHitEffectDelay());
+        }
+    }
+
+    private IEnumerator EmitHitEffectDelay(){
+        while (m_EmissionDelay>=0)
+        {
+            m_EmissionDelay -=Time.deltaTime;
+            yield return null;
+        }
+
     }
 
     public EnemyBodyPartEnum GetBodyType(){

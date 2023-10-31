@@ -256,6 +256,10 @@ public class BaseDefenceManager : MonoBehaviour
         return m_GunModelController.GetCurrentGunAnimator();
     }
 
+    public ParticleSystem GetCurrentGunMuzzelPartical(){
+        return m_GunModelController.GetCurrentGunMuzzelPartical();
+    }
+
     public void SwitchSelectedWeapon(int slotIndex){
         GunScriptable gun = MainGameManager.GetInstance().GetAllSelectedWeapon()[slotIndex];
         m_GunModelController.ChangeGunModel(gun);

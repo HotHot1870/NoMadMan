@@ -139,8 +139,6 @@ GameObject:
   - component: {fileID: 1976640925017883641}
   - component: {fileID: 6435751185372325250}
   - component: {fileID: 788046704038285794}
-  - component: {fileID: 7571496115011667520}
-  - component: {fileID: 499126487669468395}
   m_Layer: 12
   m_Name: Helmet
   m_TagString: Untagged
@@ -213,43 +211,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7571496115011667520
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315445750130945788}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.26258463, y: 0.29590166, z: 0.2981954}
-  m_Center: {x: 0.00007338016, y: 1.7972498, z: -0.010000718}
---- !u!114 &499126487669468395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 315445750130945788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 8666733018991662214}
-  m_Collider: {fileID: 7571496115011667520}
-  m_DamageMod: 0.25
-  m_BodyType: 1
 --- !u!1 &327454783630803469
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +283,7 @@ MonoBehaviour:
   m_Self: {fileID: 327454783630803469}
   m_Animator: {fileID: 5762752102752999961}
   m_AttackStartUp: 0.45
+  m_AnimationWalkSpeed: 9
 --- !u!1 &377405382207659342
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 1276573718945231154}
   m_DamageMod: 1
   m_BodyType: 0
@@ -1007,6 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 167875788120680453}
   m_DamageMod: 1
   m_BodyType: 0
@@ -1209,6 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 4103304946506768549}
   m_DamageMod: 1
   m_BodyType: 0
@@ -1430,6 +1395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 5601326307185932100}
   m_DamageMod: 1
   m_BodyType: 0
@@ -1474,6 +1440,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906097462134574255}
+  - component: {fileID: 3109971936565640344}
+  - component: {fileID: 307694981389399881}
   m_Layer: 12
   m_Name: Head_M
   m_TagString: Untagged
@@ -1505,6 +1473,44 @@ Transform:
   - {fileID: 1976640925017883641}
   m_Father: {fileID: 991556533158506698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3109971936565640344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2171576198670491343}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.35, y: 0.29590166, z: 0.2981954}
+  m_Center: {x: -0.13, y: 0.1, z: 0}
+--- !u!114 &307694981389399881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2171576198670491343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
+  m_Collider: {fileID: 3109971936565640344}
+  m_DamageMod: 0.25
+  m_BodyType: 1
 --- !u!1 &2193786437930492559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,6 +1705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 3334542453000814844}
   m_DamageMod: 1
   m_BodyType: 0
@@ -3678,6 +3685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
   m_Collider: {fileID: 2025375397787718053}
   m_DamageMod: 1.5
   m_BodyType: 2
@@ -3875,6 +3883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 2429823865940805581}
   m_DamageMod: 1
   m_BodyType: 0
@@ -4121,6 +4130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 2572031084340652873}
   m_DamageMod: 1
   m_BodyType: 0
@@ -4274,6 +4284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
   m_Collider: {fileID: 4909401345484773060}
   m_DamageMod: 1.5
   m_BodyType: 2
@@ -4473,6 +4484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 6034503362604096201}
   m_DamageMod: 1
   m_BodyType: 0
@@ -4549,6 +4561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 2187035677691318176}
   m_DamageMod: 1
   m_BodyType: 0
@@ -4861,6 +4874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 8260809670318051638}
   m_DamageMod: 1
   m_BodyType: 0
@@ -5105,6 +5119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 8160619497260889648}
   m_DamageMod: 1
   m_BodyType: 0
@@ -5543,6 +5558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Collider: {fileID: 2555054144093793812}
   m_DamageMod: 1
   m_BodyType: 0

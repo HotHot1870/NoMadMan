@@ -25,12 +25,12 @@ public class EnemyController : EnemyControllerBase
     }
 
     private IEnumerator Start() {
-        m_Self.transform.LookAt(new Vector3(m_Destination.x,m_Self.transform.position.y,m_Destination.z));
+        m_Self.transform.LookAt(new Vector3(m_CameraPos.x,m_Self.transform.position.y,m_CameraPos.z));
         m_Animator.Play("MoveForwar");
         m_Animator.speed = Mathf.Lerp(0f,m_AnimationWalkSpeed, Mathf.InverseLerp(0,25f, Scriptable.MoveSpeed) );
 
         yield return null;
-        m_Self.transform.LookAt(new Vector3(m_Destination.x,m_Self.transform.position.y,m_Destination.z));
+        m_Self.transform.LookAt(new Vector3(m_CameraPos.x,m_Self.transform.position.y,m_CameraPos.z));
         
     }
 

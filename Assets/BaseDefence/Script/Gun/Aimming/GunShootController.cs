@@ -149,11 +149,15 @@ public class GunShootController : MonoBehaviour
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
+        // muzzel
+        BaseDefenceManager.GetInstance().GetCurrentGunMuzzelPartical().Play();
+
         var gunModelAnimator = BaseDefenceManager.GetInstance().GetCurrentGunAnimator();
         if(gunModelAnimator!=null){
             gunModelAnimator.Play("Shoot");
         }
 
+        // shot all pellet
         for (int j = 0; j < m_SelectedGun.GunStats.PelletPerShot; j++)
         {
             // random center to point distance
