@@ -26,7 +26,7 @@ public class EnemyController : EnemyControllerBase
 
     private IEnumerator Start() {
         m_Self.transform.LookAt(new Vector3(m_CameraPos.x,m_Self.transform.position.y,m_CameraPos.z));
-        m_Animator.Play("MoveForwar");
+        m_Animator.Play("MoveForward");
         m_Animator.speed = Mathf.Lerp(0f,m_AnimationWalkSpeed, Mathf.InverseLerp(0,25f, Scriptable.MoveSpeed) );
 
         yield return null;
@@ -42,6 +42,9 @@ public class EnemyController : EnemyControllerBase
 
         if(!m_CanAttack&&Vector3.Distance(m_Self.transform.position , m_Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
             // close enough for attack 
+
+            m_Animator.speed = 1;
+            m_Animator.SetBool("IsStoping",true);
 
             m_CanAttack = true;
             m_Self.transform.LookAt(new Vector3(m_CameraPos.x,m_Self.transform.position.y,m_CameraPos.z));

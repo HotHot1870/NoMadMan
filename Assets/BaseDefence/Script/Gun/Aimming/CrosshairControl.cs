@@ -28,8 +28,8 @@ public class CrosshairControl : MonoBehaviour
         m_IsCrosshairMoving = true;
         m_CrossHairDragStartPos = m_CrosshairParent.position;
 
-        m_AimTouchPreviousPos = Input.mousePosition;
-        m_AimDragTouchStartPos = Input.mousePosition;
+        //m_AimTouchPreviousPos = Input.mousePosition;
+        //m_AimDragTouchStartPos = Input.mousePosition;
     }
 
     public void OnAimBtnUp(){
@@ -78,7 +78,7 @@ public class CrosshairControl : MonoBehaviour
     }
 
     public void OnCrosshairMove(){
-        /*
+        
         if(m_TouchIndex<0){
             m_TouchIndex = Input.touchCount-1;
             if(m_TouchIndex<0){
@@ -87,13 +87,13 @@ public class CrosshairControl : MonoBehaviour
             }
             m_AimTouchPreviousPos = Input.GetTouch(m_TouchIndex).position;
             m_AimDragTouchStartPos = Input.GetTouch(m_TouchIndex).position;
-        }*/
+        }
 
 
         var curAcc = BaseDefenceManager.GetInstance().GetAccruacy();
 
-        m_AimDragTouchEndPos = Input.mousePosition;
-        //m_AimDragTouchEndPos = Input.GetTouch(m_TouchIndex).position;
+        //m_AimDragTouchEndPos = Input.mousePosition;
+        m_AimDragTouchEndPos = Input.GetTouch(m_TouchIndex).position;
         Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragTouchEndPos - m_AimDragTouchStartPos) * 3;
         m_CrosshairParent.position = m_CrossHairDragStartPos + offset;
 
