@@ -55,10 +55,6 @@ public class GunModelComtroller : MonoBehaviour
         }
         m_GunModel = Instantiate(gun.FPSPrefab,m_ModelAim);
         var gunTrans = m_GunModel.transform;
-
-        Debug.Log("");
-        Debug.Log(m_ModelAim.position);
-        Debug.Log(gunTrans.position);
         
         m_ModelAim.localPosition = gunTrans.localPosition;
         gunTrans.localPosition = Vector3.zero;
@@ -67,8 +63,6 @@ public class GunModelComtroller : MonoBehaviour
         m_ModelAimStartRotation = gunTrans.localEulerAngles;
         gunTrans.localEulerAngles = Vector3.zero;
 
-        Debug.Log(m_ModelAim.position);
-        Debug.Log(gunTrans.position);
 
         m_GunModelAnimator = m_GunModel.GetComponent<Animator>();
     }

@@ -121,7 +121,13 @@ public class EnemySpawnController : MonoBehaviour
         var targetPos = new Vector3( m_Destination.position.x, m_GroundSpawnerCenter.position.y ,m_Destination.position.z) 
             + Vector3.right * Random.Range(m_WallWidth * -1f, m_WallWidth) +
             Vector3.forward * Mathf.Lerp(-0.5f,0.5f, Mathf.InverseLerp(0f,4f,index%5f) );
-        newEnemy.GetComponent<EnemyController>().Init(enemyData, targetPos, m_Camera.position);
+
+        var enemyConfig = new EnemyControllerInitConfig{
+            scriptable = enemyData,
+            destination = targetPos,
+            cameraPos = m_Camera.position
+        };
+        newEnemy.GetComponent<EnemyControllerBase>().Init(enemyConfig);
 
         newEnemy.transform.position = m_GroundSpawnerCenter.position +
             Random.Range(m_GroundSpawnerWidth * -1f, m_GroundSpawnerWidth) * Vector3.right;

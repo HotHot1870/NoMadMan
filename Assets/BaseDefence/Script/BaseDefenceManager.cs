@@ -241,7 +241,6 @@ public class BaseDefenceManager : MonoBehaviour
 
 
     public void StartReload(GunReloadControllerConfig gunReloadConfig){
-        Debug.Log("StartReload");
         m_ReloadControllerPanel.SetActive(true);
         m_ReloadController.StartReload( gunReloadConfig );
     }

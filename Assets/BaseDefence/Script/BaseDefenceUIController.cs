@@ -57,7 +57,28 @@ public class BaseDefenceUIController : MonoBehaviour
 
         m_ReloadBtn.onClick.AddListener(gunShootController.OnClickReload);
 
-        m_ShootBtn.onDown.AddListener(gunShootController.OnShootBtnDown);
+        m_ShootBtn.onDown.AddListener(()=>{
+            
+        var shootBtnRect = m_ShootBtn.GetComponent<RectTransform>();
+        var shootBtnBGRect = m_ShootBtn.transform.parent.GetComponent<RectTransform>();
+#if !UNITY_EDITOR
+
+        var touchIndex = Input.touchCount-1;
+        if(touchIndex<0){
+            // no touch detected
+            return;
+        } 
+        if(Vector2.Distance(Input.GetTouch(touchIndex).position, shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/2f ){
+            gunShootController.OnShootBtnDown();
+        }    
+#endif
+#if UNITY_EDITOR
+        if(Vector2.Distance(Input.mousePosition , shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/2f ){
+            gunShootController.OnShootBtnDown();
+        }    
+#endif
+            
+        });
         m_ShootBtn.onUp.AddListener(gunShootController.OnShootBtnUp);
         m_ShootBtn.onExit.AddListener(gunShootController.OnShootBtnUp);
         

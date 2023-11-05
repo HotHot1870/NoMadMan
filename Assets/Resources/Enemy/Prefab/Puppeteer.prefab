@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6024855892443051050}
   - component: {fileID: 2440735852902508527}
   - component: {fileID: 3012857814082944719}
-  - component: {fileID: 5749379140192767188}
+  - component: {fileID: 1654300580198601736}
   m_Layer: 12
   m_Name: BullJaw
   m_TagString: Untagged
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2999a937bafedf8438f20449c8970b38, type: 2}
+  - {fileID: 2100000, guid: 5f1aedecf6d10f242a7909203a5faddd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,21 +84,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!111 &5749379140192767188
-Animation:
+--- !u!114 &1654300580198601736
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256488424155623272}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 785122505488268407}
+  m_OnHitEffect: {fileID: 0}
+  m_Collider: {fileID: 3051447168794728046}
+  m_DamageMod: 0
+  m_BodyType: 0
+  m_Renderer: {fileID: 3012857814082944719}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &410490268557280966
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +148,7 @@ GameObject:
   - component: {fileID: 6974849379450539503}
   - component: {fileID: 1715887573399796787}
   - component: {fileID: 2185656938306694525}
+  - component: {fileID: 1295260365403154364}
   m_Layer: 12
   m_Name: Right
   m_TagString: Untagged
@@ -194,7 +199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5146548e5fd036c4da947e00555a5336, type: 2}
+  - {fileID: 2100000, guid: 3dcd0f87dc116b64ea7fca29c64706ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,6 +242,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4580232, y: 0.21162038, z: 0.23916249}
   m_Center: {x: 3.5527137e-15, y: 0, z: 0}
+--- !u!114 &1295260365403154364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814419081922168398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 785122505488268407}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
+  m_Collider: {fileID: 2185656938306694525}
+  m_DamageMod: 0.1
+  m_BodyType: 1
+  m_Renderer: {fileID: 1715887573399796787}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &3898873789160568807
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +273,7 @@ GameObject:
   - component: {fileID: 3437579899233625770}
   - component: {fileID: 6913600751589824757}
   - component: {fileID: 3051447168794728046}
+  - component: {fileID: 5684771192149340896}
   m_Layer: 12
   m_Name: BullSkull
   m_TagString: Untagged
@@ -299,7 +324,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2999a937bafedf8438f20449c8970b38, type: 2}
+  - {fileID: 2100000, guid: 5f1aedecf6d10f242a7909203a5faddd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -342,6 +367,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 16, z: 9}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5684771192149340896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898873789160568807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 785122505488268407}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
+  m_Collider: {fileID: 3051447168794728046}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 6913600751589824757}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &5567399891244192789
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +395,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4459482588214140776}
+  - component: {fileID: 785122505488268407}
+  - component: {fileID: 1167671890782952545}
   m_Layer: 12
   m_Name: Puppeteer
   m_TagString: Untagged
@@ -368,7 +414,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9017854049712466665}
@@ -376,6 +422,42 @@ Transform:
   - {fileID: 8177237532408057186}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &785122505488268407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567399891244192789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8193f117743364644bc6b2d12bffe7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Self: {fileID: 5567399891244192789}
+  m_Animator: {fileID: 1167671890782952545}
+  m_AttackStartUp: 0.45
+--- !u!95 &1167671890782952545
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567399891244192789}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b90e217440e5a0489d2d104cda9c88b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7844258093832861383
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +470,7 @@ GameObject:
   - component: {fileID: 4868780678338208064}
   - component: {fileID: 7782474184019918071}
   - component: {fileID: 4239208441846973990}
+  - component: {fileID: 3299334567945612896}
   m_Layer: 12
   m_Name: Left
   m_TagString: Untagged
@@ -438,7 +521,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5146548e5fd036c4da947e00555a5336, type: 2}
+  - {fileID: 2100000, guid: 3dcd0f87dc116b64ea7fca29c64706ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -481,3 +564,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4580232, y: 0.21162038, z: 0.23916249}
   m_Center: {x: -3.5527137e-15, y: 0, z: 0}
+--- !u!114 &3299334567945612896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844258093832861383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 785122505488268407}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
+  m_Collider: {fileID: 4239208441846973990}
+  m_DamageMod: 0.1
+  m_BodyType: 1
+  m_Renderer: {fileID: 7782474184019918071}
+  m_SkinRenderer: {fileID: 0}

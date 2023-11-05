@@ -28,8 +28,10 @@ public class CrosshairControl : MonoBehaviour
         m_IsCrosshairMoving = true;
         m_CrossHairDragStartPos = m_CrosshairParent.position;
 
-        //m_AimTouchPreviousPos = Input.mousePosition;
-        //m_AimDragTouchStartPos = Input.mousePosition;
+#if UNITY_EDITOR
+        m_AimTouchPreviousPos = Input.mousePosition;
+        m_AimDragTouchStartPos = Input.mousePosition;
+#endif
     }
 
     public void OnAimBtnUp(){
@@ -79,6 +81,7 @@ public class CrosshairControl : MonoBehaviour
 
     public void OnCrosshairMove(){
         
+#if !UNITY_EDITOR
         if(m_TouchIndex<0){
             m_TouchIndex = Input.touchCount-1;
             if(m_TouchIndex<0){
@@ -88,12 +91,17 @@ public class CrosshairControl : MonoBehaviour
             m_AimTouchPreviousPos = Input.GetTouch(m_TouchIndex).position;
             m_AimDragTouchStartPos = Input.GetTouch(m_TouchIndex).position;
         }
-
+#endif
 
         var curAcc = BaseDefenceManager.GetInstance().GetAccruacy();
 
-        //m_AimDragTouchEndPos = Input.mousePosition;
-        m_AimDragTouchEndPos = Input.GetTouch(m_TouchIndex).position;
+#if UNITY_EDITOR
+    m_AimDragTouchEndPos = Input.mousePosition;
+#endif
+
+#if !UNITY_EDITOR
+        m_AimDragTouchEndPos = Input.GetTouch(m_TouchIndex).position; 
+#endif
         Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragTouchEndPos - m_AimDragTouchStartPos) * 3;
         m_CrosshairParent.position = m_CrossHairDragStartPos + offset;
 
@@ -135,10 +143,10 @@ public class CrosshairControl : MonoBehaviour
             0
             );
     }
-
+/*
     public void SetCrosshairRecoil(Vector2 recoil){
         m_AimDragTouchStartPos += recoil;
-    }
+    }*/
 
     public void SetCrosshairAccuracy(float accuracyLose){
         accuracyLose = Mathf.Clamp(accuracyLose,0f,m_MaxAccuracyLose);

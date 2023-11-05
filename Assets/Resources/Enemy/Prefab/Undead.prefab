@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524508658097958966}
   - component: {fileID: 8916264492814986581}
+  - component: {fileID: 3518836768922753213}
   m_Layer: 12
   m_Name: B-hand.L
   m_TagString: Untagged
@@ -57,6 +58,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.25, z: 0.12}
   m_Center: {x: -0.2, y: 0, z: 0.02}
+--- !u!114 &3518836768922753213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122216609511437039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 8916264492814986581}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &353965235968066832
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1959873114705829565}
   - component: {fileID: 8012292619664494227}
+  - component: {fileID: 1410569348014161163}
   m_Layer: 12
   m_Name: B-thigh.R
   m_TagString: Untagged
@@ -206,6 +227,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.15, z: 0.15}
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &1410569348014161163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832750279147425204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 8012292619664494227}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &854476322975419334
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9134421083208736802}
   - component: {fileID: 6374671965465899394}
+  - component: {fileID: 3267881181400512785}
   m_Layer: 12
   m_Name: B-thigh.L
   m_TagString: Untagged
@@ -292,6 +333,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.15, z: 0.15}
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &3267881181400512785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039948478019882839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 6374671965465899394}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &1103269174707581560
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2495886703417646929}
   - component: {fileID: 2559700295348583410}
+  - component: {fileID: 5162312398528369723}
   m_Layer: 12
   m_Name: B-upper_arm.R
   m_TagString: Untagged
@@ -378,6 +439,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.12, z: 0.12}
   m_Center: {x: -0.15, y: 0, z: 0}
+--- !u!114 &5162312398528369723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173907804037999456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 2559700295348583410}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &1441905739675993080
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +859,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2999a937bafedf8438f20449c8970b38, type: 2}
+  - {fileID: 2100000, guid: 3ec0ab6fb5e11a34b97997d6cee5449b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -970,6 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7352128221358592883}
   - component: {fileID: 528051500585761333}
+  - component: {fileID: 1323505063769400188}
   m_Layer: 12
   m_Name: B-spine
   m_TagString: Untagged
@@ -1014,6 +1095,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.35, z: 0.25}
   m_Center: {x: 0.05, y: 0, z: 0}
+--- !u!114 &1323505063769400188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997920334148194351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 528051500585761333}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 4055506494677254806}
 --- !u!1 &4101614470669635088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,6 +1124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3125100218988295461}
   - component: {fileID: 4745018482420214045}
+  - component: {fileID: 1760138285307861579}
   m_Layer: 12
   m_Name: B-hand.R
   m_TagString: Untagged
@@ -1071,6 +1172,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.25, z: 0.12}
   m_Center: {x: -0.2, y: 0, z: 0.02}
+--- !u!114 &1760138285307861579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101614470669635088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 4745018482420214045}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &4146817470569732411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5717135140015944639}
   - component: {fileID: 7059517225245423282}
+  - component: {fileID: 429465602261802126}
   m_Layer: 12
   m_Name: B-shin.R
   m_TagString: Untagged
@@ -1157,6 +1278,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.15, z: 0.15}
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &429465602261802126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4161214643200191749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 7059517225245423282}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &4429290726920777914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 309877014661261531}
   - component: {fileID: 695056187471860618}
+  - component: {fileID: 3112867628019737330}
   m_Layer: 12
   m_Name: B-shin.L
   m_TagString: Untagged
@@ -1434,6 +1575,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.15, z: 0.15}
   m_Center: {x: -0.2, y: 0, z: 0}
+--- !u!114 &3112867628019737330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689803932624404473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 695056187471860618}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &5761872656368678522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,6 +1670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7983614127544834196}
   - component: {fileID: 2979771216696041646}
+  - component: {fileID: 4687170467374818814}
   m_Layer: 12
   m_Name: Undead
   m_TagString: Untagged
@@ -1544,7 +1705,7 @@ Animator:
   m_GameObject: {fileID: 6345075452338266797}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8ed68a3a383765a4bb2001de21d699c1, type: 3}
-  m_Controller: {fileID: 9100000, guid: f893d78148eef4541b5a78c4b4571608, type: 2}
+  m_Controller: {fileID: 9100000, guid: eb37a7a8faef0ef4e9e22eaa51672abe, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1555,6 +1716,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4687170467374818814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345075452338266797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d66a7c2fabcf44cb5d97d7ed13c428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Self: {fileID: 6345075452338266797}
+  m_Animator: {fileID: 2979771216696041646}
+  m_AttackStartUp: 0.45
+  m_AnimationWalkSpeed: 4
 --- !u!1 &6540747931119065522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,6 +1835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8019271236150499735}
   - component: {fileID: 1868208150960266181}
+  - component: {fileID: 6883219080831401926}
   m_Layer: 12
   m_Name: B-head
   m_TagString: Untagged
@@ -1702,6 +1880,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.22, z: 0.25}
   m_Center: {x: -0.05, y: 0, z: 0}
+--- !u!114 &6883219080831401926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6706243165121194363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 1868208150960266181}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &6758295183542947031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,6 +1941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3631060950297928056}
   - component: {fileID: 3054224873868313020}
+  - component: {fileID: 7382832047012796002}
   m_Layer: 12
   m_Name: B-forearm.R
   m_TagString: Untagged
@@ -1788,6 +1986,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.12, z: 0.12}
   m_Center: {x: -0.15, y: 0, z: 0}
+--- !u!114 &7382832047012796002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6930354556062733006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 3054224873868313020}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &6999536319591033567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,6 +2334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7041470344963930052}
   - component: {fileID: 2976434145827391930}
+  - component: {fileID: 1555296472664499049}
   m_Layer: 12
   m_Name: B-upper_arm.L
   m_TagString: Untagged
@@ -2161,6 +2379,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.12, z: 0.12}
   m_Center: {x: -0.15, y: 0, z: 0}
+--- !u!114 &1555296472664499049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675567781875993162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 2976434145827391930}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &7739080241071693583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,6 +2439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5806843713637856125}
   - component: {fileID: 8306682570573580247}
+  - component: {fileID: 7034208631381603457}
   m_Layer: 12
   m_Name: B-chest
   m_TagString: Untagged
@@ -2248,6 +2486,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.4, z: 0.25}
   m_Center: {x: -0.1, y: 0, z: 0.05}
+--- !u!114 &7034208631381603457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897419968461232042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 8306682570573580247}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &8168805320062804159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,6 +2579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8598914640257436151}
   - component: {fileID: 4141570331262767742}
+  - component: {fileID: 2460924455847093516}
   m_Layer: 12
   m_Name: B-forearm.L
   m_TagString: Untagged
@@ -2366,6 +2624,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.35, y: 0.12, z: 0.12}
   m_Center: {x: -0.15, y: 0, z: 0}
+--- !u!114 &2460924455847093516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251479896209081791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 4687170467374818814}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_Collider: {fileID: 4141570331262767742}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 0}
 --- !u!1 &8466820807918122904
 GameObject:
   m_ObjectHideFlags: 0

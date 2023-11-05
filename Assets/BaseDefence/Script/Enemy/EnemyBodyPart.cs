@@ -12,17 +12,55 @@ public enum EnemyBodyPartEnum
 
 public class EnemyBodyPart : MonoBehaviour
 {
-    [SerializeField] private EnemyController m_EnemyController;
+    [SerializeField] private EnemyControllerBase m_EnemyController;
     [SerializeField] private ParticleSystem m_OnHitEffect=null;
     [SerializeField] private Collider m_Collider;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
+    [SerializeField] private MeshRenderer m_Renderer = null;
+    [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
     private float m_EmissionDelay = 0;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        m_EnemyController.m_OnDead += OnDead;
-        //m_Renderer.material.SetFloat("_Seed", Random.Range(0f,1f));
+        
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_Normalized",  0);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_Normalized",  0);
+            
+        m_EnemyController.OnDeadAction += OnDead;
+
+        // seed value
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_Seed", Random.Range(0f,1f));
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_Seed", Random.Range(0f,1f));
+
+        // Spawn effect
+        if(m_Renderer == null && m_SkinRenderer == null)
+            yield break;
+
+        float passedTime = 0;
+        float fadeTimeNeeded = 0.9f;
+        while (passedTime < fadeTimeNeeded)
+        {
+            passedTime += Time.deltaTime;
+            yield return null;
+            if(m_Renderer != null)
+                m_Renderer.material.SetFloat("_Normalized",  passedTime / fadeTimeNeeded);
+
+            if(m_SkinRenderer != null)
+                m_SkinRenderer.material.SetFloat("_Normalized",  passedTime/ fadeTimeNeeded);
+
+        }
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_Normalized",  1);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_Normalized",  1);
     }
 
     public void OnHit(float damage)
@@ -63,21 +101,34 @@ public class EnemyBodyPart : MonoBehaviour
         // prevent blocking bullet after dead
         m_Collider.enabled = false;
         // burn effect
-        StartCoroutine(BurnOut());
+        StartCoroutine(OnDeadEffect());
     }
 
-    private IEnumerator BurnOut()
+    private IEnumerator OnDeadEffect()
     {
-        float passedTime = 0;
-        float fadeTimeNeeded = 0.5f;
+        if(m_Renderer == null && m_SkinRenderer == null)
+            yield break;
+
+        float fadeTimeNeeded = 0.9f;
+        // to make it look more responsive
+        float passedTime = fadeTimeNeeded*0.15f;
         while (passedTime < fadeTimeNeeded)
         {
             passedTime += Time.deltaTime;
             yield return null;
-            //m_Renderer.material.SetFloat("_Normalized",  passedTime / fadeTimeNeeded);
+            if(m_Renderer != null)
+                m_Renderer.material.SetFloat("_Normalized",  (fadeTimeNeeded- passedTime) / fadeTimeNeeded);
+
+            if(m_SkinRenderer != null)
+                m_SkinRenderer.material.SetFloat("_Normalized",  (fadeTimeNeeded-passedTime) / fadeTimeNeeded);
 
         }
-        //m_Renderer.material.SetFloat("_Normalized", 1);
+        
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_Normalized",  0);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_Normalized",  0);
 
     }
 

@@ -69,7 +69,6 @@ public class GunShootController : MonoBehaviour
         if (IsFullClipAmmo())
             return;
 
-        Debug.Log("");
         GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig
         {
             GunScriptable = m_SelectedGun,
