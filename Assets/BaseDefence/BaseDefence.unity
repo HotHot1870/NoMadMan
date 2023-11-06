@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_GroundSpawnerCenter: {fileID: 670607847}
   m_GroundSpawnerWidth: 17
   m_Destination: {fileID: 583313390}
-  m_WallWidth: 1.25
+  m_WallWidth: 1
   m_Camera: {fileID: 813147456}
   m_LeftAttackerSpot: {fileID: 730466933}
   m_MidAttackerSpot: {fileID: 1664428825}
@@ -2486,7 +2486,7 @@ Transform:
   m_GameObject: {fileID: 583313389}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.25}
+  m_LocalPosition: {x: -0.25, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

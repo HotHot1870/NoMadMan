@@ -58,6 +58,7 @@ public class ReadCsv : MonoBehaviour
         AssetDatabase.Refresh();
 
         string json = Resources.Load<TextAsset>("CSV/Enemy").ToString();
+        EnemyScriptable ghostScriptable = null; 
 
         var contents = json.Split('\n',',');
         int collumeCount = 8;
@@ -82,11 +83,19 @@ public class ReadCsv : MonoBehaviour
             // TODO : Enemy.DisplayImage = Resources.Load<Sprite>("Enemy/DisplayImage/"+displayName.Replace(" ", ""));
             Enemy.Prefab = Resources.Load<GameObject>("Enemy/Prefab/"+displayName.Replace(" ", ""));
 
+            //record ghost scriptable
+            if(Enemy.Id == 4){
+                ghostScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
+            }
 
             allEnemy.Add(Enemy);
             EditorUtility.SetDirty(Enemy);
             m_MainGameManager.SetAllEnemy(allEnemy);
         }   
+        // Puppeteer get ghost data
+        
+        var puppeteer = Resources.Load<GameObject>("Enemy/Prefab/Puppeteer");
+        puppeteer.GetComponent<PuppeteerController>().SetGhostScriptable(ghostScriptable);
     }
 
     private void ReacCSVWave() {

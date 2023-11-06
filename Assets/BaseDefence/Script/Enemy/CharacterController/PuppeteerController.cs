@@ -7,9 +7,10 @@ public class PuppeteerController : EnemyControllerBase
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_AttackStartUp = 0.45f;
-    private EnemyControllerBase m_Puppet;
+    [SerializeField] private GameObject m_Ghost;
+    [SerializeField] private EnemyScriptable m_GhostScriptable;
+    private EnemyControllerBase m_Puppet=null;
     protected float m_AttackDelay = 0;
-    private bool m_CanAttack = false;
 
     public override void Init(EnemyControllerInitConfig config)
     {
@@ -19,10 +20,9 @@ public class PuppeteerController : EnemyControllerBase
     }
     
     private IEnumerator Start() {
-        Destination += Vector3.up * 1.5f;
         m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
         
-        m_Self.transform.position += Vector3.up*8f ;
+        m_Self.transform.position += Vector3.up*6f ;
         m_Self.transform.position += m_Self.transform.forward * 15f ;
         m_Animator.Play("Idle");
 
@@ -48,41 +48,48 @@ public class PuppeteerController : EnemyControllerBase
 
             */
             // attack wall handler
-            if(m_CanAttack){
-                if(m_AttackDelay <=0){
-                    // attack
-                    StartCoroutine(Attack());
-                    
-                }else{
-                    // wait
-                    m_AttackDelay -= Time.deltaTime;
-                    
-                }
+            if(m_AttackDelay <=0){
+                // attack
+                StartCoroutine(Attack());
+                
+            }else{
+                // wait
+                m_AttackDelay -= Time.deltaTime;
+                
             }
+            
         }
     }
 
     
     public IEnumerator Attack(){
         m_Animator.speed = 1;
-        // TODO : attack animation
-        //m_Animator.Play("RightAttack");
         m_AttackDelay = Scriptable.AttackDelay + m_AttackStartUp;
         yield return new WaitForSeconds(m_AttackStartUp);
         if(IsThisDead)
             yield break;
         // spawn ghost
+        var ghost = Instantiate(m_Ghost,this.transform.parent);   
+        ghost.transform.position = m_Self.transform.position;     
         
+        var enemyConfig = new EnemyControllerInitConfig{
+            scriptable = m_GhostScriptable,
+            destination = CameraPos + Vector3.forward + Vector3.down * 0.5f ,
+            cameraPos = CameraPos
+        };
+
+        ghost.GetComponent<GhostController>().Init(enemyConfig);
         //BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
     }
 
+    public void SetGhostScriptable(EnemyScriptable enemyScriptable){
+        m_GhostScriptable = enemyScriptable;
+    }
     
     protected override void OnDead(){
         base.OnDead();
 
         m_Animator.speed = 1;
-        // TODO : dead animation
-        //m_Animator.Play("Die");
         Destroy(m_Self,1);
     }
 }
