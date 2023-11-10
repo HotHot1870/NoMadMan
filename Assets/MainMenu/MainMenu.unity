@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2117,7 +2117,7 @@ MonoBehaviour:
   m_Volume: 0.35
   m_AimSensitivity: 0.55
   m_AllSelectedWeapon:
-  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
+  - {fileID: 11400000, guid: 86a4bb2c094352143a3a2321b9c8c998, type: 2}
   - {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
   - {fileID: 11400000, guid: 146bf88fe60f33a4ba45ffa87e1ea6a6, type: 2}
   - {fileID: 11400000, guid: 67384cc299e1e2648bb7af46c47196d7, type: 2}
@@ -2130,9 +2130,11 @@ MonoBehaviour:
     IsOwned: 1
   - Gun: {fileID: 11400000, guid: 67384cc299e1e2648bb7af46c47196d7, type: 2}
     IsOwned: 1
-  - Gun: {fileID: 11400000, guid: 92d3677e177a4b64e91a8403c9ced862, type: 2}
+  - Gun: {fileID: 11400000, guid: 959c65cea7b94a549942423b34328bf9, type: 2}
     IsOwned: 0
   - Gun: {fileID: 11400000, guid: 3f81a476499063849ae93920dfc87f6a, type: 2}
+    IsOwned: 0
+  - Gun: {fileID: 11400000, guid: 86a4bb2c094352143a3a2321b9c8c998, type: 2}
     IsOwned: 0
   m_AllLocation:
   - {fileID: 11400000, guid: e7f68f4d03f46714f8a16305e744c493, type: 2}
@@ -2171,6 +2173,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   - clipName: AssultRifle
     audioClip: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
+  - clipName: GrenadeLauncher
+    audioClip: {fileID: 8300000, guid: 88cd98e74a303844c84894bc7dfc2479, type: 3}
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0

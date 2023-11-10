@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using BaseDefenceNameSpace;
-using UnityEngine.Rendering.Universal;
-using System.Runtime.InteropServices;
 
+[System.Serializable]
+public class ProjectileDetail
+{
+    public BulletType BulletType;
+    public GameObject Prefab;
+}
+
+public enum BulletType
+{
+    BasicBullet = 0,
+    Puncture = 1,
+    PillBomb = 2
+
+}
 public class GunShootController : MonoBehaviour
 {
     private GunScriptable m_SelectedGun = null;
@@ -22,12 +33,19 @@ public class GunShootController : MonoBehaviour
     [SerializeField] private AudioSource m_ShootAudioSource;
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
     private Coroutine m_SemiAutoShootCoroutine = null;
+    [Header("Projectile")]
+    [SerializeField] private List<ProjectileDetail> m_ListProjectile = new List<ProjectileDetail>();
+    [SerializeField] private Dictionary<BulletType,ProjectileDetail> m_AllProjectile = new Dictionary<BulletType,ProjectileDetail>();
 
 
 
 
     private void Start()
     {
+        foreach (var item in m_ListProjectile)
+        {
+            m_AllProjectile.Add(item.BulletType,item);
+        }
         BaseDefenceManager.GetInstance().m_UpdateAction += ShootCoolDown;
         MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 
@@ -175,9 +193,8 @@ public class GunShootController : MonoBehaviour
             var shotPoint = Instantiate(m_ShotPointPrefab,m_ShotDotParent);
             var dotPos = accuracyOffset + BaseDefenceManager.GetInstance().GetCrosshairPos();
             shotPoint.GetComponent<RectTransform>().position = dotPos;
-            CaseRayWithShootDot(dotPos, shotPoint.GetComponent<ShootDotController>() );
 
-            
+            CaseRayWithShootDot(dotPos, shotPoint.GetComponent<ShootDotController>() );
             Destroy(shotPoint, 0.3f);
         }
         
@@ -192,9 +209,40 @@ public class GunShootController : MonoBehaviour
 
     private void CaseRayWithShootDot(Vector3 dotPos, ShootDotController dotController){
         Ray ray = Camera.main.ScreenPointToRay(dotPos);
-        RaycastHit hit;
-        Physics.Raycast(ray,out hit,500, 1<<12);
-        // hit Enemy
+        RaycastHit hitEnemy;
+        RaycastHit hitEnvironmentAndEnemy;
+        RaycastHit hitEnvironment;
+        Physics.Raycast(ray,out hitEnemy,500, 1<<12);
+        Physics.Raycast(ray,out hitEnvironmentAndEnemy,500, 1<<12|1<<10);
+        Physics.Raycast(ray,out hitEnvironment,500, 1<<12|1<<10);
+        
+
+        //TODO : bullet type
+        switch (m_SelectedGun.GunStats.BulletType)
+        {
+            case BulletType.BasicBullet:
+                // normal 
+                BasicShootHandler(hitEnemy,dotController);
+            break;
+            case BulletType.Puncture:
+                // TODO : puncture
+            break;
+            case BulletType.PillBomb:
+                var pillBomb = Instantiate(m_AllProjectile[BulletType.PillBomb].Prefab);
+                // TODO : set spawn point to gun point
+                pillBomb.transform.position = this.transform.position;
+
+                // TODO : set explode radius
+                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,float.Parse(m_SelectedGun.Util));
+
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void BasicShootHandler(RaycastHit hit , ShootDotController dotController){
         if (hit.transform != null)//Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
@@ -213,12 +261,6 @@ public class GunShootController : MonoBehaviour
                         default:
                         break;
                     }
-                    /*
-                    if(bodyPart.IsShield()){
-                        dotController.OnHitShield();
-                    }else{
-                        dotController.OnHit();
-                    }*/
                     bodyPart.OnHit(m_SelectedGun.GunStats.DamagePerPellet);
                 }else{
                     dotController.OnMiss();

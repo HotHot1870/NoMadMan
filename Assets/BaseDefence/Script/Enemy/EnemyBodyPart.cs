@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EnemyBodyPartEnum
@@ -19,10 +20,15 @@ public class EnemyBodyPart : MonoBehaviour
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
     [SerializeField] private MeshRenderer m_Renderer = null;
     [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
+   // [SerializeField] private AudioSource m_AudioPlayer;
+   // [SerializeField] private AudioClip m_OnHitSound;
+    private bool m_CanPlayHitSound = true;
     private float m_EmissionDelay = 0;
 
     private IEnumerator Start()
     {
+       // m_OnHitSound = Resources.Load<AudioClip>("Enemy/Audio/Hit");
+       // m_AudioPlayer = this.AddComponent<AudioSource>();
         
         if(m_Renderer != null)
             m_Renderer.material.SetFloat("_Normalized",  0);
@@ -77,7 +83,26 @@ public class EnemyBodyPart : MonoBehaviour
             m_EmissionDelay = 0.1f;
             StartCoroutine(EmitHitEffectDelay());
         }
+/*
+        // Hit sound
+        if(m_CanPlayHitSound){
+            m_AudioPlayer.PlayOneShot(m_OnHitSound);
+            m_CanPlayHitSound = false;
+            StartCoroutine(HitSoundBlocker());
+        }*/
     }
+/*
+    private IEnumerator HitSoundBlocker(){
+        // prevent multi sound play on shot gun hit
+        float duration = 0.05f;
+        float passedTime = 0;
+        while (passedTime < duration)
+        {
+            passedTime += Time.deltaTime;
+            yield return null;
+        }
+        m_CanPlayHitSound = true;
+    }*/
 
     private IEnumerator EmitHitEffectDelay(){
         while (m_EmissionDelay>=0)
@@ -98,6 +123,9 @@ public class EnemyBodyPart : MonoBehaviour
 
     public void OnDead()
     {
+        if(this == null){
+            return;
+        }
         // prevent blocking bullet after dead
         m_Collider.enabled = false;
         // burn effect

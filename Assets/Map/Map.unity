@@ -398,9 +398,6 @@ MonoBehaviour:
   m_MapUIController: {fileID: 1020696794}
   m_VehicleController: {fileID: 471834644}
   m_MapLocationParent: {fileID: 1628183353}
-  m_AllLocationScriptable:
-  - {fileID: 11400000, guid: 66a4900c13c2c1f4c884f738d2bb22e5, type: 2}
-  - {fileID: 11400000, guid: e7f68f4d03f46714f8a16305e744c493, type: 2}
   m_LocationToVehicleMaxDistance: 7
 --- !u!4 &79963850
 Transform:
@@ -6165,7 +6162,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

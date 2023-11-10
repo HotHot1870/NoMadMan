@@ -24,6 +24,10 @@ public class GunScriptable : ScriptableObject
     [Space(20)]
     [Header("Reload")]
     public GunReloadScriptable ReloadScriptable;
+
+    [Space(20)]
+    [Header("Other")]
+    public string Util;
     
 }/*
 
@@ -51,6 +55,7 @@ public class GunScriptableStats{
     public float DamagePerPellet;
     public int PelletPerShot = 1;
     public float ClipSize;
+    public BulletType BulletType;
 
     [Header("True if holding down shoot btn will shoot continuously")]
     public bool IsSemiAuto = true;

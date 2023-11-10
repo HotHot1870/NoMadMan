@@ -21,9 +21,11 @@ MonoBehaviour:
     DamagePerPellet: 150
     PelletPerShot: 1
     ClipSize: 5
+    BulletType: 0
     IsSemiAuto: 0
     FireRate: 1.25
     Accuracy: 100
     Handling: 75
     Recoil: 25
   ReloadScriptable: {fileID: 11400000, guid: 9b6ff85fee21b4a478b34b1d768682c7, type: 2}
+  Util: 

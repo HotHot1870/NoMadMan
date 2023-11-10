@@ -23,6 +23,10 @@ public class ReadCsv : MonoBehaviour
     [SerializeField] private MainGameManager m_MainGameManager;
     private Dictionary<int,string> m_AllWaveName = new Dictionary<int, string>();
     private Dictionary<int,string> m_AllGun = new Dictionary<int, string>();
+    private EnemyScriptable m_GhostScriptable = null;
+    private EnemyScriptable m_PuppetScriptable = null;
+
+
     [SerializeField] private List<ShootSoundAndName> m_AllShootSound = new List<ShootSoundAndName>();
 #if UNITY_EDITOR
     //[MenuItem("Tool/ReadCSV")]
@@ -30,13 +34,42 @@ public class ReadCsv : MonoBehaviour
     private void SaveCsvFile(){
         StartCoroutine(GetCsvFromGoogle());
     }
-    [EButton("ReadCsv")]
-    private void ReadCsvFile(){
-
+    [EButton("ReadCsvGun")]
+    private void ReadCsvFileGun(){
         ReadGunCSV();
+
+        EditorUtility.SetDirty(m_MainGameManager);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+    [EButton("ReadCsvLocation")]
+    private void ReadCsvFileLocation(){
         ReadCSVLocation();
+
+        EditorUtility.SetDirty(m_MainGameManager);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+    [EButton("ReadCsvWave")]
+    private void ReadCsvFileWave(){
         ReacCSVWave();
+
+        EditorUtility.SetDirty(m_MainGameManager);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+    [EButton("ReadCsvEnemy")]
+    private void ReadCsvFileEenmy(){
         ReadCSVEnemy();
+
+        
+        // Puppeteer get scriptable
+        var puppeteer = Resources.Load<GameObject>("Enemy/Prefab/Puppeteer");
+        var puppeteerController = puppeteer.GetComponent<PuppeteerController>();
+        EditorUtility.SetDirty(puppeteerController);
+        puppeteerController.SetGhostScriptable(m_GhostScriptable);
+        puppeteerController.SetPuppetScriptable(m_PuppetScriptable);
+
         EditorUtility.SetDirty(m_MainGameManager);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -59,6 +92,7 @@ public class ReadCsv : MonoBehaviour
 
         string json = Resources.Load<TextAsset>("CSV/Enemy").ToString();
         EnemyScriptable ghostScriptable = null; 
+        EnemyScriptable puppetScriptable = null; 
 
         var contents = json.Split('\n',',');
         int collumeCount = 8;
@@ -83,19 +117,21 @@ public class ReadCsv : MonoBehaviour
             // TODO : Enemy.DisplayImage = Resources.Load<Sprite>("Enemy/DisplayImage/"+displayName.Replace(" ", ""));
             Enemy.Prefab = Resources.Load<GameObject>("Enemy/Prefab/"+displayName.Replace(" ", ""));
 
-            //record ghost scriptable
+            //record Ghost scriptable
             if(Enemy.Id == 4){
-                ghostScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
+                m_GhostScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
+            }
+
+            //record Puppet scriptable
+            if(Enemy.Id == 3){
+                m_PuppetScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
             }
 
             allEnemy.Add(Enemy);
             EditorUtility.SetDirty(Enemy);
             m_MainGameManager.SetAllEnemy(allEnemy);
         }   
-        // Puppeteer get ghost data
-        
-        var puppeteer = Resources.Load<GameObject>("Enemy/Prefab/Puppeteer");
-        puppeteer.GetComponent<PuppeteerController>().SetGhostScriptable(ghostScriptable);
+
     }
 
     private void ReacCSVWave() {
@@ -215,25 +251,25 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Gun").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 12;
+        int collumeCount = 13;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
             int colume = index;
             // create scriptable 
-            GunScriptable gunStat = ScriptableObject.CreateInstance<GunScriptable>();
+            GunScriptable gunScriptable = ScriptableObject.CreateInstance<GunScriptable>();
 
             colume++;
             string displayName = contents[colume].Trim();
-            AssetDatabase.CreateAsset(gunStat, m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
+            AssetDatabase.CreateAsset(gunScriptable, m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            gunStat.Id = int.Parse(contents[index]);
-            gunStat.DisplayName = displayName;
+            gunScriptable.Id = int.Parse(contents[index]);
+            gunScriptable.DisplayName = displayName;
 
-            gunStat.DisplayImage = Resources.Load<Sprite>("Gun/DisplayImage/"+displayName.Replace(" ", ""));
-            gunStat.FPSPrefab = Resources.Load<GameObject>("Gun/3DModel/"+displayName.Replace(" ", ""));
+            gunScriptable.DisplayImage = Resources.Load<Sprite>("Gun/DisplayImage/"+displayName.Replace(" ", ""));
+            gunScriptable.FPSPrefab = Resources.Load<GameObject>("Gun/3DModel/"+displayName.Replace(" ", ""));
 
             var stats = new GunScriptableStats();
             colume++;
@@ -252,21 +288,21 @@ public class ReadCsv : MonoBehaviour
             stats.Handling =  float.Parse(contents[colume]);
             colume++;
             stats.Recoil =  float.Parse(contents[colume]);
-
             colume++;
-            // is AP contents[colume]
+            stats.BulletType = (BulletType)System.Enum.Parse( typeof(BulletType), contents[colume].Trim() );
             colume++;
-            gunStat.ShootSound = m_AllShootSound.Single(x=>x.clipName == contents[colume].Trim().Replace(" ", "")).audioClip;
+            gunScriptable.ShootSound = m_AllShootSound.Single(x=>x.clipName == contents[colume].Trim().Replace(" ", "")).audioClip;
+            colume++;
+            gunScriptable.Util = contents[colume].Trim();
+            gunScriptable.ReloadScriptable = AssetDatabase.LoadAssetAtPath<GunReloadScriptable>(m_ScriptablePath+"/Reload/"+displayName.Replace(" ", "")+"_Reload.asset");
 
-            gunStat.ReloadScriptable = AssetDatabase.LoadAssetAtPath<GunReloadScriptable>(m_ScriptablePath+"/Reload/"+displayName.Replace(" ", "")+"_Reload.asset");
-
-            gunStat.GunStats = stats;
-            allGuns.Add(gunStat.Id,gunStat);
+            gunScriptable.GunStats = stats;
+            allGuns.Add(gunScriptable.Id,gunScriptable);
             var weaponOwnership = new MainGameNameSpace.WeaponOwnership();
-            weaponOwnership.Gun = gunStat;
+            weaponOwnership.Gun = gunScriptable;
             weaponOwnership.IsOwned = index/collumeCount<=4;
             allWeaponAndOwnership.Add(weaponOwnership);
-            EditorUtility.SetDirty(gunStat);
+            EditorUtility.SetDirty(gunScriptable);
         }
         m_MainGameManager.SetAllWeapon(allWeaponAndOwnership);
     }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: GrenadeLauncher
+  m_EditorClassIdentifier: 
+  Id: 6
+  DisplayName: GrenadeLauncher
+  DisplayImage: {fileID: 21300000, guid: 26b4403a54aac7240a085da54053509b, type: 3}
+  FPSPrefab: {fileID: 6042606060031932237, guid: c00290c6166d29946991d2aba31d10bf, type: 3}
+  ShootSound: {fileID: 8300000, guid: 88cd98e74a303844c84894bc7dfc2479, type: 3}
+  GunStats:
+    DamagePerPellet: 80
+    PelletPerShot: 1
+    ClipSize: 3
+    BulletType: 2
+    IsSemiAuto: 0
+    FireRate: 2
+    Accuracy: 25
+    Handling: 0
+    Recoil: 25
+  ReloadScriptable: {fileID: 11400000, guid: 69c2fc0007635074daa2607db7b056df, type: 2}
+  Util: 6

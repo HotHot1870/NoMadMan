@@ -8,6 +8,7 @@ public class EnemyControllerInitConfig{
     public EnemyScriptable scriptable;
     public Vector3 destination;
     public Vector3 cameraPos;
+    public Vector3 spawnPos;
 }
 
 public abstract class EnemyControllerBase : MonoBehaviour
@@ -26,7 +27,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
         Destination = config.destination;
         CurHp = Scriptable.MaxHp;
         CameraPos = config.cameraPos;
-        
+        this.transform.position = config.spawnPos;
     }
 
     /// <summary>
