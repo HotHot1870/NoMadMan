@@ -31,6 +31,8 @@ public class EnemySpawnController : MonoBehaviour
     private bool m_IsFinalWaveStarted = false;
     private float m_MaxSpawnDelay = 10f;
 
+    private List<Transform> m_AllEnemyTrans = new List<Transform>();
+
     private void Start()
     {
         BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;
@@ -136,7 +138,16 @@ public class EnemySpawnController : MonoBehaviour
 
 
     }
+    public List<Transform> GetAllEnemyTrans(){
+        return m_AllEnemyTrans;
+    }
 
+    public void AddEnemyToList(Transform trans){
+        m_AllEnemyTrans.Add(trans);
+    }
 
+    public void RemoveDeadEnemyFromList(Transform trans){
+        m_AllEnemyTrans.Remove(trans);
+    }
 
 }

@@ -1,8 +1,8 @@
-Id,Display Name,Dmg Per Pellet,Pellet Per Shot,Clip Size,Is Semi Auto,Fire Rate,Accuracy,Handling,Recoil,BulletType,Shoot Sound,Util
-0,SHotGun,3,15,8,y,3.5,10,0,100,BasicBullet,ShotGun,
-1,Pistol,22,1,15,y,6,75,50,10,BasicBullet,Silencer,
-2,Revolver,80,1,5,n,5,85,50,5,BasicBullet,AssultRifle ,
-3,Rifle,150,1,5,n,1.25,100,75,25,BasicBullet,AssultRifle ,
-4,PP20,25,1,20,y,10,75,25,10,BasicBullet,AssultRifle ,
-5,AK69,15,1,69,y,15,50,0,10,BasicBullet,AssultRifle ,
-6,GrenadeLauncher,80,1,3,n,2,25,0,25,PillBomb,GrenadeLauncher,6
+Id,Display Name,Dmg Per Pellet,Pellet Per Shot,Clip Size,Is Semi Auto,Fire Rate,Accuracy,Handling,Recoil,BulletType,Shoot Sound,Explode Radius
+0,SHotGun,3,15,8,y,3.5,10,0,100,BasicBullet,ShotGun,0
+1,Pistol,22,1,15,y,6,75,50,10,BasicBullet,Silencer,0
+2,Revolver,80,1,5,n,5,85,50,5,BasicBullet,AssultRifle ,0
+3,Rifle,150,1,5,n,1.25,100,75,25,BasicBullet,AssultRifle ,0
+4,PP20,25,1,20,y,10,75,25,10,BasicBullet,AssultRifle ,0
+5,AK69,15,1,69,y,15,50,0,10,BasicBullet,AssultRifle ,0
+6,GrenadeLauncher,80,1,3,n,2,80,0,25,PillBomb,GrenadeLauncher,9

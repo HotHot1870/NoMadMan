@@ -27,7 +27,7 @@ public class GunScriptable : ScriptableObject
 
     [Space(20)]
     [Header("Other")]
-    public string Util;
+    public float ExplodeRadius;
     
 }/*
 

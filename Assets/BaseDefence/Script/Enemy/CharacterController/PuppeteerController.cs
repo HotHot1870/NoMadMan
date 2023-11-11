@@ -99,16 +99,15 @@ public class PuppeteerController : EnemyControllerBase
             yield break;
         // spawn ghost
         var ghost = Instantiate(m_Ghost,this.transform.parent);   
-        ghost.transform.position = m_Self.transform.position;     
         
         var enemyConfig = new EnemyControllerInitConfig{
             scriptable = m_GhostScriptable,
             destination = CameraPos + Vector3.forward + Vector3.down * 0.5f ,
-            cameraPos = CameraPos
+            cameraPos = CameraPos,
+            spawnPos = m_Self.transform.position
         };
 
         ghost.GetComponent<GhostController>().Init(enemyConfig);
-        //BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
     }
 
     public void SetGhostScriptable(EnemyScriptable enemyScriptable){

@@ -1,6 +1,6 @@
-Id,Display Name,Total Hp,Speed,Damage,Attack Delay,Wave Value,Goo
-0,Possessed,100,3,3,1,5,10
-1,Undead,6,12,3,1,1,5
-2,Puppeteer,100,3,3,8,12,20
-3,Puppet,100,5,5,2,0,20
-4,Ghost,1,3,3,0,0,0
+Id,Display Name,Total Hp,Speed,Damage,Attack Delay,Wave Value,Goo,Explode Damage Mod
+0,Possessed,100,2,3,1,5,10,1
+1,Undead,6,5,3,1,1,5,1
+2,Puppeteer,100,0,3,8,12,20,1
+3,Puppet,100,2,5,2,0,20,0.25
+4,Ghost,1,2,3,0,0,0,1

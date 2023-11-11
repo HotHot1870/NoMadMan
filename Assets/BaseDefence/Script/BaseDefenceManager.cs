@@ -110,10 +110,24 @@ public class BaseDefenceManager : MonoBehaviour
 
     }
 
+
+    public List<Transform> GetAllEnemyTrans(){
+        return m_EnemySpawnController.GetAllEnemyTrans();
+    }
+    public void AddEnemyToList(Transform trans){
+        m_EnemySpawnController.AddEnemyToList(trans);
+    }
+
+    public void RemoveDeadEnemyFromList(Transform trans){
+        m_EnemySpawnController.RemoveDeadEnemyFromList(trans);
+    }
+
     public void StartWave(MapLocationScriptable locationInfo){
 
         m_EnemySpawnController.StartWave( MainGameManager.GetInstance().GetAllWave()[locationInfo.WaveId]);
     }
+
+
 
     private void Update() {
         switch (m_GameStage)

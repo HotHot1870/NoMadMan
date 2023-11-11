@@ -21,8 +21,8 @@ public class ReadCsv : MonoBehaviour
     [SerializeField] private string m_ResourcesPath = "";
     [SerializeField] private string m_ScriptablePath = "";
     [SerializeField] private MainGameManager m_MainGameManager;
-    private Dictionary<int,string> m_AllWaveName = new Dictionary<int, string>();
-    private Dictionary<int,string> m_AllGun = new Dictionary<int, string>();
+    //private Dictionary<int,string> m_AllWaveName = new Dictionary<int, string>();
+    //private Dictionary<int,string> m_AllGun = new Dictionary<int, string>();
     private EnemyScriptable m_GhostScriptable = null;
     private EnemyScriptable m_PuppetScriptable = null;
 
@@ -95,7 +95,7 @@ public class ReadCsv : MonoBehaviour
         EnemyScriptable puppetScriptable = null; 
 
         var contents = json.Split('\n',',');
-        int collumeCount = 8;
+        int collumeCount = 9;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -115,6 +115,7 @@ public class ReadCsv : MonoBehaviour
             Enemy.DangerValue = float.Parse(contents[index+6]);
             Enemy.GooOnKill = float.Parse(contents[index+7]);
             // TODO : Enemy.DisplayImage = Resources.Load<Sprite>("Enemy/DisplayImage/"+displayName.Replace(" ", ""));
+            Enemy.ExplodeDamageMod = float.Parse(contents[index+8]);
             Enemy.Prefab = Resources.Load<GameObject>("Enemy/Prefab/"+displayName.Replace(" ", ""));
 
             //record Ghost scriptable
@@ -151,31 +152,40 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Wave").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 6;
+        int collumeCount = 7;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
+            int colume = index;
             // create scriptable 
             WaveScriptable Wave = ScriptableObject.CreateInstance<WaveScriptable>();
-            string displayName = m_AllWaveName[int.Parse(contents[index])];
+            string displayName = contents[colume+1];
+            
             AssetDatabase.CreateAsset(Wave, m_ScriptablePath+"/Wave/"+displayName+".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            Wave.Id = int.Parse(contents[index]);
-            Wave.NormalWavesCount = int.Parse(contents[index+1]);
-            Wave.NormalWavesStrength = float.Parse(contents[index+2]);
+            Wave.Id = int.Parse(contents[colume]);
+            colume++;
+            // display name = contents[index +1]
+            colume++;
+            Wave.NormalWavesCount = int.Parse(contents[colume]);
+            colume++;
+            Wave.NormalWavesStrength = float.Parse(contents[colume]);
+            colume++;
             List<int> normalEnemyList = new List<int>();
-            foreach (var item in contents[index+3].Split('|'))
+            foreach (var item in contents[colume].Split('|'))
             {
                 normalEnemyList.Add(int.Parse(item));
             }
+            colume++;
             Wave.NormalWaveEnemy = normalEnemyList;
 
-            Wave.FinalWaveStrength = float.Parse(contents[index+4]);
+            Wave.FinalWaveStrength = float.Parse(contents[colume]);
+            colume++;
             
             List<int> finalEnemyList = new List<int>();
-            foreach (var item in contents[index+5].Split('|'))
+            foreach (var item in contents[colume].Split('|'))
             {
                 finalEnemyList.Add(int.Parse(item));
             }
@@ -222,8 +232,9 @@ public class ReadCsv : MonoBehaviour
             location.Prefab = Resources.Load<GameObject>("Location/"+contents[index+1].Trim().Replace(" ", ""));
 
             allLocation.Add(location);
+            /*
             if(!m_AllWaveName.ContainsKey(int.Parse(contents[index+2])))
-                m_AllWaveName.Add(int.Parse(contents[index+2]),contents[index+1].Trim().Replace(" ", ""));
+                m_AllWaveName.Add(int.Parse(contents[index+2]),contents[index+1].Trim().Replace(" ", ""));*/
             
             
 
@@ -293,7 +304,7 @@ public class ReadCsv : MonoBehaviour
             colume++;
             gunScriptable.ShootSound = m_AllShootSound.Single(x=>x.clipName == contents[colume].Trim().Replace(" ", "")).audioClip;
             colume++;
-            gunScriptable.Util = contents[colume].Trim();
+            gunScriptable.ExplodeRadius = float.Parse(contents[colume]);
             gunScriptable.ReloadScriptable = AssetDatabase.LoadAssetAtPath<GunReloadScriptable>(m_ScriptablePath+"/Reload/"+displayName.Replace(" ", "")+"_Reload.asset");
 
             gunScriptable.GunStats = stats;

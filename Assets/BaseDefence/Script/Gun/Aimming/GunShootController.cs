@@ -233,7 +233,7 @@ public class GunShootController : MonoBehaviour
                 pillBomb.transform.position = this.transform.position;
 
                 // TODO : set explode radius
-                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,float.Parse(m_SelectedGun.Util));
+                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,m_SelectedGun.ExplodeRadius);
 
                 break;
             default:
