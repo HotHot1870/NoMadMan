@@ -224,12 +224,13 @@ public class ReadCsv : MonoBehaviour
 
             location.Id = int.Parse(contents[index]);
             location.DisplayName = contents[index+1].Trim();
+            location.Prefab = Resources.Load<GameObject>("Location/"+contents[index+1].Trim().Replace(" ", ""));
             location.WaveId = int.Parse(contents[index+2]);
             float posX = float.Parse(contents[index+3].Split('|')[0]);
             float posZ = float.Parse(contents[index+3].Split('|')[1]);
-            location.Pos = new Vector3(posX,2f,posZ);
+            location.Pos = new Vector3(posX,0,posZ);
             location.RewardGunId = int.Parse(contents[index+4]);
-            location.Prefab = Resources.Load<GameObject>("Location/"+contents[index+1].Trim().Replace(" ", ""));
+            location.FortifyCost = int.Parse(contents[index+5]);
 
             allLocation.Add(location);
             /*

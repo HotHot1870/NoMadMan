@@ -13,8 +13,12 @@ public class ProjectileDetail
 public enum BulletType
 {
     BasicBullet = 0,
-    Puncture = 1,
-    PillBomb = 2
+    Puncture ,
+    PillBomb ,
+    Rocket ,
+    BowActionArrow,
+    BoomArrow
+
 
 }
 public class GunShootController : MonoBehaviour
@@ -167,7 +171,10 @@ public class GunShootController : MonoBehaviour
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
         // muzzel
-        BaseDefenceManager.GetInstance().GetCurrentGunMuzzelPartical().Play();
+        var muzzleFlash = BaseDefenceManager.GetInstance().GetCurrentGunMuzzelPartical();
+        if(muzzleFlash != null){
+            muzzleFlash.Play();
+        }
 
         var gunModelAnimator = BaseDefenceManager.GetInstance().GetCurrentGunAnimator();
         if(gunModelAnimator!=null){
@@ -230,9 +237,8 @@ public class GunShootController : MonoBehaviour
             case BulletType.PillBomb:
                 var pillBomb = Instantiate(m_AllProjectile[BulletType.PillBomb].Prefab);
                 // TODO : set spawn point to gun point
-                pillBomb.transform.position = this.transform.position;
+                pillBomb.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
-                // TODO : set explode radius
                 pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,m_SelectedGun.ExplodeRadius);
 
                 break;

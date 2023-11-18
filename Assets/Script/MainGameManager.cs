@@ -37,6 +37,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private float m_WallMaxHp = 1000;
     [SerializeField]private float m_GooAmount=10000;
 
+    
 
     public static MainGameManager GetInstance()
     {
@@ -121,7 +122,7 @@ public class MainGameManager : MonoBehaviour
 
     private void Start()
     {
-
+		Application.targetFrameRate = 45;
     }
 
 

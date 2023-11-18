@@ -75,9 +75,9 @@ public class EnemyBodyPart : MonoBehaviour
 
         // hit effect
         if(m_OnHitEffect != null && m_EmissionDelay<=0){
-            var hitEffect = Instantiate(m_OnHitEffect,this.transform);
-            hitEffect.Play();
+            var hitEffect = Instantiate(m_OnHitEffect);
             hitEffect.transform.position = this.transform.position;
+            hitEffect.Play();
             Destroy(hitEffect.gameObject,3f);
             // prevent shotgun emit too much 
             m_EmissionDelay = 0.1f;

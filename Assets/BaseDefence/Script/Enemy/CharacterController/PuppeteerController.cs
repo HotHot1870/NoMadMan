@@ -12,8 +12,10 @@ public class PuppeteerController : EnemyControllerBase
     [SerializeField] private EnemyScriptable m_GhostScriptable;
     [SerializeField] private EnemyScriptable m_PuppetScriptable;
     [SerializeField] private GameObject m_Electic;
+    [SerializeField] private float m_AttackDelayPerSpawn = 1f;
     private PuppetController m_PuppetController=null;
     protected float m_AttackDelay = 0;
+    private int m_SpawnCount = 0 ;
 
     public override void Init(EnemyControllerInitConfig config)
     {
@@ -93,12 +95,13 @@ public class PuppeteerController : EnemyControllerBase
     
     public IEnumerator Attack(){
         m_Animator.speed = 1;
-        m_AttackDelay = Scriptable.AttackDelay + m_AttackStartUp;
+        m_AttackDelay = Scriptable.AttackDelay + m_AttackStartUp + m_AttackDelayPerSpawn * m_SpawnCount;
         yield return new WaitForSeconds(m_AttackStartUp);
         if(IsThisDead)
             yield break;
         // spawn ghost
         var ghost = Instantiate(m_Ghost,this.transform.parent);   
+        m_SpawnCount ++;
         
         var enemyConfig = new EnemyControllerInitConfig{
             scriptable = m_GhostScriptable,

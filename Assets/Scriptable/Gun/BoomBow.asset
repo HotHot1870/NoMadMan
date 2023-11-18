@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: BoomBow
+  m_EditorClassIdentifier: 
+  Id: 9
+  DisplayName: BoomBow
+  DisplayImage: {fileID: 0}
+  FPSPrefab: {fileID: 5564056945118830172, guid: 28068a181ffde0442ba58e52d4437a21, type: 3}
+  ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
+  GunStats:
+    DamagePerPellet: 125
+    PelletPerShot: 1
+    ClipSize: 1
+    BulletType: 5
+    IsSemiAuto: 0
+    FireRate: 1
+    Accuracy: 80
+    Handling: 0
+    Recoil: 30
+  ReloadScriptable: {fileID: 0}
+  ExplodeRadius: 13

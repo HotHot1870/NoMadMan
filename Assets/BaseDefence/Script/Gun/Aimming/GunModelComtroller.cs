@@ -35,7 +35,11 @@ public class GunModelComtroller : MonoBehaviour
     }    
     
     public ParticleSystem GetCurrentGunMuzzelPartical(){
-        return m_GunModel.GetComponent<GunMuzzel>().m_ParticleSystem;
+        return m_GunModel.GetComponent<GunModle>().m_ParticleSystem;
+    }
+
+    public Vector3 GetGunPoint(){
+        return m_GunModel.GetComponent<GunModle>().m_GunPoint.position;
     }
 
     public void HideFPSGunModel(){

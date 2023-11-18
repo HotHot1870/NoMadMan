@@ -19,27 +19,23 @@ MonoBehaviour:
     - StartDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       StartDragUnderText: Drag
       StartDragPosition: {x: 200, y: -300}
-      StartDragSize: {x: 100, y: 100}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
-      DragCursorPrefab: {fileID: 5379217382254767447, guid: c7971f708e93ba940ad00a93dd130bdc, type: 3}
+      DragCursorPrefab: {fileID: 6563262903104255693, guid: 4431114c38a1163449e65f2ef38d75ec, type: 3}
       EndDragSound: {fileID: 8300000, guid: 7d2091bb1a8faeb4fa15250db27d991b, type: 3}
       EndDragUnderText: 
       EndDragPosition: {x: 50, y: 0}
-      EndDragSize: {x: 100, y: 100}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       ResultAction: 36
     - StartDragSound: {fileID: 8300000, guid: b9e4aa6d490b15b43bec131793faea1b, type: 3}
       StartDragUnderText: Drag
       StartDragPosition: {x: 200, y: 100}
-      StartDragSize: {x: 100, y: 100}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 0}
       EndDragSound: {fileID: 8300000, guid: 420d9443e7bf9204e970f16a4a74c196, type: 3}
       EndDragUnderText: 
       EndDragPosition: {x: 350, y: 25}
-      EndDragSize: {x: 100, y: 100}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       ResultAction: 2
     TapFunction: []
@@ -51,14 +47,12 @@ MonoBehaviour:
     - StartDragSound: {fileID: 8300000, guid: b9e4aa6d490b15b43bec131793faea1b, type: 3}
       StartDragUnderText: Drag
       StartDragPosition: {x: 200, y: 100}
-      StartDragSize: {x: 100, y: 100}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 0}
       EndDragSound: {fileID: 8300000, guid: 420d9443e7bf9204e970f16a4a74c196, type: 3}
       EndDragUnderText: 
       EndDragPosition: {x: 350, y: 25}
-      EndDragSize: {x: 100, y: 100}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
       ResultAction: 2
     TapFunction: []

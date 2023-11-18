@@ -8,9 +8,11 @@ public class ExplosionController : MonoBehaviour
     [SerializeField] private ParticleSystem m_Smoke;
     [SerializeField] private Transform m_Sphere;
     [SerializeField] private AnimationCurve m_SphereSizeCurve;
+    [SerializeField] private AudioSource m_AudioSource;
 
 
     public void Init(float damage , float radius){
+        MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
         StartCoroutine(PlayExplosion(radius));
         // Damage
         var allEnemy = BaseDefenceManager.GetInstance().GetAllEnemyTrans();
@@ -40,8 +42,7 @@ public class ExplosionController : MonoBehaviour
             yield return null;
         }
 
-        yield return null;
-        Destroy(m_Self);
+        Destroy(m_Self,5f);
 
     }
 }

@@ -2117,7 +2117,7 @@ MonoBehaviour:
   m_Volume: 0.35
   m_AimSensitivity: 0.55
   m_AllSelectedWeapon:
-  - {fileID: 11400000, guid: 86a4bb2c094352143a3a2321b9c8c998, type: 2}
+  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
   - {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
   - {fileID: 11400000, guid: 146bf88fe60f33a4ba45ffa87e1ea6a6, type: 2}
   - {fileID: 11400000, guid: 67384cc299e1e2648bb7af46c47196d7, type: 2}
@@ -2136,21 +2136,34 @@ MonoBehaviour:
     IsOwned: 0
   - Gun: {fileID: 11400000, guid: 86a4bb2c094352143a3a2321b9c8c998, type: 2}
     IsOwned: 0
+  - Gun: {fileID: 11400000, guid: 4d472f47008ed0e42affdc3cf040d92b, type: 2}
+    IsOwned: 0
+  - Gun: {fileID: 11400000, guid: 5ec1a64891b42404e9728581dc55f327, type: 2}
+    IsOwned: 0
+  - Gun: {fileID: 11400000, guid: 05e0526dc234e2f45b01cb0b677ab6b5, type: 2}
+    IsOwned: 0
   m_AllLocation:
-  - {fileID: 11400000, guid: e7f68f4d03f46714f8a16305e744c493, type: 2}
-  - {fileID: 11400000, guid: 66a4900c13c2c1f4c884f738d2bb22e5, type: 2}
+  - {fileID: 11400000, guid: 60dfe6fd31bc29b4d88a8f881bf6d0db, type: 2}
+  - {fileID: 11400000, guid: 3cf5f7f08cbac984db75d148e0f477fe, type: 2}
+  - {fileID: 11400000, guid: f05303e5f9ff3dc4e84524579edb3416, type: 2}
+  - {fileID: 11400000, guid: ba53a6a2d0d0bc54b9af4eb304c6a214, type: 2}
+  - {fileID: 11400000, guid: a26e7bd00a1b1524880f9bb1f3d93ba9, type: 2}
   m_AllWave:
-  - {fileID: 11400000, guid: b2896054044c1cf49b06eae68acc130c, type: 2}
-  - {fileID: 11400000, guid: 46e1b3e0c2cfa7849a173b7b5ea8969f, type: 2}
+  - {fileID: 11400000, guid: 0f460da40aa963e44a9f3bd124d35a86, type: 2}
+  - {fileID: 11400000, guid: a957626c93cfeef4cb8158b899a8ab07, type: 2}
+  - {fileID: 11400000, guid: 6a5730777433f554882b1e24ad8b0c85, type: 2}
+  - {fileID: 11400000, guid: 27389bc6e0d2df3468e3d29f7bd5b9f1, type: 2}
+  - {fileID: 11400000, guid: cc16988883f9762499f0a2502c343858, type: 2}
   m_AllEnemy:
   - {fileID: 11400000, guid: b901ec02e5f853a49bf77c6f3e799b39, type: 2}
   - {fileID: 11400000, guid: 36ae674e5bc8e1d49aaa188802a03e3d, type: 2}
   - {fileID: 11400000, guid: c6314b6ed806b7849bdab708d169d166, type: 2}
   - {fileID: 11400000, guid: d423e823838d4cc49bb0742c817c57c3, type: 2}
   - {fileID: 11400000, guid: 0438cb817c56a9441a74a88655b809d3, type: 2}
+  - {fileID: 11400000, guid: c05d23ccb5f71ab43b64f5bf071ae6f9, type: 2}
   m_WallCurrentHp: 1000
   m_WallMaxHp: 1000
-  m_GooAmount: 17929
+  m_GooAmount: 25000
 --- !u!114 &1526301688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2175,6 +2188,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   - clipName: GrenadeLauncher
     audioClip: {fileID: 8300000, guid: 88cd98e74a303844c84894bc7dfc2479, type: 3}
+  - clipName: RocketLaunch
+    audioClip: {fileID: 8300000, guid: 281510071df85174695694ff29da0b9f, type: 3}
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0

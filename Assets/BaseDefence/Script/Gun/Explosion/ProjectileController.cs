@@ -25,6 +25,7 @@ public class ProjectileController : MonoBehaviour
         m_Radius = radius;
         m_Damage = damage;
         StartCoroutine(Move());
+        m_Self.LookAt(destination);
     }
 
     private IEnumerator Move(){
@@ -38,7 +39,7 @@ public class ProjectileController : MonoBehaviour
             yield return null;
         }
 
-        // TODO : Explode
+        // Explode
         var explosion = Instantiate(m_Explosion);
         explosion.transform.position = m_Destination;
         explosion.GetComponent<ExplosionController>().Init(m_Damage , m_Radius);
