@@ -7,8 +7,9 @@ public class ProjectileController : MonoBehaviour
 {
     [SerializeField] private Transform m_Self;
     [SerializeField] private float m_Speed = 10;
-    [SerializeField] private AnimationCurve m_Curve;
+    [SerializeField] private AnimationCurve m_YPosCurve;
     [SerializeField] private GameObject m_Explosion;
+    [SerializeField] private bool m_IsStraightLine = false;
     private Vector3 m_Destination;
     private Vector3 m_StartPos ;
 
@@ -33,7 +34,13 @@ public class ProjectileController : MonoBehaviour
 
         while(passedTime<m_TimeNeedToReach){
             var xzPos= Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach);
-            float yPos = Mathf.Lerp(m_StartPos.y,m_Destination.y, m_Curve.Evaluate(passedTime/m_TimeNeedToReach));
+            float yPos = 0;
+            if(m_IsStraightLine){
+                yPos = Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach).y;
+            }else{
+                yPos = Mathf.Lerp(m_StartPos.y,m_Destination.y, m_YPosCurve.Evaluate(passedTime/m_TimeNeedToReach));
+            }
+             
             m_Self.position = new Vector3(xzPos.x,yPos,xzPos.z);
             passedTime += Time.deltaTime;
             yield return null;

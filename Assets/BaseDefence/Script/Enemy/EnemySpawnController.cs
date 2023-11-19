@@ -12,7 +12,8 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private float m_GroundSpawnerWidth = 40;
     [SerializeField] private Transform m_Destination;
     [SerializeField] private float m_WallWidth = 10;
-    [SerializeField] private Transform m_Camera;
+    [SerializeField] private Transform m_ShootCamera;
+    [SerializeField] private Camera m_MainCamera;
 
     [Header("Attacker Spot")]
     [SerializeField] private Transform m_LeftAttackerSpot;
@@ -130,8 +131,9 @@ public class EnemySpawnController : MonoBehaviour
         var enemyConfig = new EnemyControllerInitConfig{
             scriptable = enemyData,
             destination = targetPos,
-            cameraPos = m_Camera.position,
-            spawnPos = spawnPos
+            cameraPos = m_ShootCamera.position,
+            spawnPos = spawnPos,
+            camera = m_MainCamera
         };
 
         newEnemy.GetComponent<EnemyControllerBase>().Init(enemyConfig);

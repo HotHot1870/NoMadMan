@@ -29,7 +29,8 @@ public class PuppeteerController : EnemyControllerBase
             scriptable = m_PuppetScriptable,
             destination = config.destination ,
             cameraPos = CameraPos,
-            spawnPos = config.spawnPos
+            spawnPos = config.spawnPos,
+            camera = MainCamera
         };
 
         m_PuppetController = puppet.GetComponent<PuppetController>();
@@ -107,7 +108,8 @@ public class PuppeteerController : EnemyControllerBase
             scriptable = m_GhostScriptable,
             destination = CameraPos + Vector3.forward + Vector3.down * 0.5f ,
             cameraPos = CameraPos,
-            spawnPos = m_Self.transform.position
+            spawnPos = m_Self.transform.position,
+            camera = MainCamera
         };
 
         ghost.GetComponent<GhostController>().Init(enemyConfig);

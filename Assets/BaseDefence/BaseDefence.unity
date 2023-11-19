@@ -1299,7 +1299,8 @@ MonoBehaviour:
   m_GroundSpawnerWidth: 17
   m_Destination: {fileID: 583313390}
   m_WallWidth: 1
-  m_Camera: {fileID: 813147456}
+  m_ShootCamera: {fileID: 813147456}
+  m_MainCamera: {fileID: 822869636}
   m_LeftAttackerSpot: {fileID: 730466933}
   m_MidAttackerSpot: {fileID: 1664428825}
   m_RightAttackerSpot: {fileID: 107133894}
@@ -4902,6 +4903,8 @@ MonoBehaviour:
     Prefab: {fileID: 0}
   - BulletType: 2
     Prefab: {fileID: 9043695641212285836, guid: ffacc91114718fd42aa0dff962c8fb9c, type: 3}
+  - BulletType: 3
+    Prefab: {fileID: 7618961853247818638, guid: aa7f544cb9bdd9345a8ea93f35b43c5b, type: 3}
 --- !u!82 &1238169346
 AudioSource:
   m_ObjectHideFlags: 0

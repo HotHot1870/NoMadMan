@@ -65,7 +65,8 @@ public class ElwoodController : EnemyControllerBase
             scriptable = m_GhostScriptable,
             destination = CameraPos + Vector3.forward + Vector3.down * 0.5f ,
             cameraPos = CameraPos,
-            spawnPos = m_SpawnGhostPos.position
+            spawnPos = m_SpawnGhostPos.position,
+            camera = MainCamera
         };
 
         ghost.GetComponent<GhostController>().Init(enemyConfig);
