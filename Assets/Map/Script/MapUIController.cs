@@ -17,22 +17,28 @@ public class MapUIController : MonoBehaviour
     [Header("Location")]
     [SerializeField] private GameObject m_LocationDetailPanel; 
     [SerializeField] private TMP_Text m_LocationName;  
-    [SerializeField] private TMP_Text m_FortifyCost;  
-    [SerializeField] private TMP_Text m_FortifyRewardText;  
-    [SerializeField] private Image m_RewardImage;
+    //[SerializeField] private TMP_Text m_FortifyCost;  
+    //[SerializeField] private TMP_Text m_FortifyRewardText;  
+    //[SerializeField] private Image m_RewardImage;
     [SerializeField] private TMP_Text m_EnemyText;  
     [SerializeField] private Transform m_EnemyList; 
     [SerializeField] private Button m_FortifyBtn;  
     [SerializeField] private Button m_DefenceBtn;
     [SerializeField] private Button m_CancelLocationDetailBtn;
 
-    [Header("Fortify Detail")]
+
+    [Header("WeaponUpgradeSelect")]
+    [SerializeField] private WorkShopChooseWeaponController m_WorkShopChooseWeaponController;
+    [SerializeField] private Button m_WorkShopBtn;
+    
+
+    /*
     [SerializeField] private GameObject m_FortifyPanel; 
     [SerializeField] private TMP_Text m_FortifyCostInDetail; 
     [SerializeField] private TMP_Text m_RewardName;
     [SerializeField] private Image m_RewardImageInDetail;
     [SerializeField] private Button m_YesFortifyBtn;  
-    [SerializeField] private Button m_NoFortifyBtn;  
+    [SerializeField] private Button m_NoFortifyBtn; */ 
 
     [Header("ChooseWeapon")]
     [SerializeField] private GameObject m_ChooseWeaponPanel;
@@ -67,7 +73,13 @@ public class MapUIController : MonoBehaviour
     private void Start() {
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
         m_CheckLocationBtn.gameObject.SetActive(false);
+
+        // TODO : Split all ui panel
         TurnOffAllPanel();
+        m_WorkShopChooseWeaponController.gameObject.SetActive(true);
+
+
+
         var freeCameraController = MapManager.GetInstance().GetMapFreeCameraController();
         m_MapDragBtn.onDown.AddListener(freeCameraController.OnDragMapBtnDown);
         m_MapDragBtn.onUp.AddListener(freeCameraController.OnDragMapBtnUp);
@@ -76,13 +88,12 @@ public class MapUIController : MonoBehaviour
         m_CheckLocationBtn.onClick.AddListener(ShowLocationDetail);
 
         // location detail
-        m_FortifyBtn.onClick.AddListener(OnClickFortify);
+        //m_FortifyBtn.onClick.AddListener(OnClickFortify);
         m_DefenceBtn.onClick.AddListener(OnClickDefence);
         m_CancelLocationDetailBtn.onClick.AddListener(CancelLocationDetail);
 
-        // fortify detail panel
-        m_NoFortifyBtn.onClick.AddListener(OnClickFortifyNo);
-        m_YesFortifyBtn.onClick.AddListener(OnClickFortifyYes);
+        // WorkShop
+        m_WorkShopBtn.onClick.AddListener(OnClickWorkShop);
 
         // choose weapon
         m_StartDefenceBtn.onClick.AddListener(OnClickStartDefence);
@@ -96,6 +107,11 @@ public class MapUIController : MonoBehaviour
         });
     }
     
+    private void OnClickWorkShop(){
+        TurnOffAllPanel();
+        m_WorkShopChooseWeaponController.Init();
+        m_WorkShopChooseWeaponController.gameObject.SetActive(true);
+    }
 
     private void CancelLocationDetail() {
         
@@ -157,7 +173,7 @@ public class MapUIController : MonoBehaviour
 
         m_LocationDetailPanel.SetActive(true);
         m_LocationName.text = locationData.DisplayName;
-
+/*
         // no Reward
         if(locationData.RewardGunId!=-1f){
             var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
@@ -178,7 +194,7 @@ public class MapUIController : MonoBehaviour
         }else{
             m_FortifyCost.text = "Fortified";
             m_FortifyBtn.gameObject.SetActive(false);
-        }
+        }*/
 
         
         
@@ -228,7 +244,7 @@ public class MapUIController : MonoBehaviour
             m_CheckLocationBtn.gameObject.SetActive(isActive);
     }
 
-
+/*
     private void OnClickFortify(){
         MapLocationScriptable locationData = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
         if(locationData==null)
@@ -254,8 +270,8 @@ public class MapUIController : MonoBehaviour
         }else{
             m_YesFortifyBtn.gameObject.SetActive(true);
         }
-    }
-
+    }*/
+/*
     private void OnClickFortifyYes(){
         var locationScriptable = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
         MainGameManager.GetInstance().ChangeGooAmount(
@@ -270,7 +286,7 @@ public class MapUIController : MonoBehaviour
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
 
         ShowLocationDetail();
-    }
+    }*/
 
     public void OnClickWeaponListSlot(GunScriptable selectedGunScriptable, int weaponSlotIndex, MapWeaponListGrid mapWeaponListGrid) {
 
@@ -293,17 +309,17 @@ public class MapUIController : MonoBehaviour
         m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
 
     }
-
+/*
     private void OnClickFortifyNo(){
         // cancel fortify
         m_FortifyPanel.SetActive(false);
 
-    }
+    }*/
 
     private void TurnOffAllPanel(){
         m_ChooseWeaponPanel.SetActive(false);
         m_LocationDetailPanel.SetActive(false);
-        m_FortifyPanel.SetActive(false);
+        m_WorkShopChooseWeaponController.gameObject.SetActive(false);
         m_WeaponListPanel.SetActive(false);
         m_OptionPanel.SetActive(false);
     }

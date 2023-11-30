@@ -26,8 +26,9 @@ public class EnemySpawnController : MonoBehaviour
 
 
 
-    private WaveScriptable m_WavesData;
+    private MapLocationScriptable m_LocationData;
     private int m_WaveCount = 0;
+    private int m_EnemySpawnId =0;
     private float m_TimePassed = 0;
     private bool m_IsFinalWaveStarted = false;
     private float m_MaxSpawnDelay = 10f;
@@ -40,8 +41,8 @@ public class EnemySpawnController : MonoBehaviour
         GetAttackerSpotInOrder( new Vector3(1,2,3));
     }
 
-    public void StartWave(WaveScriptable waesData){
-        m_WavesData = waesData;
+    public void StartWave(MapLocationScriptable locationData){
+        m_LocationData = locationData;
         StartNextNormalWave();
     }
 
@@ -82,11 +83,11 @@ public class EnemySpawnController : MonoBehaviour
 
     private void StartNextNormalWave()
     {
-        if(m_WaveCount>=m_WavesData.NormalWavesCount){
+        if(m_WaveCount>=m_LocationData.NormalWavesCount){
             m_IsFinalWaveStarted = true;
         }
-        float Strength = m_IsFinalWaveStarted?m_WavesData.FinalWaveStrength:m_WavesData.NormalWavesStrength;
-        List<int> taregtEnemyTypes = m_IsFinalWaveStarted?m_WavesData.FinalWaveEnemy:m_WavesData.NormalWaveEnemy;
+        float Strength = m_IsFinalWaveStarted?m_LocationData.FinalWaveStrength:m_LocationData.NormalWavesStrength;
+        List<int> taregtEnemyTypes = m_IsFinalWaveStarted?m_LocationData.FinalWaveEnemy:m_LocationData.NormalWaveEnemy;
         Dictionary<int,EnemyScriptable> allPossibleEnemy = new Dictionary<int,EnemyScriptable>();
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
         foreach (var item in taregtEnemyTypes)
@@ -133,13 +134,23 @@ public class EnemySpawnController : MonoBehaviour
             destination = targetPos,
             cameraPos = m_ShootCamera.position,
             spawnPos = spawnPos,
-            camera = m_MainCamera
+            camera = m_MainCamera,
+            spawnId = m_EnemySpawnId
         };
+
+        m_EnemySpawnId++;
 
         newEnemy.GetComponent<EnemyControllerBase>().Init(enemyConfig);
 
 
     }
+
+
+    public int GetEnemySpawnId(){
+        m_EnemySpawnId++;
+        return m_EnemySpawnId-1;
+    }
+
     public List<Transform> GetAllEnemyTrans(){
         return m_AllEnemyTrans;
     }

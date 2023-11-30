@@ -30,7 +30,8 @@ public class PuppeteerController : EnemyControllerBase
             destination = config.destination ,
             cameraPos = CameraPos,
             spawnPos = config.spawnPos,
-            camera = MainCamera
+            camera = MainCamera,
+            spawnId = BaseDefenceManager.GetInstance().GetEnemySpawnId()
         };
 
         m_PuppetController = puppet.GetComponent<PuppetController>();
@@ -109,7 +110,8 @@ public class PuppeteerController : EnemyControllerBase
             destination = CameraPos + Vector3.forward + Vector3.down * 0.5f ,
             cameraPos = CameraPos,
             spawnPos = m_Self.transform.position,
-            camera = MainCamera
+            camera = MainCamera,
+            spawnId = BaseDefenceManager.GetInstance().GetEnemySpawnId()
         };
 
         ghost.GetComponent<GhostController>().Init(enemyConfig);

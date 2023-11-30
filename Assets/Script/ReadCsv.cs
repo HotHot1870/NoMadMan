@@ -21,15 +21,12 @@ public class ReadCsv : MonoBehaviour
     [SerializeField] private string m_ResourcesPath = "";
     [SerializeField] private string m_ScriptablePath = "";
     [SerializeField] private MainGameManager m_MainGameManager;
-    //private Dictionary<int,string> m_AllWaveName = new Dictionary<int, string>();
-    //private Dictionary<int,string> m_AllGun = new Dictionary<int, string>();
     private EnemyScriptable m_GhostScriptable = null;
     private EnemyScriptable m_PuppetScriptable = null;
 
 
     [SerializeField] private List<ShootSoundAndName> m_AllShootSound = new List<ShootSoundAndName>();
 #if UNITY_EDITOR
-    //[MenuItem("Tool/ReadCSV")]
     [EButton("SaveCsv")]
     private void SaveCsvFile(){
         StartCoroutine(GetCsvFromGoogle());
@@ -50,6 +47,7 @@ public class ReadCsv : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+    /*
     [EButton("ReadCsvWave")]
     private void ReadCsvFileWave(){
         ReacCSVWave();
@@ -57,7 +55,7 @@ public class ReadCsv : MonoBehaviour
         EditorUtility.SetDirty(m_MainGameManager);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-    }
+    }*/
     [EButton("ReadCsvEnemy")]
     private void ReadCsvFileEenmy(){
         ReadCSVEnemy();
@@ -134,7 +132,7 @@ public class ReadCsv : MonoBehaviour
         }   
 
     }
-
+/*
     private void ReacCSVWave() {
         //Wave
         List<WaveScriptable> allWave = new List< WaveScriptable>(); 
@@ -195,7 +193,7 @@ public class ReadCsv : MonoBehaviour
         }    
 
         m_MainGameManager.SetAllWave(allWave);
-    }
+    }*/
 
     private void ReadCSVLocation(){
         // Location
@@ -212,32 +210,56 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 6;
+        int collumeCount = 9;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
+            int colume = index;
             // create scriptable 
             MapLocationScriptable location = ScriptableObject.CreateInstance<MapLocationScriptable>();
             AssetDatabase.CreateAsset(location, m_ScriptablePath+"/Location/"+contents[index+1].Trim().Replace(" ", "")+".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            location.Id = int.Parse(contents[index]);
-            location.DisplayName = contents[index+1].Trim();
-            location.Prefab = Resources.Load<GameObject>("Location/"+contents[index+1].Trim().Replace(" ", ""));
-            location.WaveId = int.Parse(contents[index+2]);
-            float posX = float.Parse(contents[index+3].Split('|')[0]);
-            float posZ = float.Parse(contents[index+3].Split('|')[1]);
+            location.Id = int.Parse(contents[colume]);
+            colume++;
+            location.DisplayName = contents[colume].Trim();
+            location.Prefab = Resources.Load<GameObject>("Location/"+contents[colume].Trim().Replace(" ", ""));
+            
+            colume++;
+            location.WaveId = int.Parse(contents[colume]);
+            
+            colume++;
+            float posX = float.Parse(contents[colume].Split('|')[0]);
+            float posZ = float.Parse(contents[colume].Split('|')[1]);
             location.Pos = new Vector3(posX,0,posZ);
-            location.RewardGunId = int.Parse(contents[index+4]);
-            location.FortifyCost = int.Parse(contents[index+5]);
+            //location.RewardGunId = int.Parse(contents[index+4]);
+            //location.FortifyCost = int.Parse(contents[index+5]);
+            
+            colume++;
+            location.NormalWavesCount = int.Parse(contents[colume]);
+            colume++;
+            location.NormalWavesStrength = float.Parse(contents[colume]);
+            colume++;
+            List<int> normalEnemyList = new List<int>();
+            foreach (var item in contents[colume].Split('|'))
+            {
+                normalEnemyList.Add(int.Parse(item));
+            }
+            colume++;
+            location.NormalWaveEnemy = normalEnemyList;
+
+            location.FinalWaveStrength = float.Parse(contents[colume]);
+            colume++;
+            
+            List<int> finalEnemyList = new List<int>();
+            foreach (var item in contents[colume].Split('|'))
+            {
+                finalEnemyList.Add(int.Parse(item));
+            }
+            location.FinalWaveEnemy = finalEnemyList;
 
             allLocation.Add(location);
-            /*
-            if(!m_AllWaveName.ContainsKey(int.Parse(contents[index+2])))
-                m_AllWaveName.Add(int.Parse(contents[index+2]),contents[index+1].Trim().Replace(" ", ""));*/
-            
-            
 
             EditorUtility.SetDirty(location);
         }
@@ -271,6 +293,8 @@ public class ReadCsv : MonoBehaviour
             // create scriptable 
             GunScriptable gunScriptable = ScriptableObject.CreateInstance<GunScriptable>();
 
+            colume++;
+            gunScriptable.UnlockCost = float.Parse(contents[colume]);
             colume++;
             string displayName = contents[colume].Trim();
             AssetDatabase.CreateAsset(gunScriptable, m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
@@ -353,7 +377,7 @@ public class ReadCsv : MonoBehaviour
  
         }
 
-        
+        /*
         // Wave
         www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=109585683&single=true&output=csv");
         yield return www.SendWebRequest();
@@ -367,7 +391,7 @@ public class ReadCsv : MonoBehaviour
             string json = www.downloadHandler.text;
             File.AppendAllText(m_ResourcesPath+"/CSV/Wave.csv",json);
  
-        }        
+        }  */      
         
         // Location
         www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=83501182&single=true&output=csv");

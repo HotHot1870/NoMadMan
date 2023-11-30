@@ -2401,6 +2401,7 @@ GameObject:
   - component: {fileID: 7604066515744218978}
   - component: {fileID: 6103346745525368624}
   - component: {fileID: 3404523423887115977}
+  - component: {fileID: 1280098444010738219}
   m_Layer: 12
   m_Name: Ghost
   m_TagString: Untagged
@@ -2467,6 +2468,30 @@ MonoBehaviour:
   m_AttackStartUp: 0
   m_AnimationWalkSpeed: 9
   m_DeadEffect: {fileID: 4283614080345403091, guid: e4809a8873a567d488878c0628ddcc49, type: 3}
+--- !u!205 &1280098444010738219
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904047251304199293}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.999
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.46114764
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &7998845315615012264
 GameObject:
   m_ObjectHideFlags: 0

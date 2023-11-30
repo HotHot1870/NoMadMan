@@ -10,6 +10,7 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private AnimationCurve m_YPosCurve;
     [SerializeField] private GameObject m_Explosion;
     [SerializeField] private bool m_IsStraightLine = false;
+    [SerializeField] private List<Transform> m_DeParentOnDead = new List<Transform>();
     private Vector3 m_Destination;
     private Vector3 m_StartPos ;
 
@@ -33,15 +34,15 @@ public class ProjectileController : MonoBehaviour
         float passedTime = 0;
 
         while(passedTime<m_TimeNeedToReach){
-            var xzPos= Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach);
-            float yPos = 0;
             if(m_IsStraightLine){
-                yPos = Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach).y;
-            }else{
-                yPos = Mathf.Lerp(m_StartPos.y,m_Destination.y, m_YPosCurve.Evaluate(passedTime/m_TimeNeedToReach));
+                m_Self.position = Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach);
+            }
+            else{
+                var xzPos= Vector3.Lerp(m_StartPos, m_Destination, passedTime/m_TimeNeedToReach);
+                float yPos = Mathf.Lerp(m_StartPos.y,m_Destination.y, m_YPosCurve.Evaluate(passedTime/m_TimeNeedToReach));
+                m_Self.position = new Vector3(xzPos.x,yPos,xzPos.z);
             }
              
-            m_Self.position = new Vector3(xzPos.x,yPos,xzPos.z);
             passedTime += Time.deltaTime;
             yield return null;
         }
@@ -50,6 +51,11 @@ public class ProjectileController : MonoBehaviour
         var explosion = Instantiate(m_Explosion);
         explosion.transform.position = m_Destination;
         explosion.GetComponent<ExplosionController>().Init(m_Damage , m_Radius);
+        foreach (var item in m_DeParentOnDead)
+        {
+            item.SetParent(null);
+            Destroy(item.gameObject,10f);
+        }
         Destroy(this.gameObject);
     }
 }

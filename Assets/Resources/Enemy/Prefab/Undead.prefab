@@ -1848,6 +1848,7 @@ GameObject:
   - component: {fileID: 7983614127544834196}
   - component: {fileID: 2979771216696041646}
   - component: {fileID: 4687170467374818814}
+  - component: {fileID: 5102558628142781445}
   m_Layer: 12
   m_Name: Undead
   m_TagString: Untagged
@@ -1914,6 +1915,30 @@ MonoBehaviour:
   m_Animator: {fileID: 2979771216696041646}
   m_AttackStartUp: 0.45
   m_AnimationWalkSpeed: 4
+--- !u!205 &5102558628142781445
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345075452338266797}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.999
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &6376162186369387513
 GameObject:
   m_ObjectHideFlags: 0

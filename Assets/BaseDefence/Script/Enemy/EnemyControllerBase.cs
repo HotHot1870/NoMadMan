@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class EnemyControllerInitConfig{
     public Vector3 cameraPos;
     public Vector3 spawnPos;
     public Camera camera;
+    public int spawnId;
 }
 
 public abstract class EnemyControllerBase : MonoBehaviour
@@ -26,6 +28,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
     protected Vector3 CameraPos;
     protected Vector3 Destination;
     protected Camera MainCamera;
+    protected int SpawnId;
     [SerializeField] protected ParticleSystem m_ExplodeHitParticle;
  
     
@@ -36,10 +39,15 @@ public abstract class EnemyControllerBase : MonoBehaviour
         CurHp = Scriptable.MaxHp;
         CameraPos = config.cameraPos;
         MainCamera =config.camera;
+        SpawnId = config.spawnId;
         this.transform.position = config.spawnPos;
         HpCanvas.worldCamera = config.camera;
         BaseDefenceManager.GetInstance().AddEnemyToList(this.transform);
         HpParent.SetActive(false);
+    }
+
+    public int GetId(){
+        return SpawnId;
     }
 
     /// <summary>
@@ -52,6 +60,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
         CurHp += changes;
         
         HpParent.SetActive(true);
+        HpParent.transform.rotation = new Quaternion(0,0,0,0);
         HpBar.fillAmount = CurHp / Scriptable.MaxHp;
         StartCoroutine(HideHp());
         CurHp = Mathf.Clamp(CurHp,0f,Scriptable.MaxHp);

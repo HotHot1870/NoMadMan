@@ -69,6 +69,15 @@ public class EnemyBodyPart : MonoBehaviour
             m_SkinRenderer.material.SetFloat("_Normalized",  1);
     }
 
+
+    public float GetExplosiveDamageMod(){
+        return m_EnemyController.GetScriptable().ExplodeDamageMod;
+    }
+
+    public void ChangeHp(float changes){
+        m_EnemyController.ChangeHp(changes);
+    }
+
     public void OnHit(float damage)
     {
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
@@ -103,6 +112,10 @@ public class EnemyBodyPart : MonoBehaviour
         }
         m_CanPlayHitSound = true;
     }*/
+
+    public int GetEnemySpawnId(){
+        return m_EnemyController.GetId();
+    }
 
     private IEnumerator EmitHitEffectDelay(){
         while (m_EmissionDelay>=0)

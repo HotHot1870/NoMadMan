@@ -11,12 +11,11 @@ public class GunScriptable : ScriptableObject
     public int Id ;
     [Header("For Weapon selection panel in DayTime scene")]
     public string DisplayName;
+    public float UnlockCost = 10;
     public Sprite DisplayImage;
     public GameObject FPSPrefab;
     public AudioClip ShootSound;
 
-    //public GunScriptableFPS GunFPS;
-    //public GunScriptableSwitch GunSwitch;
     public GunScriptableStats GunStats;
 
 

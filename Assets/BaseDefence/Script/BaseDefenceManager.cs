@@ -122,9 +122,13 @@ public class BaseDefenceManager : MonoBehaviour
         m_EnemySpawnController.RemoveDeadEnemyFromList(trans);
     }
 
+    public int GetEnemySpawnId(){
+        return m_EnemySpawnController.GetEnemySpawnId();
+    }
+
     public void StartWave(MapLocationScriptable locationInfo){
 
-        m_EnemySpawnController.StartWave( MainGameManager.GetInstance().GetAllWave()[locationInfo.WaveId]);
+        m_EnemySpawnController.StartWave( locationInfo);
     }
 
 
@@ -221,7 +225,10 @@ public class BaseDefenceManager : MonoBehaviour
         return m_CurrentAccruacy;
     }
     public void SetAccruacy(float newAccuracy){
-        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, m_GunShootController.GetSelectedGun().GunStats.Handling , m_GunShootController.GetSelectedGun().GunStats.Accuracy);
+        // acc cannot be lower than handling
+        var handling = m_GunShootController.GetSelectedGun().GunStats.Handling;
+        var acc = Mathf.Max(m_GunShootController.GetSelectedGun().GunStats.Accuracy,handling);
+        m_CurrentAccruacy = Mathf.Clamp(newAccuracy, handling , acc);
     }
 
     public GunShootController GetGunShootController(){

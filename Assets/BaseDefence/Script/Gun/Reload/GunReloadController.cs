@@ -275,7 +275,8 @@ public class GunReloadController : MonoBehaviour
         if(dragFunction.DragCursorPrefab != null){
             SpawnUIObjectForReloadPhaseConfig cursorConfig = new SpawnUIObjectForReloadPhaseConfig{
                 Prefab = dragFunction.DragCursorPrefab,
-                Position = Input.mousePosition
+                Position = Input.mousePosition,
+                Size = dragFunction.DragCursorPrefab.GetComponent<RectTransform>().sizeDelta
 
             };
             GameObject cursor = SpawnUIObjectForReloadPhase( cursorConfig );
@@ -321,10 +322,22 @@ public class GunReloadController : MonoBehaviour
             m_Config.SetAmmoToFull?.Invoke();
         }
 
-        if(actionEnum == ( actionEnum | GunReloadActionResult.PhaseChangeByAmmo ) ){
+        if(actionEnum == ( actionEnum | GunReloadActionResult.PhaseChangeByAmmoShotGun ) ){
             // if ammo full , to next phase , refreash otherwise
             if(m_Config.IsFullClipAmmo.Invoke()){
                 ++m_CurReloadPhase;
+            }
+            SetReloadPhase();   
+        }
+
+        
+
+        if(actionEnum == ( actionEnum | GunReloadActionResult.PhaseChangeByAmmoGrenadeLauncher ) ){
+            // if ammo full , to next phase , To previous stage otherwise
+            if(m_Config.IsFullClipAmmo.Invoke()){
+                ++m_CurReloadPhase;
+            }else{
+                --m_CurReloadPhase;
             }
             SetReloadPhase();   
         }

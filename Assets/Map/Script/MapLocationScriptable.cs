@@ -10,7 +10,13 @@ public class MapLocationScriptable : ScriptableObject
     public int WaveId;
     public GameObject Prefab;
     public Vector3 Pos;
-    public int RewardGunId;
-    [Range(10,100000)]public float FortifyCost = 1000f;
+    
+    [Header("Normal")]
+    public int NormalWavesCount = 2;
+    public float NormalWavesStrength = 10f;
+    public List<int> NormalWaveEnemy = new List<int>();
+    [Header("Final")]
+    public float FinalWaveStrength = 50f;
+    public List<int> FinalWaveEnemy = new List<int>();
  
 }

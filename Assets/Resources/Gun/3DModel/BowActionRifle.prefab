@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4540670722459881666}
   - component: {fileID: 9215110677723000559}
   m_Layer: 0
-  m_Name: Crossbow
+  m_Name: BowActionRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35110134421944926}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0.087072834, y: 0.04345342, z: -0.0038016832, w: 0.9952466}
+  m_LocalPosition: {x: 0.8, y: 0.3, z: -1.5}
+  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3431885562483286897}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 5, z: 0}
 --- !u!114 &4540670722459881666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ Animator:
   m_GameObject: {fileID: 35110134421944926}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6acf054716d60f742ae37b99b2859ac4, type: 3}
-  m_Controller: {fileID: 9100000, guid: 48491b34c7bdf2b4f974944b3b7ca8e6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2e623aefe47971046956b71fbf7fd590, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

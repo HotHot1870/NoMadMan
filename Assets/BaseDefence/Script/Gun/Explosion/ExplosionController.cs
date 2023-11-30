@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplosionController : MonoBehaviour
@@ -9,40 +10,51 @@ public class ExplosionController : MonoBehaviour
     [SerializeField] private Transform m_Sphere;
     [SerializeField] private AnimationCurve m_SphereSizeCurve;
     [SerializeField] private AudioSource m_AudioSource;
+    private List<int> m_AllHittedEnemy = new List<int>();
+    private float m_Damage;
 
 
     public void Init(float damage , float radius){
         MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
         StartCoroutine(PlayExplosion(radius));
-        // Damage
-        var allEnemy = BaseDefenceManager.GetInstance().GetAllEnemyTrans();
-        for(int i =0 ; i <allEnemy.Count;i++)
-        {
-            if(allEnemy[i] == null)
-                continue;
+        m_Damage = damage;
+        this.transform.localScale = Vector3.one * radius;
+        StartCoroutine(RemoveCollider());
+    }
 
-            var distance = Vector3.Distance(allEnemy[i].position, this.transform.position);
-            if(distance <= radius/2f){
-                // in range 
-                var enemyController = allEnemy[i].GetComponent<EnemyControllerBase>();
-                enemyController.ChangeHp(damage * enemyController.GetScriptable().ExplodeDamageMod * -1);
-            }
-        }
+    private IEnumerator RemoveCollider(){
+        yield return new WaitForSeconds(0.15f);
+        m_Self.GetComponent<SphereCollider>().enabled = false;
     }
 
     private IEnumerator PlayExplosion(float radius){
         m_Smoke.Play();
         float passTime=0;
-        float duration=0.5f;
+        float duration=0.4f;
         while (duration>passTime)
         {
             passTime += Time.deltaTime;
-            float scale = Mathf.Lerp( 0f,radius/2f,  m_SphereSizeCurve.Evaluate( (duration-passTime)/duration) );
+            float scale = Mathf.Lerp( 0f,1f,  m_SphereSizeCurve.Evaluate( (duration-passTime)/duration) );
             m_Sphere.localScale= new Vector3( scale,scale,scale );
             yield return null;
         }
 
         Destroy(m_Self,5f);
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var enemyBodyPart = other.GetComponent<EnemyBodyPart>();
+        if(enemyBodyPart !=null){
+            var enemySpawnId = enemyBodyPart.GetEnemySpawnId();
+            if(!m_AllHittedEnemy.Contains(enemySpawnId)){
+                // never hit this enemy , hit it
+                m_AllHittedEnemy.Add(enemySpawnId);
+                enemyBodyPart.ChangeHp(m_Damage * enemyBodyPart.GetExplosiveDamageMod() * -1);
+                
+            }
+
+        }
     }
 }

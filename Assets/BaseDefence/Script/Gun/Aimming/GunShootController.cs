@@ -243,11 +243,16 @@ public class GunShootController : MonoBehaviour
 
                 break;
             case BulletType.Rocket:
-                var rocket = Instantiate(m_AllProjectile[BulletType.PillBomb].Prefab);
+                var rocket = Instantiate(m_AllProjectile[BulletType.Rocket].Prefab);
                 // set spawn point to gun point
                 rocket.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
                 rocket.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,m_SelectedGun.ExplodeRadius);
+                break;
+            case BulletType.BowActionArrow:
+                var bowActionExplosion = Instantiate(m_AllProjectile[BulletType.BowActionArrow].Prefab);
+                bowActionExplosion.transform.position = hitEnvironmentAndEnemy.point;
+                bowActionExplosion.GetComponent<ExplosionController>().Init(m_SelectedGun.GunStats.DamagePerPellet, m_SelectedGun.ExplodeRadius);
                 break;
             default:
                 break;

@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 8
   DisplayName: BowActionRifle
   DisplayImage: {fileID: 0}
-  FPSPrefab: {fileID: 0}
+  FPSPrefab: {fileID: 35110134421944926, guid: ad40c44d2e72db043bb3f8809ccc73d8, type: 3}
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   GunStats:
     DamagePerPellet: 20
@@ -23,8 +23,8 @@ MonoBehaviour:
     ClipSize: 12
     BulletType: 4
     IsSemiAuto: 1
-    FireRate: 3
-    Accuracy: 80
+    FireRate: 5
+    Accuracy: 70
     Handling: 50
     Recoil: 15
   ReloadScriptable: {fileID: 0}

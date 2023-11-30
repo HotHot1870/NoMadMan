@@ -30,7 +30,7 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField] private List<WeaponOwnership> m_AllWeapon = new List<WeaponOwnership>();
     [SerializeField] private List<MapLocationScriptable> m_AllLocation = new List<MapLocationScriptable>();
-    [SerializeField] private List<WaveScriptable> m_AllWave = new List<WaveScriptable>();
+    //[SerializeField] private List<WaveScriptable> m_AllWave = new List<WaveScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
     [SerializeField]private float m_WallCurrentHp = 1000;
@@ -48,6 +48,11 @@ public class MainGameManager : MonoBehaviour
         return m_Instance;
     }
 
+
+    private void Start()
+    {
+		Application.targetFrameRate = 60;
+    }
     public List<WeaponOwnership> GetAllWeapon()
     {
         return m_AllWeapon;
@@ -65,10 +70,10 @@ public class MainGameManager : MonoBehaviour
         return m_AllSelectedWeapon;
     }
 
-    
+    /*
     public List<WaveScriptable> GetAllWave() {
         return m_AllWave;
-    }
+    }*/
 
     
     public List<EnemyScriptable> GetAllEnemy(){
@@ -96,11 +101,11 @@ public class MainGameManager : MonoBehaviour
     public void SetAllLocation(List<MapLocationScriptable> allLocation){
         m_AllLocation = allLocation;
     }
-
+/*
     public void SetAllWave(List<WaveScriptable> allWave) {
         m_AllWave = allWave;
     }
-
+*/
     public void SetAllEnemy(List<EnemyScriptable> allEnemy){
         m_AllEnemy = allEnemy;
     }
@@ -120,10 +125,6 @@ public class MainGameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    private void Start()
-    {
-		Application.targetFrameRate = 45;
-    }
 
 
     public void UnlockGun(int id){
