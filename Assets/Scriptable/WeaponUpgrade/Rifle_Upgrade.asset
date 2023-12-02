@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
+  m_Name: Rifle_Upgrade
+  m_EditorClassIdentifier: 
+  Id: 19
+  WeaponId: 3
+  UpgradeDetails:
+  - UpgradeStat: Damage
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 105
+    - Cost: 200
+      UpgradeValue: 110
+    - Cost: 300
+      UpgradeValue: 115
+    - Cost: 400
+      UpgradeValue: 120
+    - Cost: 500
+      UpgradeValue: 125
+  - UpgradeStat: Accuracy
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 88
+    - Cost: 200
+      UpgradeValue: 91
+    - Cost: 300
+      UpgradeValue: 94
+    - Cost: 400
+      UpgradeValue: 97
+    - Cost: 500
+      UpgradeValue: 100
+  - UpgradeStat: FireRate
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 1.5
+    - Cost: 200
+      UpgradeValue: 1.75
+    - Cost: 300
+      UpgradeValue: 2
+    - Cost: 400
+      UpgradeValue: 2.25
+    - Cost: 500
+      UpgradeValue: 2.5
+  - UpgradeStat: ClipSize
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 6
+    - Cost: 200
+      UpgradeValue: 7
+    - Cost: 300
+      UpgradeValue: 8
+    - Cost: 400
+      UpgradeValue: 9
+    - Cost: 500
+      UpgradeValue: 10
+  - UpgradeStat: BulletType
+    CostAndValue:
+    - Cost: 1000
+      UpgradeValue: Puncture

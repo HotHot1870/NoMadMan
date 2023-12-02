@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   DisplayName: SHotGun
+  UnlockCost: 0
   DisplayImage: {fileID: 21300000, guid: 8eb14259e0b997d45ad4f5a7e5807c39, type: 3}
   FPSPrefab: {fileID: 5973581222493145179, guid: 402c419fdb199c64b96870e759cf86c7, type: 3}
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   GunStats:
     DamagePerPellet: 3
-    PelletPerShot: 15
-    ClipSize: 8
+    PelletPerShot: 10
+    ClipSize: 5
     BulletType: 0
-    IsSemiAuto: 1
-    FireRate: 3.5
+    IsSemiAuto: 0
+    FireRate: 3
     Accuracy: 10
     Handling: 0
     Recoil: 100
   ReloadScriptable: {fileID: 11400000, guid: 13b778b1d24a02048bc58b1731fc2d57, type: 2}
+  UpgradeScriptable: {fileID: 0}
   ExplodeRadius: 0

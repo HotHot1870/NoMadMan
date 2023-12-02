@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2
   DisplayName: Revolver
+  UnlockCost: 0
   DisplayImage: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
   FPSPrefab: {fileID: 1466696141579975733, guid: c75821895e130f54488ea6d82d527b0c, type: 3}
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   GunStats:
-    DamagePerPellet: 80
+    DamagePerPellet: 70
     PelletPerShot: 1
     ClipSize: 5
     BulletType: 0
@@ -28,4 +29,5 @@ MonoBehaviour:
     Handling: 50
     Recoil: 5
   ReloadScriptable: {fileID: 11400000, guid: 942e6f2cc6f086b4c9c5723380d5a3da, type: 2}
+  UpgradeScriptable: {fileID: 0}
   ExplodeRadius: 0

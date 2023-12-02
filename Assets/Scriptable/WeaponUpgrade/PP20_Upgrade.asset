@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
+  m_Name: PP20_Upgrade
+  m_EditorClassIdentifier: 
+  Id: 24
+  WeaponId: 4
+  UpgradeDetails:
+  - UpgradeStat: Damage
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 27
+    - Cost: 200
+      UpgradeValue: 29
+    - Cost: 300
+      UpgradeValue: 31
+    - Cost: 400
+      UpgradeValue: 33
+    - Cost: 500
+      UpgradeValue: 35
+  - UpgradeStat: ClipSize
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 22
+    - Cost: 200
+      UpgradeValue: 24
+    - Cost: 300
+      UpgradeValue: 26
+    - Cost: 400
+      UpgradeValue: 28
+    - Cost: 500
+      UpgradeValue: 30
+  - UpgradeStat: Recoil
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 9
+    - Cost: 200
+      UpgradeValue: 8
+    - Cost: 300
+      UpgradeValue: 7
+    - Cost: 400
+      UpgradeValue: 6
+    - Cost: 500
+      UpgradeValue: 5
+  - UpgradeStat: FireRate
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 10.5
+    - Cost: 200
+      UpgradeValue: 11
+    - Cost: 300
+      UpgradeValue: 11.5
+    - Cost: 400
+      UpgradeValue: 12
+    - Cost: 500
+      UpgradeValue: 12.5
+  - UpgradeStat: Accuracy
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 78
+    - Cost: 200
+      UpgradeValue: 81
+    - Cost: 300
+      UpgradeValue: 84
+    - Cost: 400
+      UpgradeValue: 87
+    - Cost: 500
+      UpgradeValue: 90

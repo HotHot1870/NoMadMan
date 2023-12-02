@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   DisplayName: BoomBow
+  UnlockCost: 800
   DisplayImage: {fileID: 0}
   FPSPrefab: {fileID: 5564056945118830172, guid: 28068a181ffde0442ba58e52d4437a21, type: 3}
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
@@ -28,4 +29,5 @@ MonoBehaviour:
     Handling: 0
     Recoil: 30
   ReloadScriptable: {fileID: 0}
+  UpgradeScriptable: {fileID: 0}
   ExplodeRadius: 16

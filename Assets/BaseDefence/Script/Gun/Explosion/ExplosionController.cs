@@ -19,6 +19,8 @@ public class ExplosionController : MonoBehaviour
         StartCoroutine(PlayExplosion(radius));
         m_Damage = damage;
         this.transform.localScale = Vector3.one * radius;
+        var smokeMain = m_Smoke.main;
+        smokeMain.startSize = new ParticleSystem.MinMaxCurve(radius*5f, radius*15f);
         StartCoroutine(RemoveCollider());
     }
 
@@ -30,7 +32,7 @@ public class ExplosionController : MonoBehaviour
     private IEnumerator PlayExplosion(float radius){
         m_Smoke.Play();
         float passTime=0;
-        float duration=0.4f;
+        float duration=0.25f;
         while (duration>passTime)
         {
             passTime += Time.deltaTime;
@@ -39,7 +41,7 @@ public class ExplosionController : MonoBehaviour
             yield return null;
         }
 
-        Destroy(m_Self,5f);
+        Destroy(m_Self,3f);
 
     }
 

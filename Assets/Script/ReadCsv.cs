@@ -31,9 +31,19 @@ public class ReadCsv : MonoBehaviour
     private void SaveCsvFile(){
         StartCoroutine(GetCsvFromGoogle());
     }
+
     [EButton("ReadCsvGun")]
     private void ReadCsvFileGun(){
-        ReadGunCSV();
+        StartCoroutine(ReadGunCSV());
+
+        EditorUtility.SetDirty(m_MainGameManager);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+    
+    [EButton("ReadWeaponUpgradeWave")]
+    private void ReadCsvFileWeaponUpgrade(){
+        StartCoroutine(ReacCSVWeaponUpgrade());
 
         EditorUtility.SetDirty(m_MainGameManager);
         AssetDatabase.SaveAssets();
@@ -41,21 +51,14 @@ public class ReadCsv : MonoBehaviour
     }
     [EButton("ReadCsvLocation")]
     private void ReadCsvFileLocation(){
-        ReadCSVLocation();
+        StartCoroutine(ReadCSVLocation());
 
         EditorUtility.SetDirty(m_MainGameManager);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
-    /*
-    [EButton("ReadCsvWave")]
-    private void ReadCsvFileWave(){
-        ReacCSVWave();
 
-        EditorUtility.SetDirty(m_MainGameManager);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-    }*/
+
     [EButton("ReadCsvEnemy")]
     private void ReadCsvFileEenmy(){
         ReadCSVEnemy();
@@ -132,74 +135,90 @@ public class ReadCsv : MonoBehaviour
         }   
 
     }
-/*
-    private void ReacCSVWave() {
-        //Wave
-        List<WaveScriptable> allWave = new List< WaveScriptable>(); 
-        if(Resources.Load<TextAsset>("CSV/Wave") == null){
-            Debug.LogError(m_ResourcesPath+"/Wave.csv is null" );
-            return;
+
+    private IEnumerator ReacCSVWeaponUpgrade() {
+        // WeaponUpgrade
+        List<WeaponUpgradeScriptable> allWeaponUpgrade = new List<WeaponUpgradeScriptable>(); 
+        if(Resources.Load<TextAsset>("CSV/WeaponUpgrade") == null){
+            Debug.LogError(m_ResourcesPath+"/WeaponUpgrade.csv is null" );
+            yield break;
         }
         
         
         // remove all scriptable in gun folder
-        FileUtil.DeleteFileOrDirectory(m_ScriptablePath+"/Wave");
+        FileUtil.DeleteFileOrDirectory(m_ScriptablePath+"/WeaponUpgrade");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        string json = Resources.Load<TextAsset>("CSV/Wave").ToString();
+        string json = Resources.Load<TextAsset>("CSV/WeaponUpgrade").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 7;
+        int collumeCount = 5;
+        var allWeapon = m_MainGameManager.GetAllWeapon();
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
             int colume = index;
-            // create scriptable 
-            WaveScriptable Wave = ScriptableObject.CreateInstance<WaveScriptable>();
-            string displayName = contents[colume+1];
-            
-            AssetDatabase.CreateAsset(Wave, m_ScriptablePath+"/Wave/"+displayName+".asset");
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+            string displayName = allWeapon.Find(x=>x.Gun.Id==int.Parse(contents[colume+1]) ).Gun.DisplayName;
+            WeaponUpgradeScriptable WeaponUpgrade = null;
+            List<WeaponUpgradeDetail> upgradeDetails = new List<WeaponUpgradeDetail>();
 
-            Wave.Id = int.Parse(contents[colume]);
-            colume++;
-            // display name = contents[index +1]
-            colume++;
-            Wave.NormalWavesCount = int.Parse(contents[colume]);
-            colume++;
-            Wave.NormalWavesStrength = float.Parse(contents[colume]);
-            colume++;
-            List<int> normalEnemyList = new List<int>();
-            foreach (var item in contents[colume].Split('|'))
+            if (System.IO.File.Exists(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset"))
             {
-                normalEnemyList.Add(int.Parse(item));
-            }
-            colume++;
-            Wave.NormalWaveEnemy = normalEnemyList;
-
-            Wave.FinalWaveStrength = float.Parse(contents[colume]);
-            colume++;
+                // file already exist 
+                WeaponUpgrade = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
+                upgradeDetails = WeaponUpgrade.UpgradeDetails;
+                yield return null;
+            }else{
             
-            List<int> finalEnemyList = new List<int>();
-            foreach (var item in contents[colume].Split('|'))
-            {
-                finalEnemyList.Add(int.Parse(item));
+                WeaponUpgrade = ScriptableObject.CreateInstance<WeaponUpgradeScriptable>();
+
+                AssetDatabase.CreateAsset(WeaponUpgrade, m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
-            Wave.FinalWaveEnemy = finalEnemyList;
-            allWave.Add(Wave);
-            EditorUtility.SetDirty(Wave);
+
+                WeaponUpgrade.Id = int.Parse(contents[colume]);
+                colume++;
+                WeaponUpgrade.WeaponId = int.Parse(contents[colume]);
+                colume++;
+                string statName = contents[colume].Trim();
+                colume++;
+
+                List<string> allUpgradeValue = contents[colume].Split('|').ToList();
+                List<string> allUpgradeCost = contents[colume+1].Split('|').ToList();
+                var weaponUpgradeDetail = new WeaponUpgradeDetail{
+                    UpgradeStat = statName
+                    
+                };
+                for (int j = 0; j < allUpgradeValue.Count; j++)
+                {
+
+                    var upgradeCostAndValue = new WeaponUpgradeCostAndValue{
+                        UpgradeValue = allUpgradeValue[j].Trim(),
+                        Cost = float.Parse(allUpgradeCost[j].Trim())
+                    };
+                    weaponUpgradeDetail.CostAndValue.Add(upgradeCostAndValue);
+                }
+                upgradeDetails.Add(weaponUpgradeDetail);
+                WeaponUpgrade.UpgradeDetails = upgradeDetails;
+                colume++;
+                allWeaponUpgrade.Add(WeaponUpgrade);
+                
+                var gunScriptable = AssetDatabase.LoadAssetAtPath<GunScriptable>(m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
+                gunScriptable.UpgradeScriptable = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
+                EditorUtility.SetDirty(WeaponUpgrade);
+            yield return null;
         }    
 
-        m_MainGameManager.SetAllWave(allWave);
-    }*/
+        m_MainGameManager.SetAllWeaponUpgrade(allWeaponUpgrade);
+    }
 
-    private void ReadCSVLocation(){
+    private IEnumerator ReadCSVLocation(){
         // Location
         if(Resources.Load<TextAsset>("CSV/Location") == null){
             Debug.LogError(m_ResourcesPath+"/Location.csv is null" );
-            return;
+            yield break;
         }
         List<MapLocationScriptable> allLocation = new List<MapLocationScriptable>();
         
@@ -262,18 +281,19 @@ public class ReadCsv : MonoBehaviour
             allLocation.Add(location);
 
             EditorUtility.SetDirty(location);
+            yield return null;
         }
             m_MainGameManager.SetAllLocation(allLocation);
     }
 
-    private void ReadGunCSV(){
+    private IEnumerator ReadGunCSV(){
         // Gun
         Dictionary<int,GunScriptable> allGuns = new Dictionary<int, GunScriptable>(); 
         List<MainGameNameSpace.WeaponOwnership> allWeaponAndOwnership = new List<MainGameNameSpace.WeaponOwnership>();
 
         if(Resources.Load<TextAsset>("CSV/Gun") == null){
             Debug.LogError(m_ResourcesPath+"/CSV//Gun.csv is null" );
-            return;
+            yield break;
         }
         
         
@@ -285,7 +305,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Gun").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 13;
+        int collumeCount = 14;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -339,6 +359,7 @@ public class ReadCsv : MonoBehaviour
             weaponOwnership.IsOwned = index/collumeCount<=4;
             allWeaponAndOwnership.Add(weaponOwnership);
             EditorUtility.SetDirty(gunScriptable);
+            yield return null;
         }
         m_MainGameManager.SetAllWeapon(allWeaponAndOwnership);
     }
@@ -377,21 +398,20 @@ public class ReadCsv : MonoBehaviour
  
         }
 
-        /*
-        // Wave
-        www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=109585683&single=true&output=csv");
+        // WeaponUpgrade
+        www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=2049343216&single=true&output=csv");
         yield return www.SendWebRequest();
         if(www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError){
             Debug.Log("Error: " + www.error);
         }else{
             
-            FileUtil.DeleteFileOrDirectory(m_ResourcesPath+"/CSV/Wave.csv");
+            FileUtil.DeleteFileOrDirectory(m_ResourcesPath+"/CSV/WeaponUpgrade.csv");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             string json = www.downloadHandler.text;
-            File.AppendAllText(m_ResourcesPath+"/CSV/Wave.csv",json);
+            File.AppendAllText(m_ResourcesPath+"/CSV/WeaponUpgrade.csv",json);
  
-        }  */      
+        }      
         
         // Location
         www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=83501182&single=true&output=csv");

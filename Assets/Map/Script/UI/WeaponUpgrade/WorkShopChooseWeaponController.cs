@@ -43,6 +43,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             });
         m_UpgradeBtn.onClick.AddListener(()=>{
             m_MapUpgradeWeaponPanel.gameObject.SetActive(true);
+            m_MapUpgradeWeaponPanel.Init(m_SelectedGun);
         });
         m_UnlockBtn.onDown.AddListener(OnDownUnlockBtn);
         m_UnlockBtn.onUp.AddListener(OnLetGoUnlockBtn);
@@ -71,12 +72,11 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_SelectedWeaponAcc.text = "Acc : "+m_SelectedGun.GunStats.Accuracy.ToString();
         m_SelectedWeaponRecoil.text = "Recoil : "+m_SelectedGun.GunStats.Recoil.ToString();
         m_SelectedWeaponHandling.text = "Handling : "+m_SelectedGun.GunStats.Handling.ToString();
-        m_SelectedWeaponUnlockCost.text = "Unlock Cost : "+m_SelectedGun.UnlockCost.ToString()+" / "+MainGameManager.GetInstance().GetGooAmount().ToString();
+        m_SelectedWeaponUnlockCost.text = "Unlock : "+m_SelectedGun.UnlockCost.ToString()+" / "+MainGameManager.GetInstance().GetGooAmount().ToString();
 
         m_SelectedWeaponUnlockCost.gameObject.SetActive(!selectedGunOwnership.IsOwned);
         m_UnlockBtn.gameObject.SetActive(!selectedGunOwnership.IsOwned);
-        // TODO : Upgrade weapon 
-        //m_UpgradeBtn.gameObject.SetActive(selectedGunOwnership.IsOwned);
+        m_UpgradeBtn.gameObject.SetActive(selectedGunOwnership.IsOwned);
     }
 
 
@@ -123,7 +123,10 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     private void OnLetGoUnlockBtn(){
         if(m_Filling != null)
             StopCoroutine( m_Filling);
-        m_Unfilling = StartCoroutine(UnfillUnlockImage());
+            
+        m_UnlockFill.fillAmount = 0;
+
+        //m_Unfilling = StartCoroutine(UnfillUnlockImage());
 
     }
 
@@ -148,6 +151,11 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
         };
         SetWeaponlistSelectedWeaponData(weaponOwnership);
+        
+        if(m_Filling != null){
+            StopCoroutine( m_Filling);
+            m_Filling = null;
+        }
     }
 
     private IEnumerator UnfillUnlockImage(){
@@ -161,6 +169,11 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             
         }
         m_UnlockFill.fillAmount = 0;
+        if(m_Unfilling != null){
+            StopCoroutine( m_Unfilling);
+            m_Unfilling = null;
+        }
+
     }
 
 

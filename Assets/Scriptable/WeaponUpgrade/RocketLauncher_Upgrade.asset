@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
+  m_Name: RocketLauncher_Upgrade
+  m_EditorClassIdentifier: 
+  Id: 36
+  WeaponId: 7
+  UpgradeDetails:
+  - UpgradeStat: Damage
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 105
+    - Cost: 200
+      UpgradeValue: 110
+    - Cost: 300
+      UpgradeValue: 115
+    - Cost: 400
+      UpgradeValue: 120
+    - Cost: 500
+      UpgradeValue: 125
+  - UpgradeStat: Accuracy
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 65
+    - Cost: 200
+      UpgradeValue: 70
+    - Cost: 300
+      UpgradeValue: 75
+    - Cost: 400
+      UpgradeValue: 80
+    - Cost: 500
+      UpgradeValue: 85
+  - UpgradeStat: ExplodeRadius
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 13.5
+    - Cost: 200
+      UpgradeValue: 14
+    - Cost: 300
+      UpgradeValue: 14.5
+    - Cost: 400
+      UpgradeValue: 15
+    - Cost: 1000
+      UpgradeValue: 16

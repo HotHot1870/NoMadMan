@@ -10,7 +10,6 @@ public class SwitchWeaponController : MonoBehaviour
     private int m_CurrentWeaponSlotIndex = 0;
 
     private void Start() {
-        BaseDefenceManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
 
         var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
 
@@ -54,24 +53,5 @@ public class SwitchWeaponController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void SwitchWeaponUpdate() {/*
-        if (Input.GetMouseButtonDown(0) && BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon )
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            // hit SwitchWeapon
-            if (Physics.Raycast(ray, out hit, 100, 1<<11))
-            {
-                if(hit.transform.TryGetComponent<WeaponToBeSwitch>(out var weaponData)){
-                    // switch weapon 
-                    weaponData.OnClickWeaponSlot();
-
-                    // look up 
-                    //BaseDefenceManager.GetInstance().LookUp();
-                }
-            }
-        }*/
     }
 }

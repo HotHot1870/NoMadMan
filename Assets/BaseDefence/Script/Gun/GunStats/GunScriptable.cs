@@ -23,31 +23,15 @@ public class GunScriptable : ScriptableObject
     [Space(20)]
     [Header("Reload")]
     public GunReloadScriptable ReloadScriptable;
+    [Space(20)]
+    [Header("Upgrade")]
+    public WeaponUpgradeScriptable UpgradeScriptable;
 
     [Space(20)]
     [Header("Other")]
     public float ExplodeRadius;
     
-}/*
-
-[System.Serializable]
-public class GunScriptableFPS{
-    public Vector3 FPSPos;
-    public Vector3 FPSRot;
-    public Vector3 FPSScale = Vector3.one;
-
-}*/
-
-/*
-
-[System.Serializable]
-public class GunScriptableSwitch{
-    // under the wall , waiting to be swtiched to
-    public Vector3 ReloadPos;
-    public Vector3 ReloadRot;
-    public Vector3 ReloadScale = Vector3.one;
-
-}*/
+}
 
 [System.Serializable]
 public class GunScriptableStats{
