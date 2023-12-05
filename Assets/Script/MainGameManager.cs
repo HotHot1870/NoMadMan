@@ -4,7 +4,7 @@ using UnityEngine;
 using MainGameNameSpace;
 using UnityEngine.SceneManagement;
 using System;
-using System.Linq;
+using UnityEditor;
 
 
 
@@ -35,9 +35,27 @@ public class MainGameManager : MonoBehaviour
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
-    [SerializeField]private float m_GooAmount=10000;
+    [SerializeField]private float m_GooAmount=1000;
 
     
+    [MenuItem("Scene/MainMenu")]
+    static void ToMainMenu()
+    {
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/MainMenu/MainMenu.unity");
+    }
+
+    [MenuItem("Scene/BaseDefence")]
+    static void ToBaseDefence()
+    {
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/BaseDefence/BaseDefence.unity");
+    }
+    
+    [MenuItem("Scene/Map")]
+    static void ToMap()
+    {
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Map/Map.unity");
+    }
+
 
     public static MainGameManager GetInstance()
     {
@@ -51,7 +69,8 @@ public class MainGameManager : MonoBehaviour
 
     private void Start()
     {
-		Application.targetFrameRate = 60;
+		Application.targetFrameRate = 50;
+        m_GooAmount = MathF.Max( (float)GetData<float>("Goo") ,m_GooAmount );
     }
     public List<WeaponOwnership> GetAllWeapon()
     {
@@ -135,6 +154,7 @@ public class MainGameManager : MonoBehaviour
 
     public void ChangeGooAmount(float gooChanges){
         m_GooAmount += gooChanges;
+        SaveData<float>("Goo",m_GooAmount);
     }
 
     public float GetGooAmount(){
@@ -142,7 +162,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
-        SceneManager.LoadScene("baseDefence");
+        SceneManager.LoadScene("BaseDefence");
         StartCoroutine(StartWave(location));
     }
 
@@ -226,6 +246,34 @@ public class MainGameManager : MonoBehaviour
         {
             m_AllAudioSource.RemoveAt(toBeRemove[i] - i);
         }
+    }
+
+
+
+    public void SaveData<T>(string key, T value)
+    {
+        if(typeof(T) == typeof(int)){
+            PlayerPrefs.SetInt(key, Convert.ToInt32(value) );
+        }else if(typeof(T) == typeof(float)){
+            PlayerPrefs.SetFloat(key, (float)Convert.ToDouble(value) );
+        }
+        else if(typeof(T) == typeof(string)){
+            PlayerPrefs.SetString(key,value.ToString());
+        }
+    }
+
+    
+    public object GetData<T>(string key)
+    {
+        if(typeof(T) == typeof(int)){
+            return PlayerPrefs.GetInt(key, 0 );
+        }else if(typeof(T) == typeof(float)){
+            return PlayerPrefs.GetFloat(key, 0 );
+        }
+        else if(typeof(T) == typeof(string)){
+            return PlayerPrefs.GetString(key, "");
+        }
+        return null;
     }
 
 }

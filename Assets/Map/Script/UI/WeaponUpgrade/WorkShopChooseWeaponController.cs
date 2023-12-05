@@ -35,6 +35,9 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     [SerializeField] private TMP_Text m_SelectedWeaponHandling;
     [SerializeField] private TMP_Text m_SelectedWeaponFireRate;
     [SerializeField] private TMP_Text m_SelectedWeaponUnlockCost;
+    [SerializeField] private TMP_Text m_SelectedWeaponExplodeRadius;
+    [SerializeField] private TMP_Text m_SelectedWeaponSemiAuto;
+    [SerializeField] private TMP_Text m_SelectedWeaponPuncture;
 
 
     void Start(){
@@ -66,13 +69,23 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_SelectedWeaponId = m_SelectedGun.Id;
         m_SelectedWeaponImage.sprite = m_SelectedGun.DisplayImage;
         m_SelectedWeaponName.text = "Name : "+m_SelectedGun.DisplayName;
-        m_SelectedWeaponFireRate.text = "Fire Rate : "+m_SelectedGun.GunStats.FireRate;
-        m_SelectedWeaponDamage.text = "Damage : "+m_SelectedGun.GunStats.DamagePerPellet+" x "+m_SelectedGun.GunStats.PelletPerShot.ToString();
-        m_SelectedWeaponClipSize.text = "Clip Size : "+m_SelectedGun.GunStats.ClipSize;
-        m_SelectedWeaponAcc.text = "Acc : "+m_SelectedGun.GunStats.Accuracy.ToString();
-        m_SelectedWeaponRecoil.text = "Recoil : "+m_SelectedGun.GunStats.Recoil.ToString();
-        m_SelectedWeaponHandling.text = "Handling : "+m_SelectedGun.GunStats.Handling.ToString();
+        m_SelectedWeaponFireRate.text = "Fire Rate : "+m_SelectedGun.GetStatValue("FireRate");
+        m_SelectedWeaponDamage.text = "Damage : "+m_SelectedGun.GetStatValue("Damage")+" x "+m_SelectedGun.GetStatValue("Pellet");
+        m_SelectedWeaponClipSize.text = "Clip Size : "+m_SelectedGun.GetStatValue("ClipSize");
+        m_SelectedWeaponAcc.text = "Acc : "+m_SelectedGun.GetStatValue("Accuracy");
+        m_SelectedWeaponRecoil.text = "Recoil : "+m_SelectedGun.GetStatValue("Recoil");
+        m_SelectedWeaponHandling.text = "Handling : "+m_SelectedGun.GetStatValue("Handling");
         m_SelectedWeaponUnlockCost.text = "Unlock : "+m_SelectedGun.UnlockCost.ToString()+" / "+MainGameManager.GetInstance().GetGooAmount().ToString();
+        m_SelectedWeaponExplodeRadius.text = "Explode Radius : "+m_SelectedGun.GetStatValue("ExplodeRadius");
+        //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
+
+        m_SelectedWeaponSemiAuto.text = "Semi_Auto : "+m_SelectedGun.GunStats.IsSemiAuto.ToString();
+        //m_SelectedWeaponSemiAuto.gameObject.SetActive(m_SelectedGun.GunStats.IsSemiAuto);
+
+        string punctureText = (m_SelectedGun.GunStats.BulletType == BulletType.Puncture).ToString();
+        m_SelectedWeaponPuncture.text = "Puncture : "+punctureText;
+        //m_SelectedWeaponPuncture.gameObject.SetActive(m_SelectedGun.GunStats.BulletType == BulletType.Puncture);
+
 
         m_SelectedWeaponUnlockCost.gameObject.SetActive(!selectedGunOwnership.IsOwned);
         m_UnlockBtn.gameObject.SetActive(!selectedGunOwnership.IsOwned);

@@ -132,5 +132,10 @@ public class BaseDefenceUIController : MonoBehaviour
     public void SetResultPanel(bool isWin){
         m_ResultParent.SetActive(true);
         m_ResultTitle.text = isWin?"You Win":"Loser";
+
+        if(isWin){
+            var locationData = BaseDefenceManager.GetInstance().GetLocationScriptable();
+            MainGameManager.GetInstance().SaveData<int>(locationData.DisplayName+locationData.Id, 1);
+        }
     }
 }

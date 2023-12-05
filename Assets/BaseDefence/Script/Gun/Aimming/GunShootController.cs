@@ -116,14 +116,14 @@ public class GunShootController : MonoBehaviour
         m_SelectedGun = gun;
         m_CurrentWeaponSlotIndex = slotIndex;
 
-        BaseDefenceManager.GetInstance().SetAccruacy(m_SelectedGun.GunStats.Accuracy);
+        BaseDefenceManager.GetInstance().SetAccruacy((float)m_SelectedGun.GetStatValue("Accuracy"));
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
     }
 
     // on start ammo set up 
     public void SetUpGun(int slotIndex , GunScriptable gun){
-        m_GunsClipAmmo.Add(slotIndex, gun.GunStats.ClipSize);
+        m_GunsClipAmmo.Add(slotIndex, (float)gun.GetStatValue("ClipSize"));
         if(m_SelectedGun == null){
             BaseDefenceManager.GetInstance().SwitchSelectedWeapon(slotIndex);
 
@@ -137,7 +137,7 @@ public class GunShootController : MonoBehaviour
 
     private bool IsFullClipAmmo()
     {
-        return m_CurrentAmmo >= m_SelectedGun.GunStats.ClipSize;
+        return m_CurrentAmmo >= (float)m_SelectedGun.GetStatValue("ClipSize");
     }
 
     private void SetClipAmmoToZero()
@@ -147,7 +147,7 @@ public class GunShootController : MonoBehaviour
 
     private void SetClipAmmoToFull()
     {
-        ChangeAmmoCount(m_SelectedGun.GunStats.ClipSize, true);
+        ChangeAmmoCount((float)m_SelectedGun.GetStatValue("ClipSize"), true);
     }
     private IEnumerator SemiAutoShoot()
     {
@@ -182,7 +182,7 @@ public class GunShootController : MonoBehaviour
         }
 
         // shot all pellet
-        for (int j = 0; j < m_SelectedGun.GunStats.PelletPerShot; j++)
+        for (int j = 0; j < (float)m_SelectedGun.GetStatValue("Pellet"); j++)
         {
             // random center to point distance
             
@@ -207,10 +207,10 @@ public class GunShootController : MonoBehaviour
         
             // acc lose on shoot            
             BaseDefenceManager.GetInstance().SetAccruacy(
-                BaseDefenceManager.GetInstance().GetAccruacy()-m_SelectedGun.GunStats.Recoil
+                BaseDefenceManager.GetInstance().GetAccruacy()- (float)m_SelectedGun.GetStatValue("Recoil")
             );
 
-        m_CurrentShootCoolDown = 1 / m_SelectedGun.GunStats.FireRate;
+        m_CurrentShootCoolDown = 1 / (float)m_SelectedGun.GetStatValue("FireRate");
         ChangeAmmoCount(-1, false);
     }
 
@@ -239,7 +239,7 @@ public class GunShootController : MonoBehaviour
                 // set spawn point to gun point
                 pillBomb.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
-                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,m_SelectedGun.ExplodeRadius);
+                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,(float)m_SelectedGun.GetStatValue("Damage"),m_SelectedGun.ExplodeRadius);
 
                 break;
             case BulletType.Rocket:
@@ -247,12 +247,12 @@ public class GunShootController : MonoBehaviour
                 // set spawn point to gun point
                 rocket.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
-                rocket.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,m_SelectedGun.GunStats.DamagePerPellet,m_SelectedGun.ExplodeRadius);
+                rocket.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,(float)m_SelectedGun.GetStatValue("Damage"),m_SelectedGun.ExplodeRadius);
                 break;
             case BulletType.BowActionArrow:
                 var bowActionExplosion = Instantiate(m_AllProjectile[BulletType.BowActionArrow].Prefab);
                 bowActionExplosion.transform.position = hitEnvironmentAndEnemy.point;
-                bowActionExplosion.GetComponent<ExplosionController>().Init(m_SelectedGun.GunStats.DamagePerPellet, m_SelectedGun.ExplodeRadius);
+                bowActionExplosion.GetComponent<ExplosionController>().Init((float)m_SelectedGun.GetStatValue("Damage"), m_SelectedGun.ExplodeRadius);
                 break;
             default:
                 break;
@@ -279,7 +279,7 @@ public class GunShootController : MonoBehaviour
                         default:
                         break;
                     }
-                    bodyPart.OnHit(m_SelectedGun.GunStats.DamagePerPellet);
+                    bodyPart.OnHit((float)m_SelectedGun.GetStatValue("Damage"));
                 }else{
                     dotController.OnMiss();
                 }
@@ -305,12 +305,12 @@ public class GunShootController : MonoBehaviour
         {
             m_CurrentAmmo += num;
         }
-        if (m_CurrentAmmo > m_SelectedGun.GunStats.ClipSize)
+        if (m_CurrentAmmo > (float)m_SelectedGun.GetStatValue("ClipSize"))
         {
-            m_CurrentAmmo = m_SelectedGun.GunStats.ClipSize;
+            m_CurrentAmmo = (float)m_SelectedGun.GetStatValue("ClipSize");
         }
 
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText( $"{m_CurrentAmmo} / {m_SelectedGun.GunStats.ClipSize}" );
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText( $"{m_CurrentAmmo} / {(float)m_SelectedGun.GetStatValue("ClipSize")}" );
     }
     public GunScriptable GetSelectedGun(){
         return m_SelectedGun;

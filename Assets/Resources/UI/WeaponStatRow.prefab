@@ -199,6 +199,7 @@ MonoBehaviour:
   m_StatName: {fileID: 2109230732123779503}
   m_Cost: {fileID: 720022229302473240}
   m_UpgradeStatSmallBoxPrefab: {fileID: 3983430063713895755, guid: 6014982489c6af348a27227b8357734e, type: 3}
+  m_BlockParent: {fileID: 8322404519719815000}
 --- !u!1 &4137086973075806950
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 50, y: 20}
-  m_SizeDelta: {x: 800, y: 50}
+  m_SizeDelta: {x: 740, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &4711995879040713957
 MonoBehaviour:

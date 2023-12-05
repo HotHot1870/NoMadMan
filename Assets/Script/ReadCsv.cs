@@ -41,7 +41,7 @@ public class ReadCsv : MonoBehaviour
         AssetDatabase.Refresh();
     }
     
-    [EButton("ReadWeaponUpgradeWave")]
+    [EButton("ReadWeaponUpgrade")]
     private void ReadCsvFileWeaponUpgrade(){
         StartCoroutine(ReacCSVWeaponUpgrade());
 
@@ -168,7 +168,6 @@ public class ReadCsv : MonoBehaviour
                 // file already exist 
                 WeaponUpgrade = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
                 upgradeDetails = WeaponUpgrade.UpgradeDetails;
-                yield return null;
             }else{
             
                 WeaponUpgrade = ScriptableObject.CreateInstance<WeaponUpgradeScriptable>();
@@ -207,8 +206,9 @@ public class ReadCsv : MonoBehaviour
                 
                 var gunScriptable = AssetDatabase.LoadAssetAtPath<GunScriptable>(m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
                 gunScriptable.UpgradeScriptable = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
+                EditorUtility.SetDirty(gunScriptable);
                 EditorUtility.SetDirty(WeaponUpgrade);
-            yield return null;
+                yield return null;
         }    
 
         m_MainGameManager.SetAllWeaponUpgrade(allWeaponUpgrade);
@@ -335,7 +335,7 @@ public class ReadCsv : MonoBehaviour
             colume++;
             stats.ClipSize =  int.Parse(contents[colume]);
             colume++;
-            stats.IsSemiAuto = contents[colume].Trim() == "y";
+            stats.IsSemiAuto = contents[colume].Trim() == "Yes";
             colume++;
             stats.FireRate =  float.Parse(contents[colume]);
             colume++;

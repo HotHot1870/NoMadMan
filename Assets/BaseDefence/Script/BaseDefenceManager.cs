@@ -49,7 +49,6 @@ public class BaseDefenceManager : MonoBehaviour
 
     private float m_CurrentAccruacy = 100f;
 
-    private bool m_IsWin = false;
 
 
     [Header("Enemy Hp Bars")]
@@ -131,6 +130,9 @@ public class BaseDefenceManager : MonoBehaviour
         m_EnemySpawnController.StartWave( locationInfo);
     }
 
+    public MapLocationScriptable GetLocationScriptable(){
+        return m_EnemySpawnController.GetLocationScriptable();
+    }
 
 
     private void Update() {
@@ -226,8 +228,8 @@ public class BaseDefenceManager : MonoBehaviour
     }
     public void SetAccruacy(float newAccuracy){
         // acc cannot be lower than handling
-        var handling = m_GunShootController.GetSelectedGun().GunStats.Handling;
-        var acc = Mathf.Max(m_GunShootController.GetSelectedGun().GunStats.Accuracy,handling);
+        float handling = (float)m_GunShootController.GetSelectedGun().GetStatValue("Handling");
+        var acc = Mathf.Max( (float)m_GunShootController.GetSelectedGun().GetStatValue("Accuracy"),handling);
         m_CurrentAccruacy = Mathf.Clamp(newAccuracy, handling , acc);
     }
 

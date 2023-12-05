@@ -10,17 +10,16 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
     [SerializeField] private Button m_BackBtn; 
     [SerializeField] private Image m_GunDisplayImage;
     [SerializeField] private GameObject m_UpgradeStatRowPrefab;
-    [SerializeField] private CanvasGroup m_BottomFade;
     [SerializeField] private RectTransform m_Content;
 
-    private float m_ContentHeight = 0;
-    // including spawn
-    private float m_RowTotalheight = 0;
 
 
     private GunScriptable m_GunScriptable;
 
     private void Start(){
+        m_BackBtn.onClick.AddListener(()=>
+            this.gameObject.SetActive(false)
+        );
         this.gameObject.SetActive(false);
     }
 
@@ -32,20 +31,11 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
         {
             // spawn row
             var row = Instantiate(m_UpgradeStatRowPrefab,m_Content);
-            row.GetComponent<WeaponUpgradeRowController>().Init(upgradeScriptable,item);
+            row.GetComponent<WeaponUpgradeRowController>().Init(item,gunScriptable);
         }
         
-        m_RowTotalheight = m_UpgradeStatRowPrefab.GetComponent<RectTransform>().sizeDelta.y*(m_GunScriptable.UpgradeScriptable.UpgradeDetails.Count*2-1 );
+        m_GunDisplayImage.sprite = gunScriptable.DisplayImage;
         EditorUtility.SetDirty(m_Content);
-        m_BottomFade.alpha = m_Content.sizeDelta.y >= m_RowTotalheight ? 0f:1f;
-    }
-
-    public void OnScroll(){
-        m_ContentHeight = m_Content.sizeDelta.y;
-        // total height - content scroll amount - content size y
-        m_BottomFade.alpha = (m_RowTotalheight - m_Content.position.y - m_ContentHeight);
-        Debug.Log(m_RowTotalheight - m_Content.position.y - m_ContentHeight);
-        Debug.Log(m_RowTotalheight+"    "+m_Content.position.y+"     "+ m_ContentHeight);
     }
 
 }

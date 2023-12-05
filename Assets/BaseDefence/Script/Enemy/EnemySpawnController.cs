@@ -41,6 +41,10 @@ public class EnemySpawnController : MonoBehaviour
         GetAttackerSpotInOrder( new Vector3(1,2,3));
     }
 
+    public MapLocationScriptable GetLocationScriptable(){
+        return m_LocationData;
+    }
+
     public void StartWave(MapLocationScriptable locationData){
         m_LocationData = locationData;
         StartNextNormalWave();

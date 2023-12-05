@@ -300,12 +300,12 @@ public class MapUIController : MonoBehaviour
 
     private void SetWeaponlistSelectedWeaponData(GunScriptable selectedGunScriptable){
         m_SelectedWeaponName.text = "Name : "+selectedGunScriptable.DisplayName;
-        m_SelectedWeaponFireRate.text = "Fire Rate : "+selectedGunScriptable.GunStats.FireRate;
-        m_SelectedWeaponDamage.text = "Damage : "+selectedGunScriptable.GunStats.DamagePerPellet+" x "+selectedGunScriptable.GunStats.PelletPerShot.ToString();
-        m_SelectedWeaponClipSize.text = "Clip Size : "+selectedGunScriptable.GunStats.ClipSize;
-        m_SelectedWeaponAcc.text = "Acc : "+selectedGunScriptable.GunStats.Accuracy.ToString();
-        m_SelectedWeaponRecoil.text = "Recoil : "+selectedGunScriptable.GunStats.Recoil.ToString();
-        m_SelectedWeaponHandling.text = "Handling : "+selectedGunScriptable.GunStats.Handling.ToString();
+        m_SelectedWeaponFireRate.text = "Fire Rate : "+selectedGunScriptable.GetStatValue("FireRate");
+        m_SelectedWeaponDamage.text = "Damage : "+selectedGunScriptable.GetStatValue("Damage")+" x "+selectedGunScriptable.GetStatValue("Pellet");
+        m_SelectedWeaponClipSize.text = "Clip Size : "+selectedGunScriptable.GetStatValue("ClipSize");
+        m_SelectedWeaponAcc.text = "Acc : "+selectedGunScriptable.GetStatValue("Accuracy");
+        m_SelectedWeaponRecoil.text = "Recoil : "+selectedGunScriptable.GetStatValue("Recoil");
+        m_SelectedWeaponHandling.text = "Handling : "+selectedGunScriptable.GetStatValue("Handling");
         m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
 
     }
