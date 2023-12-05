@@ -69,14 +69,14 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_SelectedWeaponId = m_SelectedGun.Id;
         m_SelectedWeaponImage.sprite = m_SelectedGun.DisplayImage;
         m_SelectedWeaponName.text = "Name : "+m_SelectedGun.DisplayName;
-        m_SelectedWeaponFireRate.text = "Fire Rate : "+m_SelectedGun.GetStatValue("FireRate");
-        m_SelectedWeaponDamage.text = "Damage : "+m_SelectedGun.GetStatValue("Damage")+" x "+m_SelectedGun.GetStatValue("Pellet");
-        m_SelectedWeaponClipSize.text = "Clip Size : "+m_SelectedGun.GetStatValue("ClipSize");
-        m_SelectedWeaponAcc.text = "Acc : "+m_SelectedGun.GetStatValue("Accuracy");
-        m_SelectedWeaponRecoil.text = "Recoil : "+m_SelectedGun.GetStatValue("Recoil");
-        m_SelectedWeaponHandling.text = "Handling : "+m_SelectedGun.GetStatValue("Handling");
+        m_SelectedWeaponFireRate.text = "Fire Rate : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("FireRate"));
+        m_SelectedWeaponDamage.text = "Damage : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage"))+" x "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("Pellet"));
+        m_SelectedWeaponClipSize.text = "Clip Size : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize"));
+        m_SelectedWeaponAcc.text = "Acc : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("Accuracy"));
+        m_SelectedWeaponRecoil.text = "Recoil : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("Recoil"));
+        m_SelectedWeaponHandling.text = "Handling : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("Handling"));
         m_SelectedWeaponUnlockCost.text = "Unlock : "+m_SelectedGun.UnlockCost.ToString()+" / "+MainGameManager.GetInstance().GetGooAmount().ToString();
-        m_SelectedWeaponExplodeRadius.text = "Explode Radius : "+m_SelectedGun.GetStatValue("ExplodeRadius");
+        m_SelectedWeaponExplodeRadius.text = "Explode Radius : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("ExplodeRadius"));
         //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
 
         m_SelectedWeaponSemiAuto.text = "Semi_Auto : "+m_SelectedGun.GunStats.IsSemiAuto.ToString();

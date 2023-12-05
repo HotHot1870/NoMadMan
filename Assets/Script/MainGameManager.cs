@@ -38,6 +38,13 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private float m_GooAmount=1000;
 
     
+#if UNITY_EDITOR
+    [MenuItem("Action/ClearData")]
+    static void ClearData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    
     [MenuItem("Scene/MainMenu")]
     static void ToMainMenu()
     {
@@ -55,7 +62,7 @@ public class MainGameManager : MonoBehaviour
     {
         UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Map/Map.unity");
     }
-
+#endif
 
     public static MainGameManager GetInstance()
     {

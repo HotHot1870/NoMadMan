@@ -24,7 +24,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
         m_GunScriptable = gunScriptable;
 
         string upgradeSaveKey = m_GunScriptable.DisplayName+m_UpgradeDetail.UpgradeStat.ToString();
-        m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
+        m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
 
         m_UpgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey);
 
@@ -36,7 +36,10 @@ public class WeaponUpgradeRowController : MonoBehaviour
             m_AllBlock.Add(blockController);
             blockController.m_Text.text = m_UpgradeDetail.CostAndValue[i].UpgradeValue;
             blockController.m_BG.color = m_UpgradeCount>i?Color.green:Color.white;
+
+#if UNITY_EDITOR
             EditorUtility.SetDirty(block);
+#endif
         }
         
 
@@ -45,7 +48,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
             m_AllBlock[m_UpgradeCount].m_BG.color = Color.green;
             m_UpgradeCount++;
             MainGameManager.GetInstance().SaveData<int>(upgradeSaveKey,m_UpgradeCount);
-            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
+            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ System.Convert.ToSingle(gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat)).ToString();
         });
     }
 }

@@ -26,7 +26,10 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
     public void Init(GunScriptable gunScriptable){
         m_GunScriptable = gunScriptable;
         var upgradeScriptable = m_GunScriptable.UpgradeScriptable;
+        
+#if UNITY_EDITOR
         EditorUtility.SetDirty(m_Content);
+#endif
         foreach (var item in upgradeScriptable.UpgradeDetails)
         {
             // spawn row
@@ -35,7 +38,10 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
         }
         
         m_GunDisplayImage.sprite = gunScriptable.DisplayImage;
+        
+#if UNITY_EDITOR
         EditorUtility.SetDirty(m_Content);
+#endif
     }
 
 }

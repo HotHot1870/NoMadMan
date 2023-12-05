@@ -69,7 +69,7 @@ public class GunScriptable : ScriptableObject
                 ans = (object)GunStats.BulletType;
                 break;
             case "IsSemiAuto":
-                ans = (object)"False";
+                ans = (object)"No";
                 break;
             default:
                 break;

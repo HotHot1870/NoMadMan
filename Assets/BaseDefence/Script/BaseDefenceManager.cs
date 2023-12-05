@@ -228,8 +228,8 @@ public class BaseDefenceManager : MonoBehaviour
     }
     public void SetAccruacy(float newAccuracy){
         // acc cannot be lower than handling
-        float handling = (float)m_GunShootController.GetSelectedGun().GetStatValue("Handling");
-        var acc = Mathf.Max( (float)m_GunShootController.GetSelectedGun().GetStatValue("Accuracy"),handling);
+        float handling = (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue("Handling"));
+        var acc = Mathf.Max( (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue("Accuracy")),handling);
         m_CurrentAccruacy = Mathf.Clamp(newAccuracy, handling , acc);
     }
 
