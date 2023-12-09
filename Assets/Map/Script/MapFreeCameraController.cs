@@ -5,11 +5,9 @@ using UnityEngine;
 public class MapFreeCameraController : MonoBehaviour
 {
     [SerializeField] private Transform m_CameraParent;
-    [SerializeField] private Transform m_TopRight;
-    [SerializeField] private Transform m_BottomLeft;
     [SerializeField][Range(0.5f,5f)] private float m_Sensitivity = 1f;
-    //private Vector2 m_AimDragMouseStartPos = Vector2.zero;
-    //private Vector2 m_AimDragMouseEndPos = Vector2.zero;
+    [SerializeField] private Vector2 m_CameraBottomLeft;
+    [SerializeField] private Vector2 m_CameraTopRight;
     private Vector2 m_MousePreviousPos = Vector2.zero;
     private bool m_IsCameraMoving = false;
     private Vector3 m_CameraDragStartPos;
@@ -59,9 +57,9 @@ public class MapFreeCameraController : MonoBehaviour
 
     private void CameraOutOfBoundPrevention(){
         m_CameraParent.position = new Vector3(
-            Mathf.Clamp(m_CameraParent.position.x,m_TopRight.position.x,m_BottomLeft.position.x),
+            Mathf.Clamp(m_CameraParent.position.x,m_CameraBottomLeft.x, m_CameraTopRight.x),
             m_CameraParent.position.y,
-            Mathf.Clamp(m_CameraParent.position.z,m_TopRight.position.z,m_BottomLeft.position.z)
+            Mathf.Clamp(m_CameraParent.position.z,m_CameraBottomLeft.y, m_CameraTopRight.y)
          ) ;
     }
 }
