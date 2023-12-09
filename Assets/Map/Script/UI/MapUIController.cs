@@ -8,7 +8,6 @@ using TMPro;
 public class MapUIController : MonoBehaviour
 {
     [SerializeField] private Button2D m_MapDragBtn;  
-    [SerializeField] private Button m_CheckLocationBtn;
 
     [Header("Option")]
     [SerializeField] private Button m_OptionBtn;
@@ -17,9 +16,6 @@ public class MapUIController : MonoBehaviour
     [Header("Location")]
     [SerializeField] private GameObject m_LocationDetailPanel; 
     [SerializeField] private TMP_Text m_LocationName;  
-    //[SerializeField] private TMP_Text m_FortifyCost;  
-    //[SerializeField] private TMP_Text m_FortifyRewardText;  
-    //[SerializeField] private Image m_RewardImage;
     [SerializeField] private TMP_Text m_EnemyText;  
     [SerializeField] private Transform m_EnemyList; 
     [SerializeField] private Button m_FortifyBtn;  
@@ -30,15 +26,7 @@ public class MapUIController : MonoBehaviour
     [Header("WeaponUpgradeSelect")]
     [SerializeField] private WorkShopChooseWeaponController m_WorkShopChooseWeaponController;
     [SerializeField] private Button m_WorkShopBtn;
-    
 
-    /*
-    [SerializeField] private GameObject m_FortifyPanel; 
-    [SerializeField] private TMP_Text m_FortifyCostInDetail; 
-    [SerializeField] private TMP_Text m_RewardName;
-    [SerializeField] private Image m_RewardImageInDetail;
-    [SerializeField] private Button m_YesFortifyBtn;  
-    [SerializeField] private Button m_NoFortifyBtn; */ 
 
     [Header("ChooseWeapon")]
     [SerializeField] private GameObject m_ChooseWeaponPanel;
@@ -72,7 +60,6 @@ public class MapUIController : MonoBehaviour
 
     private void Start() {
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
-        m_CheckLocationBtn.gameObject.SetActive(false);
 
         // TODO : Split all ui panel
         TurnOffAllPanel();
@@ -85,7 +72,6 @@ public class MapUIController : MonoBehaviour
         m_MapDragBtn.onUp.AddListener(freeCameraController.OnDragMapBtnUp);
         m_MapDragBtn.onExit.AddListener(freeCameraController.OnDragMapBtnUp);
 
-        m_CheckLocationBtn.onClick.AddListener(ShowLocationDetail);
 
         // location detail
         //m_FortifyBtn.onClick.AddListener(OnClickFortify);
@@ -115,10 +101,8 @@ public class MapUIController : MonoBehaviour
     }
 
     private void CancelLocationDetail() {
-        
-        m_CheckLocationBtn.gameObject.SetActive(true);
         m_LocationDetailPanel.SetActive(false);
-        MapManager.GetInstance().GetNearestLocationController().SetLocationCameraPiority(0);
+        MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(0);
         StartCoroutine(SetMovable());
         
     }
@@ -126,7 +110,6 @@ public class MapUIController : MonoBehaviour
     private IEnumerator SetMovable(){
         // wait until location detail panel are hidden , then set movable
         yield return null;
-        MapManager.GetInstance().GetVehicleController().ChangeMovable(true);
 
     }
 
@@ -157,20 +140,20 @@ public class MapUIController : MonoBehaviour
     }
 
     private void OnClickStartDefence() {
-        MapLocationScriptable locationData = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
+        MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null)
             return;
             
         MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
     }
 
-    private void ShowLocationDetail(){
-        MapLocationScriptable locationData = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
-        if(locationData==null)
+    public void ShowLocationDetail(){
+        MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
+        if(locationData==null || m_LocationDetailPanel.activeSelf)
             return;
 
         
-        MapManager.GetInstance().GetNearestLocationController().SetLocationCameraPiority(10);
+        MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);
 
         m_LocationDetailPanel.SetActive(true);
         m_LocationName.text = locationData.DisplayName;
@@ -201,9 +184,6 @@ public class MapUIController : MonoBehaviour
         
 
         // TODO : enemy list
-        MapManager.GetInstance().GetVehicleController().ChangeMovable(false);
-
-        m_CheckLocationBtn.gameObject.SetActive(false);
 
     }
 
@@ -238,17 +218,9 @@ public class MapUIController : MonoBehaviour
         }
     }
 
-    public void ChangeCheckLocationActive(bool isActive){
-        if(m_LocationDetailPanel.activeSelf){
-            // no check location btn if already checking
-            return;
-        }
-            m_CheckLocationBtn.gameObject.SetActive(isActive);
-    }
-
 /*
     private void OnClickFortify(){
-        MapLocationScriptable locationData = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
+        MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null)
             return;
 
@@ -275,7 +247,7 @@ public class MapUIController : MonoBehaviour
     }*/
 /*
     private void OnClickFortifyYes(){
-        var locationScriptable = MapManager.GetInstance().GetNearestLocationController().GetScriptable();
+        var locationScriptable = MapManager.GetInstance().GetLocationController().GetScriptable();
         MainGameManager.GetInstance().ChangeGooAmount(
             locationScriptable.FortifyCost * -1f
         );

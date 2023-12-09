@@ -9,6 +9,7 @@ public class MapFreeCameraController : MonoBehaviour
     [SerializeField] private Vector2 m_CameraBottomLeft;
     [SerializeField] private Vector2 m_CameraTopRight;
     private Vector2 m_MousePreviousPos = Vector2.zero;
+    private Vector2 m_MouseStartPos = Vector2.zero;
     private bool m_IsCameraMoving = false;
     private Vector3 m_CameraDragStartPos;
 
@@ -32,15 +33,32 @@ public class MapFreeCameraController : MonoBehaviour
         m_MousePreviousPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         //m_AimDragMouseStartPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         m_CameraDragStartPos = m_CameraParent.position;
+        m_MouseStartPos = Input.mousePosition;
         m_IsCameraMoving = true;
     }
 
     public void OnDragMapBtnUp()
     {
+        // click building
+        if( Vector3.Distance( m_MouseStartPos , Input.mousePosition ) <5f){
+            Ray ray = Camera.main.ScreenPointToRay(m_MousePreviousPos);
+            RaycastHit hitBuilding;
+        
+            if( Physics.Raycast(ray,out hitBuilding,500, 1<<10) ){
+                var mapLocationController = hitBuilding.transform.GetComponent<MapLocationController>();
+                if(mapLocationController != null){
+                    MapManager.GetInstance().SetLocation( mapLocationController );
+                    MapManager.GetInstance().ShowLocationDetail();
+                }
+            }
+        }
+
+        // reset
         m_IsCameraMoving = false;
         //m_AimDragMouseStartPos = Vector2.zero;
         m_MousePreviousPos = Vector2.zero;
         m_CameraDragStartPos = m_CameraParent.position;
+
     }
 
     private void MoveFreeCamera()

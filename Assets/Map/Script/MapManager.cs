@@ -8,10 +8,8 @@ public class MapManager : MonoBehaviour
     public static MapManager m_Instance = null;
     [SerializeField] private MapFreeCameraController m_MapFreeCameraController;
     [SerializeField] private MapUIController m_MapUIController;
-    [SerializeField] private VehicleController m_VehicleController;
     [SerializeField] private Transform m_MapLocationParent;
-    private Dictionary<MapLocationScriptable,MapLocationController> m_AllLocation = new Dictionary<MapLocationScriptable,MapLocationController>();
-    private MapLocationController m_NearestLocationController = null;
+    private MapLocationController m_LocationController = null;
     [SerializeField] private float m_LocationToVehicleMaxDistance = 3f;
 
 
@@ -32,27 +30,18 @@ public class MapManager : MonoBehaviour
         SpawnAllLocation();
     }
 
-    public VehicleController GetVehicleController(){
-        return m_VehicleController;
+    public void ShowLocationDetail(){
+        m_MapUIController.ShowLocationDetail();
     }
 
-    public void SetNearestLocation(Vector3 VehiclePos)
+
+    public void SetLocation(MapLocationController mapLocationController)
     {
-        m_NearestLocationController = null;
-        float ansDistance = m_LocationToVehicleMaxDistance;
-        foreach (var item in m_AllLocation)
-        {
-            float distance = Vector3.Distance(item.Key.Pos, VehiclePos);
-            if ( distance < ansDistance)
-            {
-                m_NearestLocationController = item.Value;
-            }
-        }
-
+        m_LocationController = mapLocationController;
     }
 
-    public MapLocationController GetNearestLocationController(){
-        return m_NearestLocationController;
+    public MapLocationController GetLocationController(){
+        return m_LocationController;
     }
 
     public static MapManager GetInstance()
@@ -81,7 +70,6 @@ public class MapManager : MonoBehaviour
             var newLocation = Instantiate(item.Prefab, m_MapLocationParent);
             newLocation.transform.position = item.Pos;
             var locationController = newLocation.GetComponent<MapLocationController>();
-            m_AllLocation.Add(item,locationController);
             locationController.SetScriptable(item);
         }
     }

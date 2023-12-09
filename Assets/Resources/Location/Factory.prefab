@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318651951724821184}
   - component: {fileID: 5657370617863001481}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 2584975222054277391}
   - component: {fileID: 9111922559853236067}
   - component: {fileID: 6197136395579860561}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building_Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2416485781442876454}
   - component: {fileID: 3367930830746065842}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6436912401336193342}
   - component: {fileID: 7286800541836257496}
-  m_Layer: 0
+  - component: {fileID: 4683473305912029419}
+  m_Layer: 10
   m_Name: Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,3 +248,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LocationCamera: {fileID: 5657370617863001481}
   m_Scriptable: {fileID: 0}
+--- !u!65 &4683473305912029419
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8845782238484281136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9, y: 8, z: 15}
+  m_Center: {x: 0, y: 4, z: 0}

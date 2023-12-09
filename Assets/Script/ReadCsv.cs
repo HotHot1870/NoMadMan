@@ -229,7 +229,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 9;
+        int collumeCount = 8;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -245,8 +245,6 @@ public class ReadCsv : MonoBehaviour
             location.DisplayName = contents[colume].Trim();
             location.Prefab = Resources.Load<GameObject>("Location/"+contents[colume].Trim().Replace(" ", ""));
             
-            colume++;
-            location.WaveId = int.Parse(contents[colume]);
             
             colume++;
             float posX = float.Parse(contents[colume].Split('|')[0]);

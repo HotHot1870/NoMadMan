@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5590957990403019349}
   - component: {fileID: -5372499914996020082}
-  m_Layer: 0
+  - component: {fileID: 1889270186288475050}
+  m_Layer: 10
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +49,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LocationCamera: {fileID: 8776108656280521919}
   m_Scriptable: {fileID: 0}
+--- !u!65 &1889270186288475050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260530507001224352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9, y: 4, z: 5}
+  m_Center: {x: 1.5, y: 2, z: 0}
 --- !u!1 &3197963667935065902
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060495587043391299}
   - component: {fileID: 4091985189134094441}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004136818519163917}
   - component: {fileID: 8776108656280521919}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +197,7 @@ GameObject:
   - component: {fileID: 2208574544593473379}
   - component: {fileID: 7137165449655351976}
   - component: {fileID: 3213482034070899653}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Modle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
