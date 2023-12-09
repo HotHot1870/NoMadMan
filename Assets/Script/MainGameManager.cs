@@ -1,22 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MainGameNameSpace;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEditor;
+using Unity.VisualScripting;
 
-
-
-namespace MainGameNameSpace
-{
-    [System.Serializable]
-    public class WeaponOwnership
-    {
-        public GunScriptable Gun;
-        public bool IsOwned = false;
-    }
-}
 
 public class MainGameManager : MonoBehaviour
 {
@@ -28,14 +17,13 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
 
-    [SerializeField] private List<WeaponOwnership> m_AllWeapon = new List<WeaponOwnership>();
+    [SerializeField] private List<GunScriptable> m_AllWeapon = new List<GunScriptable>();
     [SerializeField] private List<MapLocationScriptable> m_AllLocation = new List<MapLocationScriptable>();
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
-    [SerializeField]private float m_GooAmount=1000;
 
     
 #if UNITY_EDITOR
@@ -43,6 +31,12 @@ public class MainGameManager : MonoBehaviour
     static void ClearData()
     {
         PlayerPrefs.DeleteAll();
+    }
+    [MenuItem("Action/GetHundredGoo")]
+    static void GetGooDebug()
+    {
+        float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
+        PlayerPrefs.SetFloat("Goo",curGoo+1000);
     }
     
     [MenuItem("Scene/MainMenu")]
@@ -77,9 +71,14 @@ public class MainGameManager : MonoBehaviour
     private void Start()
     {
 		Application.targetFrameRate = 50;
-        m_GooAmount = MathF.Max( (float)GetData<float>("Goo") ,m_GooAmount );
+        //
+        
+        for (int i = 0; i < 4; i++)
+        {
+            SaveData<int>(m_AllWeapon[i].DisplayName+m_AllWeapon[i].Id.ToString(),1);
+        }
     }
-    public List<WeaponOwnership> GetAllWeapon()
+    public List<GunScriptable> GetAllWeapon()
     {
         return m_AllWeapon;
     }
@@ -106,15 +105,18 @@ public class MainGameManager : MonoBehaviour
         return m_AllEnemy;
     }
 
-    public void SetAllWeapon(List<WeaponOwnership> allWeapon){
+    public void SetAllWeapon(List<GunScriptable> allWeapon){
         // TODO : check Ownership
         m_AllWeapon = allWeapon;
         m_AllSelectedWeapon.Clear();
 
         for (int i = 0; i < m_AllWeapon.Count; i++)
         {
-            if(m_AllWeapon[i].IsOwned){
-                m_AllSelectedWeapon.Add(m_AllWeapon[i].Gun);
+            
+            string gunUnlockKey = m_AllWeapon[i].DisplayName+m_AllWeapon[i].Id;
+
+            if((int)System.Convert.ToSingle(GetData<int>(gunUnlockKey)) == 1){
+                m_AllSelectedWeapon.Add(m_AllWeapon[i]);
             }
             if(m_AllSelectedWeapon.Count>=4)
                 break;
@@ -154,18 +156,19 @@ public class MainGameManager : MonoBehaviour
 
 
     public void UnlockGun(int id){
-        var tmp = m_AllWeapon.Find(x=>x.Gun.Id==id);
-        tmp.IsOwned = true;
+        var targetGun = m_AllWeapon.Find(x=>x.Id==id);
+
+        SaveData<int>(targetGun.DisplayName+targetGun.Id.ToString(),1);
     }
 
 
     public void ChangeGooAmount(float gooChanges){
-        m_GooAmount += gooChanges;
-        SaveData<float>("Goo",m_GooAmount);
+        var curGoo = (float)GetData<float>("Goo") ;
+        SaveData<float>("Goo",curGoo+gooChanges);
     }
 
     public float GetGooAmount(){
-        return m_GooAmount;
+        return (float)GetData<float>("Goo") ;
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
@@ -280,7 +283,7 @@ public class MainGameManager : MonoBehaviour
         else if(typeof(T) == typeof(string)){
             return PlayerPrefs.GetString(key, "");
         }
-        return null;
+        return 0;
     }
 
 }

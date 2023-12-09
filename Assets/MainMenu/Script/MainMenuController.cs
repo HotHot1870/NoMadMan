@@ -20,7 +20,8 @@ public class MainMenuController : MonoBehaviour
         });
         
         m_OptionBtn.onClick.AddListener(()=>{
-            m_OptionPanel.SetActive(true);
+            var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
+            optionController.Open();
         });
 
         m_QuitGameBtn.onClick.AddListener(()=>{

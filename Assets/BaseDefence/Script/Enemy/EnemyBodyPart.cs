@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EnemyBodyPartEnum
@@ -78,7 +76,7 @@ public class EnemyBodyPart : MonoBehaviour
         m_EnemyController.ChangeHp(changes);
     }
 
-    public void OnHit(float damage)
+    public void OnHit(float damage, Vector2 screenPos)
     {
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
 
@@ -92,6 +90,25 @@ public class EnemyBodyPart : MonoBehaviour
             m_EmissionDelay = 0.1f;
             StartCoroutine(EmitHitEffectDelay());
         }
+
+        // show damage
+        Color color= new Color(1,0,0) ;
+        switch (m_BodyType)
+            {
+                case EnemyBodyPartEnum.Body:
+                    color = Color.white;
+                break;
+                case EnemyBodyPartEnum.Shield:
+                    color = Color.blue;
+                break;
+                case EnemyBodyPartEnum.Crit:
+                    color = Color.red;
+                break;
+                default:
+                break;
+            }
+
+        BaseDefenceManager.GetInstance().SetDamageText(damage * m_DamageMod,color,screenPos);
 /*
         // Hit sound
         if(m_CanPlayHitSound){

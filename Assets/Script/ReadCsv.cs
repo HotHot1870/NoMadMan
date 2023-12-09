@@ -159,7 +159,7 @@ public class ReadCsv : MonoBehaviour
         {
             int index = i;
             int colume = index;
-            string displayName = allWeapon.Find(x=>x.Gun.Id==int.Parse(contents[colume+1]) ).Gun.DisplayName;
+            string displayName = allWeapon.Find(x=>x.Id==int.Parse(contents[colume+1]) ).DisplayName;
             WeaponUpgradeScriptable WeaponUpgrade = null;
             List<WeaponUpgradeDetail> upgradeDetails = new List<WeaponUpgradeDetail>();
 
@@ -289,7 +289,7 @@ public class ReadCsv : MonoBehaviour
     private IEnumerator ReadGunCSV(){
         // Gun
         Dictionary<int,GunScriptable> allGuns = new Dictionary<int, GunScriptable>(); 
-        List<MainGameNameSpace.WeaponOwnership> allWeaponAndOwnership = new List<MainGameNameSpace.WeaponOwnership>();
+        List<GunScriptable> allGunScriptable = new List<GunScriptable>();
 
         if(Resources.Load<TextAsset>("CSV/Gun") == null){
             Debug.LogError(m_ResourcesPath+"/CSV//Gun.csv is null" );
@@ -354,14 +354,16 @@ public class ReadCsv : MonoBehaviour
 
             gunScriptable.GunStats = stats;
             allGuns.Add(gunScriptable.Id,gunScriptable);
-            var weaponOwnership = new MainGameNameSpace.WeaponOwnership();
-            weaponOwnership.Gun = gunScriptable;
-            weaponOwnership.IsOwned = index/collumeCount<=4;
-            allWeaponAndOwnership.Add(weaponOwnership);
+
+            if(index/collumeCount<=4)
+                m_MainGameManager.SaveData<int>(gunScriptable.DisplayName+gunScriptable.Id.ToString(),1);
+
+
+            allGunScriptable.Add(gunScriptable);
             EditorUtility.SetDirty(gunScriptable);
             yield return null;
         }
-        m_MainGameManager.SetAllWeapon(allWeaponAndOwnership);
+        m_MainGameManager.SetAllWeapon(allGunScriptable);
     }
 
 

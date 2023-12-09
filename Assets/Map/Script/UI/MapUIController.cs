@@ -103,7 +103,8 @@ public class MapUIController : MonoBehaviour
         m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);
 
         m_OptionBtn.onClick.AddListener(()=>{
-            m_OptionPanel.SetActive(true);
+            var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
+            optionController.Open();
         });
     }
     
@@ -228,10 +229,11 @@ public class MapUIController : MonoBehaviour
         for (int i = 0; i < allWeapon.Count; i++)
         {
             //Debug.Log("check weawpon"+allWeapon[i].Gun.Id);
-            // >>>>  check if other slot have the smae weapon  <<<<<
-            if(allWeapon[i].IsOwned && !allSelectedWeaponId.Contains( allWeapon[i].Gun.Id)){
+            // >>>>  check if other slot have the same weapon  <<<<<
+            string gunUnlockKey = allWeapon[i].DisplayName+allWeapon[i].Id.ToString();
+            if( System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey))==1 && !allSelectedWeaponId.Contains( allWeapon[i].Id)){
                 var newWeaponListSlot = Instantiate(m_WeaponListSlotPrefab, m_WeaponListSlotParent);
-                newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i].Gun,weaponSlotIndex);
+                newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i],weaponSlotIndex);
             }
         }
     }
@@ -321,6 +323,5 @@ public class MapUIController : MonoBehaviour
         m_LocationDetailPanel.SetActive(false);
         m_WorkShopChooseWeaponController.gameObject.SetActive(false);
         m_WeaponListPanel.SetActive(false);
-        m_OptionPanel.SetActive(false);
     }
 }

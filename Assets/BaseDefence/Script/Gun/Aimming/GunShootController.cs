@@ -68,7 +68,7 @@ public class GunShootController : MonoBehaviour
         else
         {
             m_SemiAutoShootCoroutine = null;
-            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GunStats.IsSemiAuto)
+            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GetStatValue("IsSemiAuto").ToString() == "Yes")
             {
                 m_SemiAutoShootCoroutine = StartCoroutine(SemiAutoShoot());
                 // semi auto 
@@ -279,7 +279,7 @@ public class GunShootController : MonoBehaviour
                         default:
                         break;
                     }
-                    bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")));
+                    bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")) , Camera.main.WorldToScreenPoint(hit.point));
                 }else{
                     dotController.OnMiss();
                 }

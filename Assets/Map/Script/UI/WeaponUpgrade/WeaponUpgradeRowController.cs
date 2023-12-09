@@ -45,10 +45,12 @@ public class WeaponUpgradeRowController : MonoBehaviour
 
         m_UpgradeBtn.onClick.AddListener(()=>{
             // TODO : On Hold , not on click
-            m_AllBlock[m_UpgradeCount].m_BG.color = Color.green;
             m_UpgradeCount++;
+            m_AllBlock[m_UpgradeCount-1].m_BG.color = Color.green;
+            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ m_AllBlock[m_UpgradeCount-1].m_Text.text;
             MainGameManager.GetInstance().SaveData<int>(upgradeSaveKey,m_UpgradeCount);
-            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ System.Convert.ToSingle(gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat)).ToString();
+            Debug.Log(upgradeSaveKey+"     "+m_UpgradeCount);
+            // TODO : cost goo
         });
     }
 }

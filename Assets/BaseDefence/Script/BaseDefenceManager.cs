@@ -163,6 +163,10 @@ public class BaseDefenceManager : MonoBehaviour
         }
     }
 
+    public void SetDamageText(float damage , Color color,Vector2 pos){
+        m_BaseDefenceUIController.ShowDamageText(damage,color,pos);
+    }
+
     public BaseDefenceUIController GetBaseDefenceUIController(){
         return m_BaseDefenceUIController;
     }

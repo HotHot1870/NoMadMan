@@ -54,6 +54,10 @@ public class ExplosionController : MonoBehaviour
                 // never hit this enemy , hit it
                 m_AllHittedEnemy.Add(enemySpawnId);
                 enemyBodyPart.ChangeHp(m_Damage * enemyBodyPart.GetExplosiveDamageMod() * -1);
+                BaseDefenceManager.GetInstance().SetDamageText(
+                    m_Damage * enemyBodyPart.GetExplosiveDamageMod(),
+                    Color.yellow,
+                    Camera.main.WorldToScreenPoint(other.transform.position));
                 
             }
 

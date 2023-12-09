@@ -95,7 +95,6 @@ public abstract class EnemyControllerBase : MonoBehaviour
     protected virtual void OnDead(){
         BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
         MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetGooText();
         OnDeadAction?.Invoke();
     }
 }

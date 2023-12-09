@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using GunReloadScriptableNameSpace;
+
 using UnityEngine;
-using MainGameNameSpace;
-using Unity.VisualScripting;
 using System.Linq;
 
 
@@ -69,7 +65,8 @@ public class GunScriptable : ScriptableObject
                 ans = (object)GunStats.BulletType;
                 break;
             case "IsSemiAuto":
-                ans = (object)"No";
+                string baseValue = GunStats.IsSemiAuto?"Yes":"No";
+                ans = GetUpgradedGunStat(statName, (object)baseValue);
                 break;
             default:
                 break;
@@ -82,11 +79,11 @@ public class GunScriptable : ScriptableObject
         var targetList = UpgradeScriptable.UpgradeDetails.Where(x=>x.UpgradeStat == typeName).ToList();
         if(targetList.Count>0){
             string upgradeSaveKey = DisplayName+targetList[0].UpgradeStat.ToString() ;
-            int upgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey) -1;
-            if(upgradeCount <=0){
+            int upgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey) ;
+            if(upgradeCount-1 <0){
                 return baseValue;
             }
-            return targetList[0].CostAndValue[upgradeCount].UpgradeValue;
+            return targetList[0].CostAndValue[Mathf.Clamp(upgradeCount-1,0,targetList[0].CostAndValue.Count)].UpgradeValue;
         }
         return baseValue;
 

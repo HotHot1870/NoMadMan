@@ -6,8 +6,6 @@ using GunReloadScriptableNameSpace;
 using BaseDefenceNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using MainGameNameSpace;
 
 
 public class GunReloadController : MonoBehaviour

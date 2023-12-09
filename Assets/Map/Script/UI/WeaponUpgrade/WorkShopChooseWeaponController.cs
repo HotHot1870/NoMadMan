@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using ExtendedButtons;
-using MainGameNameSpace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,7 +51,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         this.gameObject.SetActive(false);
         m_UpgradeBtn.gameObject.SetActive(false);
     }
-    private void SetWeaponlistSelectedWeaponData(WeaponOwnership selectedGunOwnership){
+    private void SetWeaponlistSelectedWeaponData(GunScriptable gunScriptable){
         if(m_Unfilling != null)
             StopCoroutine( m_Unfilling);
 
@@ -64,7 +61,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_UnlockFill.fillAmount = 0;
 
 
-        m_SelectedGun = selectedGunOwnership.Gun;
+        m_SelectedGun = gunScriptable;
         
         m_SelectedWeaponId = m_SelectedGun.Id;
         m_SelectedWeaponImage.sprite = m_SelectedGun.DisplayImage;
@@ -79,7 +76,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_SelectedWeaponExplodeRadius.text = "Explode Radius : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue("ExplodeRadius"));
         //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
 
-        m_SelectedWeaponSemiAuto.text = "Semi_Auto : "+m_SelectedGun.GunStats.IsSemiAuto.ToString();
+        m_SelectedWeaponSemiAuto.text = "Semi_Auto : "+ m_SelectedGun.GetStatValue("IsSemiAuto");
         //m_SelectedWeaponSemiAuto.gameObject.SetActive(m_SelectedGun.GunStats.IsSemiAuto);
 
         string punctureText = (m_SelectedGun.GunStats.BulletType == BulletType.Puncture).ToString();
@@ -87,9 +84,12 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         //m_SelectedWeaponPuncture.gameObject.SetActive(m_SelectedGun.GunStats.BulletType == BulletType.Puncture);
 
 
-        m_SelectedWeaponUnlockCost.gameObject.SetActive(!selectedGunOwnership.IsOwned);
-        m_UnlockBtn.gameObject.SetActive(!selectedGunOwnership.IsOwned);
-        m_UpgradeBtn.gameObject.SetActive(selectedGunOwnership.IsOwned);
+        string gunUnlockKey = m_SelectedGun.DisplayName+m_SelectedGun.Id;
+
+        bool isOwned = (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(gunUnlockKey)) == 1;
+        m_SelectedWeaponUnlockCost.gameObject.SetActive(!isOwned);
+        m_UnlockBtn.gameObject.SetActive(!isOwned);
+        m_UpgradeBtn.gameObject.SetActive(isOwned);
     }
 
 
@@ -109,9 +109,13 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             int index = i;
             var newWeaponListSlot = Instantiate(m_WeaponListGrid, m_WeaponListContent);
             var gun = allWeapon[index];
+            
+            string gunUnlockKey = gun.DisplayName+gun.Id.ToString();
+
+            bool isOwned = (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(gunUnlockKey)) == 1;
             var config = new WeaponUpgradeGridConfig{
-                isLock = !allWeapon[index].IsOwned,
-                gunOwnership = gun,
+                isLock = !isOwned,
+                gunScriptsble = gun,
                 onClickAction = SetWeaponlistSelectedWeaponData
             };
             newWeaponListSlot.GetComponent<MapWeaponUpgradeGridController>().Init(config);
@@ -158,12 +162,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         MainGameManager.GetInstance().ChangeGooAmount(-1f*m_SelectedGun.UnlockCost);
         MainGameManager.GetInstance().UnlockGun(m_SelectedGun.Id);
         Init();
-        var weaponOwnership = new WeaponOwnership{
-            Gun = m_SelectedGun,
-            IsOwned = true
-
-        };
-        SetWeaponlistSelectedWeaponData(weaponOwnership);
+        SetWeaponlistSelectedWeaponData( m_SelectedGun);
         
         if(m_Filling != null){
             StopCoroutine( m_Filling);
