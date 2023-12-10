@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class BaseDefenceUIController : MonoBehaviour
 {
+    private bool m_IsWin = false;
     
     [Header("BG")]
     [SerializeField] private Animator m_BGAnimator;
@@ -159,12 +160,15 @@ public class BaseDefenceUIController : MonoBehaviour
 
     public void OnClickBackFromResult(){
         SceneManager.LoadScene("Map");
+        // remove corruption if win
+        
     }
 
     public void SetResultPanel(bool isWin){
         TurnOffAllPanel();
         m_ResultParent.SetActive(true);
         m_BGAnimator.Play("Open");
+        m_IsWin = isWin;
         m_ResultTitle.text = isWin?"You Win":"Loser";
 
         if(isWin){

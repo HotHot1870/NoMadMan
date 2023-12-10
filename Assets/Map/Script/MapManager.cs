@@ -34,6 +34,10 @@ public class MapManager : MonoBehaviour
         m_MapUIController.ShowLocationDetail();
     }
 
+    public bool ShouldShowLocationDetail(){
+        return m_MapUIController.ShouldShowLocationDetail();
+    }
+
 
     public void SetLocation(MapLocationController mapLocationController)
     {

@@ -9,6 +9,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     [SerializeField] private Button m_BackBtn; 
     [SerializeField] private MapUpgradeWeaponPanel m_MapUpgradeWeaponPanel; 
     [SerializeField] private Button m_UpgradeBtn; 
+    [SerializeField] private TMP_Text m_GooText;
 
     [Header("Unlock")]
     [SerializeField] private Button2D m_UnlockBtn; 
@@ -38,6 +39,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
 
     void Start(){
+        
+        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
         m_BackBtn.onClick.AddListener(()=>{
             this.gameObject.SetActive(false);
             });
@@ -95,6 +98,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
     public void Init(){
         m_UnlockFill.fillAmount = 0;
+        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
         
         var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
         
@@ -169,7 +173,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             m_Filling = null;
         }
     }
-
+/*
     private IEnumerator UnfillUnlockImage(){
         float duration = 1;
         float timePass = m_UnlockFill.fillAmount * duration;
@@ -186,7 +190,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             m_Unfilling = null;
         }
 
-    }
+    }*/
 
 
 

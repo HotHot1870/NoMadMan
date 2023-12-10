@@ -688,8 +688,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75
-  m_fontSizeBase: 75
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6724,7 +6724,6 @@ RectTransform:
   - {fileID: 1205531180}
   - {fileID: 676451940}
   - {fileID: 497925329}
-  - {fileID: 1909756403}
   - {fileID: 1091357136}
   - {fileID: 692542598}
   - {fileID: 1950704491}
@@ -6783,7 +6782,6 @@ MonoBehaviour:
   m_WeaponListSlotParent: {fileID: 1341937563}
   m_WeaponListSlotPrefab: {fileID: 3630917713144208795, guid: 9bb781504d88f114e9c1afd561c66d5c, type: 3}
   m_ComfirmWeaponChangeBtn: {fileID: 58082126}
-  m_GooText: {fileID: 133255685}
 --- !u!1 &1047782041
 GameObject:
   m_ObjectHideFlags: 0
@@ -7091,6 +7089,7 @@ RectTransform:
   m_Children:
   - {fileID: 545903493}
   - {fileID: 1235082687}
+  - {fileID: 1909756403}
   - {fileID: 1419744051}
   - {fileID: 804496463}
   - {fileID: 2069117824}
@@ -7120,6 +7119,7 @@ MonoBehaviour:
   m_BackBtn: {fileID: 1419744052}
   m_MapUpgradeWeaponPanel: {fileID: 692542599}
   m_UpgradeBtn: {fileID: 984556399}
+  m_GooText: {fileID: 133255685}
   m_UnlockBtn: {fileID: 159473054}
   m_UnlockFill: {fileID: 1062411032}
   m_WeaponListGrid: {fileID: 3786452604834216494, guid: baa903a249ebb3e4caadd01b95ac26f0, type: 3}
@@ -12497,13 +12497,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909756402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 133255684}
-  m_Father: {fileID: 1020696793}
+  m_Father: {fileID: 1091357136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}

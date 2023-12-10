@@ -229,7 +229,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 8;
+        int collumeCount = 9;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -275,6 +275,13 @@ public class ReadCsv : MonoBehaviour
                 finalEnemyList.Add(int.Parse(item));
             }
             location.FinalWaveEnemy = finalEnemyList;
+            colume++;
+            List<int> lockBy = new List<int>();
+            foreach (var item in contents[colume].Split('|'))
+            {
+                lockBy.Add(int.Parse(item));
+            }
+            location.LockBy = lockBy;
 
             allLocation.Add(location);
 

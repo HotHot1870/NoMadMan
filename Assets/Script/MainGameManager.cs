@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEditor;
-using Unity.VisualScripting;
+using UnityEngine.UI;
+//using Microsoft.Unity.VisualStudio.Editor;
 
 
 public class MainGameManager : MonoBehaviour
@@ -22,13 +23,20 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
+    // TODO : not wall
+    // TODO : Reset on start defence
     [SerializeField]private float m_WallCurrentHp = 1000;
     [SerializeField]private float m_WallMaxHp = 1000;
 
+    [Header("Loading")]
+    [SerializeField]private Canvas m_LoadingCanvas;
+    [SerializeField]private Image m_LoadAmountImage;
+    [SerializeField]private Animator m_BgAnimator;
+
     
 #if UNITY_EDITOR
-    [MenuItem("Action/ClearData")]
-    static void ClearData()
+    [MenuItem("Action/ClearplayerPref")]
+    static void ClearplayerPref()
     {
         PlayerPrefs.DeleteAll();
     }
@@ -71,13 +79,33 @@ public class MainGameManager : MonoBehaviour
     private void Start()
     {
 		Application.targetFrameRate = 50;
-        //
         
         for (int i = 0; i < 4; i++)
         {
             SaveData<int>(m_AllWeapon[i].DisplayName+m_AllWeapon[i].Id.ToString(),1);
         }
+        
+        m_BgAnimator.Play("Hidden");
     }
+
+
+    public void LoadSceneMode(string sceneName){
+        m_LoadingCanvas.sortingOrder = 1;
+        StartCoroutine(LoadAsync(sceneName));
+        m_BgAnimator.Play("Open");
+    }
+
+    private IEnumerator LoadAsync(string sceneName){
+        AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
+        while (!load.isDone)
+        {
+            m_LoadAmountImage.fillAmount = Mathf.Clamp01(load.progress/0.9f);
+            yield return null;
+        }
+        
+        m_BgAnimator.Play("Close");
+    }
+
     public List<GunScriptable> GetAllWeapon()
     {
         return m_AllWeapon;
@@ -191,7 +219,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetMapScene(){
-        SceneManager.LoadScene("Map");
+        LoadSceneMode("Map");
     }
 
     public void ChangeWallHp(float changes){

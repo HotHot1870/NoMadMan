@@ -40,7 +40,7 @@ public class MapFreeCameraController : MonoBehaviour
     public void OnDragMapBtnUp()
     {
         // click building
-        if( Vector3.Distance( m_MouseStartPos , Input.mousePosition ) <5f){
+        if( Vector3.Distance( m_MouseStartPos , Input.mousePosition ) <5f && MapManager.GetInstance().ShouldShowLocationDetail()){
             Ray ray = Camera.main.ScreenPointToRay(m_MousePreviousPos);
             RaycastHit hitBuilding;
         

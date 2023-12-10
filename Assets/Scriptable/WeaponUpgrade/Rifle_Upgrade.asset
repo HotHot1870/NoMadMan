@@ -18,15 +18,15 @@ MonoBehaviour:
   - UpgradeStat: Damage
     CostAndValue:
     - Cost: 100
-      UpgradeValue: 105
+      UpgradeValue: 95
     - Cost: 200
       UpgradeValue: 110
     - Cost: 300
-      UpgradeValue: 115
-    - Cost: 400
-      UpgradeValue: 120
-    - Cost: 500
       UpgradeValue: 125
+    - Cost: 400
+      UpgradeValue: 140
+    - Cost: 500
+      UpgradeValue: 155
   - UpgradeStat: Accuracy
     CostAndValue:
     - Cost: 100

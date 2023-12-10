@@ -52,14 +52,9 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private GameObject m_WeaponListSlotPrefab;
     [SerializeField] private Button m_ComfirmWeaponChangeBtn;  
 
-    [Header("Goo")]
-    [SerializeField] private TMP_Text m_GooText;
-
-
 
 
     private void Start() {
-        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
 
         // TODO : Split all ui panel
         TurnOffAllPanel();
@@ -147,6 +142,10 @@ public class MapUIController : MonoBehaviour
         MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
     }
 
+    public bool ShouldShowLocationDetail(){
+        return !m_LocationDetailPanel.activeSelf;
+    }
+
     public void ShowLocationDetail(){
         MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null || m_LocationDetailPanel.activeSelf)
@@ -156,6 +155,7 @@ public class MapUIController : MonoBehaviour
         MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);
 
         m_LocationDetailPanel.SetActive(true);
+        m_DefenceBtn.gameObject.SetActive( !MapManager.GetInstance().GetLocationController().ShouldShowCorruption() );
         m_LocationName.text = locationData.DisplayName;
 /*
         // no Reward
