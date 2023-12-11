@@ -11,6 +11,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button m_QuitGameBtn;
     [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_GainGooBtn;
+    [SerializeField] private Button m_unlockAllLevelBtn;
 
     [SerializeField] private GameObject m_OptionPanel;
 
@@ -21,6 +22,7 @@ public class MainMenuController : MonoBehaviour
             float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
             PlayerPrefs.SetFloat("Goo",curGoo+1000);
         });
+        m_unlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
 
 
         m_ClearDataBtn.onClick.AddListener(()=>{

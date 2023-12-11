@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 4
   WeaponId: 0
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 3.5
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 5
     - Cost: 500
       UpgradeValue: 5.5
-  - UpgradeStat: Pellet
+  - UpgradeStat: 1
     CostAndValue:
     - Cost: 100
       UpgradeValue: 11
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 14
     - Cost: 500
       UpgradeValue: 15
-  - UpgradeStat: ClipSize
+  - UpgradeStat: 2
     CostAndValue:
     - Cost: 100
       UpgradeValue: 6
@@ -51,11 +51,11 @@ MonoBehaviour:
       UpgradeValue: 9
     - Cost: 500
       UpgradeValue: 10
-  - UpgradeStat: IsSemiAuto
+  - UpgradeStat: 9
     CostAndValue:
     - Cost: 500
       UpgradeValue: Yes
-  - UpgradeStat: FireRate
+  - UpgradeStat: 3
     CostAndValue:
     - Cost: 100
       UpgradeValue: 3.5

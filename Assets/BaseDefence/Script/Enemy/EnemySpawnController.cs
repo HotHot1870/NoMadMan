@@ -15,6 +15,7 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private Transform m_ShootCamera;
     [SerializeField] private Camera m_MainCamera;
 
+/*
     [Header("Attacker Spot")]
     [SerializeField] private Transform m_LeftAttackerSpot;
     private bool m_IsLeftAttackerSpotOccupied=false;
@@ -22,7 +23,7 @@ public class EnemySpawnController : MonoBehaviour
     private bool m_IsMidAttackerSpotOccupied=false;
     [SerializeField] private Transform m_RightAttackerSpot;
     private bool m_IsRightAttackerSpotOccupied=false;
-
+*/
 
 
 
@@ -38,7 +39,7 @@ public class EnemySpawnController : MonoBehaviour
     private void Start()
     {
         BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;
-        GetAttackerSpotInOrder( new Vector3(1,2,3));
+        //GetAttackerSpotInOrder( new Vector3(1,2,3));
     }
 
     public MapLocationScriptable GetLocationScriptable(){
@@ -49,7 +50,7 @@ public class EnemySpawnController : MonoBehaviour
         m_LocationData = locationData;
         StartNextNormalWave();
     }
-
+/*
     public List<Vector3> GetAttackerSpotInOrder(Vector3 pos){
         // return from closest to fardest
         List<Vector3> ans = new List<Vector3>();
@@ -60,7 +61,7 @@ public class EnemySpawnController : MonoBehaviour
         ans.Sort((p1,p2)=>Vector3.Distance(p1,pos).CompareTo(Vector3.Distance(p2,pos)));
 
         return ans;
-    }
+    }*/
 
     private void EnemySpawnUpdate(){
 

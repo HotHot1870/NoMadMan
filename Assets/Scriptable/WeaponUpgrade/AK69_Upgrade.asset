@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 28
   WeaponId: 5
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 17
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 23
     - Cost: 500
       UpgradeValue: 25
-  - UpgradeStat: FireRate
+  - UpgradeStat: 3
     CostAndValue:
     - Cost: 100
       UpgradeValue: 16
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 19
     - Cost: 500
       UpgradeValue: 20
-  - UpgradeStat: Handling
+  - UpgradeStat: 5
     CostAndValue:
     - Cost: 300
       UpgradeValue: 15
@@ -47,7 +47,7 @@ MonoBehaviour:
       UpgradeValue: 20
     - Cost: 500
       UpgradeValue: 25
-  - UpgradeStat: Recoil
+  - UpgradeStat: 6
     CostAndValue:
     - Cost: 100
       UpgradeValue: 9

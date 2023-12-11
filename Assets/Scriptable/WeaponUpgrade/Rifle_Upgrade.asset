@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 19
   WeaponId: 3
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 95
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 140
     - Cost: 500
       UpgradeValue: 155
-  - UpgradeStat: Accuracy
+  - UpgradeStat: 4
     CostAndValue:
     - Cost: 100
       UpgradeValue: 88
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 97
     - Cost: 500
       UpgradeValue: 100
-  - UpgradeStat: FireRate
+  - UpgradeStat: 3
     CostAndValue:
     - Cost: 100
       UpgradeValue: 1.5
@@ -51,7 +51,7 @@ MonoBehaviour:
       UpgradeValue: 2.25
     - Cost: 500
       UpgradeValue: 2.5
-  - UpgradeStat: ClipSize
+  - UpgradeStat: 2
     CostAndValue:
     - Cost: 100
       UpgradeValue: 6
@@ -63,7 +63,7 @@ MonoBehaviour:
       UpgradeValue: 9
     - Cost: 500
       UpgradeValue: 10
-  - UpgradeStat: BulletType
+  - UpgradeStat: 8
     CostAndValue:
     - Cost: 1000
       UpgradeValue: Puncture

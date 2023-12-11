@@ -10,6 +10,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
 {
     [SerializeField] private Button2D m_UpgradeBtn;
     [SerializeField] private TMP_Text m_StatName;  
+    // TODO : cost
     [SerializeField] private TMP_Text m_Cost;  
     [SerializeField] private GameObject m_UpgradeStatSmallBoxPrefab;
     [SerializeField] private Transform m_BlockParent;
@@ -45,6 +46,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
 
         m_UpgradeBtn.onClick.AddListener(()=>{
             // TODO : On Hold , not on click
+            // TODO : check goo suffition
             m_UpgradeCount++;
             m_AllBlock[m_UpgradeCount-1].m_BG.color = Color.green;
             m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ m_AllBlock[m_UpgradeCount-1].m_Text.text;

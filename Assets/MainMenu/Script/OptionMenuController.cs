@@ -42,10 +42,10 @@ public class OptionMenuController : MonoBehaviour
             switch (SceneManager.GetActiveScene().name)
             {
                 case "BaseDefence":
-                SceneManager.LoadScene("Map");
+                    MainGameManager.GetInstance().LoadSceneMode("Map");
                 return;
                 case "Map":
-                SceneManager.LoadScene("MainMenu");
+                    MainGameManager.GetInstance().LoadSceneMode("MainMenu");
                 return;
                 default:
                     m_BgAnimator?.Play("Hidden");
@@ -81,10 +81,10 @@ public class OptionMenuController : MonoBehaviour
             switch (SceneManager.GetActiveScene().name)
             {
                 case "BaseDefence":
-                SceneManager.LoadScene("Map");
+                    MainGameManager.GetInstance().LoadSceneMode("Map");
                 return;
                 case "Map":
-                SceneManager.LoadScene("MainMenu");
+                    MainGameManager.GetInstance().LoadSceneMode("MainMenu");
                 return;
                 default:
                     m_BgAnimator?.Play("Hidden");

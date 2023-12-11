@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 9
   WeaponId: 1
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 20
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 26
     - Cost: 500
       UpgradeValue: 28
-  - UpgradeStat: ClipSize
+  - UpgradeStat: 2
     CostAndValue:
     - Cost: 200
       UpgradeValue: 14
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 20
     - Cost: 1000
       UpgradeValue: 22
-  - UpgradeStat: Accuracy
+  - UpgradeStat: 4
     CostAndValue:
     - Cost: 100
       UpgradeValue: 70
@@ -51,11 +51,11 @@ MonoBehaviour:
       UpgradeValue: 85
     - Cost: 500
       UpgradeValue: 90
-  - UpgradeStat: IsSemiAuto
+  - UpgradeStat: 9
     CostAndValue:
     - Cost: 500
       UpgradeValue: Yes
-  - UpgradeStat: Handling
+  - UpgradeStat: 5
     CostAndValue:
     - Cost: 100
       UpgradeValue: 55

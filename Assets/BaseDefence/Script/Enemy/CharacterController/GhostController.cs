@@ -42,7 +42,7 @@ public class GhostController : EnemyControllerBase
         if(IsThisDead)
             return;
 
-        BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
         OnDead();
     }
 

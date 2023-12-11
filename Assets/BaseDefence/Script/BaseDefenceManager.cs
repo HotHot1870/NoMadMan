@@ -54,10 +54,7 @@ public class BaseDefenceManager : MonoBehaviour
     [Header("Enemy Hp Bars")]
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
-
-    //[Header("Wall")]
-    //[SerializeField] private WallController m_WallController;
-    private float m_TotalWallHpBarStayTime = 0;
+    private float m_TotalHpBarStayTime = 0;
 
     
     #region UpdateAction
@@ -101,10 +98,10 @@ public class BaseDefenceManager : MonoBehaviour
 
 
     private void Start() {
-        //m_WallController.Init(m_WallController.GetWallMaxHp());
+        //m_Controller.Init(m_Controller.GetMaxHp());
 
         m_ChangeFromReloadAction += CloseReloadPanel;
-        //m_WallController.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
+        //m_Controller.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetCurHp() / MainGameManager.GetInstance().GetMaxHp();
 
 
     }
@@ -155,11 +152,11 @@ public class BaseDefenceManager : MonoBehaviour
     
     private void FixedUpdate()
     {
-        // wall hp bar stay time
-        if(m_TotalWallHpBarStayTime>0){
-            m_TotalWallHpBarStayTime -= Time.deltaTime;
+        //  hp bar stay time
+        if(m_TotalHpBarStayTime>0){
+            m_TotalHpBarStayTime -= Time.deltaTime;
         }else{
-            m_BaseDefenceUIController.WallUISetActive(false);
+            m_BaseDefenceUIController.UISetActive(false);
         }
     }
 
@@ -232,8 +229,8 @@ public class BaseDefenceManager : MonoBehaviour
     }
     public void SetAccruacy(float newAccuracy){
         // acc cannot be lower than handling
-        float handling = (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue("Handling"));
-        var acc = Mathf.Max( (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue("Accuracy")),handling);
+        float handling = (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue(GunScriptableStatEnum.Handling));
+        var acc = Mathf.Max( (float) System.Convert.ToSingle(m_GunShootController.GetSelectedGun().GetStatValue(GunScriptableStatEnum.Accuracy)),handling);
         m_CurrentAccruacy = Mathf.Clamp(newAccuracy, handling , acc);
     }
 
@@ -241,24 +238,24 @@ public class BaseDefenceManager : MonoBehaviour
         return m_GunShootController;
     }
 
-    public void OnWallHit(float damage){
+    public void OnPlayerHit(float damage){
         if(m_GameStage == BaseDefenceStage.Result){
             // game over already
             return;
         }
-        m_TotalWallHpBarStayTime = 4;
-        MainGameManager.GetInstance().ChangeWallHp(-damage);
-        //float wallCurHp = MainGameManager.GetInstance().GetWallCurHp();
-        //m_WallController.ChangeHp(-damage);
-        m_BaseDefenceUIController.SetWallHpUI();
-        if(MainGameManager.GetInstance().GetWallCurHp()<=0){
+        m_TotalHpBarStayTime = 4;
+        MainGameManager.GetInstance().ChangeHp(-damage);
+        //float CurHp = MainGameManager.GetInstance().GetCurHp();
+        //m_Controller.ChangeHp(-damage);
+        m_BaseDefenceUIController.SetHpUI();
+        if(MainGameManager.GetInstance().GetCurHp()<=0){
             // lose 
             m_GameStage = BaseDefenceStage.Result;
             m_BaseDefenceUIController.SetResultPanel(false);
         }
         
         /*
-        if(wallCurHp<=0)
+        if(CurHp<=0)
             GameOver(true);*/
     }
 

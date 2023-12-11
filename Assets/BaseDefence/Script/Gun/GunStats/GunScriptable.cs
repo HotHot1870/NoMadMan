@@ -2,6 +2,20 @@
 using UnityEngine;
 using System.Linq;
 
+[System.Serializable]
+public enum GunScriptableStatEnum
+{
+    Damage,
+    Pellet,
+    ClipSize,
+    FireRate,
+    Accuracy,
+    Handling,
+    Recoil,
+    ExplodeRadius,
+    BulletType,
+    IsSemiAuto
+}
 
 [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable/Weapon", order = 1)]
 public class GunScriptable : ScriptableObject
@@ -30,41 +44,40 @@ public class GunScriptable : ScriptableObject
     public float ExplodeRadius;
 
 
-    public object GetStatValue(string statName){
-        // TODO : get enum instead of string
+    public object GetStatValue(GunScriptableStatEnum statName){
+        // TODO : get enum instead of string above : working
         object ans = null;
         
         switch (statName)
         {
-            case "Damage":
+            case GunScriptableStatEnum.Damage:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.DamagePerPellet);
                 break;
-            case "Pellet":
+            case GunScriptableStatEnum.Pellet:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.PelletPerShot);
                 break;
-            case "ClipSize":
+            case GunScriptableStatEnum.ClipSize:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.ClipSize);
                 break;
-            case "FireRate":
+            case GunScriptableStatEnum.FireRate:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.FireRate);
                 break;
-            case "Accuracy":
+            case GunScriptableStatEnum.Accuracy:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.Accuracy);
                 break;
-            case "Handling":
+            case GunScriptableStatEnum.Handling:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.Handling);
                 break;
-            case "Recoil":
+            case GunScriptableStatEnum.Recoil:
                 ans = GetUpgradedGunStat(statName, (object)GunStats.Recoil);
                 break;
-            case "ExplodeRadius":
+            case GunScriptableStatEnum.ExplodeRadius:
                 ans = GetUpgradedGunStat(statName, (object)ExplodeRadius);
                 break;
-            case "BulletType":
-                 // TODO : bullet type
-                ans = (object)GunStats.BulletType;
+            case GunScriptableStatEnum.BulletType:
+                ans = GetUpgradedGunStat(statName, (object)GunStats.BulletType);
                 break;
-            case "IsSemiAuto":
+            case GunScriptableStatEnum.IsSemiAuto:
                 string baseValue = GunStats.IsSemiAuto?"Yes":"No";
                 ans = GetUpgradedGunStat(statName, (object)baseValue);
                 break;
@@ -75,8 +88,8 @@ public class GunScriptable : ScriptableObject
         return ans;
     }
 
-    public object GetUpgradedGunStat(string typeName, object baseValue){
-        var targetList = UpgradeScriptable.UpgradeDetails.Where(x=>x.UpgradeStat == typeName).ToList();
+    public object GetUpgradedGunStat(GunScriptableStatEnum statName, object baseValue){
+        var targetList = UpgradeScriptable.UpgradeDetails.Where(x=>x.UpgradeStat == statName).ToList();
         if(targetList.Count>0){
             string upgradeSaveKey = DisplayName+targetList[0].UpgradeStat.ToString() ;
             int upgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey) ;
@@ -89,25 +102,25 @@ public class GunScriptable : ScriptableObject
 
     }
 
-    public float GetStatBaseValue(string statName){
-        // TODO : use dictionary instead
+    public float GetStatBaseValue(GunScriptableStatEnum statName){
+        // TODO : use dictionary instead : working
         switch (statName)
         {
-            case "Damage":
+            case GunScriptableStatEnum.Damage:
                 return GunStats.DamagePerPellet;
-            case "Pellet":
+            case GunScriptableStatEnum.Pellet:
                 return GunStats.PelletPerShot;
-            case "ClipSize":
+            case GunScriptableStatEnum.ClipSize:
                 return GunStats.ClipSize;
-            case "FireRate":
+            case GunScriptableStatEnum.FireRate:
                 return GunStats.FireRate;
-            case "Accuracy":
+            case GunScriptableStatEnum.Accuracy:
                 return GunStats.Accuracy;
-            case "Handling":
+            case GunScriptableStatEnum.Handling:
                 return GunStats.Handling;
-            case "Recoil":
+            case GunScriptableStatEnum.Recoil:
                 return GunStats.Recoil;
-            case "ExplodeRadius":
+            case GunScriptableStatEnum.ExplodeRadius:
                 return ExplodeRadius;
             default:
             return 0;

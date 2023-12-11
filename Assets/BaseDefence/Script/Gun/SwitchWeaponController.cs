@@ -25,6 +25,7 @@ public class SwitchWeaponController : MonoBehaviour
                 ); 
                 BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,allSelectedWeapon[index] );
             }else{
+                // no selected weapon
                 m_AllWeaponSlot[index].Init(
                     index,
                     allSelectedWeapon[index].DisplayImage
@@ -32,7 +33,6 @@ public class SwitchWeaponController : MonoBehaviour
             }
             index++;
 
-            // TODO : check slot owned in main game manager 
             if (index >= allSelectedWeapon.Count)
                 break;
 

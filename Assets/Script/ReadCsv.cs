@@ -187,7 +187,7 @@ public class ReadCsv : MonoBehaviour
                 List<string> allUpgradeValue = contents[colume].Split('|').ToList();
                 List<string> allUpgradeCost = contents[colume+1].Split('|').ToList();
                 var weaponUpgradeDetail = new WeaponUpgradeDetail{
-                    UpgradeStat = statName
+                    UpgradeStat = (GunScriptableStatEnum)System.Enum.Parse( typeof(GunScriptableStatEnum), statName )
                     
                 };
                 for (int j = 0; j < allUpgradeValue.Count; j++)
@@ -208,7 +208,6 @@ public class ReadCsv : MonoBehaviour
                 gunScriptable.UpgradeScriptable = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
                 EditorUtility.SetDirty(gunScriptable);
                 EditorUtility.SetDirty(WeaponUpgrade);
-                yield return null;
         }    
 
         m_MainGameManager.SetAllWeaponUpgrade(allWeaponUpgrade);

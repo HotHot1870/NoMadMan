@@ -77,7 +77,7 @@ public class PuppetController  : EnemyControllerBase
         if(IsThisDead)
             yield break;
 
-        BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
     }
 
     public void OnPuppeteerDead(){

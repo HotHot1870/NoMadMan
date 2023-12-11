@@ -68,7 +68,7 @@ public class GunShootController : MonoBehaviour
         else
         {
             m_SemiAutoShootCoroutine = null;
-            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GetStatValue("IsSemiAuto").ToString() == "Yes")
+            if (m_SemiAutoShootCoroutine == null && m_SelectedGun.GetStatValue(GunScriptableStatEnum.IsSemiAuto).ToString() == "Yes")
             {
                 m_SemiAutoShootCoroutine = StartCoroutine(SemiAutoShoot());
                 // semi auto 
@@ -116,14 +116,14 @@ public class GunShootController : MonoBehaviour
         m_SelectedGun = gun;
         m_CurrentWeaponSlotIndex = slotIndex;
 
-        BaseDefenceManager.GetInstance().SetAccruacy((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Accuracy")));
+        BaseDefenceManager.GetInstance().SetAccruacy((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Accuracy)));
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
     }
 
     // on start ammo set up 
     public void SetUpGun(int slotIndex , GunScriptable gun){
-        m_GunsClipAmmo.Add(slotIndex, (float) System.Convert.ToSingle(gun.GetStatValue("ClipSize")));
+        m_GunsClipAmmo.Add(slotIndex, (float) System.Convert.ToSingle(gun.GetStatValue(GunScriptableStatEnum.ClipSize)));
         if(m_SelectedGun == null){
             BaseDefenceManager.GetInstance().SwitchSelectedWeapon(slotIndex);
 
@@ -137,7 +137,7 @@ public class GunShootController : MonoBehaviour
 
     private bool IsFullClipAmmo()
     {
-        return m_CurrentAmmo >= (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize") );
+        return m_CurrentAmmo >= (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize) );
     }
 
     private void SetClipAmmoToZero()
@@ -147,7 +147,7 @@ public class GunShootController : MonoBehaviour
 
     private void SetClipAmmoToFull()
     {
-        ChangeAmmoCount((float) System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize")), true);
+        ChangeAmmoCount((float) System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize)), true);
     }
     private IEnumerator SemiAutoShoot()
     {
@@ -182,7 +182,7 @@ public class GunShootController : MonoBehaviour
         }
 
         // shot all pellet
-        for (int j = 0; j < (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue("Pellet")); j++)
+        for (int j = 0; j < (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Pellet)); j++)
         {
             // random center to point distance
             
@@ -207,10 +207,10 @@ public class GunShootController : MonoBehaviour
         
             // acc lose on shoot            
             BaseDefenceManager.GetInstance().SetAccruacy(
-                BaseDefenceManager.GetInstance().GetAccruacy()- (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Recoil"))
+                BaseDefenceManager.GetInstance().GetAccruacy()- (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Recoil))
             );
 
-        m_CurrentShootCoolDown = 1 / (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue("FireRate"));
+        m_CurrentShootCoolDown = 1 / (float) System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.FireRate));
         ChangeAmmoCount(-1, false);
     }
 
@@ -223,23 +223,28 @@ public class GunShootController : MonoBehaviour
         Physics.Raycast(ray,out hitEnvironmentAndEnemy,500, 1<<12|1<<10);
         Physics.Raycast(ray,out hitEnvironment,500, 1<<12|1<<10);
         
-
-        //TODO : bullet type
-        switch (m_SelectedGun.GunStats.BulletType)
+        switch ((BulletType)System.Enum.Parse( typeof(BulletType),m_SelectedGun.GetStatValue(GunScriptableStatEnum.BulletType).ToString().Trim()) )
         {
             case BulletType.BasicBullet:
                 // normal 
                 BasicShootHandler(hitEnemy,dotController);
             break;
             case BulletType.Puncture:
-                // TODO : puncture
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(ray, 500f, 1<<12);
+                List<int> hitedEnemySpawnId = new List<int>();
+                foreach (var item in hits)
+                {
+                    hitedEnemySpawnId.Add(BasicShootHandler(item,dotController,hitedEnemySpawnId)); 
+                }
             break;
             case BulletType.PillBomb:
                 var pillBomb = Instantiate(m_AllProjectile[BulletType.PillBomb].Prefab);
                 // set spawn point to gun point
                 pillBomb.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
-                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,(float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")),m_SelectedGun.ExplodeRadius);
+                pillBomb.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,
+                    (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage)),m_SelectedGun.ExplodeRadius);
 
                 break;
             case BulletType.Rocket:
@@ -247,12 +252,14 @@ public class GunShootController : MonoBehaviour
                 // set spawn point to gun point
                 rocket.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
 
-                rocket.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,(float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")),m_SelectedGun.ExplodeRadius);
+                rocket.GetComponent<ProjectileController>().Init(hitEnvironmentAndEnemy.point,
+                    (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage)),m_SelectedGun.ExplodeRadius);
                 break;
             case BulletType.BowActionArrow:
                 var bowActionExplosion = Instantiate(m_AllProjectile[BulletType.BowActionArrow].Prefab);
                 bowActionExplosion.transform.position = hitEnvironmentAndEnemy.point;
-                bowActionExplosion.GetComponent<ExplosionController>().Init((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")), m_SelectedGun.ExplodeRadius);
+                bowActionExplosion.GetComponent<ExplosionController>().Init(
+                    (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage)), m_SelectedGun.ExplodeRadius);
                 break;
             default:
                 break;
@@ -260,10 +267,21 @@ public class GunShootController : MonoBehaviour
 
     }
 
-    private void BasicShootHandler(RaycastHit hit , ShootDotController dotController){
+    private int BasicShootHandler(RaycastHit hit , ShootDotController dotController, List<int> allHittedSpawnId = null){
         if (hit.transform != null)//Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
+                
+                int punctureCount = 0;
+                // puncture bullet type
+                if(allHittedSpawnId !=null){
+                    punctureCount = allHittedSpawnId.Count;
+                    // check if already hitted if list provide
+                    if(allHittedSpawnId.Contains(bodyPart.GetEnemySpawnId())){
+                        // already hitted , skip
+                        return bodyPart.GetEnemySpawnId();
+                    }
+                }
                 if(!bodyPart.IsDead()){
                     switch (bodyPart.GetBodyType())
                     {
@@ -279,14 +297,21 @@ public class GunShootController : MonoBehaviour
                         default:
                         break;
                     }
-                    bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("Damage")) , Camera.main.WorldToScreenPoint(hit.point));
+
+                    // foreach puncture count , reduce damage by 50%
+                    bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage) ) * 
+                        (1 * Mathf.Pow( 0.5f ,punctureCount)), 
+                        Camera.main.WorldToScreenPoint(hit.point));
                 }else{
                     dotController.OnMiss();
                 }
+                
+                return bodyPart.GetEnemySpawnId();
             }
         }else{
             dotController.OnMiss();
         }
+        return -1;
     }
 
 
@@ -305,12 +330,13 @@ public class GunShootController : MonoBehaviour
         {
             m_CurrentAmmo += num;
         }
-        if (m_CurrentAmmo > (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize")))
+        if (m_CurrentAmmo > (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize)))
         {
-            m_CurrentAmmo = (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize"));
+            m_CurrentAmmo = (float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize));
         }
 
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText( $"{m_CurrentAmmo} / {(float)System.Convert.ToSingle(m_SelectedGun.GetStatValue("ClipSize"))}" );
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetAmmoText(
+             $"{m_CurrentAmmo} / {(float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize))}" );
     }
     public GunScriptable GetSelectedGun(){
         return m_SelectedGun;

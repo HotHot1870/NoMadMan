@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEditor;
 using UnityEngine.UI;
-//using Microsoft.Unity.VisualStudio.Editor;
 
 
 public class MainGameManager : MonoBehaviour
@@ -23,10 +22,9 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
-    // TODO : not wall
     // TODO : Reset on start defence
-    [SerializeField]private float m_WallCurrentHp = 1000;
-    [SerializeField]private float m_WallMaxHp = 1000;
+    [SerializeField]private float m_CurrentHp = 1000;
+    [SerializeField]private float m_MaxHp = 1000;
 
     [Header("Loading")]
     [SerializeField]private Canvas m_LoadingCanvas;
@@ -35,12 +33,12 @@ public class MainGameManager : MonoBehaviour
 
     
 #if UNITY_EDITOR
-    [MenuItem("Action/ClearplayerPref")]
+    [MenuItem("Action/Clear PlayerPref")]
     static void ClearplayerPref()
     {
         PlayerPrefs.DeleteAll();
     }
-    [MenuItem("Action/GetHundredGoo")]
+    [MenuItem("Action/Get Hundred Goo")]
     static void GetGooDebug()
     {
         float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
@@ -88,6 +86,12 @@ public class MainGameManager : MonoBehaviour
         m_BgAnimator.Play("Hidden");
     }
 
+    public void UnlockAllLevel(){
+        foreach (var item in m_AllLocation)
+        {
+            SaveData<int>(item.DisplayName + item.Id, 1);  
+        }
+    }
 
     public void LoadSceneMode(string sceneName){
         m_LoadingCanvas.sortingOrder = 1;
@@ -96,9 +100,11 @@ public class MainGameManager : MonoBehaviour
     }
 
     private IEnumerator LoadAsync(string sceneName){
+        float timePass = 0;
         AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
-        while (!load.isDone)
+        while (!load.isDone || timePass < 0.75f)
         {
+            timePass += Time.deltaTime;
             m_LoadAmountImage.fillAmount = Mathf.Clamp01(load.progress/0.9f);
             yield return null;
         }
@@ -210,24 +216,24 @@ public class MainGameManager : MonoBehaviour
 
     }
 
-    public float GetWallCurHp(){
-        return m_WallCurrentHp;
+    public float GetCurHp(){
+        return m_CurrentHp;
     }
 
-    public float GetWallMaxHp(){
-        return m_WallMaxHp;
+    public float GetMaxHp(){
+        return m_MaxHp;
     }
 
     public void SetMapScene(){
         LoadSceneMode("Map");
     }
 
-    public void ChangeWallHp(float changes){
-        m_WallCurrentHp += changes;
-        if(m_WallCurrentHp<0){
-            m_WallCurrentHp = 0;
-        }else if(m_WallCurrentHp>m_WallMaxHp){
-            m_WallCurrentHp = m_WallMaxHp;
+    public void ChangeHp(float changes){
+        m_CurrentHp += changes;
+        if(m_CurrentHp<0){
+            m_CurrentHp = 0;
+        }else if(m_CurrentHp>m_MaxHp){
+            m_CurrentHp = m_MaxHp;
         }
     }
 

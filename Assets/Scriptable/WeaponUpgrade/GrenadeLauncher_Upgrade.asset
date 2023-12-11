@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 33
   WeaponId: 6
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 48
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 57
     - Cost: 500
       UpgradeValue: 60
-  - UpgradeStat: ExplodeRadius
+  - UpgradeStat: 7
     CostAndValue:
     - Cost: 100
       UpgradeValue: 9.5
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 11
     - Cost: 500
       UpgradeValue: 11.5
-  - UpgradeStat: Accuracy
+  - UpgradeStat: 4
     CostAndValue:
     - Cost: 100
       UpgradeValue: 50
@@ -51,7 +51,7 @@ MonoBehaviour:
       UpgradeValue: 65
     - Cost: 500
       UpgradeValue: 70
-  - UpgradeStat: FireRate
+  - UpgradeStat: 3
     CostAndValue:
     - Cost: 100
       UpgradeValue: 1.6
@@ -63,7 +63,7 @@ MonoBehaviour:
       UpgradeValue: 1.9
     - Cost: 500
       UpgradeValue: 2
-  - UpgradeStat: IsSemiAuto
+  - UpgradeStat: 9
     CostAndValue:
     - Cost: 500
       UpgradeValue: Yes

@@ -16,7 +16,7 @@ public class WeaponUpgradeScriptable : ScriptableObject
 [System.Serializable]
 public class WeaponUpgradeDetail
 {
-    public string UpgradeStat;
+    public GunScriptableStatEnum UpgradeStat;
     public List<WeaponUpgradeCostAndValue> CostAndValue = new List<WeaponUpgradeCostAndValue>();
 
 }

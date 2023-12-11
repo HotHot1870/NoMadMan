@@ -28,10 +28,10 @@ public class BaseDefenceUIController : MonoBehaviour
     [Header("OptionPanel")]
     [SerializeField] private GameObject m_OptionPanel;
 
-    [Header("Wall")]
-    [SerializeField] private GameObject m_WallParent;
+    [Header("Hp")]
+    [SerializeField] private GameObject m_HpParent;
     [SerializeField] private Image m_HpBarFiller;
-    [SerializeField] private TMP_Text m_WallHpText;
+    [SerializeField] private TMP_Text m_HpText;
 
     [Header("Result")]
     [SerializeField] private GameObject m_ResultParent;
@@ -146,21 +146,22 @@ public class BaseDefenceUIController : MonoBehaviour
         m_AmmoText.text = text;
     }
 
-    public void SetWallHpUI(){
-        float wallHp = MainGameManager.GetInstance().GetWallCurHp();
-        float wallMapHp = MainGameManager.GetInstance().GetWallMaxHp();
-        WallUISetActive(true);
-        m_WallHpText.text = $"{wallHp.ToString("0.#")} / {wallMapHp}";
-        m_HpBarFiller.fillAmount = wallHp/wallMapHp;
+    public void SetHpUI(){
+        // TODO : reset on start defence , no need to put hp in main game manager
+        float Hp = MainGameManager.GetInstance().GetCurHp();
+        float MapHp = MainGameManager.GetInstance().GetMaxHp();
+        UISetActive(true);
+        m_HpText.text = $"{Hp.ToString("0.#")} / {MapHp}";
+        m_HpBarFiller.fillAmount = Hp/MapHp;
     }
 
-    public void WallUISetActive(bool isActive){
-        m_WallParent.SetActive(isActive);
+    public void UISetActive(bool isActive){
+        m_HpParent.SetActive(isActive);
     }
 
     public void OnClickBackFromResult(){
-        SceneManager.LoadScene("Map");
-        // remove corruption if win
+        MainGameManager.GetInstance().LoadSceneMode("Map");
+        // TODO : remove corruption if win
         
     }
 

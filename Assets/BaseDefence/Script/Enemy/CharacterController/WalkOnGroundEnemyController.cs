@@ -74,7 +74,7 @@ public class WalkOnGroundEnemyController : EnemyControllerBase
         if(IsThisDead)
             yield break;
 
-        BaseDefenceManager.GetInstance().OnWallHit(Scriptable.Damage);
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
     }
 
     protected override void OnDead(){

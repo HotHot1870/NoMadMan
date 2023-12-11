@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 24
   WeaponId: 4
   UpgradeDetails:
-  - UpgradeStat: Damage
+  - UpgradeStat: 0
     CostAndValue:
     - Cost: 100
       UpgradeValue: 27
@@ -27,7 +27,7 @@ MonoBehaviour:
       UpgradeValue: 33
     - Cost: 500
       UpgradeValue: 35
-  - UpgradeStat: ClipSize
+  - UpgradeStat: 2
     CostAndValue:
     - Cost: 100
       UpgradeValue: 22
@@ -39,7 +39,7 @@ MonoBehaviour:
       UpgradeValue: 28
     - Cost: 500
       UpgradeValue: 30
-  - UpgradeStat: Recoil
+  - UpgradeStat: 6
     CostAndValue:
     - Cost: 100
       UpgradeValue: 9
@@ -51,7 +51,7 @@ MonoBehaviour:
       UpgradeValue: 6
     - Cost: 500
       UpgradeValue: 5
-  - UpgradeStat: FireRate
+  - UpgradeStat: 3
     CostAndValue:
     - Cost: 100
       UpgradeValue: 10.5
@@ -63,7 +63,7 @@ MonoBehaviour:
       UpgradeValue: 12
     - Cost: 500
       UpgradeValue: 12.5
-  - UpgradeStat: Accuracy
+  - UpgradeStat: 4
     CostAndValue:
     - Cost: 100
       UpgradeValue: 78

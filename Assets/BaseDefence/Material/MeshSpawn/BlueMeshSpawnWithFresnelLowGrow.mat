@@ -56,16 +56,16 @@ Material:
     m_Floats:
     - _Ambient: 0
     - _FresnelPower: 5
-    - _GrowStrength: 0.02
-    - _Metallic: 1
-    - _NoiseDensity: 0.65
+    - _GrowStrength: 0.015
+    - _Metallic: 0
+    - _NoiseDensity: 0.1
     - _Normalized: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Seed: 0
-    - _Smoothness: 0.6
+    - _Smoothness: 0
     m_Colors:
-    - _BackColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BackColor: {r: 0.50980395, g: 0.16862746, b: 0, a: 0}
     - _FresnelColor: {r: 0, g: 0.21499984, b: 1.4980392, a: 0}
-    - _MainColor: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+    - _MainColor: {r: 0.50980395, g: 0.16862746, b: 0, a: 0}
   m_BuildTextureStacks: []
