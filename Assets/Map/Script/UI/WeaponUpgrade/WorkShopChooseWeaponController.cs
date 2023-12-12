@@ -14,6 +14,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     [Header("Unlock")]
     [SerializeField] private Button2D m_UnlockBtn; 
     [SerializeField] private Image m_UnlockFill;
+    [SerializeField] private TMP_Text m_SelectedWeaponUnlockCost;
+    private bool m_IsEnoughGoo = true;
     private Coroutine m_Filling;
     private Coroutine m_Unfilling;
     private int m_SelectedWeaponId;
@@ -32,7 +34,6 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     [SerializeField] private TMP_Text m_SelectedWeaponRecoil;
     [SerializeField] private TMP_Text m_SelectedWeaponHandling;
     [SerializeField] private TMP_Text m_SelectedWeaponFireRate;
-    [SerializeField] private TMP_Text m_SelectedWeaponUnlockCost;
     [SerializeField] private TMP_Text m_SelectedWeaponExplodeRadius;
     [SerializeField] private TMP_Text m_SelectedWeaponSemiAuto;
     [SerializeField] private TMP_Text m_SelectedWeaponPuncture;
@@ -76,8 +77,18 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_SelectedWeaponAcc.text = "Acc : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Accuracy));
         m_SelectedWeaponRecoil.text = "Recoil : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Recoil));
         m_SelectedWeaponHandling.text = "Handling : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Handling));
-        m_SelectedWeaponUnlockCost.text = "Unlock : "+m_SelectedGun.UnlockCost.ToString()+" / "+MainGameManager.GetInstance().GetGooAmount().ToString();
         m_SelectedWeaponExplodeRadius.text = "Explode Radius : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ExplodeRadius));
+
+        float unlockCost = m_SelectedGun.UnlockCost;
+        float gooOwnedAmount = MainGameManager.GetInstance().GetGooAmount();
+        m_SelectedWeaponUnlockCost.text = "Unlock : "+unlockCost.ToString()+" / "+gooOwnedAmount.ToString();
+        m_IsEnoughGoo = true;
+        if(unlockCost>gooOwnedAmount){
+            // not enough goo too unlock
+            m_IsEnoughGoo = false;
+            m_SelectedWeaponUnlockCost.color = Color.red;
+        }
+        
         //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
 
         m_SelectedWeaponSemiAuto.text = "Semi_Auto : "+ m_SelectedGun.GetStatValue(GunScriptableStatEnum.IsSemiAuto);
@@ -139,6 +150,10 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         if(m_Unfilling != null)
             StopCoroutine( m_Unfilling);
 
+        if(!m_IsEnoughGoo){
+            // not enough goo
+            return;
+        }
         m_Filling = StartCoroutine(FillUnlockImage());
     }
 

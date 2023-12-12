@@ -160,7 +160,7 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     public void OnClickBackFromResult(){
-        MainGameManager.GetInstance().LoadSceneMode("Map");
+        MainGameManager.GetInstance().LoadSceneWithTransition("Map");
         // TODO : remove corruption if win
         
     }

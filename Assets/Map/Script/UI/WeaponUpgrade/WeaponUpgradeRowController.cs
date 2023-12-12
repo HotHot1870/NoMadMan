@@ -10,10 +10,10 @@ public class WeaponUpgradeRowController : MonoBehaviour
 {
     [SerializeField] private Button2D m_UpgradeBtn;
     [SerializeField] private TMP_Text m_StatName;  
-    // TODO : cost
     [SerializeField] private TMP_Text m_Cost;  
     [SerializeField] private GameObject m_UpgradeStatSmallBoxPrefab;
     [SerializeField] private Transform m_BlockParent;
+    private bool m_IsEnoughGoo = true;
     private GunScriptable m_GunScriptable;
     private WeaponUpgradeDetail m_UpgradeDetail;
     private List<WeaponUpgradeBoxController> m_AllBlock = new List<WeaponUpgradeBoxController>();
@@ -28,6 +28,24 @@ public class WeaponUpgradeRowController : MonoBehaviour
         m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
 
         m_UpgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey);
+        float playerOwnedGoo =  MainGameManager.GetInstance().GetGooAmount();
+        if(m_UpgradeCount<m_UpgradeDetail.CostAndValue.Count){
+            m_Cost.text = m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost.ToString("0.#") +" / "+playerOwnedGoo;
+            //  check goo suffition
+            if(playerOwnedGoo<m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost){
+                // not enough goo
+                m_Cost.color = Color.red;
+                m_UpgradeBtn.GetComponent<Image>().color = Color.red;
+                m_IsEnoughGoo = false;
+            }else{
+                m_IsEnoughGoo = true;
+            }
+        }else{
+            // fully upgraded
+            m_Cost.text = "Fully upgraded";
+            m_UpgradeBtn.gameObject.SetActive(false);
+        }
+
 
         for (int i = 0; i < m_UpgradeDetail.CostAndValue.Count; i++)
         {
@@ -46,13 +64,19 @@ public class WeaponUpgradeRowController : MonoBehaviour
 
         m_UpgradeBtn.onClick.AddListener(()=>{
             // TODO : On Hold , not on click
-            // TODO : check goo suffition
+            if(!m_IsEnoughGoo){
+                // not enough goo
+                return;
+            }
+
+            // cost goo
+            MainGameManager.GetInstance().ChangeGooAmount(m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost);
+
             m_UpgradeCount++;
             m_AllBlock[m_UpgradeCount-1].m_BG.color = Color.green;
             m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ m_AllBlock[m_UpgradeCount-1].m_Text.text;
             MainGameManager.GetInstance().SaveData<int>(upgradeSaveKey,m_UpgradeCount);
             Debug.Log(upgradeSaveKey+"     "+m_UpgradeCount);
-            // TODO : cost goo
         });
     }
 }

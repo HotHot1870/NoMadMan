@@ -123,7 +123,6 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void StartWave(MapLocationScriptable locationInfo){
-
         m_EnemySpawnController.StartWave( locationInfo);
     }
 

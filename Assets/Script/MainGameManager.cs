@@ -22,7 +22,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
-    // TODO : Reset on start defence
+    // TODO : Reset on start defence , put hp in base defence manager , not here
     [SerializeField]private float m_CurrentHp = 1000;
     [SerializeField]private float m_MaxHp = 1000;
 
@@ -93,23 +93,31 @@ public class MainGameManager : MonoBehaviour
         }
     }
 
-    public void LoadSceneMode(string sceneName){
+    public void LoadSceneWithTransition(string sceneName, Action onFinishAction = null){
         m_LoadingCanvas.sortingOrder = 1;
-        StartCoroutine(LoadAsync(sceneName));
-        m_BgAnimator.Play("Open");
+        StartCoroutine(LoadAsync(sceneName,onFinishAction));
     }
 
-    private IEnumerator LoadAsync(string sceneName){
+    private IEnumerator LoadAsync(string sceneName, Action onFinishAction = null){
         float timePass = 0;
-        AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
-        while (!load.isDone || timePass < 0.75f)
+        m_BgAnimator.Play("Open");
+        while (timePass<=0.75f)
         {
             timePass += Time.deltaTime;
-            m_LoadAmountImage.fillAmount = Mathf.Clamp01(load.progress/0.9f);
             yield return null;
         }
         
+        AsyncOperation load = SceneManager.LoadSceneAsync(sceneName);
+        while (!load.isDone )
+        {
+            m_LoadAmountImage.fillAmount = Mathf.Clamp01(load.progress/0.9f);
+            yield return null;
+        }
         m_BgAnimator.Play("Close");
+        
+        
+        yield return null;
+        onFinishAction?.Invoke();
     }
 
     public List<GunScriptable> GetAllWeapon()
@@ -206,13 +214,12 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
-        SceneManager.LoadScene("BaseDefence");
-        StartCoroutine(StartWave(location));
+        LoadSceneWithTransition("BaseDefence", 
+            ()=>BaseDefenceManager.GetInstance().StartWave(location));
     }
 
     private IEnumerator StartWave(MapLocationScriptable location){
         yield return null;
-        BaseDefenceManager.GetInstance().StartWave(location);
 
     }
 
@@ -225,7 +232,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetMapScene(){
-        LoadSceneMode("Map");
+        LoadSceneWithTransition("Map");
     }
 
     public void ChangeHp(float changes){

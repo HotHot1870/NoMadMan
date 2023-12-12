@@ -163,9 +163,11 @@ public class ReadCsv : MonoBehaviour
             WeaponUpgradeScriptable WeaponUpgrade = null;
             List<WeaponUpgradeDetail> upgradeDetails = new List<WeaponUpgradeDetail>();
 
+            bool isFileAlreadyExist = false;
             if (System.IO.File.Exists(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset"))
             {
                 // file already exist 
+                isFileAlreadyExist =true;
                 WeaponUpgrade = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
                 upgradeDetails = WeaponUpgrade.UpgradeDetails;
             }else{
@@ -202,7 +204,9 @@ public class ReadCsv : MonoBehaviour
                 upgradeDetails.Add(weaponUpgradeDetail);
                 WeaponUpgrade.UpgradeDetails = upgradeDetails;
                 colume++;
-                allWeaponUpgrade.Add(WeaponUpgrade);
+                // no need to add it again
+                if(!isFileAlreadyExist)
+                    allWeaponUpgrade.Add(WeaponUpgrade);
                 
                 var gunScriptable = AssetDatabase.LoadAssetAtPath<GunScriptable>(m_ScriptablePath+"/Gun/"+displayName.Replace(" ", "")+".asset");
                 gunScriptable.UpgradeScriptable = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");

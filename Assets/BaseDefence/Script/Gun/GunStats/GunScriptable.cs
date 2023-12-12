@@ -45,7 +45,6 @@ public class GunScriptable : ScriptableObject
 
 
     public object GetStatValue(GunScriptableStatEnum statName){
-        // TODO : get enum instead of string above : working
         object ans = null;
         
         switch (statName)
