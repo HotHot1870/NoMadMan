@@ -439,6 +439,21 @@ public class ReadCsv : MonoBehaviour
         }
 
         
+        // Dialog
+        www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=287695030&single=true&output=csv");
+        yield return www.SendWebRequest();
+        if(www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError){
+            Debug.Log("Error: " + www.error);
+        }else{
+            
+            FileUtil.DeleteFileOrDirectory(m_ResourcesPath+"/CSV/Dialog.csv");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            string json = www.downloadHandler.text;
+            File.AppendAllText(m_ResourcesPath+"/CSV/Dialog.csv",json);
+ 
+        }
+        
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }

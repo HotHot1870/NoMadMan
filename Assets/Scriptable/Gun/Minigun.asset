@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
-  m_Name: BoomBow
+  m_Name: Minigun
   m_EditorClassIdentifier: 
   Id: 9
-  DisplayName: BoomBow
-  UnlockCost: 800
+  DisplayName: Minigun
+  UnlockCost: 9999999
   DisplayImage: {fileID: 0}
-  FPSPrefab: {fileID: 5564056945118830172, guid: 28068a181ffde0442ba58e52d4437a21, type: 3}
+  FPSPrefab: {fileID: 0}
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   GunStats:
-    DamagePerPellet: 125
-    PelletPerShot: 1
-    ClipSize: 1
-    BulletType: 5
-    IsSemiAuto: 0
-    FireRate: 1
-    Accuracy: 50
+    DamagePerPellet: 5
+    PelletPerShot: 2
+    ClipSize: 666
+    BulletType: 0
+    IsSemiAuto: 1
+    FireRate: 25
+    Accuracy: 35
     Handling: 0
-    Recoil: 30
+    Recoil: 2
   ReloadScriptable: {fileID: 0}
   UpgradeScriptable: {fileID: 0}
-  ExplodeRadius: 16
+  ExplodeRadius: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 8
   DisplayName: BowActionRifle
   UnlockCost: 800
-  DisplayImage: {fileID: 0}
+  DisplayImage: {fileID: 21300000, guid: 7b2ae00c9748e5e459fdee8f671374a4, type: 3}
   FPSPrefab: {fileID: 35110134421944926, guid: ad40c44d2e72db043bb3f8809ccc73d8, type: 3}
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   GunStats:
@@ -28,6 +28,6 @@ MonoBehaviour:
     Accuracy: 70
     Handling: 50
     Recoil: 15
-  ReloadScriptable: {fileID: 0}
-  UpgradeScriptable: {fileID: 0}
+  ReloadScriptable: {fileID: 11400000, guid: deb0733a7330b5e43b03e80792791ec0, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 84436f1cac39a844ab5656c09a588d0b, type: 2}
   ExplodeRadius: 1

@@ -23,11 +23,11 @@ MonoBehaviour:
     PelletPerShot: 1
     ClipSize: 5
     BulletType: 0
-    IsSemiAuto: 1
+    IsSemiAuto: 0
     FireRate: 1.25
     Accuracy: 85
     Handling: 75
     Recoil: 25
   ReloadScriptable: {fileID: 11400000, guid: 9b6ff85fee21b4a478b34b1d768682c7, type: 2}
-  UpgradeScriptable: {fileID: 11400000, guid: c7d0e761db762684dbdad5f0145ad711, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 2784e010865bea949b1fe1a5cb89c14a, type: 2}
   ExplodeRadius: 0
