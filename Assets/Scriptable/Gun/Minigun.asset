@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   DisplayName: Minigun
-  UnlockCost: 9999999
-  DisplayImage: {fileID: 0}
-  FPSPrefab: {fileID: 0}
+  UnlockCost: 1000
+  DisplayImage: {fileID: 21300000, guid: 55bc2709311445c42accfd0b50f1faeb, type: 3}
+  FPSPrefab: {fileID: 8181188354269715084, guid: 78e3bfc1e6b646f4e87008a8e1954bd7, type: 3}
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   GunStats:
     DamagePerPellet: 5
@@ -24,10 +24,10 @@ MonoBehaviour:
     ClipSize: 666
     BulletType: 0
     IsSemiAuto: 1
-    FireRate: 25
-    Accuracy: 35
+    FireRate: 45
+    Accuracy: 50
     Handling: 0
-    Recoil: 2
-  ReloadScriptable: {fileID: 0}
-  UpgradeScriptable: {fileID: 0}
+    Recoil: 15
+  ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 4bd828db2d6687b4badc8d41c238f8b7, type: 2}
   ExplodeRadius: 0

@@ -1305,9 +1305,6 @@ MonoBehaviour:
   m_WallWidth: 1
   m_ShootCamera: {fileID: 813147456}
   m_MainCamera: {fileID: 822869636}
-  m_LeftAttackerSpot: {fileID: 730466933}
-  m_MidAttackerSpot: {fileID: 1664428825}
-  m_RightAttackerSpot: {fileID: 107133894}
 --- !u!4 &321752856
 Transform:
   m_ObjectHideFlags: 0
@@ -11875,8 +11872,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
-  m_Intensity: 0.75
+  m_Color: {r: 0.8627451, g: 0.8627451, b: 0.8627451, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
