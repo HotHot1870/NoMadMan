@@ -147,9 +147,8 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     public void SetHpUI(){
-        // TODO : reset on start defence , no need to put hp in main game manager
-        float Hp = MainGameManager.GetInstance().GetCurHp();
-        float MapHp = MainGameManager.GetInstance().GetMaxHp();
+        float Hp = BaseDefenceManager.GetInstance().GetCurHp();
+        float MapHp = BaseDefenceManager.GetInstance().GetMaxHp();
         UISetActive(true);
         m_HpText.text = $"{Hp.ToString("0.#")} / {MapHp}";
         m_HpBarFiller.fillAmount = Hp/MapHp;
@@ -161,7 +160,6 @@ public class BaseDefenceUIController : MonoBehaviour
 
     public void OnClickBackFromResult(){
         MainGameManager.GetInstance().LoadSceneWithTransition("Map");
-        // TODO : remove corruption if win
         
     }
 

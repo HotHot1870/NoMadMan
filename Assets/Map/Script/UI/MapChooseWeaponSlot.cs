@@ -10,14 +10,16 @@ public class MapChooseWeaponSlot : MonoBehaviour
     [SerializeField] private Image m_Border;
     [SerializeField] private Button m_Btn;
     [SerializeField] private Image m_WeaponDisplayImage;
-    protected int m_Index = -1;
+    protected int m_WeaponSlotIndex = -1;
 
-    private void Start() {
+    public void Init(int slotIndex, Sprite weaponImage = null){
+        m_WeaponSlotIndex = slotIndex;
+        if(weaponImage != null){
+            m_WeaponDisplayImage.sprite = weaponImage;
+        }
+        m_Btn.onClick.RemoveAllListeners();
         m_Btn.onClick.AddListener(OnClickWeaponSlot);
-    }
-    public void Init(int index, Sprite weaponImage){
-        m_Index = index;
-        m_WeaponDisplayImage.sprite = weaponImage;
+
     }
 
     public void SetBorderColor(Color color){
@@ -27,7 +29,7 @@ public class MapChooseWeaponSlot : MonoBehaviour
     
 
     public virtual void OnClickWeaponSlot(){
-        // TODO : show weapon list
-        MapManager.GetInstance().GetMapUIController().ShowWeaponListPanel(m_Index);
+        // show weapon list
+        MapManager.GetInstance().GetMapUIController().ShowChangeWeaponInSlotPanel(m_WeaponSlotIndex);
     }
 }

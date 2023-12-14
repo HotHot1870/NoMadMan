@@ -15,17 +15,11 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private float m_Volume = 0.75f;
     [SerializeField] private float m_AimSensitivity = 0.5f;
 
-    [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
-
     [SerializeField] private List<GunScriptable> m_AllWeapon = new List<GunScriptable>();
     [SerializeField] private List<MapLocationScriptable> m_AllLocation = new List<MapLocationScriptable>();
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
     [SerializeField] private List<EnemyScriptable> m_AllEnemy = new List<EnemyScriptable>();
     
-    // TODO : Reset on start defence , put hp in base defence manager , not here
-    [SerializeField]private float m_CurrentHp = 1000;
-    [SerializeField]private float m_MaxHp = 1000;
-
     [Header("Loading")]
     [SerializeField]private Canvas m_LoadingCanvas;
     [SerializeField]private Image m_LoadAmountImage;
@@ -78,10 +72,11 @@ public class MainGameManager : MonoBehaviour
     {
 		Application.targetFrameRate = 50;
         
-        for (int i = 0; i < 4; i++)
-        {
-            SaveData<int>(m_AllWeapon[i].DisplayName+m_AllWeapon[i].Id.ToString(),1);
-        }
+        // unlock pistol
+        SaveData<int>(m_AllWeapon[0].DisplayName+m_AllWeapon[0].Id.ToString(),1);
+        // can use pistol by default , if no gun selected
+        if((int)System.Convert.ToSingle(GetData<int>("SelectedWeapon"+0.ToString(), "-1")) < 0)
+            SaveData<int>("SelectedWeapon"+0.ToString(),0);
         
         m_BgAnimator.Play("Hidden");
     }
@@ -131,10 +126,14 @@ public class MainGameManager : MonoBehaviour
 
     public List<GunScriptable> GetAllSelectedWeapon()
     {
-        if(m_AllSelectedWeapon.Count>4){
-            m_AllSelectedWeapon = new List<GunScriptable>(m_AllSelectedWeapon.GetRange(0,4));
+        List<GunScriptable> ans = new List<GunScriptable>();
+        for (int i = 0; i < 4; i++)
+        {
+            int gunId = (int)GetData<int>("SelectedWeapon"+i.ToString(),"-1");  
+            GunScriptable gunScriptable = m_AllWeapon.Find(x=>x.Id==gunId);
+            ans.Add(gunScriptable);
         }
-        return m_AllSelectedWeapon;
+        return ans;
     }
 
     
@@ -148,24 +147,10 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetAllWeapon(List<GunScriptable> allWeapon){
-        // TODO : check Ownership
         m_AllWeapon = allWeapon;
-        m_AllSelectedWeapon.Clear();
+        string gunUnlockKey = m_AllWeapon[0].DisplayName+m_AllWeapon[0].Id;
 
-        for (int i = 0; i < m_AllWeapon.Count; i++)
-        {
-            
-            string gunUnlockKey = m_AllWeapon[i].DisplayName+m_AllWeapon[i].Id;
-
-            if((int)System.Convert.ToSingle(GetData<int>(gunUnlockKey)) == 1){
-                m_AllSelectedWeapon.Add(m_AllWeapon[i]);
-            }
-            if(m_AllSelectedWeapon.Count>=4)
-                break;
-        } 
-        if(m_AllSelectedWeapon.Count<4){
-            Debug.Log("Not enough owned gun");
-        }
+        
     }
 
     public void SetAllLocation(List<MapLocationScriptable> allLocation){
@@ -223,34 +208,11 @@ public class MainGameManager : MonoBehaviour
 
     }
 
-    public float GetCurHp(){
-        return m_CurrentHp;
-    }
-
-    public float GetMaxHp(){
-        return m_MaxHp;
-    }
-
     public void SetMapScene(){
         LoadSceneWithTransition("Map");
     }
 
-    public void ChangeHp(float changes){
-        m_CurrentHp += changes;
-        if(m_CurrentHp<0){
-            m_CurrentHp = 0;
-        }else if(m_CurrentHp>m_MaxHp){
-            m_CurrentHp = m_MaxHp;
-        }
-    }
 
-
-
-    public void ChangeSelectedWeapon(int slotIndex, GunScriptable newWeapon)
-    {
-        if (m_AllSelectedWeapon.Count > slotIndex && slotIndex >= 0)
-            m_AllSelectedWeapon[slotIndex] = newWeapon;
-    }
 
 
     public void SetAimSensitivity(float sensitivity)
@@ -314,17 +276,19 @@ public class MainGameManager : MonoBehaviour
     }
 
     
-    public object GetData<T>(string key)
+    public object GetData<T>(string key, string defaultValue = null)
     {
         if(typeof(T) == typeof(int)){
-            return PlayerPrefs.GetInt(key, 0 );
+            int baseIntValue = defaultValue != null? int.Parse(defaultValue) : 0;
+            return PlayerPrefs.GetInt(key, baseIntValue );
         }else if(typeof(T) == typeof(float)){
-            return PlayerPrefs.GetFloat(key, 0 );
+            float baseFloatValue = defaultValue != null? float.Parse(defaultValue) : 0;
+            return PlayerPrefs.GetFloat(key, baseFloatValue );
         }
         else if(typeof(T) == typeof(string)){
             return PlayerPrefs.GetString(key, "");
         }
-        return 0;
+        return "";
     }
 
 }

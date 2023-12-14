@@ -1612,7 +1612,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2500, y: 1500}
+  m_SizeDelta: {x: 3000, y: 1500}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1074936721
 MonoBehaviour:
@@ -2057,22 +2057,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Volume: 0.35
   m_AimSensitivity: 0.55
-  m_AllSelectedWeapon:
-  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
-  - {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
-  - {fileID: 11400000, guid: 04e2e90a57390a4478683c847fcf00a8, type: 2}
-  - {fileID: 11400000, guid: ae1c1530a53243f43a01929e7dafd8f4, type: 2}
   m_AllWeapon:
-  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
   - {fileID: 11400000, guid: 8d8cc90f2a949b44d964e7b4b70e1c72, type: 2}
+  - {fileID: 11400000, guid: dad3f8098b841004b8176a02e7b9a06d, type: 2}
   - {fileID: 11400000, guid: 04e2e90a57390a4478683c847fcf00a8, type: 2}
   - {fileID: 11400000, guid: ae1c1530a53243f43a01929e7dafd8f4, type: 2}
   - {fileID: 11400000, guid: 0398ac4bf23712543bd4e425a50bcaeb, type: 2}
-  - {fileID: 11400000, guid: 72e21bd0918e1c54d93dbc86fdd0af97, type: 2}
-  - {fileID: 11400000, guid: 8fa64aaea5ffbe74ba10b4af50ac685c, type: 2}
-  - {fileID: 11400000, guid: 72b83fc915c5b5a4c8f9f0ccf7a9ed9e, type: 2}
-  - {fileID: 11400000, guid: dac411db1e80f8b419e2d59810a81f55, type: 2}
-  - {fileID: 11400000, guid: 1c33f8cbca88605428f018da75a9512a, type: 2}
+  - {fileID: 11400000, guid: d6938e402c8abb24aa149c12ef7dc7f2, type: 2}
+  - {fileID: 11400000, guid: ab70ab36b460c0440abab24a02c8779d, type: 2}
+  - {fileID: 11400000, guid: d8c7b5727a26ed240a5f290e7dad9f80, type: 2}
+  - {fileID: 11400000, guid: c0ffcab6187d79349bd3fea4d9f1f733, type: 2}
+  - {fileID: 11400000, guid: 7dd44697ce19d9840aa0a766ea91509c, type: 2}
   m_AllLocation:
   - {fileID: 11400000, guid: 60dfe6fd31bc29b4d88a8f881bf6d0db, type: 2}
   - {fileID: 11400000, guid: 3cf5f7f08cbac984db75d148e0f477fe, type: 2}
@@ -2081,16 +2076,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0205162da5cebe04aa8f0ca067425838, type: 2}
   - {fileID: 11400000, guid: 464e7d5bde71fbc4fb74b56afbd3c132, type: 2}
   m_AllWeaponUpgrade:
+  - {fileID: 11400000, guid: 006116f47fdd61647a9ca66e443a395a, type: 2}
   - {fileID: 11400000, guid: d6a52da5e7467c7439e58deeec187740, type: 2}
-  - {fileID: 11400000, guid: cef66e6714a643842b1e173a8e42f475, type: 2}
-  - {fileID: 11400000, guid: c5ffd7bf53001f54f8e01cc3cf95304a, type: 2}
-  - {fileID: 11400000, guid: 2784e010865bea949b1fe1a5cb89c14a, type: 2}
-  - {fileID: 11400000, guid: 10ada2b8c51a38644bdd34752e9226c5, type: 2}
-  - {fileID: 11400000, guid: 6ed051b5064de8e46a86f187792be9ff, type: 2}
-  - {fileID: 11400000, guid: 3fa7b8506e341434b900fe247f0d600c, type: 2}
-  - {fileID: 11400000, guid: 0cec48f688c32784ea755a32c987b074, type: 2}
-  - {fileID: 11400000, guid: 84436f1cac39a844ab5656c09a588d0b, type: 2}
-  - {fileID: 11400000, guid: 4bd828db2d6687b4badc8d41c238f8b7, type: 2}
+  - {fileID: 11400000, guid: 6d137a614bfc55048b1415da38c977c1, type: 2}
+  - {fileID: 11400000, guid: ce396a1c7d83d34499c3a9e197bcfad1, type: 2}
+  - {fileID: 11400000, guid: 3f39fa141891e614c995720384fbd216, type: 2}
+  - {fileID: 11400000, guid: 4f5527a18cc5d464588de6b313d9b8a0, type: 2}
+  - {fileID: 11400000, guid: f85cd16ba6d00ff4490d350c221987cf, type: 2}
+  - {fileID: 11400000, guid: 23aba24ca9ec2b240b7adb6ab613eeb9, type: 2}
+  - {fileID: 11400000, guid: 76b75eb5bdbf8e34a8ef49c0da6936f8, type: 2}
+  - {fileID: 11400000, guid: 8c73bcca5d9c12b459494d64a321770b, type: 2}
   m_AllEnemy:
   - {fileID: 11400000, guid: b901ec02e5f853a49bf77c6f3e799b39, type: 2}
   - {fileID: 11400000, guid: 36ae674e5bc8e1d49aaa188802a03e3d, type: 2}
@@ -2098,8 +2093,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d423e823838d4cc49bb0742c817c57c3, type: 2}
   - {fileID: 11400000, guid: 0438cb817c56a9441a74a88655b809d3, type: 2}
   - {fileID: 11400000, guid: c05d23ccb5f71ab43b64f5bf071ae6f9, type: 2}
-  m_CurrentHp: 1000
-  m_MaxHp: 1000
   m_LoadingCanvas: {fileID: 1435346224}
   m_LoadAmountImage: {fileID: 190365640}
   m_BgAnimator: {fileID: 1870043632}
@@ -2129,6 +2122,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 88cd98e74a303844c84894bc7dfc2479, type: 3}
   - clipName: RocketLaunch
     audioClip: {fileID: 8300000, guid: 281510071df85174695694ff29da0b9f, type: 3}
+  - clipName: Minigun
+    audioClip: {fileID: 8300000, guid: dd19b1813b6307648b4b34ed10557afb, type: 3}
 --- !u!1 &1583860413
 GameObject:
   m_ObjectHideFlags: 0

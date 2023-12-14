@@ -3573,7 +3573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 791800097c5fa8d4abc2411c0e4e44fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3818,7 +3818,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 791800097c5fa8d4abc2411c0e4e44fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4292,7 +4292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 791800097c5fa8d4abc2411c0e4e44fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4460,6 +4460,7 @@ GameObject:
   - component: {fileID: 1304843644}
   - component: {fileID: 1304843643}
   - component: {fileID: 1304843645}
+  - component: {fileID: 1304843646}
   m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
@@ -4547,12 +4548,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0.0000000055879354, y: -0.5, z: 0}
+--- !u!114 &1304843646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304843641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7019dbb0036f7e42b5947624984eea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Mud: {fileID: 7207690488165255026, guid: d47371553d99120449ea6cf5216bd67e, type: 3}
 --- !u!1 &1334681804
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,7 +4748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 791800097c5fa8d4abc2411c0e4e44fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5295,6 +5309,7 @@ MonoBehaviour:
   m_CrosshairControl: {fileID: 653484385}
   m_GunModelController: {fileID: 2113294479}
   m_ReloadControllerPanel: {fileID: 7275959}
+  m_MaxHp: 1000
   m_EnemyHpBarParent: {fileID: 242040062}
 --- !u!1 &1662568303
 GameObject:

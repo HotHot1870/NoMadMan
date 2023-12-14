@@ -49,6 +49,11 @@ public class BaseDefenceManager : MonoBehaviour
 
     private float m_CurrentAccruacy = 100f;
 
+    // hp
+    private float m_CurrentHp = 1000;
+    [SerializeField]private float m_MaxHp = 1000;
+
+
 
 
     [Header("Enemy Hp Bars")]
@@ -98,6 +103,7 @@ public class BaseDefenceManager : MonoBehaviour
 
 
     private void Start() {
+        m_CurrentHp = m_MaxHp;
         //m_Controller.Init(m_Controller.GetMaxHp());
 
         m_ChangeFromReloadAction += CloseReloadPanel;
@@ -107,9 +113,29 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
 
+    
+
+    public float GetCurHp(){
+        return m_CurrentHp;
+    }
+
+    public float GetMaxHp(){
+        return m_MaxHp;
+    }
+
+    public void ChangeHp(float changes){
+        m_CurrentHp += changes;
+        if(m_CurrentHp<0){
+            m_CurrentHp = 0;
+        }else if(m_CurrentHp>m_MaxHp){
+            m_CurrentHp = m_MaxHp;
+        }
+    }
+
+/*
     public List<Transform> GetAllEnemyTrans(){
         return m_EnemySpawnController.GetAllEnemyTrans();
-    }
+    }*/
     public void AddEnemyToList(Transform trans){
         m_EnemySpawnController.AddEnemyToList(trans);
     }
@@ -243,11 +269,11 @@ public class BaseDefenceManager : MonoBehaviour
             return;
         }
         m_TotalHpBarStayTime = 4;
-        MainGameManager.GetInstance().ChangeHp(-damage);
+        ChangeHp(-damage);
         //float CurHp = MainGameManager.GetInstance().GetCurHp();
         //m_Controller.ChangeHp(-damage);
         m_BaseDefenceUIController.SetHpUI();
-        if(MainGameManager.GetInstance().GetCurHp()<=0){
+        if(m_CurrentHp<=0){
             // lose 
             m_GameStage = BaseDefenceStage.Result;
             m_BaseDefenceUIController.SetResultPanel(false);
@@ -283,7 +309,13 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void SwitchSelectedWeapon(int slotIndex){
-        GunScriptable gun = MainGameManager.GetInstance().GetAllSelectedWeapon()[slotIndex];
+        List<GunScriptable> selectedGunlist = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        GunScriptable gun;
+        if(slotIndex >= selectedGunlist.Count || selectedGunlist[slotIndex] == null){
+            // no selected weapon
+            return;
+        }
+        gun = selectedGunlist[slotIndex];
         m_GunModelController.ChangeGunModel(gun);
         m_GunShootController.SetSelectedGun(gun, slotIndex);
     }

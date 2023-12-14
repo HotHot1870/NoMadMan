@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  Id: 1
+  Id: 0
   DisplayName: Pistol
   UnlockCost: 0
   DisplayImage: {fileID: 21300000, guid: 0fc5d6dfd7f744b4080906d132a54aad, type: 3}
@@ -29,5 +29,5 @@ MonoBehaviour:
     Handling: 50
     Recoil: 10
   ReloadScriptable: {fileID: 11400000, guid: 5a1cdc698796e214eb69f54a7eb5dae8, type: 2}
-  UpgradeScriptable: {fileID: 11400000, guid: cef66e6714a643842b1e173a8e42f475, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 006116f47fdd61647a9ca66e443a395a, type: 2}
   ExplodeRadius: 0

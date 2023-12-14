@@ -34,6 +34,7 @@ public class ReadCsv : MonoBehaviour
 
     [EButton("ReadCsvGun")]
     private void ReadCsvFileGun(){
+        // get upgrade data auto
         StartCoroutine(ReadGunCSV());
 
         EditorUtility.SetDirty(m_MainGameManager);
@@ -362,10 +363,6 @@ public class ReadCsv : MonoBehaviour
 
             gunScriptable.GunStats = stats;
             allGuns.Add(gunScriptable.Id,gunScriptable);
-
-            if(index/collumeCount<=4)
-                m_MainGameManager.SaveData<int>(gunScriptable.DisplayName+gunScriptable.Id.ToString(),1);
-
 
             allGunScriptable.Add(gunScriptable);
             EditorUtility.SetDirty(gunScriptable);

@@ -10,13 +10,13 @@ public class WeaponToBeSwitch : MapChooseWeaponSlot
 
     public override void OnClickWeaponSlot(){
         if(BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon &&
-            m_Index != -1){
-            BaseDefenceManager.GetInstance().SwitchSelectedWeapon(m_Index );
+            m_WeaponSlotIndex != -1){
+            BaseDefenceManager.GetInstance().SwitchSelectedWeapon(m_WeaponSlotIndex );
             BaseDefenceManager.GetInstance().DoneSwitchWeapon();
         }
     }
 
     public bool IsGunDataEmpty(){
-        return m_Index == -1;
+        return m_WeaponSlotIndex == -1;
     }
 }

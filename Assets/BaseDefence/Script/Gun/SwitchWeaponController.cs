@@ -11,24 +11,27 @@ public class SwitchWeaponController : MonoBehaviour
 
     private void Start() {
 
-        var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        List<GunScriptable> allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        List<GunScriptable> allWeapon = MainGameManager.GetInstance().GetAllWeapon();
 
         // set selected weapon into Slot
-        for (int i = 0; i < m_AllWeaponSlot.Count; i++)
+        for (int i = 0; i < 4; i++)
         {
             int index = i;
-            if (allSelectedWeapon[index] != null)
+            var targetGunId = (int)MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+index.ToString(),"-1");
+            GunScriptable targetGunScriptable = allWeapon.Find(x=>x.Id == targetGunId);
+            if (targetGunScriptable != null)
             {
                 m_AllWeaponSlot[index].Init(
                     index,
-                    allSelectedWeapon[index].DisplayImage
+                    targetGunScriptable.DisplayImage
                 ); 
-                BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,allSelectedWeapon[index] );
+                BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,targetGunScriptable );
             }else{
                 // no selected weapon
                 m_AllWeaponSlot[index].Init(
                     index,
-                    allSelectedWeapon[index].DisplayImage
+                    null
                 ); 
             }
             index++;

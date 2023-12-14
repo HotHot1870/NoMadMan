@@ -102,7 +102,6 @@ public class GunScriptable : ScriptableObject
     }
 
     public float GetStatBaseValue(GunScriptableStatEnum statName){
-        // TODO : use dictionary instead : working
         switch (statName)
         {
             case GunScriptableStatEnum.Damage:

@@ -126,7 +126,6 @@ public class GunShootController : MonoBehaviour
         m_GunsClipAmmo.Add(slotIndex, (float) System.Convert.ToSingle(gun.GetStatValue(GunScriptableStatEnum.ClipSize)));
         if(m_SelectedGun == null){
             BaseDefenceManager.GetInstance().SwitchSelectedWeapon(slotIndex);
-
         }
     }
 
@@ -307,9 +306,12 @@ public class GunShootController : MonoBehaviour
                 }
                 
                 return bodyPart.GetEnemySpawnId();
+            }else if(hit.transform.TryGetComponent<GroundController>(out var groundController)){
+                // if hit ground , if so , emit mud
+                groundController.EmitMud(hit.point);
             }
-        }else{
             dotController.OnMiss();
+        }else{
         }
         return -1;
     }

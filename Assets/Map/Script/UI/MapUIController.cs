@@ -17,8 +17,7 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private GameObject m_LocationDetailPanel; 
     [SerializeField] private TMP_Text m_LocationName;  
     [SerializeField] private TMP_Text m_EnemyText;  
-    [SerializeField] private Transform m_EnemyList; 
-    [SerializeField] private Button m_FortifyBtn;  
+    [SerializeField] private Transform m_EnemyList;  
     [SerializeField] private Button m_DefenceBtn;
     [SerializeField] private Button m_CancelLocationDetailBtn;
 
@@ -31,10 +30,13 @@ public class MapUIController : MonoBehaviour
     [Header("ChooseWeapon")]
     [SerializeField] private GameObject m_ChooseWeaponPanel;
     [SerializeField] private List<MapChooseWeaponSlot> m_ChooseWeaponBtns = new List<MapChooseWeaponSlot>();
-    [SerializeField] private Transform m_ChooseWeaponEnemyList;
+   // [SerializeField] private Transform m_ChooseWeaponEnemyList;
     [SerializeField] private Button m_StartDefenceBtn;  
     [SerializeField] private Button m_CancelChooseWeaponBtn;  
-
+    
+    [Header("Weaponlist")]
+    [SerializeField] private MapChangeWeaponInSlotController m_ChangeWeaponInSlotController;
+/*
     [Header("Weaponlist")]
     [SerializeField] private GameObject m_WeaponListPanel;
     [SerializeField] private Image m_SelectedSlotWeapon;
@@ -51,7 +53,7 @@ public class MapUIController : MonoBehaviour
     [SerializeField] private Transform m_WeaponListSlotParent;
     [SerializeField] private GameObject m_WeaponListSlotPrefab;
     [SerializeField] private Button m_ComfirmWeaponChangeBtn;  
-
+*/
 
 
     private void Start() {
@@ -79,9 +81,9 @@ public class MapUIController : MonoBehaviour
         // choose weapon
         m_StartDefenceBtn.onClick.AddListener(OnClickStartDefence);
         m_CancelChooseWeaponBtn.onClick.AddListener(OnClickCancelInChooseWeapon);
-
+/*
         // weapon list panel
-        m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);
+        m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);*/
 
         m_OptionBtn.onClick.AddListener(()=>{
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
@@ -108,24 +110,35 @@ public class MapUIController : MonoBehaviour
 
     }
 
+    public void ShowChangeWeaponInSlotPanel(int weaponSlotIndex){
+        m_ChangeWeaponInSlotController.ShowWeaponListPanel(weaponSlotIndex);
+    }
+
     private void OnClickDefence(){
         TurnOffAllPanel();
 
         // set choose weapon panel
         m_ChooseWeaponPanel.SetActive(true);
 
-        var allSelectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
+
         for (int i = 0; i < 4; i++)
         {
             int index = i;
-            var selectedWeapon = allSelectedWeapon[i];
-            if(selectedWeapon!=null){
-                m_ChooseWeaponBtns[i].Init(index ,selectedWeapon.DisplayImage);
+            var targetGunId = (int)MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+index.ToString(),"-1");
+            GunScriptable targetGunScriptable = allWeapon.Find(x=>x.Id == targetGunId);
+            if( targetGunScriptable == null ){
+                //no selected weapon
+                m_ChooseWeaponBtns[i].Init(index , null);
+            }else{
+                m_ChooseWeaponBtns[i].Init(index ,targetGunScriptable.DisplayImage);
+
             }
+            
         }
     }
 
-    private void OnClickComfirmInWeaponList(){
+    public void ResetPreFightPanel(){
         OnClickDefence();
     }
 
@@ -157,31 +170,6 @@ public class MapUIController : MonoBehaviour
         m_LocationDetailPanel.SetActive(true);
         m_DefenceBtn.gameObject.SetActive( !MapManager.GetInstance().GetLocationController().ShouldShowCorruption() );
         m_LocationName.text = locationData.DisplayName;
-/*
-        // no Reward
-        if(locationData.RewardGunId!=-1f){
-            var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
-            var rewardGun = allWeapon.Find(x=>x.Gun.Id == locationData.RewardGunId).Gun;
-
-            if(allWeapon.Find(x=>x.Gun.Id == locationData.RewardGunId).IsOwned){
-                // already own weapon
-                m_FortifyCost.text = "Fortified";
-                m_FortifyBtn.gameObject.SetActive(false);
-            }else{
-                m_FortifyCost.text = "Fortify Cost : "+locationData.FortifyCost;
-                m_FortifyBtn.gameObject.SetActive(true);
-            }
-            m_FortifyRewardText.text = "Fortify Reward : "+rewardGun.DisplayName;
-
-            m_RewardImage.sprite = rewardGun.DisplayImage;
-            // TODO :  m_EnemyText.text = " Enemy : ( Danger "+locationData.WaveData.NormalWavesStrength+","+locationData.WaveData.FinalWaveStrength+" )";
-        }else{
-            m_FortifyCost.text = "Fortified";
-            m_FortifyBtn.gameObject.SetActive(false);
-        }*/
-
-        
-        
 
         // TODO : enemy list
 
@@ -189,17 +177,30 @@ public class MapUIController : MonoBehaviour
 
     public void ShowWeaponListPanel(int weaponSlotIndex){
         TurnOffAllPanel();
+        /*
         m_WeaponListPanel.SetActive(true);
-        var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+
+        //get all selected weapon , prevent showing selected weapon in list 
+        List<GunScriptable> allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        List<GunScriptable> allWeapon = MainGameManager.GetInstance().GetAllWeapon();
         List<int> allSelectedWeaponId = new List<int>();
         foreach (var item in allSelectedWeawpon)
         {
-            allSelectedWeaponId.Add(item.Id);
+            if(item != null)
+                allSelectedWeaponId.Add(item.Id);
         }
 
-        SetWeaponlistSelectedWeaponData(allSelectedWeawpon[weaponSlotIndex]);
+        int curSelectedWeaponId =  (int)MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+weaponSlotIndex.ToString(),"-1") ; 
+        // RESET show detail if no selected weapon
+        if(curSelectedWeaponId > -1){
+            GunScriptable targetGun = allWeapon.Find(x=>x.Id == curSelectedWeaponId);
+            bool isWeaponOwned = (int)MainGameManager.GetInstance().GetData<int>(targetGun.DisplayName+targetGun.Id.ToString(),"-1") ==1 ; 
+            SetWeaponListSelectedWeaponData( targetGun, isWeaponOwned);
+        }else{
+            ReseretWeaponListSelectedWeaponData();
+        }   
 
-        var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
+        // show all weapon
         
         for (int i = 0; i < m_WeaponListSlotParent.childCount; i++)
         {
@@ -208,14 +209,14 @@ public class MapUIController : MonoBehaviour
 
         for (int i = 0; i < allWeapon.Count; i++)
         {
-            //Debug.Log("check weawpon"+allWeapon[i].Gun.Id);
-            // >>>>  check if other slot have the same weapon  <<<<<
             string gunUnlockKey = allWeapon[i].DisplayName+allWeapon[i].Id.ToString();
-            if( System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey))==1 && !allSelectedWeaponId.Contains( allWeapon[i].Id)){
+            bool isUnlocked = System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey))==1;
+            bool isEquipbyOtherSlot = allSelectedWeaponId.Contains( allWeapon[i].Id);
+            if( !isEquipbyOtherSlot ){
                 var newWeaponListSlot = Instantiate(m_WeaponListSlotPrefab, m_WeaponListSlotParent);
-                newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i],weaponSlotIndex);
+                newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i],weaponSlotIndex,isUnlocked);
             }
-        }
+        }*/
     }
 
 /*
@@ -262,17 +263,26 @@ public class MapUIController : MonoBehaviour
         ShowLocationDetail();
     }*/
 
-    public void OnClickWeaponListSlot(GunScriptable selectedGunScriptable, int weaponSlotIndex, MapWeaponListGrid mapWeaponListGrid) {
+    public void OnClickWeaponListSlot(bool isWeaponLocked,GunScriptable selectedGunScriptable, int weaponSlotIndex, MapWeaponListGrid mapWeaponListGrid) {
+        
+        m_ChangeWeaponInSlotController.OnClickWeaponListSlot(isWeaponLocked, selectedGunScriptable, weaponSlotIndex, mapWeaponListGrid);
 
-        SetWeaponlistSelectedWeaponData(selectedGunScriptable);
-        var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
-        mapWeaponListGrid.Init(allSelectedWeawpon[weaponSlotIndex], weaponSlotIndex);
+    }
+/*
+    private void ReseretWeaponListSelectedWeaponData(){
+        m_SelectedWeaponName.text = "Name : ";
+        m_SelectedWeaponFireRate.text = "Fire Rate : ";
+        m_SelectedWeaponDamage.text = "Damage : ";
+        m_SelectedWeaponClipSize.text = "Clip Size : ";
+        m_SelectedWeaponAcc.text = "Acc : ";
+        m_SelectedWeaponRecoil.text = "Recoil : ";
+        m_SelectedWeaponHandling.text = "Handling : ";
+        m_SelectedSlotWeapon.sprite = null;
+        m_SelectedSlotWeapon.color = Color.black;
 
-        MainGameManager.GetInstance().ChangeSelectedWeapon(weaponSlotIndex, selectedGunScriptable);
     }
 
-
-    private void SetWeaponlistSelectedWeaponData(GunScriptable selectedGunScriptable){
+    private void SetWeaponListSelectedWeaponData(GunScriptable selectedGunScriptable, bool isWeaponOwned = false){
         m_SelectedWeaponName.text = "Name : "+selectedGunScriptable.DisplayName;
         m_SelectedWeaponFireRate.text = "Fire Rate : "+System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.FireRate));
         m_SelectedWeaponDamage.text = "Damage : "+System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.Damage))+
@@ -282,8 +292,9 @@ public class MapUIController : MonoBehaviour
         m_SelectedWeaponRecoil.text = "Recoil : "+ System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.Recoil));
         m_SelectedWeaponHandling.text = "Handling : "+ System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.Handling));
         m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
+        m_SelectedSlotWeapon.color = isWeaponOwned ? Color.white : Color.black;
 
-    }
+    }*/
 /*
     private void OnClickFortifyNo(){
         // cancel fortify
@@ -295,6 +306,6 @@ public class MapUIController : MonoBehaviour
         m_ChooseWeaponPanel.SetActive(false);
         m_LocationDetailPanel.SetActive(false);
         m_WorkShopChooseWeaponController.gameObject.SetActive(false);
-        m_WeaponListPanel.SetActive(false);
+        //m_WeaponListPanel.SetActive(false);
     }
 }

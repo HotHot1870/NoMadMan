@@ -68,9 +68,9 @@ public class CrosshairControl : MonoBehaviour
         
         if(BaseDefenceManager.GetInstance().GetGunShootController().GetShootCoolDown()>0){
             // gain less acc on shoot cool down
-            curAcc += Time.deltaTime*50f;
+            curAcc += Time.deltaTime*25f;
         }else{
-            curAcc += Time.deltaTime*100f;
+            curAcc += Time.deltaTime*50f;
         }
         return curAcc;
     }
