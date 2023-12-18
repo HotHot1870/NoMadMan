@@ -58,6 +58,11 @@ public class GunShootController : MonoBehaviour
         //ChangeAmmoCount(0, true);
     }
 
+    public void SetGunIdle(){
+        var gunModelAnimator = BaseDefenceManager.GetInstance().GetCurrentGunAnimator();
+        if(!gunModelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            gunModelAnimator.Play("Idle");
+    }
 
     public void OnShootBtnDown(){
         if (m_CurrentAmmo <= 0)
@@ -176,7 +181,9 @@ public class GunShootController : MonoBehaviour
         }
 
         var gunModelAnimator = BaseDefenceManager.GetInstance().GetCurrentGunAnimator();
-        if(gunModelAnimator!=null){
+        if(gunModelAnimator!=null && m_SelectedGun.DisplayName != "Minigun"){
+            gunModelAnimator.Play("Shoot");
+        }else if(m_SelectedGun.DisplayName == "Minigun" && !gunModelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Shoot")){
             gunModelAnimator.Play("Shoot");
         }
 

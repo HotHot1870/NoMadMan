@@ -70,9 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 8916264492814986581}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -239,9 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 8012292619664494227}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -345,9 +343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 6374671965465899394}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -451,9 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 2559700295348583410}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -1209,9 +1205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 528051500585761333}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -1286,9 +1281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 4745018482420214045}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -1392,9 +1386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 7059517225245423282}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -1764,9 +1757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 695056187471860618}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -1847,8 +1839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7983614127544834196}
   - component: {fileID: 2979771216696041646}
-  - component: {fileID: 4687170467374818814}
-  - component: {fileID: 5102558628142781445}
+  - component: {fileID: 5431261733440693160}
   m_Layer: 12
   m_Name: BoneSoldier
   m_TagString: Untagged
@@ -1895,7 +1886,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4687170467374818814
+--- !u!114 &5431261733440693160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1904,7 +1895,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6345075452338266797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4d66a7c2fabcf44cb5d97d7ed13c428, type: 3}
+  m_Script: {fileID: 11500000, guid: d5d50de4afd52154b86b10938c5742bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HpCanvas: {fileID: 6415441346356048965}
@@ -1912,33 +1903,8 @@ MonoBehaviour:
   HpParent: {fileID: 6376162186369387513}
   m_ExplodeHitParticle: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_Self: {fileID: 6345075452338266797}
+  m_Animator: {fileID: 2979771216696041646}
   m_AttackStartUp: 0.45
-  m_AllModleAndAnimation: []
-  m_AllAnimationToSpeed: []
---- !u!205 &5102558628142781445
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6345075452338266797}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
-  m_Size: 1
-  m_FadeMode: 1
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.999
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers: []
-  m_Enabled: 1
 --- !u!1 &6376162186369387513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,9 +2141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 1868208150960266181}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -2281,9 +2246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 3054224873868313020}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -2674,9 +2638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 2976434145827391930}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -2781,9 +2744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 8306682570573580247}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
@@ -2919,9 +2881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 4687170467374818814}
+  m_EnemyController: {fileID: 5431261733440693160}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
-  m_Collider: {fileID: 4141570331262767742}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}

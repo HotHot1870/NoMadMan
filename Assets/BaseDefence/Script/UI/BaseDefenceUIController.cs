@@ -77,12 +77,16 @@ public class BaseDefenceUIController : MonoBehaviour
         } 
         if(Vector2.Distance(Input.GetTouch(touchIndex).position, shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/1.75f ){
             gunShootController.OnShootBtnDown();
+        }else{
+            gunShootController.SetGunIdle();
         }    
 #endif
 #if UNITY_EDITOR
         if(Vector2.Distance(Input.mousePosition , shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/2f ){
             gunShootController.OnShootBtnDown();
-        }    
+        }else{
+            gunShootController.SetGunIdle();
+        }      
 #endif
             
         });
