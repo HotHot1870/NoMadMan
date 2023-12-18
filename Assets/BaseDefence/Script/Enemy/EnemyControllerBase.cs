@@ -76,12 +76,12 @@ public abstract class EnemyControllerBase : MonoBehaviour
         yield return new WaitForSeconds(3);
         HpParent.SetActive(false);
     }
-
+/*
     public void ExplodeHitParticle(){
         var explodeHitParticle = Instantiate(m_ExplodeHitParticle);
         explodeHitParticle.transform.position = this.transform.position;
         explodeHitParticle.Play();
-    }
+    }*/
 
     public bool IsDead(){
         return IsThisDead;

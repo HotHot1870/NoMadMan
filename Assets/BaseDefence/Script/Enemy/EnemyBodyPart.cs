@@ -85,9 +85,9 @@ public class EnemyBodyPart : MonoBehaviour
             var hitEffect = Instantiate(m_OnHitEffect);
             hitEffect.transform.position = this.transform.position;
             hitEffect.Play();
-            Destroy(hitEffect.gameObject,3f);
+            Destroy(hitEffect.gameObject,2f);
             // prevent shotgun emit too much 
-            m_EmissionDelay = 0.1f;
+            m_EmissionDelay = 0.2f;
             StartCoroutine(EmitHitEffectDelay());
         }
 

@@ -9,6 +9,6 @@ public class GroundController : MonoBehaviour
         var mudEmitter = Instantiate(m_Mud, this.transform);
         mudEmitter.transform.position = pos;
         mudEmitter.GetComponent<ParticleSystem>().Play();
-        Destroy(mudEmitter,5);
+        Destroy(mudEmitter,1);
     }
 }

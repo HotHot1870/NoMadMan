@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using ExtendedButtons;
 using UnityEditor;
+using System;
 
 public class WeaponUpgradeRowController : MonoBehaviour
 {
@@ -20,14 +21,14 @@ public class WeaponUpgradeRowController : MonoBehaviour
     private int m_UpgradeCount = 0;
 
 
-    public void Init( WeaponUpgradeDetail upgradeDetail, GunScriptable gunScriptable){
+    public void Init( WeaponUpgradeDetail upgradeDetail, GunScriptable gunScriptable, Action onUpgrade){
         m_UpgradeDetail = upgradeDetail;
         m_GunScriptable = gunScriptable;
 
         string upgradeSaveKey = m_GunScriptable.DisplayName+m_UpgradeDetail.UpgradeStat.ToString();
         m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
 
-        m_UpgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey);
+        m_UpgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey,"0");
         float playerOwnedGoo =  MainGameManager.GetInstance().GetGooAmount();
         if(m_UpgradeCount<m_UpgradeDetail.CostAndValue.Count){
             m_Cost.text = m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost.ToString("0.#") +" / "+playerOwnedGoo;
@@ -47,6 +48,12 @@ public class WeaponUpgradeRowController : MonoBehaviour
         }
 
 
+        // clear all blocks
+        for (int i = 0; i < m_BlockParent.childCount; i++)
+        {
+            Destroy(m_BlockParent.GetChild(i).gameObject);
+        }
+
         for (int i = 0; i < m_UpgradeDetail.CostAndValue.Count; i++)
         {
             var block = Instantiate(m_UpgradeStatSmallBoxPrefab,m_BlockParent);
@@ -54,14 +61,14 @@ public class WeaponUpgradeRowController : MonoBehaviour
             var blockController = block.GetComponent<WeaponUpgradeBoxController>();
             m_AllBlock.Add(blockController);
             blockController.m_Text.text = m_UpgradeDetail.CostAndValue[i].UpgradeValue;
-            blockController.m_BG.color = m_UpgradeCount>i?Color.green:Color.white;
+            blockController.m_BG.color = m_UpgradeCount>i ?Color.green:Color.white;
 
 #if UNITY_EDITOR
             EditorUtility.SetDirty(block);
 #endif
         }
         
-
+        m_UpgradeBtn.onClick.RemoveAllListeners();
         m_UpgradeBtn.onClick.AddListener(()=>{
             // TODO : On Hold , not on click
             if(!m_IsEnoughGoo){
@@ -70,13 +77,15 @@ public class WeaponUpgradeRowController : MonoBehaviour
             }
 
             // cost goo
-            MainGameManager.GetInstance().ChangeGooAmount(m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost);
-
+            MainGameManager.GetInstance().ChangeGooAmount(m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost*-1);
+            string upgradeSaveKey = m_GunScriptable.DisplayName+m_UpgradeDetail.UpgradeStat.ToString();
+/*
             m_UpgradeCount++;
             m_AllBlock[m_UpgradeCount-1].m_BG.color = Color.green;
-            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ m_AllBlock[m_UpgradeCount-1].m_Text.text;
+            m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ m_AllBlock[m_UpgradeCount-1].m_Text.text;*/
+            m_UpgradeCount++;
             MainGameManager.GetInstance().SaveData<int>(upgradeSaveKey,m_UpgradeCount);
-            Debug.Log(upgradeSaveKey+"     "+m_UpgradeCount);
+            onUpgrade?.Invoke();
         });
     }
 }

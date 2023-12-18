@@ -8,6 +8,8 @@ public class MapLocationController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_LocationCamera;
     [SerializeField] private List<GameObject> m_CoruuptionObject = new List<GameObject>();
     [SerializeField] private MapLocationScriptable m_Scriptable;
+    private Color CorrupColor = new Color(50f/255f,0,1);
+    private Color BaseColor = new Color(1,1,1);
     private bool m_ShouldShowCorruption = false;
 
 
@@ -49,6 +51,8 @@ public class MapLocationController : MonoBehaviour
         foreach (var item in m_CoruuptionObject)
         {
             item.SetActive( m_ShouldShowCorruption );
+            //item.GetComponent<MeshRenderer>().material.SetColor("_Color",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
+            //item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
         }
 
     }

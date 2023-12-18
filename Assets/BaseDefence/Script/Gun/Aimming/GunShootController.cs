@@ -226,11 +226,11 @@ public class GunShootController : MonoBehaviour
         {
             case BulletType.BasicBullet:
                 // normal 
-                BasicShootHandler(hitEnemy,dotController);
+                BasicShootHandler(hitEnvironmentAndEnemy,dotController);
             break;
             case BulletType.Puncture:
                 RaycastHit[] hits;
-                hits = Physics.RaycastAll(ray, 500f, 1<<12);
+                hits = Physics.RaycastAll(ray, 500f, 1<<12|10);
                 List<int> hitedEnemySpawnId = new List<int>();
                 foreach (var item in hits)
                 {

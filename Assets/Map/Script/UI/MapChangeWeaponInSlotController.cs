@@ -82,7 +82,7 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
             string gunUnlockKey = allWeapon[i].DisplayName+allWeapon[i].Id.ToString();
             bool isUnlocked = System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey))==1;
             bool isEquipbyOtherSlot = allSelectedWeaponId.Contains( allWeapon[i].Id);
-            if( !isEquipbyOtherSlot ){
+            if( !isEquipbyOtherSlot && isUnlocked){
                 var newWeaponListSlot = Instantiate(m_WeaponListSlotPrefab, m_WeaponListSlotParent);
                 newWeaponListSlot.GetComponent<MapWeaponListGrid>().Init(allWeapon[i],weaponSlotIndex,isUnlocked);
             }
@@ -124,19 +124,14 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
             return;
 
         SetWeaponListSelectedWeaponData(selectedGunScriptable,!isWeaponLocked);
-        if(isWeaponLocked){
-            // weapon locked , show detail of weapon , but hide confirm btn
-            m_ComfirmWeaponChangeBtn.gameObject.SetActive(false);
-            return;
-        }
-        m_ComfirmWeaponChangeBtn.gameObject.SetActive(true);
+        
+        m_SelectedGunScriptable = selectedGunScriptable;
+        m_ComfirmWeaponChangeBtn.gameObject.SetActive(!isWeaponLocked);
 
-        var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        //var allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
         //string gunUnlockKey = selectedGunScriptable.DisplayName+selectedGunScriptable.Id.ToString();
         //bool isUnlocked = System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey,"-1"))==1;
         mapWeaponListGrid.Init(m_SelectedGunScriptable, weaponSlotIndex, !isWeaponLocked);
-
-        m_SelectedGunScriptable = selectedGunScriptable;
 
 
     }

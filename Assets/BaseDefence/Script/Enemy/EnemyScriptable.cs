@@ -9,7 +9,7 @@ public class EnemyScriptable : ScriptableObject
     public GameObject Prefab;
     public string DisplayName;
     public Sprite DisplayImage;
-    [Range(0.1f,500)] public float MaxHp = 100;
+    [Range(0.1f,10000)] public float MaxHp = 100;
     [Range(0.1f,100)] public float Damage = 33;
     [Range(0.1f,5f)] public float AttackDelay = 1.5f;
     [Range(1, 25)] public float MoveSpeed = 5;

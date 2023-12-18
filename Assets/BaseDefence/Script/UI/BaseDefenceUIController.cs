@@ -75,7 +75,7 @@ public class BaseDefenceUIController : MonoBehaviour
             // no touch detected
             return;
         } 
-        if(Vector2.Distance(Input.GetTouch(touchIndex).position, shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/2f ){
+        if(Vector2.Distance(Input.GetTouch(touchIndex).position, shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/1.75f ){
             gunShootController.OnShootBtnDown();
         }    
 #endif
