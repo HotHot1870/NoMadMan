@@ -340,7 +340,7 @@ MonoBehaviour:
   HpParent: {fileID: 3338055288722886004}
   m_ExplodeHitParticle: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
   m_Self: {fileID: 327454783630803469}
-  m_AttackAnimationStartUp: 0.36
+  m_AttackAnimationStartUp: 0.33
   m_AllModleAndAnimation:
   - m_Name: BlondHairFemale
     m_Self: {fileID: 2851348693230987293}
@@ -370,9 +370,6 @@ MonoBehaviour:
     m_Self: {fileID: 8383248803128964657}
     m_Animtor: {fileID: 8431418040123163167}
     m_Renderer: {fileID: 8482574303861032831}
-  m_AllAnimationName:
-  - NormalWalk
-  - Run
 --- !u!1 &377405382207659342
 GameObject:
   m_ObjectHideFlags: 0
@@ -17827,8 +17824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 0}
-  m_OnHitEffect: {fileID: 0}
+  m_EnemyController: {fileID: 8666733018991662214}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}

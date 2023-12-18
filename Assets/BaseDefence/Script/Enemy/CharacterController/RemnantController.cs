@@ -19,10 +19,9 @@ public class RemnantController : EnemyControllerBase
     [SerializeField] private float m_AttackAnimationStartUp = 0.45f;
     // drunk = 1: 1.25 , sneak = 1: 0.5f , LowHandWalk 1 : 1.
     [SerializeField] private List<RemnantModleAndAnimation> m_AllModleAndAnimation = new List<RemnantModleAndAnimation>();
-    [SerializeField] private List<string> m_AllAnimationName = new List<string>();
     private SkinnedMeshRenderer m_TargetRenderer = null;
     private Animator m_TargetAnimator = null;
-    private int randomInt =-1;
+    private float m_RandomSpeedMod = 1;
     private bool m_CanAttack = false;
 
     public override void Init(EnemyControllerInitConfig config)
@@ -47,16 +46,11 @@ public class RemnantController : EnemyControllerBase
             }
         }
 
+        m_RandomSpeedMod = UnityEngine.Random.Range(0.6f,1.6f);
+
         //m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
 
-        // random animation
-        randomInt =  UnityEngine.Random.Range(0,m_AllAnimationName.Count);
-        m_TargetAnimator.Play(m_AllAnimationName[randomInt]);
-        m_TargetAnimator.speed = Scriptable.MoveSpeed/2;
-        //m_TargetAnimator.speed = m_AllAnimationToSpeed[randomInt].m_AnimationSpeed * Scriptable.MoveSpeed ;
-        //Debug.Log($"Name:{m_AllAnimationToSpeed[randomInt].m_AnimtionName}    speed:{m_AllAnimationToSpeed[randomInt].m_AnimationSpeed}    final:{m_TargetAnimator.speed}");
-
-
+        m_TargetAnimator.Play("Move");
         yield return null;
         m_Self.transform.LookAt(new Vector3(Destination.x,m_Self.transform.position.y,Destination.x));
         
@@ -77,8 +71,8 @@ public class RemnantController : EnemyControllerBase
 
         }else{
             // move
-            m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed/5f);
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
+            m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed*m_RandomSpeedMod);
+            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime *m_RandomSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
 
@@ -137,8 +131,8 @@ public class RemnantController : EnemyControllerBase
     protected override void OnDead(){
         base.OnDead();
 
-        m_TargetAnimator.speed = 1;
-        m_TargetAnimator.Play("Die");
+        //m_TargetAnimator.speed = 1;
+        //m_TargetAnimator.Play("Die");
         Destroy(m_Self,1);
     }
 
