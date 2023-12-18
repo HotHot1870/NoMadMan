@@ -13,11 +13,11 @@ public class EnemyBodyPart : MonoBehaviour
 {
     [SerializeField] private EnemyControllerBase m_EnemyController;
     [SerializeField] private ParticleSystem m_OnHitEffect=null;
-    [SerializeField] private Collider m_Collider;
     [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
     [SerializeField] private MeshRenderer m_Renderer = null;
     [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
+    private Collider m_Collider;
    // [SerializeField] private AudioSource m_AudioPlayer;
    // [SerializeField] private AudioClip m_OnHitSound;
     private bool m_CanPlayHitSound = true;
@@ -27,7 +27,7 @@ public class EnemyBodyPart : MonoBehaviour
     {
        // m_OnHitSound = Resources.Load<AudioClip>("Enemy/Audio/Hit");
        // m_AudioPlayer = this.AddComponent<AudioSource>();
-        
+        m_Collider = this.GetComponent<Collider>();
         if(m_Renderer != null)
             m_Renderer.material.SetFloat("_Normalized",  0);
 
