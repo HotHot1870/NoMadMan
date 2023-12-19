@@ -21,6 +21,7 @@ public class RemnantController : EnemyControllerBase
     private Animator m_TargetAnimator = null;
     private float m_RandomSpeedMod = 1;
     private bool m_CanAttack = false;
+    private float m_FallingBackTime =0;
 
     public override void Init(EnemyControllerInitConfig config)
     {
@@ -92,6 +93,15 @@ public class RemnantController : EnemyControllerBase
         }
         StartCoroutine(FirstAttack());
 
+    }
+
+    private IEnumerator FallingBack(){
+        float duration = 1;
+        while (m_FallingBackTime < duration)
+        {
+            m_FallingBackTime += Time.deltaTime;
+        }
+        
     }
 
     private IEnumerator FirstAttack(){
