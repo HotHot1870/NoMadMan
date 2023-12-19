@@ -186,11 +186,19 @@ public class EnemyBodyPart : MonoBehaviour
         {
             passedTime += Time.deltaTime;
             yield return null;
-            if(m_Renderer != null)
-                m_Renderer.material.SetFloat("_Normalized",  (fadeTimeNeeded- passedTime) / fadeTimeNeeded);
+            if(m_Renderer != null){
+                foreach (var item in m_Renderer.materials)
+                {
+                    item.SetFloat("_Normalized",  (fadeTimeNeeded- passedTime) / fadeTimeNeeded);
+                }
+            }
 
-            if(m_SkinRenderer != null)
-                m_SkinRenderer.material.SetFloat("_Normalized",  (fadeTimeNeeded-passedTime) / fadeTimeNeeded);
+            if(m_SkinRenderer != null){
+                foreach (var item in m_SkinRenderer.materials)
+                {
+                    item.SetFloat("_Normalized",  (fadeTimeNeeded- passedTime) / fadeTimeNeeded);
+                }
+            }
 
         }
         

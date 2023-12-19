@@ -16,7 +16,6 @@ public class RemnantController : EnemyControllerBase
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private float m_AttackAnimationStartUp = 0.45f;
-    // drunk = 1: 1.25 , sneak = 1: 0.5f , LowHandWalk 1 : 1.
     [SerializeField] private List<RemnantModleAndAnimation> m_AllModleAndAnimation = new List<RemnantModleAndAnimation>();
     private SkinnedMeshRenderer m_TargetRenderer = null;
     private Animator m_TargetAnimator = null;
