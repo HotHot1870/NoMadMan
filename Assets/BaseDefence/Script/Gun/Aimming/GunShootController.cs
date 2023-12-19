@@ -307,7 +307,8 @@ public class GunShootController : MonoBehaviour
                     // foreach puncture count , reduce damage by 50%
                     bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage) ) * 
                         (1 * Mathf.Pow( 0.5f ,punctureCount)), 
-                        Camera.main.WorldToScreenPoint(hit.point));
+                        Camera.main.WorldToScreenPoint(hit.point),
+                        hit.point);
                 }else{
                     dotController.OnMiss();
                 }

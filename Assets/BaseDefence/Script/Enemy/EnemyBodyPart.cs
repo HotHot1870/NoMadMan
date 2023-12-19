@@ -77,7 +77,7 @@ public class EnemyBodyPart : MonoBehaviour
         m_EnemyController.ChangeHp(changes);
     }
 
-    public void OnHit(float damage, Vector2 screenPos)
+    public void OnHit(float damage, Vector2 screenPos, Vector3 hitPos)
     {
         m_BodyPartHpPresentage -= ((damage * m_DamageMod) / m_EnemyController.GetMaxHp());
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
@@ -86,7 +86,7 @@ public class EnemyBodyPart : MonoBehaviour
         // hit effect
         if(m_OnHitEffect != null && m_EmissionDelay<=0){
             var hitEffect = Instantiate(m_OnHitEffect);
-            hitEffect.transform.position = this.transform.position;
+            hitEffect.transform.position = hitPos;
             hitEffect.Play();
             Destroy(hitEffect.gameObject,2f);
             // prevent shotgun emit too much 
@@ -169,7 +169,8 @@ public class EnemyBodyPart : MonoBehaviour
             return;
         }
         // prevent blocking bullet after dead
-        m_Collider.enabled = false;
+        if(m_Collider != null)
+            m_Collider.enabled = false;
         // dead effect
         StartCoroutine(OnDeadEffect());
     }

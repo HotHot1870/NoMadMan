@@ -83,7 +83,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,11 +272,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 312703913585131400}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &453381754065579368
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,11 +383,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 8791566759278096163}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &594146011692296028
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,11 +628,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 8678588190011431808}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 6260526563644965918}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &1146330799306464233
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +676,6 @@ GameObject:
   - component: {fileID: 4320599243872775993}
   - component: {fileID: 6292847627130715383}
   - component: {fileID: 2776816407608768710}
-  - component: {fileID: 8001641225852763623}
   m_Layer: 12
   m_Name: Puppet
   m_TagString: Untagged
@@ -734,7 +733,7 @@ Animator:
   m_GameObject: {fileID: 1223978466725511306}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
-  m_Controller: {fileID: 9100000, guid: c251d1cf5b3b8cf4982c6f46b70d4c21, type: 2}
+  m_Controller: {fileID: 9100000, guid: 376d842526c99d441b05d77ff0bdbf3c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -745,30 +744,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!205 &8001641225852763623
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223978466725511306}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
-  m_Size: 1
-  m_FadeMode: 1
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.999
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers: []
-  m_Enabled: 1
 --- !u!1 &1264464761322049370
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,11 +907,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 8110171724251700118}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 1415303803441682971}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &1755208329450664380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,11 +1266,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 3332089007501482892}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 8547228373021317683}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &2671659387874817197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,7 +1489,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1686,7 +1661,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1940,11 +1915,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 7110823976077543370}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 6260526563644965918}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &4591114510125635234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,11 +2091,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 4578267243172569058}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 7007377847923178237}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &4980203293885261750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,11 +2201,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 664816453816098097}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &5144472599015505950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2298,7 @@ Transform:
   m_GameObject: {fileID: 5595897954038263951}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0.15}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2414,11 +2389,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
-  m_Collider: {fileID: 8576189514332757551}
   m_DamageMod: 0.1
   m_BodyType: 1
   m_Renderer: {fileID: 1303684915722249369}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &5772072233147300150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,11 +2558,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 1170413410364462872}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &6108182690874348498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2679,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2845,7 +2820,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3426,11 +3401,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 8373883015241086726}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 3604091435307169530}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &7399004790111366540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3610,7 +3585,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0b376e43ee01da42b34f87dad787dc4, type: 2}
+  - {fileID: 2100000, guid: 2ff9e95fa11402f4ab4c16504f7afee9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4159,11 +4134,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 5709261423138271093}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &8574066494477579065
 GameObject:
   m_ObjectHideFlags: 0
@@ -4328,11 +4303,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 4671087433779355721}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 1232287000447576660}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &8778348382203396897
 GameObject:
   m_ObjectHideFlags: 0
@@ -4529,11 +4504,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 6292847627130715383}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 3079723984153287712}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &9206506837404278433
 GameObject:
   m_ObjectHideFlags: 0

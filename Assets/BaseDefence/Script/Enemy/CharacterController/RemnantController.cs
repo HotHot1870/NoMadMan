@@ -78,7 +78,7 @@ public class RemnantController : EnemyControllerBase
     }
     private IEnumerator TrunAndLookAndCamera(){
         float passTime = 0;
-        float duration = 0.5f;
+        float duration = 0.25f;
         while (passTime<duration)
         {
             yield return null;

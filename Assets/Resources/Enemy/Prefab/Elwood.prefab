@@ -748,12 +748,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
-  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 3638995819365970578}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
   m_DamageMod: 1.5
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 4943171535433664837}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &2522203174769906320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,8 +1106,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004797048934412802}
-  - component: {fileID: 6720879187760874549}
   - component: {fileID: 1735740092185662449}
+  - component: {fileID: 6720879187760874549}
   m_Layer: 12
   m_Name: trunkUpper
   m_TagString: Untagged
@@ -1136,6 +1136,25 @@ Transform:
   - {fileID: 2524630140977886203}
   m_Father: {fileID: 7611840774571321960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1735740092185662449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3756137218759698545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EnemyController: {fileID: 3056453051600076715}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: d47371553d99120449ea6cf5216bd67e, type: 3}
+  m_DamageMod: 1
+  m_BodyType: 0
+  m_Renderer: {fileID: 0}
+  m_SkinRenderer: {fileID: 8497130151902999052}
+  m_BodyPartHpPresentage: 1
 --- !u!65 &6720879187760874549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1157,25 +1176,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.015, z: 0.03}
   m_Center: {x: 0, y: 0.015, z: 0}
---- !u!114 &1735740092185662449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3756137218759698545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe11233b55232c84d856d72a159ed962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EnemyController: {fileID: 3056453051600076715}
-  m_OnHitEffect: {fileID: 8314652227003925356, guid: e4809a8873a567d488878c0628ddcc49, type: 3}
-  m_Collider: {fileID: 6720879187760874549}
-  m_DamageMod: 1
-  m_BodyType: 0
-  m_Renderer: {fileID: 0}
-  m_SkinRenderer: {fileID: 8497130151902999052}
 --- !u!1 &4043840071036283432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,12 +1686,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
-  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
-  m_Collider: {fileID: 3992678955232939041}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: d47371553d99120449ea6cf5216bd67e, type: 3}
   m_DamageMod: 1
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!65 &3992678955232939041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2370,12 +2370,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
-  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 9073703578811255249}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
   m_DamageMod: 1.5
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 2577048822393745810}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &8527043791976406695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,12 +2482,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
-  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0e7946fe2598b174b8a55e69d08bdafa, type: 3}
-  m_Collider: {fileID: 3519247847655474476}
+  m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
   m_DamageMod: 1.5
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 8035835111316926212}
+  m_BodyPartHpPresentage: 1
 --- !u!65 &3519247847655474476
 BoxCollider:
   m_ObjectHideFlags: 0
