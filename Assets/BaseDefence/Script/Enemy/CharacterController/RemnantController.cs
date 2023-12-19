@@ -12,7 +12,6 @@ public class RemnantModleAndAnimation
     public SkinnedMeshRenderer m_Renderer;
 }
 
-// TODO : Make Skelecton controller
 public class RemnantController : EnemyControllerBase
 {
     [SerializeField] private GameObject m_Self;
@@ -131,8 +130,7 @@ public class RemnantController : EnemyControllerBase
     protected override void OnDead(){
         base.OnDead();
 
-        //m_TargetAnimator.speed = 1;
-        //m_TargetAnimator.Play("Die");
+        m_TargetAnimator.Play("Dead");
         Destroy(m_Self,1);
     }
 

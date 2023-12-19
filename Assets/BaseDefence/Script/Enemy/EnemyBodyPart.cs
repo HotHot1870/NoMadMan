@@ -17,6 +17,7 @@ public class EnemyBodyPart : MonoBehaviour
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
     [SerializeField] private MeshRenderer m_Renderer = null;
     [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
+    [SerializeField][Range(0f, 1f)] private float m_BodyPartHpPresentage = 1f;
     private Collider m_Collider;
    // [SerializeField] private AudioSource m_AudioPlayer;
    // [SerializeField] private AudioClip m_OnHitSound;
@@ -78,7 +79,9 @@ public class EnemyBodyPart : MonoBehaviour
 
     public void OnHit(float damage, Vector2 screenPos)
     {
+        m_BodyPartHpPresentage -= ((damage * m_DamageMod) / m_EnemyController.GetMaxHp());
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
+        
 
         // hit effect
         if(m_OnHitEffect != null && m_EmissionDelay<=0){
@@ -109,6 +112,15 @@ public class EnemyBodyPart : MonoBehaviour
             }
 
         BaseDefenceManager.GetInstance().SetDamageText(damage * m_DamageMod,color,screenPos);
+        if(m_BodyPartHpPresentage <=0){
+            // destory body part
+            StartCoroutine(OnDeadEffect());
+
+            // TODO : play fall back animation if not dead
+            if(!m_EnemyController.IsDead()){
+
+            }
+        }
 /*
         // Hit sound
         if(m_CanPlayHitSound){
@@ -158,7 +170,7 @@ public class EnemyBodyPart : MonoBehaviour
         }
         // prevent blocking bullet after dead
         m_Collider.enabled = false;
-        // burn effect
+        // dead effect
         StartCoroutine(OnDeadEffect());
     }
 
@@ -187,6 +199,9 @@ public class EnemyBodyPart : MonoBehaviour
 
         if(m_SkinRenderer != null)
             m_SkinRenderer.material.SetFloat("_Normalized",  0);
+
+        if(this.gameObject != null)
+            Destroy(this.gameObject);
 
     }
 

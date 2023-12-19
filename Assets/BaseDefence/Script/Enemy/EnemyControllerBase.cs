@@ -62,7 +62,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
         HpParent.SetActive(true);
         HpParent.transform.rotation = new Quaternion(0,0,0,0);
         HpBar.fillAmount = CurHp / Scriptable.MaxHp;
-        StartCoroutine(HideHp());
+        StartCoroutine(HideHpUI());
         CurHp = Mathf.Clamp(CurHp,0f,Scriptable.MaxHp);
         if( CurHp<=0 ){
             // dead
@@ -72,7 +72,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
         }
     }
 
-    private IEnumerator HideHp(){
+    private IEnumerator HideHpUI(){
         yield return new WaitForSeconds(3);
         HpParent.SetActive(false);
     }
@@ -85,6 +85,10 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
     public bool IsDead(){
         return IsThisDead;
+    }
+
+    public float GetMaxHp(){
+        return Scriptable.MaxHp;
     }
 
     public EnemyScriptable GetScriptable(){
