@@ -233,7 +233,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 9;
+        int collumeCount = 10;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -286,7 +286,8 @@ public class ReadCsv : MonoBehaviour
                 lockBy.Add(int.Parse(item));
             }
             location.LockBy = lockBy;
-
+            colume++;
+            location.Level = int.Parse(contents[colume]);
             allLocation.Add(location);
 
             EditorUtility.SetDirty(location);
@@ -371,6 +372,60 @@ public class ReadCsv : MonoBehaviour
         m_MainGameManager.SetAllWeapon(allGunScriptable);
     }
 
+private IEnumerator ReadDialogCSV(){
+        // Dialog
+        Dictionary<int,DialogScriptable> allDialogs = new Dictionary<int, DialogScriptable>(); 
+        List<DialogScriptable> allDialogScriptable = new List<DialogScriptable>();
+
+        if(Resources.Load<TextAsset>("CSV/Dialog") == null){
+            Debug.LogError(m_ResourcesPath+"/CSV//Dialog.csv is null" );
+            yield break;
+        }
+        
+        
+        // remove all scriptable in Dialog folder
+        FileUtil.DeleteFileOrDirectory(m_ScriptablePath+"/Dialog");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        string json = Resources.Load<TextAsset>("CSV/Dialog").ToString();
+
+        var contents = json.Split('\n',',');
+        int collumeCount = 6;
+        for (int i = collumeCount; i < contents.Length; i+=collumeCount)
+        {
+            int index = i;
+            int colume = index;
+            // create scriptable 
+            DialogScriptable DialogScriptable = ScriptableObject.CreateInstance<DialogScriptable>();
+
+            DialogScriptable.Id = int.Parse(contents[colume]);
+            colume++;
+            string displayName = contents[colume].Trim()+DialogScriptable.Id.ToString();
+            DialogScriptable.SpeakerName = contents[colume].Trim();
+            colume++;
+            AssetDatabase.CreateAsset(DialogScriptable, m_ScriptablePath+"/Dialog/"+displayName.Replace(" ", "")+".asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            // tra chinese
+            colume++;
+            // sim chinese
+            colume++;
+            DialogScriptable.EngDialog = contents[colume].Trim();
+            colume++;
+            foreach (var item in contents[colume].Split('|'))
+            {
+                DialogScriptable.NextId.Add(int.Parse(item));
+            }
+            allDialogs.Add(DialogScriptable.Id,DialogScriptable);
+
+            allDialogScriptable.Add(DialogScriptable);
+            EditorUtility.SetDirty(DialogScriptable);
+            yield return null;
+        }
+        m_MainGameManager.SetAllDialog(allDialogScriptable);
+    }
 
 
     private IEnumerator GetCsvFromGoogle(){

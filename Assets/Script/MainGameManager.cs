@@ -15,6 +15,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private float m_Volume = 0.75f;
     [SerializeField] private float m_AimSensitivity = 0.5f;
 
+    [SerializeField] private List<DialogScriptable> m_AllDialog = new List<DialogScriptable>();
     [SerializeField] private List<GunScriptable> m_AllWeapon = new List<GunScriptable>();
     [SerializeField] private List<MapLocationScriptable> m_AllLocation = new List<MapLocationScriptable>();
     [SerializeField] private List<WeaponUpgradeScriptable> m_AllWeaponUpgrade = new List<WeaponUpgradeScriptable>();
@@ -146,11 +147,14 @@ public class MainGameManager : MonoBehaviour
         return m_AllEnemy;
     }
 
+    public void SetAllDialog(List<DialogScriptable> allDialog){
+        m_AllDialog = allDialog;
+ 
+    }
+
     public void SetAllWeapon(List<GunScriptable> allWeapon){
         m_AllWeapon = allWeapon;
-        string gunUnlockKey = m_AllWeapon[0].DisplayName+m_AllWeapon[0].Id;
-
-        
+ 
     }
 
     public void SetAllLocation(List<MapLocationScriptable> allLocation){

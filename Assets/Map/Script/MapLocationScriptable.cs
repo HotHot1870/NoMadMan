@@ -8,6 +8,7 @@ public class MapLocationScriptable : ScriptableObject
     public int Id;
     public string DisplayName;
     public List<int> LockBy = new List<int>();
+    public int Level;
     public GameObject Prefab;
     public Vector3 Pos;
     

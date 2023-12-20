@@ -68,13 +68,19 @@ public class RemnantController : EnemyControllerBase
             m_CanAttack = true;
             StartCoroutine(TrunAndLookAndCamera());
 
-        }else{
-            // move
+        }else if(m_FallingBackTime <=0){
+            // move forward
             m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed*m_RandomSpeedMod);
             float moveDistance = Scriptable.MoveSpeed * Time.deltaTime *m_RandomSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
 
+        }else{
+            // move backward
+            m_TargetAnimator.SetFloat("Speed",-0.5f);
+            float moveDistance = -0.5f * Time.deltaTime *m_RandomSpeedMod;
+            m_Self.transform.position = Vector3.MoveTowards(
+                m_Self.transform.position, Destination, moveDistance);
         }
     }
     private IEnumerator TrunAndLookAndCamera(){
@@ -100,6 +106,7 @@ public class RemnantController : EnemyControllerBase
         while (m_FallingBackTime < duration)
         {
             m_FallingBackTime += Time.deltaTime;
+            yield return null;
         }
         
     }
