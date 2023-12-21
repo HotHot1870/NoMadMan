@@ -8460,8 +8460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 375, y: 0}
-  m_SizeDelta: {x: 1200, y: 1000}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1575, y: 1000}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1158835256
 MonoBehaviour:
@@ -11469,7 +11469,6 @@ MonoBehaviour:
   m_DialogRowParent: {fileID: 2017379937}
   m_ScrollRect: {fileID: 1158835256}
   m_BgAnimator: {fileID: 1684257328}
-  m_BtnParent: {fileID: 758032735}
   m_NextDialogBtn: {fileID: 1946275106}
   m_EndDailogBtn: {fileID: 2144489746}
   m_EndDialogBtnText: {fileID: 305216261}
@@ -14801,8 +14800,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 375, y: 0}
+  m_SizeDelta: {x: -375, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2017379938
 MonoBehaviour:
@@ -14820,7 +14819,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 25
-    m_Bottom: 150
+    m_Bottom: 350
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1

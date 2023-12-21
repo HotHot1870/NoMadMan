@@ -150,14 +150,28 @@ public class MapUIController : MonoBehaviour
         m_LocationDetailPanel.SetActive(true);
     }
 
+    public void OnEndDefenceShowDialog(){
+        MapLocationScriptable locationData = MainGameManager.GetInstance().GetSelectedLocation();
+
+        if(locationData==null)
+            return;
+
+        m_DialogController.Init(locationData.EndDialogId,null);
+        // TODO : Map Camera look at location
+    }
+
     private void OnClickStartDefence() {
         // TODO : Working show dialog first
         MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null)
             return;
 
-        m_DialogController.Init(locationData.StartDialogId);
+        m_DialogController.Init(locationData.StartDialogId,OnDialogEndByStartDefence);
+    }
 
+    private void OnDialogEndByStartDefence(){
+        MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
+        MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
     }
 
     public bool ShouldShowLocationDetail(){

@@ -163,9 +163,13 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     public void OnClickBackFromResult(){
-        MainGameManager.GetInstance().LoadSceneWithTransition("Map");
-        
+        // TODO : Show dailog if win 
+        MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
     }
+    private void ShowDialogOnEndGame(){
+        MapManager.GetInstance().ShowEndDefenceDialog();
+    }
+
 
     public void SetResultPanel(bool isWin){
         TurnOffAllPanel();

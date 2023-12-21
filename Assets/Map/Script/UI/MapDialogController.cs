@@ -13,27 +13,19 @@ public class MapDialogController : MonoBehaviour
     [SerializeField] private Transform m_DialogRowParent;
     [SerializeField] private ScrollRect m_ScrollRect;
     [SerializeField] private Animator m_BgAnimator;
-    [SerializeField] private Transform m_BtnParent;
     [SerializeField] private Button m_NextDialogBtn;
     [SerializeField] private Button m_EndDailogBtn;
     [SerializeField] private TMP_Text m_EndDialogBtnText;
     private DialogScriptable m_CurDialogScriptable = null;
 
-    public void Init(int startDialogId){
+    public void Init(int startDialogId , Action onDialogEnd){
         m_Self.SetActive(true);
-        m_CurDialogScriptable = GetDialogScritapble(startDialogId);
-        m_BgAnimator.Play("Open");
-        SetDialogRow();
-    }
-
-    void Start(){
-        m_BgAnimator.Play("Hidden");
+        
         m_NextDialogBtn.onClick.AddListener(()=>{
             if(m_CurDialogScriptable.NextId[0] == -1){
                 // close dialog
-                
-                MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
-                MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
+                onDialogEnd?.Invoke();
+                m_BgAnimator.Play("Close");
             }else{
                 // TODO : choose at the end
                 // next dialog
@@ -43,22 +35,43 @@ public class MapDialogController : MonoBehaviour
         });
 
         m_EndDailogBtn.onClick.AddListener(()=>{
-            MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
-            MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
+            onDialogEnd?.Invoke();
+            m_BgAnimator.Play("Close");
         });
+
+        m_CurDialogScriptable = GetDialogScritapble(startDialogId);
+        m_BgAnimator.Play("Open");
+        SetDialogRow();
+    }
+
+    void Start(){
+        m_BgAnimator.Play("Hidden");
+
         m_Self.SetActive(false);
     }
     private IEnumerator AddNewDialogRow(){
         var newBlock = Instantiate(m_DialogRowPrefab,m_DialogRowParent);
+        newBlock.transform.SetSiblingIndex(newBlock.transform.GetSiblingIndex()-1);
 
         newBlock.GetComponent<MapDialogRowController>().Init(m_CurDialogScriptable);
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(m_DialogRowParent);
 #endif
-        m_BtnParent.SetAsLastSibling();
-        m_ScrollRect.verticalNormalizedPosition = 0;
         yield return null;
+        // scroll to bottom 
+        float passTime = 0f;
+        float duration = 0.35f;
+        float startVerticalNormalizedPosition = m_ScrollRect.verticalNormalizedPosition;
+        
+        while (passTime<duration)
+        {
+            passTime += Time.deltaTime;
+            yield return null;
+            m_ScrollRect.verticalNormalizedPosition = Mathf.Lerp(startVerticalNormalizedPosition,0,passTime/duration);
+        }
+        m_ScrollRect.verticalNormalizedPosition = 0;
+        
 
     }
 

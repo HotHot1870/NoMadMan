@@ -81,6 +81,7 @@ public class BaseDefenceManager : MonoBehaviour
     public Action m_ChangeToReloadAction = null;
     #endregion
 
+    private MapLocationScriptable m_CurlocationData ;
 
     private BaseDefenceStage m_GameStage = BaseDefenceStage.Shoot;
     public BaseDefenceStage GameStage {get { return m_GameStage; }}
@@ -108,7 +109,6 @@ public class BaseDefenceManager : MonoBehaviour
 
         m_ChangeFromReloadAction += CloseReloadPanel;
         //m_Controller.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetCurHp() / MainGameManager.GetInstance().GetMaxHp();
-
 
     }
 
@@ -149,11 +149,13 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void StartWave(MapLocationScriptable locationInfo){
+        m_CurlocationData = locationInfo;
         m_EnemySpawnController.StartWave( locationInfo);
+        MainGameManager.GetInstance().SetSelectedLocation(m_CurlocationData);
     }
 
     public MapLocationScriptable GetLocationScriptable(){
-        return m_EnemySpawnController.GetLocationScriptable();
+        return m_CurlocationData;
     }
 
 

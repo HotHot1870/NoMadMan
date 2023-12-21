@@ -7,7 +7,6 @@ using TMPro;
 
 public class MapDialogRowController : MonoBehaviour
 {
-    [SerializeField] private GameObject m_Self;
     // TODO : show action
     [SerializeField] private Animator m_BgAnimator;
     [SerializeField] private TMP_Text m_DialogText;  
@@ -16,5 +15,6 @@ public class MapDialogRowController : MonoBehaviour
     public void Init(DialogScriptable dialogScriptable){
         m_DialogText.text = dialogScriptable.EngDialog;
         m_SpeakText.text = dialogScriptable.SpeakerName;
+        //m_BgAnimator.Play("Show");
     }
 }

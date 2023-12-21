@@ -25,6 +25,8 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private Canvas m_LoadingCanvas;
     [SerializeField]private Image m_LoadAmountImage;
     [SerializeField]private Animator m_BgAnimator;
+    [Header("Location")]
+    private MapLocationScriptable m_CurlocationData ;
 
     
 #if UNITY_EDITOR
@@ -82,6 +84,14 @@ public class MainGameManager : MonoBehaviour
         m_BgAnimator.Play("Hidden");
     }
 
+    public void SetSelectedLocation(MapLocationScriptable location){
+        m_CurlocationData = location;
+    }
+
+    public MapLocationScriptable GetSelectedLocation(){
+        return m_CurlocationData;
+    }
+
     public void UnlockAllLevel(){
         foreach (var item in m_AllLocation)
         {
@@ -89,12 +99,12 @@ public class MainGameManager : MonoBehaviour
         }
     }
 
-    public void LoadSceneWithTransition(string sceneName, Action onFinishAction = null){
+    public void LoadSceneWithTransition(string sceneName,Action doneLoadSenceAction = null){
         m_LoadingCanvas.sortingOrder = 1;
-        StartCoroutine(LoadAsync(sceneName,onFinishAction));
+        StartCoroutine(LoadAsync(sceneName,doneLoadSenceAction));
     }
 
-    private IEnumerator LoadAsync(string sceneName, Action onFinishAction = null){
+    private IEnumerator LoadAsync(string sceneName,Action doneLoadSenceAction){
         float timePass = 0;
         m_BgAnimator.Play("Open");
         while (timePass<=0.75f)
@@ -113,7 +123,9 @@ public class MainGameManager : MonoBehaviour
         
         
         yield return null;
-        onFinishAction?.Invoke();
+
+        doneLoadSenceAction?.Invoke();
+        
     }
 
     public List<GunScriptable> GetAllWeapon()

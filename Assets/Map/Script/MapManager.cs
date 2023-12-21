@@ -67,6 +67,10 @@ public class MapManager : MonoBehaviour
         return m_MapUIController;
     }
 
+    public void ShowEndDefenceDialog(){
+        m_MapUIController.OnEndDefenceShowDialog();
+    }
+
     public void SpawnAllLocation()
     {
         foreach (var item in MainGameManager.GetInstance().GetAllLocation())
