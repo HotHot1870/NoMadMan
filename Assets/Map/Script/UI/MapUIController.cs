@@ -36,6 +36,9 @@ public class MapUIController : MonoBehaviour
     
     [Header("Weaponlist")]
     [SerializeField] private MapChangeWeaponInSlotController m_ChangeWeaponInSlotController;
+
+    [Header("Dialog")]
+    [SerializeField] private MapDialogController m_DialogController;
 /*
     [Header("Weaponlist")]
     [SerializeField] private GameObject m_WeaponListPanel;
@@ -148,11 +151,13 @@ public class MapUIController : MonoBehaviour
     }
 
     private void OnClickStartDefence() {
+        // TODO : Working show dialog first
         MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null)
             return;
-            
-        MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
+
+        m_DialogController.Init(locationData.StartDialogId);
+
     }
 
     public bool ShouldShowLocationDetail(){
