@@ -10852,7 +10852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4437459323509006, guid: 0de8a3d472546b04aa775e83b052764e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.1
+      value: 52.2
       objectReference: {fileID: 0}
     - target: {fileID: 4437459323509006, guid: 0de8a3d472546b04aa775e83b052764e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10860,7 +10860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4437459323509006, guid: 0de8a3d472546b04aa775e83b052764e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4437459323509006, guid: 0de8a3d472546b04aa775e83b052764e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11085,7 +11085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraParent: {fileID: 1544190104}
   m_Sensitivity: 1.5
-  m_CameraBottomLeft: {x: 0, y: -20}
+  m_CameraBottomLeft: {x: -10, y: -20}
   m_CameraTopRight: {x: 100, y: 10}
 --- !u!1 &1553880923
 GameObject:
@@ -11276,6 +11276,7 @@ MonoBehaviour:
   m_ScrollRect: {fileID: 1158835256}
   m_BgAnimator: {fileID: 1684257328}
   m_DialogBtn: {fileID: 1946275106}
+  m_DialogBtnText: {fileID: 0}
 --- !u!1 &1572725020
 GameObject:
   m_ObjectHideFlags: 0

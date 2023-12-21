@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
+  m_Name: CampSite
+  m_EditorClassIdentifier: 
+  Id: 4
+  DisplayName: CampSite
+  LockBy: 02000000
+  Level: 1
+  Prefab: {fileID: 7090060795350866760, guid: 1d551d6d6e873a04084bbe362b80b473, type: 3}
+  Pos: {x: 79, y: 0, z: 10}
+  StartDialogId: 38
+  EndDialogId: 23
+  NormalWavesCount: 2
+  NormalWavesStrength: 15
+  NormalWaveEnemy: 000000000100000002000000
+  FinalWaveStrength: 28
+  FinalWaveEnemy: 0100000005000000

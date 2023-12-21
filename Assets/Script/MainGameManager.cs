@@ -146,6 +146,11 @@ public class MainGameManager : MonoBehaviour
     public List<EnemyScriptable> GetAllEnemy(){
         return m_AllEnemy;
     }
+    
+    public DialogScriptable GetDialog(int id){
+        return m_AllDialog.Find(x=>x.Id == id);
+ 
+    }
 
     public void SetAllDialog(List<DialogScriptable> allDialog){
         m_AllDialog = allDialog;

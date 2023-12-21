@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
+  m_Name: Bar
+  m_EditorClassIdentifier: 
+  Id: 2
+  DisplayName: Bar
+  LockBy: 01000000
+  Level: 1
+  Prefab: {fileID: 7541125701674679338, guid: d1649af442318b94a9b525c837c6e2c1, type: 3}
+  Pos: {x: 51, y: 0, z: 10}
+  StartDialogId: 28
+  EndDialogId: 32
+  NormalWavesCount: 2
+  NormalWavesStrength: 15
+  NormalWaveEnemy: 0000000001000000
+  FinalWaveStrength: 24
+  FinalWaveEnemy: 000000000100000002000000

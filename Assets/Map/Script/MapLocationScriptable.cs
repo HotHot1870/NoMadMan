@@ -11,6 +11,8 @@ public class MapLocationScriptable : ScriptableObject
     public int Level;
     public GameObject Prefab;
     public Vector3 Pos;
+    public int StartDialogId;
+    public int EndDialogId;
     
     [Header("Normal")]
     public int NormalWavesCount = 2;

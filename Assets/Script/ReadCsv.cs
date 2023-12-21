@@ -31,10 +31,19 @@ public class ReadCsv : MonoBehaviour
     private void SaveCsvFile(){
         StartCoroutine(GetCsvFromGoogle());
     }
+    
+    [EButton("ReadCsvDialog")]
+    private void ReadCsvFileDialog(){
+        StartCoroutine(ReadDialogCSV());
+
+        EditorUtility.SetDirty(m_MainGameManager);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
 
     [EButton("ReadCsvGun")]
     private void ReadCsvFileGun(){
-        // get upgrade data auto
+        // TODO : get upgrade data auto
         StartCoroutine(ReadGunCSV());
 
         EditorUtility.SetDirty(m_MainGameManager);
@@ -233,7 +242,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 10;
+        int collumeCount = 12;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -288,6 +297,12 @@ public class ReadCsv : MonoBehaviour
             location.LockBy = lockBy;
             colume++;
             location.Level = int.Parse(contents[colume]);
+            colume++;
+            location.StartDialogId =  int.Parse(contents[colume]);
+            colume++;
+            location.EndDialogId =  int.Parse(contents[colume]);
+
+
             allLocation.Add(location);
 
             EditorUtility.SetDirty(location);
@@ -372,7 +387,7 @@ public class ReadCsv : MonoBehaviour
         m_MainGameManager.SetAllWeapon(allGunScriptable);
     }
 
-private IEnumerator ReadDialogCSV(){
+    private IEnumerator ReadDialogCSV(){
         // Dialog
         Dictionary<int,DialogScriptable> allDialogs = new Dictionary<int, DialogScriptable>(); 
         List<DialogScriptable> allDialogScriptable = new List<DialogScriptable>();
@@ -401,7 +416,7 @@ private IEnumerator ReadDialogCSV(){
 
             DialogScriptable.Id = int.Parse(contents[colume]);
             colume++;
-            string displayName = contents[colume].Trim()+DialogScriptable.Id.ToString();
+            string displayName = DialogScriptable.Id.ToString()+contents[colume].Trim();
             DialogScriptable.SpeakerName = contents[colume].Trim();
             colume++;
             AssetDatabase.CreateAsset(DialogScriptable, m_ScriptablePath+"/Dialog/"+displayName.Replace(" ", "")+".asset");
@@ -416,13 +431,14 @@ private IEnumerator ReadDialogCSV(){
             colume++;
             foreach (var item in contents[colume].Split('|'))
             {
-                DialogScriptable.NextId.Add(int.Parse(item));
+                int tragetInt = -2;
+                if(int.TryParse(item, out tragetInt))
+                    DialogScriptable.NextId.Add(tragetInt);
             }
             allDialogs.Add(DialogScriptable.Id,DialogScriptable);
 
             allDialogScriptable.Add(DialogScriptable);
             EditorUtility.SetDirty(DialogScriptable);
-            yield return null;
         }
         m_MainGameManager.SetAllDialog(allDialogScriptable);
     }
