@@ -25,8 +25,6 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private Canvas m_LoadingCanvas;
     [SerializeField]private Image m_LoadAmountImage;
     [SerializeField]private Animator m_BgAnimator;
-    [Header("Location")]
-    private MapLocationScriptable m_CurlocationData = null;
 
     
 #if UNITY_EDITOR
@@ -85,11 +83,12 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetSelectedLocation(MapLocationScriptable location){
-        m_CurlocationData = location;
+        SaveData<int>("SelectedLocation",location.Id);
     }
 
     public MapLocationScriptable GetSelectedLocation(){
-        return m_CurlocationData;
+        int locationId = (int)System.Convert.ToSingle(GetData<int>("SelectedLocation","0"));
+        return m_AllLocation.Find(x=>x.Id == locationId);
     }
 
     public void UnlockAllLevel(){

@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum MapToOtherLevelBtnStage{
+    NoShow = 0,
+    ToLast ,
+    ToNext
+}
+
 public class MapFreeCameraController : MonoBehaviour
 {
     [SerializeField] private Transform m_CameraParent;
@@ -79,5 +86,15 @@ public class MapFreeCameraController : MonoBehaviour
             m_CameraParent.position.y,
             Mathf.Clamp(m_CameraParent.position.z,m_CameraBottomLeft.y, m_CameraTopRight.y)
          ) ;
+
+        if(m_CameraParent.position.x>=m_CameraTopRight.x*0.95f){
+            // to next 
+            MapManager.GetInstance().SetToOtherLevelBtnStage( MapToOtherLevelBtnStage.ToNext);
+        }else if(m_CameraParent.position.x<=m_CameraBottomLeft.x*0.95f){
+            // to Last
+            MapManager.GetInstance().SetToOtherLevelBtnStage( MapToOtherLevelBtnStage.ToLast);
+        }else{
+            MapManager.GetInstance().SetToOtherLevelBtnStage( MapToOtherLevelBtnStage.NoShow);
+        }
     }
 }

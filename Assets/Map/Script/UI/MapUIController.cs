@@ -8,6 +8,8 @@ using TMPro;
 public class MapUIController : MonoBehaviour
 {
     [SerializeField] private Button2D m_MapDragBtn;  
+    [SerializeField] private Button m_NextLevelBtn;
+    [SerializeField] private Button m_LastLevelBtn;
 
     [Header("Option")]
     [SerializeField] private Button m_OptionBtn;
@@ -65,6 +67,16 @@ public class MapUIController : MonoBehaviour
         TurnOffAllPanel();
         m_WorkShopChooseWeaponController.gameObject.SetActive(true);
 
+        m_NextLevelBtn.onClick.AddListener(()=>{
+            // TODO : to next level
+            
+        });
+        m_NextLevelBtn.gameObject.SetActive(false);
+
+        m_LastLevelBtn.onClick.AddListener(()=>{
+            // TODO : to last level
+        });
+        m_LastLevelBtn.gameObject.SetActive(false);
 
 
         var freeCameraController = MapManager.GetInstance().GetMapFreeCameraController();
@@ -92,6 +104,12 @@ public class MapUIController : MonoBehaviour
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
             optionController.Open();
         });
+    }
+
+
+    public void SetToOtherLevelBtn(MapToOtherLevelBtnStage btnStage ){
+        m_LastLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToLast);
+        m_NextLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToNext);
     }
     
     private void OnClickWorkShop(){
