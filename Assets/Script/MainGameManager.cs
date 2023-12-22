@@ -26,7 +26,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private Image m_LoadAmountImage;
     [SerializeField]private Animator m_BgAnimator;
     [Header("Location")]
-    private MapLocationScriptable m_CurlocationData ;
+    private MapLocationScriptable m_CurlocationData = null;
 
     
 #if UNITY_EDITOR

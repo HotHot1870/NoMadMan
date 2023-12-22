@@ -19,6 +19,12 @@ public class MapDialogController : MonoBehaviour
     private DialogScriptable m_CurDialogScriptable = null;
 
     public void Init(int startDialogId , Action onDialogEnd){
+        if(startDialogId == -1){
+            onDialogEnd?.Invoke();
+            return;
+        }
+
+
         m_Self.SetActive(true);
         
         m_NextDialogBtn.onClick.AddListener(()=>{

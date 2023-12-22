@@ -42,7 +42,7 @@ public class PuppeteerController : EnemyControllerBase
     private IEnumerator Start() {
         m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
         
-        m_Self.transform.position += Vector3.up*5f ;
+        m_Self.transform.position += Vector3.up*4.75f ;
         m_Self.transform.position += m_Self.transform.forward * 22f ;
         m_Animator.Play("Idle");
 

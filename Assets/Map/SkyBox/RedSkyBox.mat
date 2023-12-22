@@ -81,10 +81,10 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _BaseFade: 2
+    - _BaseFade: 8.7
     - _BaseYOffset: 0.4
     - _CameraPosAffect: 0.5
-    - _CloudCutOut: -0.58
+    - _CloudCutOut: -1.34
     - _CloudDensity: 79.2
     - _CloudDistanceFade: 5.24
     - _CloudSize: 7.01
@@ -114,16 +114,16 @@ Material:
     m_Colors:
     - _BottomColor: {r: 0, g: 0, b: 0, a: 0}
     - _CameraPos: {r: 0, g: 0, b: 0, a: 0}
-    - _CloudColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 0}
+    - _CloudColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _MainLightRotation: {r: 1, g: 0, b: 0, a: 0}
     - _MainLightVector3: {r: 0, g: 0, b: 1, a: 0}
-    - _MoonColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 0}
+    - _MoonColor: {r: 1, g: 0, b: 0, a: 1}
     - _MoonRotation: {r: 0.3472222, g: 0.9166667, b: 0, a: 0}
     - _StarColor: {r: 1, g: 0.5273215, b: 0.5235849, a: 0}
     - _SubCloudColor: {r: 4, g: 0, b: 0, a: 0}
     - _SunColor: {r: 2.9960785, g: 1.1921569, b: 0, a: 0}
     - _SunPos: {r: 0, g: 0, b: 0, a: 0}
     - _SunVector: {r: 0.02, g: 1, b: 0.1, a: 0}
-    - _TopColor: {r: 0, g: 0, b: 0, a: 0}
+    - _TopColor: {r: 1, g: 0, b: 0.029988289, a: 0}
   m_BuildTextureStacks: []

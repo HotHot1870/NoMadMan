@@ -149,6 +149,8 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void StartWave(MapLocationScriptable locationInfo){
+        // TODO : change sky box
+        // TODO : change ground
         m_CurlocationData = locationInfo;
         m_EnemySpawnController.StartWave( locationInfo);
         MainGameManager.GetInstance().SetSelectedLocation(m_CurlocationData);

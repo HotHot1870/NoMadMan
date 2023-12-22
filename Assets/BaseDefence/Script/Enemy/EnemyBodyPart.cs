@@ -116,9 +116,9 @@ public class EnemyBodyPart : MonoBehaviour
             // destory body part
             StartCoroutine(OnDeadEffect());
 
-            // TODO : play fall back animation if not dead
             if(!m_EnemyController.IsDead()){
-
+            // TODO : play fall back animation if not dead
+                
             }
         }
 /*

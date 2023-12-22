@@ -7,7 +7,6 @@ using TMPro;
 
 public class MapDialogRowController : MonoBehaviour
 {
-    // TODO : show action
     [SerializeField] private Animator m_BgAnimator;
     [SerializeField] private TMP_Text m_DialogText;  
     [SerializeField] private TMP_Text m_SpeakText;  

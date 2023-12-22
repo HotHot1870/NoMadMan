@@ -50,9 +50,9 @@ public class MapLocationController : MonoBehaviour
         // Set coruption actiove
         foreach (var item in m_CoruuptionObject)
         {
-            item.SetActive( m_ShouldShowCorruption );
-            //item.GetComponent<MeshRenderer>().material.SetColor("_Color",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
-            //item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
+            //item.SetActive( m_ShouldShowCorruption );
+            item.GetComponent<MeshRenderer>().material.SetColor("_Color",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
+            item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  m_ShouldShowCorruption? CorrupColor :BaseColor); 
         }
 
     }

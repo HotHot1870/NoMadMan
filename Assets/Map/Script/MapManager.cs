@@ -11,6 +11,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Transform m_MapLocationParent;
     private MapLocationController m_LocationController = null;
     [SerializeField] private float m_LocationToVehicleMaxDistance = 3f;
+    [SerializeField] private Transform m_MapCameraPrent;
 
 
     private void Awake()
@@ -28,6 +29,15 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         SpawnAllLocation();
+        // look at location if defence end
+        var targetLocation = MainGameManager.GetInstance().GetSelectedLocation();
+        if(targetLocation != null){
+            m_MapCameraPrent.position = new Vector3(
+                targetLocation.Pos.x,
+                m_MapCameraPrent.position.y,
+                targetLocation.Pos.z
+            );
+        }
     }
 
     public void ShowLocationDetail(){

@@ -15,6 +15,12 @@ public class ShootSoundAndName
     public AudioClip audioClip;
 }
 
+[Serializable]
+public class UniqueText
+{
+    public string Key;
+    public string Replacement;
+}
 
 public class ReadCsv : MonoBehaviour
 {
@@ -23,6 +29,8 @@ public class ReadCsv : MonoBehaviour
     [SerializeField] private MainGameManager m_MainGameManager;
     private EnemyScriptable m_GhostScriptable = null;
     private EnemyScriptable m_PuppetScriptable = null;
+    public List<UniqueText> m_UniqueText = new List<UniqueText>();
+
 
 
     [SerializeField] private List<ShootSoundAndName> m_AllShootSound = new List<ShootSoundAndName>();
@@ -387,6 +395,22 @@ public class ReadCsv : MonoBehaviour
         m_MainGameManager.SetAllWeapon(allGunScriptable);
     }
 
+
+    
+
+    public string ReplaceText(string source){
+        string ans = source;
+        foreach (var item in m_UniqueText)
+        {
+            if(!ans.Contains("_@@")){
+                return ans;
+            }
+            ans = ans.Replace(item.Key,item.Replacement);
+        }
+        return ans;
+
+    }
+
     private IEnumerator ReadDialogCSV(){
         // Dialog
         Dictionary<int,DialogScriptable> allDialogs = new Dictionary<int, DialogScriptable>(); 
@@ -428,6 +452,7 @@ public class ReadCsv : MonoBehaviour
             // sim chinese
             colume++;
             DialogScriptable.EngDialog = contents[colume].Trim();
+            DialogScriptable.EngDialog = ReplaceText(DialogScriptable.EngDialog);
             colume++;
             foreach (var item in contents[colume].Split('|'))
             {

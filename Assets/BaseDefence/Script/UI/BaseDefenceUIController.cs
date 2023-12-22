@@ -163,7 +163,6 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     public void OnClickBackFromResult(){
-        // TODO : Show dailog if win 
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
     }
     private void ShowDialogOnEndGame(){

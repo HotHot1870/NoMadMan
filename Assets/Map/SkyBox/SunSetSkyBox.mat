@@ -21,8 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SunSetSkyBox
-  m_Shader: {fileID: -6465566751694194690, guid: 6016d768239da5845b1dd0ff2dc1e7be,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6016d768239da5845b1dd0ff2dc1e7be, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -39,7 +38,7 @@ Material:
     m_TexEnvs:
     - _MoonTex:
         m_Texture: {fileID: 2800000, guid: 98e5c8832e763364c87eb943e809d2c3, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0.5, y: 0.5}
     - _SkyTex:
         m_Texture: {fileID: 0}
@@ -70,7 +69,7 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BaseFade: 12.9
-    - _BaseYOffset: 0.89
+    - _BaseYOffset: 0.7
     - _CameraPosAffect: 0
     - _CloudCutOut: -0.64
     - _CloudDensity: 79.2
@@ -80,8 +79,8 @@ Material:
     - _CloudYOffset: 0.29
     - _DistanceFade: 2.44
     - _MainLightRotation: 360
-    - _MainLightRotationX: 350
-    - _MainLightRotationY: 20
+    - _MainLightRotationX: 169
+    - _MainLightRotationY: 25
     - _MoonRotation: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -100,7 +99,7 @@ Material:
     - _SunPointB: 0.05
     - _SunSize: 0.074
     m_Colors:
-    - _BottomColor: {r: 1, g: 0.125, b: 0, a: 0}
+    - _BottomColor: {r: 1, g: 0, b: 0.061522484, a: 0}
     - _CameraPos: {r: 0, g: 0, b: 0, a: 0}
     - _CloudColor: {r: 0.4528302, g: 0.20125787, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
