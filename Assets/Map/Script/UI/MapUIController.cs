@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExtendedButtons;
 using TMPro;
+using System;
 
 public class MapUIController : MonoBehaviour
 {
     [SerializeField] private Button2D m_MapDragBtn;  
     [SerializeField] private Button m_NextLevelBtn;
     [SerializeField] private Button m_LastLevelBtn;
+    [SerializeField]private Animator m_CoverAnimator;
 
     [Header("Option")]
     [SerializeField] private Button m_OptionBtn;
@@ -41,40 +43,29 @@ public class MapUIController : MonoBehaviour
 
     [Header("Dialog")]
     [SerializeField] private MapDialogController m_DialogController;
-/*
-    [Header("Weaponlist")]
-    [SerializeField] private GameObject m_WeaponListPanel;
-    [SerializeField] private Image m_SelectedSlotWeapon;
-
-    [SerializeField] private TMP_Text m_SelectedWeaponName;
-    [SerializeField] private TMP_Text m_SelectedWeaponDamage;
-    [SerializeField] private TMP_Text m_SelectedWeaponClipSize;
-    [SerializeField] private TMP_Text m_SelectedWeaponAcc;
-    [SerializeField] private TMP_Text m_SelectedWeaponRecoil;
-    [SerializeField] private TMP_Text m_SelectedWeaponHandling;
-    [SerializeField] private TMP_Text m_SelectedWeaponFireRate;
-
-
-    [SerializeField] private Transform m_WeaponListSlotParent;
-    [SerializeField] private GameObject m_WeaponListSlotPrefab;
-    [SerializeField] private Button m_ComfirmWeaponChangeBtn;  
-*/
 
 
     private void Start() {
-
         // TODO : Split all ui panel
+        m_CoverAnimator.Play("Hidden");
         TurnOffAllPanel();
         m_WorkShopChooseWeaponController.gameObject.SetActive(true);
 
+        m_NextLevelBtn.onClick.RemoveAllListeners();
         m_NextLevelBtn.onClick.AddListener(()=>{
-            // TODO : to next level
+            // to next level
+            m_NextLevelBtn.gameObject.SetActive(false);
+            CoverAnimtion(()=>ChangeLevel(1));
             
         });
         m_NextLevelBtn.gameObject.SetActive(false);
 
+        m_LastLevelBtn.onClick.RemoveAllListeners();
         m_LastLevelBtn.onClick.AddListener(()=>{
-            // TODO : to last level
+            // to last level
+            m_LastLevelBtn.gameObject.SetActive(false);
+            CoverAnimtion(()=>ChangeLevel(-1));
+            
         });
         m_LastLevelBtn.gameObject.SetActive(false);
 
@@ -106,10 +97,42 @@ public class MapUIController : MonoBehaviour
         });
     }
 
+    private void ChangeLevel(int levelChanges){
+        var curSelectedlocationLevel = MainGameManager.GetInstance().GetSelectedLocation().Level;
+        var newSelectedLocation = MainGameManager.GetInstance().GetAllLocation().Find(x=>x.Level==curSelectedlocationLevel+levelChanges);
+        MainGameManager.GetInstance().SetSelectedLocation(newSelectedLocation);
+        MapManager.GetInstance().SpawnAllLocation();
+        MapManager.GetInstance().CameraLookAtSelectedLocation();
+
+    }
+
+
+    private void CoverAnimtion(Action onCoveredAction){
+        StartCoroutine(CoverAnimation(onCoveredAction));
+    }
+
+    private IEnumerator CoverAnimation(Action onCoveredAction){
+        m_CoverAnimator.Play("Open");
+        float passTime = 0;
+        float duration = 1.5f;
+        bool isActioned = false;
+        while (passTime<duration)
+        {
+            passTime += Time.deltaTime;
+            yield return null;
+            if(passTime > 0.75f && !isActioned ){
+                onCoveredAction?.Invoke();
+                isActioned = true;
+            }
+        }
+        m_CoverAnimator.Play("Close");
+    }
 
     public void SetToOtherLevelBtn(MapToOtherLevelBtnStage btnStage ){
-        m_LastLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToLast);
-        m_NextLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToNext);
+        // hide if no next level
+        var selectedLocation = MainGameManager.GetInstance().GetSelectedLocation();
+        m_LastLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToLast && selectedLocation.Level >0);
+        m_NextLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToNext && selectedLocation.Level <4);
     }
     
     private void OnClickWorkShop(){
@@ -175,7 +198,7 @@ public class MapUIController : MonoBehaviour
             return;
 
         m_DialogController.Init(locationData.EndDialogId,null);
-        // TODO : Map Camera look at location
+        
     }
 
     private void OnClickStartDefence() {

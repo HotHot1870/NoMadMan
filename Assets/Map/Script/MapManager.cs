@@ -41,7 +41,10 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         SpawnAllLocation();
-        // look at location if defence end
+        CameraLookAtSelectedLocation();
+    }
+
+    public void CameraLookAtSelectedLocation(){
         var targetLocation = MainGameManager.GetInstance().GetSelectedLocation();
         if(targetLocation != null){
             m_MapCameraPrent.position = new Vector3(
@@ -103,7 +106,7 @@ public class MapManager : MonoBehaviour
         int spawnedlocationCount = m_MapLocationParent.childCount;
         for (int i = 0; i < spawnedlocationCount; i++)
         {
-            Destroy(m_MapLocationParent.GetChild(0).gameObject);
+            Destroy(m_MapLocationParent.GetChild(i).gameObject);
 
         }
         int selectedLevel = MainGameManager.GetInstance().GetSelectedLocation().Level;
@@ -123,5 +126,6 @@ public class MapManager : MonoBehaviour
             Destroy(m_SpawnedEnvironment);
         }
         m_SpawnedEnvironment = Instantiate(m_AllEnvironmentPrefab.Find(x=>x.Level == selectedLevel).Prefeb,m_MapEnvironemntParent);
+        
     }
 }

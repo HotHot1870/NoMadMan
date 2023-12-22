@@ -10,7 +10,7 @@ public class MapLocationController : MonoBehaviour
     [SerializeField] private MapLocationScriptable m_Scriptable;
     private Color m_CorrupColor = new Color(50f/255f,0,1);
     private Color m_BaseColor = new Color(1,1,1);
-    private Color m_LockOtherColor = new Color(1,1,0);
+    private Color m_NeverPlayedColor = new Color(1,1,0);
     private bool m_ShouldShowCorruption = false;
 
 
@@ -53,18 +53,9 @@ public class MapLocationController : MonoBehaviour
         {
             //item.SetActive( m_ShouldShowCorruption );
             var targetColor = m_ShouldShowCorruption? m_CorrupColor : m_BaseColor;
-            if(m_ShouldShowCorruption){
-                foreach (var location in MainGameManager.GetInstance().GetAllLocation())
-                {
-                    if(location.LockBy.Contains(m_Scriptable.Id)){
-                        bool isLocationLocked = System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(location.DisplayName+location.Id) )  <=0f;
-                        if(isLocationLocked){
-                            // next level lock by this
-                            targetColor = m_LockOtherColor;
-                            break;
-                        }
-                    }
-                }
+            if(!m_ShouldShowCorruption && (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(m_Scriptable.DisplayName+m_Scriptable.Id) ) <=0){
+                // never played before
+                targetColor = m_NeverPlayedColor;
             }
             item.GetComponent<MeshRenderer>().material.SetColor("_Color",  targetColor); 
             item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  targetColor); 
