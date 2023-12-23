@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
   m_Name: CoffeeShop
   m_EditorClassIdentifier: 
-  Id: 6
+  Id: 7
   DisplayName: CoffeeShop
-  LockBy: 05000000
+  LockBy: 06000000
   Level: 1
   Prefab: {fileID: 4538311398314982902, guid: 97f5460fafc27b549ae7df441cc3d206, type: 3}
-  Pos: {x: -15, y: 0, z: -4}
-  StartDialogId: 56
-  EndDialogId: 58
+  Pos: {x: 20, y: 0, z: -4}
+  StartDialogId: 64
+  EndDialogId: 74
   NormalWavesCount: 2
-  NormalWavesStrength: 25
-  NormalWaveEnemy: 01000000
+  NormalWavesStrength: 30
+  NormalWaveEnemy: 0000000001000000
   FinalWaveStrength: 35
-  FinalWaveEnemy: 01000000
+  FinalWaveEnemy: 0000000001000000

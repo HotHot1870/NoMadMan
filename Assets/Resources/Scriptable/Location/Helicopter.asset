@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
-  m_Name: House
+  m_Name: Helicopter
   m_EditorClassIdentifier: 
-  Id: 1
-  DisplayName: House
-  LockBy: 00000000
-  Level: 0
-  Prefab: {fileID: 1260530507001224352, guid: 4bee3af3d957ad148862f6114a01d7d8, type: 3}
-  Pos: {x: 20, y: 0, z: -4}
-  StartDialogId: 7
-  EndDialogId: 18
+  Id: 11
+  DisplayName: Helicopter
+  LockBy: 09000000
+  Level: 1
+  Prefab: {fileID: 58559984176131205, guid: 42bf0bdda376b7445bb92682938d4fb9, type: 3}
+  Pos: {x: 103, y: 0, z: -4}
+  StartDialogId: 103
+  EndDialogId: 112
   NormalWavesCount: 2
-  NormalWavesStrength: 20
-  NormalWaveEnemy: 0000000001000000
-  FinalWaveStrength: 22
-  FinalWaveEnemy: 000000000100000002000000
+  NormalWavesStrength: 45
+  NormalWaveEnemy: 0100000002000000
+  FinalWaveStrength: 50
+  FinalWaveEnemy: 010000000200000005000000

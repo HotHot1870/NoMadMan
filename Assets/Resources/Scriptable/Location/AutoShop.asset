@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
-  m_Name: House
+  m_Name: AutoShop
   m_EditorClassIdentifier: 
-  Id: 1
-  DisplayName: House
-  LockBy: 00000000
-  Level: 0
-  Prefab: {fileID: 1260530507001224352, guid: 4bee3af3d957ad148862f6114a01d7d8, type: 3}
-  Pos: {x: 20, y: 0, z: -4}
-  StartDialogId: 7
-  EndDialogId: 18
+  Id: 8
+  DisplayName: AutoShop
+  LockBy: 07000000
+  Level: 1
+  Prefab: {fileID: 3873660704220447792, guid: 2511d55f45d42224893bf66ac86eda7b, type: 3}
+  Pos: {x: 51, y: 0, z: 10}
+  StartDialogId: 84
+  EndDialogId: 91
   NormalWavesCount: 2
-  NormalWavesStrength: 20
+  NormalWavesStrength: 35
   NormalWaveEnemy: 0000000001000000
-  FinalWaveStrength: 22
-  FinalWaveEnemy: 000000000100000002000000
+  FinalWaveStrength: 35
+  FinalWaveEnemy: 0000000001000000
