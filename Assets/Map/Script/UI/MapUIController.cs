@@ -202,7 +202,6 @@ public class MapUIController : MonoBehaviour
     }
 
     private void OnClickStartDefence() {
-        // TODO : Working show dialog first
         MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         if(locationData==null)
             return;

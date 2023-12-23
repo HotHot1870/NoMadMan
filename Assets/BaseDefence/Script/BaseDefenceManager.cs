@@ -30,6 +30,14 @@ namespace BaseDefenceNameSpace
         Reload,
         Result
     }
+    [System.Serializable]
+    public class DefenceEnvironment
+    {
+        public string Stagename;
+        public int Level;
+        public GameObject Prefeb;
+        public Material SkyBox;
+    }
 }
 
 public class BaseDefenceManager : MonoBehaviour
@@ -43,9 +51,9 @@ public class BaseDefenceManager : MonoBehaviour
     [SerializeField] private BaseDefenceResultPanel m_BaseDefenceResultPanel;
     [SerializeField] private CrosshairControl m_CrosshairControl;
     [SerializeField] private GunModelComtroller m_GunModelController;
-
-    
     [SerializeField] private GameObject m_ReloadControllerPanel;
+    [SerializeField] private Transform m_EnvironmentParent;
+    [SerializeField] private List<DefenceEnvironment> m_AllEnvironmentPrefab = new List<DefenceEnvironment>();
 
     private float m_CurrentAccruacy = 100f;
 
@@ -150,7 +158,8 @@ public class BaseDefenceManager : MonoBehaviour
 
     public void StartWave(MapLocationScriptable locationInfo){
         // TODO : change sky box
-        // TODO : change ground
+        // TODO : Working change ground
+        Instantiate(m_AllEnvironmentPrefab.Find(x=>x.Level==locationInfo.Level).Prefeb,m_EnvironmentParent);
         m_CurlocationData = locationInfo;
         m_EnemySpawnController.StartWave( locationInfo);
         MainGameManager.GetInstance().SetSelectedLocation(m_CurlocationData);

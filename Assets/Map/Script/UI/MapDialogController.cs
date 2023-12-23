@@ -14,7 +14,7 @@ public class MapDialogController : MonoBehaviour
     [SerializeField] private ScrollRect m_ScrollRect;
     [SerializeField] private Animator m_BgAnimator;
     [SerializeField] private Button m_NextDialogBtn;
-    [SerializeField] private Button m_EndDailogBtn;
+    [SerializeField] private Button m_EndDialogBtn;
     [SerializeField] private TMP_Text m_EndDialogBtnText;
     private DialogScriptable m_CurDialogScriptable = null;
 
@@ -23,10 +23,16 @@ public class MapDialogController : MonoBehaviour
             onDialogEnd?.Invoke();
             return;
         }
+        
+        for (int i = 0; i < m_DialogRowParent.childCount-1; i++)
+        {
+            Destroy(m_DialogRowParent.GetChild(i).gameObject);
+        }
 
 
         m_Self.SetActive(true);
         
+        m_NextDialogBtn.onClick.RemoveAllListeners();
         m_NextDialogBtn.onClick.AddListener(()=>{
             if(m_CurDialogScriptable.NextId[0] == -1){
                 // close dialog
@@ -40,7 +46,8 @@ public class MapDialogController : MonoBehaviour
             }
         });
 
-        m_EndDailogBtn.onClick.AddListener(()=>{
+        m_EndDialogBtn.onClick.RemoveAllListeners();
+        m_EndDialogBtn.onClick.AddListener(()=>{
             onDialogEnd?.Invoke();
             m_BgAnimator.Play("Close");
         });

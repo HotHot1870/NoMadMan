@@ -21,7 +21,6 @@ public class MapManager : MonoBehaviour
     private MapLocationController m_LocationController = null;
     [SerializeField] private float m_LocationToVehicleMaxDistance = 3f;
     [SerializeField] private Transform m_MapCameraPrent;
-    // TODO : set environment by level
     [SerializeField] private List<MapEnvironment> m_AllEnvironmentPrefab = new List<MapEnvironment>();
     private GameObject m_SpawnedEnvironment = null;
 
