@@ -65,8 +65,8 @@ Material:
         m_Scale: {x: 1.25, y: 1}
         m_Offset: {x: -0.125, y: 0.04}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9da7f5de3c5d55045a1622728c4d3a58, type: 3}
-        m_Scale: {x: 2, y: 2}
+        m_Texture: {fileID: 2800000, guid: 9480a99de269b1f43b6abd1fa3546116, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
         m_Texture: {fileID: 2800000, guid: c93af2a0e9bb79d438117623301d2373, type: 3}
@@ -118,7 +118,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _CricleDencity: 80
+    - _CricleDencity: 31.3
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -130,7 +130,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseDencity: 258
+    - _NoiseDencity: 104
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0

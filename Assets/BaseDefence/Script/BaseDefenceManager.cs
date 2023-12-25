@@ -157,9 +157,18 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
     public void StartWave(MapLocationScriptable locationInfo){
-        // TODO : change sky box
-        // TODO : Working change ground
-        Instantiate(m_AllEnvironmentPrefab.Find(x=>x.Level==locationInfo.Level).Prefeb,m_EnvironmentParent);
+        var targetEnvironment = m_AllEnvironmentPrefab.Find(x=>x.Level==locationInfo.Level);
+        if(targetEnvironment == null){
+            Debug.LogError($"Level {locationInfo.Level} environment not found ");
+            return;
+        }
+
+        // change sky box
+        RenderSettings.skybox= targetEnvironment.SkyBox ;
+        // change ground
+        Instantiate(targetEnvironment.Prefeb,m_EnvironmentParent);
+
+
         m_CurlocationData = locationInfo;
         m_EnemySpawnController.StartWave( locationInfo);
         MainGameManager.GetInstance().SetSelectedLocation(m_CurlocationData);

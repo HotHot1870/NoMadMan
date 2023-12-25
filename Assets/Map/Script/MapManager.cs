@@ -10,6 +10,7 @@ public class MapEnvironment
     public string Stagename;
     public int Level;
     public GameObject Prefeb;
+    public Material SkyBox;
 }
 public class MapManager : MonoBehaviour
 {
@@ -124,7 +125,16 @@ public class MapManager : MonoBehaviour
         if(m_SpawnedEnvironment != null){
             Destroy(m_SpawnedEnvironment);
         }
-        m_SpawnedEnvironment = Instantiate(m_AllEnvironmentPrefab.Find(x=>x.Level == selectedLevel).Prefeb,m_MapEnvironemntParent);
+        
+        var targetEnvironment = m_AllEnvironmentPrefab.Find(x=>x.Level == selectedLevel);
+        if(targetEnvironment == null){
+            Debug.LogError($"Level {selectedLevel} Map environment not found ");
+            return;
+        }
+
+        m_SpawnedEnvironment = Instantiate(targetEnvironment.Prefeb,m_MapEnvironemntParent);
+        // change sky box
+        RenderSettings.skybox= targetEnvironment.SkyBox ;
         
     }
 }
