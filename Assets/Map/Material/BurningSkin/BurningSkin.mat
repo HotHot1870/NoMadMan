@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LavaGround
-  m_Shader: {fileID: -6465566751694194690, guid: 630aa966e1f215c4ea8f6a7af1f7db03, type: 3}
+  m_Name: BurningSkin
+  m_Shader: {fileID: -6465566751694194690, guid: 660d99c4453c22942a784364dbdb8a21, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,7 +24,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a93bb1ebb004cb04bbc1887b124d6de6, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -41,31 +49,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Ambient: 1
-    - _LavaAmbient: 1
-    - _LavaMetallic: 1
-    - _LavaSmoothness: 0
-    - _LavaSpeed: 0.42
-    - _LavaStrength: 1
+    - _Ambient: 0
+    - _FireNoise: 20
+    - _MainFireSpeed: 0.5
+    - _MainNoise: 10
     - _Metallic: 0
-    - _NormalStrength: 10
-    - _PattenNoise: 231
-    - _PattenSize: 0.179
-    - _PattenStrength: 0
+    - _NormalStrength: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
-    - _Speed: 1
+    - _SubAmount: 0.15
+    - _SubNoise: 250
     m_Colors:
-    - _Color: {r: 3.9999995, g: 1.8144071, b: 0, a: 0}
-    - _Color_1: {r: 3.9999995, g: 0, b: 0.15347098, a: 0}
-    - _Color_2: {r: 0.3962264, g: 0.037157986, b: 0, a: 0}
-    - _LavaMainColor: {r: 7.999999, g: 3.2251306, b: 0, a: 0}
-    - _LavaSubColor: {r: 8, g: 0, b: 0.29319382, a: 0}
-    - _MainColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Tile: {r: 5, g: 5, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 0, b: 0, a: 0}
+    - _SubColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ThirdColor: {r: 1, g: 0.5370559, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &3925333614457948171
+--- !u!114 &4050870012292635689
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -132,7 +132,7 @@ public class MapUIController : MonoBehaviour
         // hide if no next level
         var selectedLocation = MainGameManager.GetInstance().GetSelectedLocation();
         m_LastLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToLast && selectedLocation.Level >0);
-        m_NextLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToNext && selectedLocation.Level <4);
+        m_NextLevelBtn.gameObject.SetActive(btnStage==MapToOtherLevelBtnStage.ToNext && selectedLocation.Level <3);
     }
     
     private void OnClickWorkShop(){
