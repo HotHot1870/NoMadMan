@@ -58,8 +58,8 @@ public class BaseDefenceManager : MonoBehaviour
     private float m_CurrentAccruacy = 100f;
 
     // hp
-    private float m_CurrentHp = 1000;
-    [SerializeField]private float m_MaxHp = 1000;
+    private float m_CurrentHp = 100;
+    private float m_MaxHp = 100;
 
 
 
@@ -291,7 +291,7 @@ public class BaseDefenceManager : MonoBehaviour
             return;
         }
         m_TotalHpBarStayTime = 4;
-        ChangeHp(-damage);
+        ChangeHp(-damage*(1f+m_CurlocationData.DamageMutation/100f));
         //float CurHp = MainGameManager.GetInstance().GetCurHp();
         //m_Controller.ChangeHp(-damage);
         m_BaseDefenceUIController.SetHpUI();

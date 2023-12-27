@@ -13,6 +13,9 @@ public class MapLocationScriptable : ScriptableObject
     public Vector3 Pos;
     public int StartDialogId;
     public int EndDialogId;
+    public float HealthMutation = 0;
+    public float DamageMutation = 0;
+    public float SpeedMutation = 0;
     
     [Header("Normal")]
     public int NormalWavesCount = 2;

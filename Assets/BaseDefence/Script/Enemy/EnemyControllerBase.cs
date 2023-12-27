@@ -88,7 +88,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
     }
 
     public float GetMaxHp(){
-        return Scriptable.MaxHp;
+        return Scriptable.MaxHp * (BaseDefenceManager.GetInstance().GetLocationScriptable().HealthMutation/100f+1f);
     }
 
     public EnemyScriptable GetScriptable(){

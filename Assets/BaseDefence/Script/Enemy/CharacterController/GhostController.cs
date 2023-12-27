@@ -32,7 +32,8 @@ public class GhostController : EnemyControllerBase
             Attack();
         }else{
             // move
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
+            float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
+            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime * locationSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
         }

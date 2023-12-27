@@ -46,7 +46,8 @@ public class BoneSoldierController : EnemyControllerBase
             m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
         }else{
             // move
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
+            float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
+            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime * locationSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
         }

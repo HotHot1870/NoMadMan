@@ -70,8 +70,9 @@ public class RemnantController : EnemyControllerBase
 
         }else if(m_FallingBackTime <=0){
             // move forward
-            m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed*m_RandomSpeedMod);
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime *m_RandomSpeedMod;
+            float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
+            m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed*m_RandomSpeedMod*locationSpeedMod);
+            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime *m_RandomSpeedMod*locationSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
 

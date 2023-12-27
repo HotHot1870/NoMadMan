@@ -72,13 +72,6 @@ public class PuppeteerController : EnemyControllerBase
                 
             }
         }else{
-            // move
-            /*
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
-            m_Self.transform.position = Vector3.MoveTowards(
-                m_Self.transform.position, Destination, moveDistance);
-
-            */
             // attack wall handler
             if(m_AttackDelay <=0){
                 // attack

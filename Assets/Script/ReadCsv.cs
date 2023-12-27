@@ -250,7 +250,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 12;
+        int collumeCount = 13;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -309,6 +309,32 @@ public class ReadCsv : MonoBehaviour
             location.StartDialogId =  int.Parse(contents[colume]);
             colume++;
             location.EndDialogId =  int.Parse(contents[colume]);
+            colume++;
+            // TODO : mutation
+            
+            if(contents[colume].Trim() != string.Empty)
+                foreach (var item in contents[colume].Split('|'))
+                {
+                    if(item.Trim() == string.Empty)
+                        continue;
+
+                    float mutationTypeId = float.Parse(item.Split('@')[0]);
+                    float mutationValue = float.Parse(item.Split('@')[1]);
+                    switch (mutationTypeId)
+                    {
+                        case 1:
+                            location.HealthMutation = mutationValue;
+                        break;
+                        case 2:
+                            location.DamageMutation = mutationValue;
+                        break;
+                        case 3:
+                            location.SpeedMutation = mutationValue;
+                        break;
+                        default:
+                        break;
+                    }
+                }
 
 
             allLocation.Add(location);
