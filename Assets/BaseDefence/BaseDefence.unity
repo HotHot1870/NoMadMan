@@ -155,8 +155,6 @@ RectTransform:
   - {fileID: 985358395}
   - {fileID: 796377263}
   - {fileID: 56885399}
-  - {fileID: 1603054663}
-  - {fileID: 2067647623}
   m_Father: {fileID: 1794693721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -182,8 +180,7 @@ MonoBehaviour:
   m_MainGunImage: {fileID: 796377264}
   m_DragIcon: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
   m_TapIcon: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
-  m_GrayWhileDragPanel: {fileID: 56885399}
-  m_NotGrayWhileDragPanel: {fileID: 2067647623}
+  m_Parent: {fileID: 56885399}
   m_ArrowPrefab: {fileID: 5509025794714849235, guid: 612bbfcfa1b0c8d4381e9501a773d646, type: 3}
 --- !u!1 &32751029
 GameObject:
@@ -329,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56885399}
   m_Layer: 5
-  m_Name: GrayWhileDragPanel
+  m_Name: ReloadObjectParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5605,7 +5602,7 @@ GameObject:
   - component: {fileID: 1400379374}
   - component: {fileID: 1400379373}
   m_Layer: 5
-  m_Name: LookDownBtn
+  m_Name: SwitchWeaponBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5934,6 +5931,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493457403}
   m_CullTransparentMesh: 1
+--- !u!1 &1528524799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1528524800}
+  m_Layer: 0
+  m_Name: FireBallSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1528524800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528524799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 11, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556480001
 GameObject:
   m_ObjectHideFlags: 0
@@ -6217,78 +6245,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595615728}
-  m_CullTransparentMesh: 1
---- !u!1 &1603054662
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1603054663}
-  - component: {fileID: 1603054665}
-  - component: {fileID: 1603054664}
-  m_Layer: 5
-  m_Name: Gray
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1603054663
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603054662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7275960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1603054664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603054662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &1603054665
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603054662}
   m_CullTransparentMesh: 1
 --- !u!1 &1629870516
 GameObject:
@@ -6731,8 +6687,8 @@ MonoBehaviour:
   m_OptionBtn: {fileID: 293644552}
   m_AimBtn: {fileID: 2001144654}
   m_ShootBtn: {fileID: 61383350}
-  m_LookDownBtn: {fileID: 1400379373}
-  m_LookUpBtn: {fileID: 2138075528}
+  m_SwitchWeaponBtn: {fileID: 1400379373}
+  m_CloseSwitchWeaponBtn: {fileID: 2138075528}
   m_OptionPanel: {fileID: 2098608960}
   m_HpParent: {fileID: 1049700872}
   m_HpBarFiller: {fileID: 1492374466968977587}
@@ -7189,41 +7145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2067647622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2067647623}
-  m_Layer: 5
-  m_Name: NotGrayWhileDragPanel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2067647623
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067647622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7275960}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2071704766
 GameObject:
   m_ObjectHideFlags: 0
@@ -7714,7 +7635,7 @@ GameObject:
   - component: {fileID: 2138075529}
   - component: {fileID: 2138075528}
   m_Layer: 5
-  m_Name: LookUpBtn
+  m_Name: CloseSwitchWeaponBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13020,3 +12941,4 @@ SceneRoots:
   - {fileID: 1238169344}
   - {fileID: 1391119224}
   - {fileID: 760730313}
+  - {fileID: 1528524800}

@@ -21,8 +21,8 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private Button2D m_AimBtn;    
     [SerializeField] private Button2D m_ShootBtn;
-    [SerializeField] private Button2D m_LookDownBtn;
-    [SerializeField] private Button2D m_LookUpBtn;
+    [SerializeField] private Button2D m_SwitchWeaponBtn;
+    [SerializeField] private Button2D m_CloseSwitchWeaponBtn;
 
     
     [Header("OptionPanel")]
@@ -103,9 +103,9 @@ public class BaseDefenceUIController : MonoBehaviour
 
         var cameraController = BaseDefenceManager.GetInstance().GetCameraController();
 
-        m_LookDownBtn.onDown.AddListener(OnClickShowSwitchWeaponPanel);
+        m_SwitchWeaponBtn.onDown.AddListener(OnClickShowSwitchWeaponPanel);
 
-        m_LookUpBtn.onDown.AddListener(OnClickCloseSwitchWeaponPanel);
+        m_CloseSwitchWeaponBtn.onDown.AddListener(OnClickCloseSwitchWeaponPanel);
     }
 
     private IEnumerable DelayAction(System.Action action, float delayDuration){
@@ -166,7 +166,8 @@ public class BaseDefenceUIController : MonoBehaviour
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
     }
     private void ShowDialogOnEndGame(){
-        MapManager.GetInstance().ShowEndDefenceDialog();
+        if(m_IsWin)
+            MapManager.GetInstance().ShowEndDefenceDialog();
     }
 
 

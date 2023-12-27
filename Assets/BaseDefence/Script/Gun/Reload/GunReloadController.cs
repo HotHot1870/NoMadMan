@@ -19,8 +19,7 @@ public class GunReloadController : MonoBehaviour
     [SerializeField] private Image m_MainGunImage;
     [SerializeField] private GameObject m_DragIcon;
     [SerializeField] private GameObject m_TapIcon;
-    [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging // no use for now
-    [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable // no use for now
+    [SerializeField] private Transform m_Parent; 
 
     [Header("Drag")]
     [SerializeField] private GameObject m_ArrowPrefab;
@@ -127,8 +126,8 @@ public class GunReloadController : MonoBehaviour
 
     
     private GameObject SpawnUIObjectForReloadPhase(SpawnUIObjectForReloadPhaseConfig config){
-        var spawnedUIObject = Instantiate(config.Prefab);
-        spawnedUIObject.transform.SetParent(m_GrayWhileDragPanel);
+        var spawnedUIObject = Instantiate(config.Prefab, m_Parent);
+        spawnedUIObject.transform.SetParent(m_Parent);
         spawnedUIObject.GetComponent<RectTransform>().anchoredPosition = config.Position;
         m_AllSpawnedImage.Add(spawnedUIObject);
 
@@ -180,7 +179,7 @@ public class GunReloadController : MonoBehaviour
 
         };
         m_DragArrow = SpawnUIObjectForReloadPhase( arrowConfig );
-        m_DragArrow.transform.SetParent(m_NotGrayWhileDragPanel);
+        m_DragArrow.transform.SetParent(m_Parent);
         m_DragArrow.GetComponent<RectTransform>().sizeDelta = new Vector2(
             m_DragArrow.GetComponent<RectTransform>().sizeDelta.x,
             Vector2.Distance(dragFunction.EndDragPosition , dragFunction.StartDragPosition)
@@ -261,7 +260,7 @@ public class GunReloadController : MonoBehaviour
 
         };
         m_DragArrow = SpawnUIObjectForReloadPhase( arrowConfig );
-        m_DragArrow.transform.SetParent(m_NotGrayWhileDragPanel);
+        m_DragArrow.transform.SetParent(m_Parent);
         m_DragArrow.GetComponent<RectTransform>().sizeDelta = new Vector2(
             m_DragArrow.GetComponent<RectTransform>().sizeDelta.x,
             Vector2.Distance(dragFunction.EndDragPosition , dragFunction.StartDragPosition)
@@ -278,7 +277,7 @@ public class GunReloadController : MonoBehaviour
 
             };
             GameObject cursor = SpawnUIObjectForReloadPhase( cursorConfig );
-            cursor.transform.SetParent(m_NotGrayWhileDragPanel);
+            cursor.transform.SetParent(m_Parent);
             m_DragImage = cursor.GetComponent<RectTransform>();
         }
 

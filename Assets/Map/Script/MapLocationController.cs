@@ -8,9 +8,9 @@ public class MapLocationController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_LocationCamera;
     [SerializeField] private List<GameObject> m_CoruuptionObject = new List<GameObject>();
     [SerializeField] private MapLocationScriptable m_Scriptable;
-    private Color m_CorrupColor = new Color(50f/255f,0,1,1);
+    private Color m_CorrupColor = new Color(50f/255f,0,1,0);
     private Color m_BaseColor = new Color(0,0,0,0);
-    private Color m_NeverPlayedColor = new Color(1,1,0,1);
+    private Color m_NeverPlayedColor = new Color(1,1,0,0);
     private bool m_ShouldShowCorruption = false;
 
 
