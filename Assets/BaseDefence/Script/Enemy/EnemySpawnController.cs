@@ -41,7 +41,16 @@ public class EnemySpawnController : MonoBehaviour
     }
 
     public Vector3 GetOneRandomEnemyPos(){
-        return m_AllEnemyTrans[UnityEngine.Random.Range(0,m_AllEnemyTrans.Count)].position;
+        Vector3 ans = Vector3.zero;
+        while (ans == Vector3.zero && m_AllEnemyTrans.Count>=1 )
+        {
+            int randomInt = UnityEngine.Random.Range(0,m_AllEnemyTrans.Count);
+            if(m_AllEnemyTrans[randomInt] != null){
+                ans = m_AllEnemyTrans[randomInt].position;
+                return ans;
+            }
+        }
+        return ans;
     }
 
     private void EnemySpawnUpdate(){

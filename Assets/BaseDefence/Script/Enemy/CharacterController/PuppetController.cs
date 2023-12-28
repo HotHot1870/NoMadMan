@@ -100,6 +100,9 @@ public class PuppetController  : EnemyControllerBase
         {
             passedTime += Time.deltaTime;
             yield return null;
+            if(this.gameObject == null){
+                yield break;
+            }
             shieldRenderer.material.SetFloat("_Normalized",  (fadeTimeNeeded- passedTime) / fadeTimeNeeded);
 
         }

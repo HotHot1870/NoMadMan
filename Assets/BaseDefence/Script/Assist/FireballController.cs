@@ -9,6 +9,7 @@ public class FireballController : MonoBehaviour
     [SerializeField] private GameObject m_ExplosionPrefab;
     private float m_Damage = 10f;
     private float m_Radius = 5f;
+    private bool m_ShouldStop = false;
 
 
     public void Init(float damage, float radius){
@@ -20,11 +21,15 @@ public class FireballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * m_Speed;
+            transform.position += transform.forward * Time.deltaTime * m_Speed;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if(m_ShouldStop)
+            return;
+
+
         var enemyBodyPart = other.GetComponent<EnemyBodyPart>();
         var ground = other.GetComponent<GroundController>();
         if(enemyBodyPart !=null || ground != null){
@@ -32,7 +37,7 @@ public class FireballController : MonoBehaviour
             var explosion = Instantiate(m_ExplosionPrefab);
             explosion.transform.position = m_Self.transform.position;
             explosion.GetComponent<ExplosionController>().Init(m_Damage , m_Radius);
-
+            m_ShouldStop = true;
             Destroy(explosion, 2f);
             Destroy(m_Self, 4f);
         }
