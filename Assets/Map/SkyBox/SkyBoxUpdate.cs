@@ -36,6 +36,6 @@ public class SkyBoxUpdate : MonoBehaviour
         baker.RenderProbe();
         yield return new WaitForEndOfFrame();
         RenderSettings.customReflectionTexture= baker.texture;
-        }
+    }
     
 }

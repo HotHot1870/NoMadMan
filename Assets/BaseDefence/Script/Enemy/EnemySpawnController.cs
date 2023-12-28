@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using BaseDefenceNameSpace;
-using Unity.Collections;
 using UnityEngine;
 
 public class EnemySpawnController : MonoBehaviour
@@ -15,15 +13,6 @@ public class EnemySpawnController : MonoBehaviour
     [SerializeField] private Transform m_ShootCamera;
     [SerializeField] private Camera m_MainCamera;
 
-/*
-    [Header("Attacker Spot")]
-    [SerializeField] private Transform m_LeftAttackerSpot;
-    private bool m_IsLeftAttackerSpotOccupied=false;
-    [SerializeField] private Transform m_MidAttackerSpot;
-    private bool m_IsMidAttackerSpotOccupied=false;
-    [SerializeField] private Transform m_RightAttackerSpot;
-    private bool m_IsRightAttackerSpotOccupied=false;
-*/
 
 
 
@@ -50,18 +39,10 @@ public class EnemySpawnController : MonoBehaviour
         m_LocationData = locationData;
         StartNextNormalWave();
     }
-/*
-    public List<Vector3> GetAttackerSpotInOrder(Vector3 pos){
-        // return from closest to fardest
-        List<Vector3> ans = new List<Vector3>();
-        //
-        ans.Add(m_LeftAttackerSpot.position);
-        ans.Add(m_MidAttackerSpot.position);
-        ans.Add(m_RightAttackerSpot.position);
-        ans.Sort((p1,p2)=>Vector3.Distance(p1,pos).CompareTo(Vector3.Distance(p2,pos)));
 
-        return ans;
-    }*/
+    public Vector3 GetOneRandomEnemyPos(){
+        return m_AllEnemyTrans[UnityEngine.Random.Range(0,m_AllEnemyTrans.Count)].position;
+    }
 
     private void EnemySpawnUpdate(){
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using BaseDefenceNameSpace;
+using UnityEngine.Rendering;
 
 namespace BaseDefenceNameSpace
 {
@@ -54,6 +55,7 @@ public class BaseDefenceManager : MonoBehaviour
     [SerializeField] private GameObject m_ReloadControllerPanel;
     [SerializeField] private Transform m_EnvironmentParent;
     [SerializeField] private List<DefenceEnvironment> m_AllEnvironmentPrefab = new List<DefenceEnvironment>();
+    private ReflectionProbe baker;
 
     private float m_CurrentAccruacy = 100f;
 
@@ -165,6 +167,7 @@ public class BaseDefenceManager : MonoBehaviour
 
         // change sky box
         RenderSettings.skybox= targetEnvironment.SkyBox ;
+        ChangeSkyBox();
         // change ground
         Instantiate(targetEnvironment.Prefeb,m_EnvironmentParent);
 
@@ -321,6 +324,25 @@ public class BaseDefenceManager : MonoBehaviour
 
     }
 
+    private void ChangeSkyBox() {
+        baker = gameObject.AddComponent<ReflectionProbe>();
+        RenderSettings.skybox = RenderSettings.skybox;
+        DynamicGI.UpdateEnvironment();
+        baker.cullingMask = 0;
+        baker.refreshMode = ReflectionProbeRefreshMode.ViaScripting;
+        baker.mode = ReflectionProbeMode.Realtime;
+        baker.timeSlicingMode = ReflectionProbeTimeSlicingMode.NoTimeSlicing;
+
+        RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+        StartCoroutine(UpdateEnvironment());
+    }
+
+    IEnumerator UpdateEnvironment() {
+        DynamicGI.UpdateEnvironment();
+        baker.RenderProbe();
+        yield return new WaitForEndOfFrame();
+        RenderSettings.customReflectionTexture= baker.texture;
+    }
 
     public Animator GetCurrentGunAnimator(){
         return m_GunModelController.GetCurrentGunAnimator();

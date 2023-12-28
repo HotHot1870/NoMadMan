@@ -1,34 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class AssistPanelController : MonoBehaviour
 {
-
-    [Header("Location")]
     [SerializeField] private GameObject m_Self; 
     [SerializeField] private Animator m_Animator;
-    [SerializeField] private TMP_Text m_LocationName;  
     [SerializeField] private Button m_FireballBtn; 
     [SerializeField] private Button m_SwordBtn;
     [SerializeField] private Button m_NetBtn;
     [SerializeField] private Button m_ShieldBtn;
+    [SerializeField] private Button m_CloseBtn;
+    [SerializeField] private FireballEmitter m_FireballEmitter;
 
     void Start(){
         m_FireballBtn.onClick.AddListener(OnClickFireball);
         m_SwordBtn.onClick.AddListener(OnClickSword);
         m_NetBtn.onClick.AddListener(OnClickNet);
         m_ShieldBtn.onClick.AddListener(OnClickShield);
-        m_Animator.Play("Hidden");
+        m_CloseBtn.onClick.AddListener(Close);
         m_Self.SetActive(false);
 
     }
 
-    private void OnClickFireball(){
+    private void Close(){
+        m_Animator.Play("Down");
+    }
 
+    public void Init(){
+        m_Self.SetActive(true);
+        m_Animator.Play("Up");
+
+    }
+
+    private void OnClickFireball(){
+        m_FireballEmitter.ShootFireBall(50f,6f,30);
+        Close();
     }
 
 

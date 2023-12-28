@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireballController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
-    [SerializeField] private float m_Speed = 5f;
+    private float m_Speed = 22f;
     [SerializeField] private GameObject m_ExplosionPrefab;
     private float m_Damage = 10f;
     private float m_Radius = 5f;
@@ -23,5 +23,18 @@ public class FireballController : MonoBehaviour
         transform.position += transform.forward * Time.deltaTime * m_Speed;
     }
 
-    // TODO : init ExplosionController when touch enemy collider
+    private void OnTriggerEnter(Collider other)
+    {
+        var enemyBodyPart = other.GetComponent<EnemyBodyPart>();
+        var ground = other.GetComponent<GroundController>();
+        if(enemyBodyPart !=null || ground != null){
+            // hit enemy or ground , explode
+            var explosion = Instantiate(m_ExplosionPrefab);
+            explosion.transform.position = m_Self.transform.position;
+            explosion.GetComponent<ExplosionController>().Init(m_Damage , m_Radius);
+
+            Destroy(explosion, 2f);
+            Destroy(m_Self, 4f);
+        }
+    }
 }

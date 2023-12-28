@@ -22,6 +22,8 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private Button2D m_AimBtn;    
     [SerializeField] private Button2D m_ShootBtn;
     [SerializeField] private Button2D m_SwitchWeaponBtn;
+    [SerializeField] private Button2D m_AssistBtn;
+    [SerializeField] private AssistPanelController m_AssistPanel;
     [SerializeField] private Button2D m_CloseSwitchWeaponBtn;
 
     
@@ -104,8 +106,14 @@ public class BaseDefenceUIController : MonoBehaviour
         var cameraController = BaseDefenceManager.GetInstance().GetCameraController();
 
         m_SwitchWeaponBtn.onDown.AddListener(OnClickShowSwitchWeaponPanel);
+        m_AssistBtn.onDown.AddListener(ShowAssistPanel);
 
         m_CloseSwitchWeaponBtn.onDown.AddListener(OnClickCloseSwitchWeaponPanel);
+    }
+
+
+    private void ShowAssistPanel(){
+        m_AssistPanel.Init();
     }
 
     private IEnumerable DelayAction(System.Action action, float delayDuration){

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 [System.Serializable]
@@ -24,6 +25,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Transform m_MapCameraPrent;
     [SerializeField] private List<MapEnvironment> m_AllEnvironmentPrefab = new List<MapEnvironment>();
     private GameObject m_SpawnedEnvironment = null;
+    private ReflectionProbe baker;
 
 
     private void Awake()
@@ -135,6 +137,26 @@ public class MapManager : MonoBehaviour
         m_SpawnedEnvironment = Instantiate(targetEnvironment.Prefeb,m_MapEnvironemntParent);
         // change sky box
         RenderSettings.skybox= targetEnvironment.SkyBox ;
-        
+        ChangeSkyBox();
+    }
+    
+    private void ChangeSkyBox() {
+        baker = gameObject.AddComponent<ReflectionProbe>();
+        RenderSettings.skybox = RenderSettings.skybox;
+        DynamicGI.UpdateEnvironment();
+        baker.cullingMask = 0;
+        baker.refreshMode = ReflectionProbeRefreshMode.ViaScripting;
+        baker.mode = ReflectionProbeMode.Realtime;
+        baker.timeSlicingMode = ReflectionProbeTimeSlicingMode.NoTimeSlicing;
+
+        RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+        StartCoroutine(UpdateEnvironment());
+    }
+
+    IEnumerator UpdateEnvironment() {
+        DynamicGI.UpdateEnvironment();
+        baker.RenderProbe();
+        yield return new WaitForEndOfFrame();
+        RenderSettings.customReflectionTexture= baker.texture;
     }
 }

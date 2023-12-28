@@ -25,8 +25,8 @@ public class DamageTextController : MonoBehaviour
     void Update(){
         m_TimePass += Time.deltaTime;
         m_Text.alpha = m_Curve.Evaluate((m_ExistTime-m_TimePass)/m_ExistTime);
-        if(m_Text.alpha <=0){
-            Destroy(this);
+        if(m_TimePass >=5f){
+            Destroy(this.gameObject);
         }
         m_Self.anchoredPosition += Vector2.up * m_RandomUp * Time.deltaTime;
         m_Self.anchoredPosition += Vector2.right * m_RandomLeftRight * Time.deltaTime;

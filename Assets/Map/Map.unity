@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2e19d0eb7ab555d49b2ea2a311438322, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c370590a7392e7d44913c462e89d1179, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1643168965}
-  m_IndirectSpecularColor: {r: 0.38775983, g: 0.0017753121, b: 0.009493373, a: 1}
+  m_IndirectSpecularColor: {r: 0.33493546, g: 0.6628107, b: 0.8949349, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4780,10 +4780,10 @@ RectTransform:
   - {fileID: 1946275105}
   m_Father: {fileID: 2017379937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 591.5, y: -87.5}
-  m_SizeDelta: {x: 1183, y: 125}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758032736
 MonoBehaviour:
@@ -10886,7 +10886,7 @@ MonoBehaviour:
   m_CameraParent: {fileID: 1544190104}
   m_Sensitivity: 1.5
   m_CameraBottomLeft: {x: -25, y: -25}
-  m_CameraTopRight: {x: 100, y: 15}
+  m_CameraTopRight: {x: 110, y: 15}
 --- !u!1 &1553880923
 GameObject:
   m_ObjectHideFlags: 0
@@ -13574,10 +13574,10 @@ RectTransform:
   - {fileID: 1390700726}
   m_Father: {fileID: 758032735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 894.75, y: -125}
-  m_SizeDelta: {x: 576.5, y: 125}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 125}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1946275106
 MonoBehaviour:
@@ -15129,10 +15129,10 @@ RectTransform:
   - {fileID: 305216263}
   m_Father: {fileID: 758032735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 288.25, y: -125}
-  m_SizeDelta: {x: 576.5, y: 125}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 125}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2144489744
 MonoBehaviour:
