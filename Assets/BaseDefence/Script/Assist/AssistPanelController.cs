@@ -13,6 +13,7 @@ public class AssistPanelController : MonoBehaviour
     [SerializeField] private Button m_ShieldBtn;
     [SerializeField] private Button m_CloseBtn;
     [SerializeField] private FireballEmitter m_FireballEmitter;
+    [SerializeField] private TimmySlashController m_SlashController;
 
     void Start(){
         m_FireballBtn.onClick.AddListener(OnClickFireball);
@@ -41,7 +42,8 @@ public class AssistPanelController : MonoBehaviour
 
 
     private void OnClickSword(){
-        
+        m_SlashController.Slash();
+        Close();
     }
 
 
