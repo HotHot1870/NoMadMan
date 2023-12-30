@@ -30,7 +30,7 @@ public class GhostController : EnemyControllerBase
             // close enough for attack 
 
             Attack();
-        }else{
+        }else if(!m_IsNeted) {
             // move
             float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
             float moveDistance = Scriptable.MoveSpeed * Time.deltaTime * locationSpeedMod;

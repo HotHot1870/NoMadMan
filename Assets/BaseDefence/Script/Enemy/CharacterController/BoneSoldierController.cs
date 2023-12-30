@@ -44,7 +44,7 @@ public class BoneSoldierController : EnemyControllerBase
 
             m_CanAttack = true;
             m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
-        }else{
+        }else if(!m_IsNeted) {
             // move
             float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
             float moveDistance = Scriptable.MoveSpeed * Time.deltaTime * locationSpeedMod;

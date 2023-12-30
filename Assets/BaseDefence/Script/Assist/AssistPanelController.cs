@@ -14,6 +14,7 @@ public class AssistPanelController : MonoBehaviour
     [SerializeField] private Button m_CloseBtn;
     [SerializeField] private FireballEmitter m_FireballEmitter;
     [SerializeField] private TimmySlashController m_SlashController;
+    [SerializeField] private KineticTransmitterController m_KineticTransmitterController;
 
     void Start(){
         m_FireballBtn.onClick.AddListener(OnClickFireball);
@@ -48,6 +49,8 @@ public class AssistPanelController : MonoBehaviour
 
 
     private void OnClickNet(){
+        m_KineticTransmitterController.init();
+        Close();
         
     }
 

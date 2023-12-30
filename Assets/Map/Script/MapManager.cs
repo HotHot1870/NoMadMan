@@ -141,7 +141,9 @@ public class MapManager : MonoBehaviour
     }
     
     private void ChangeSkyBox() {
-        baker = gameObject.AddComponent<ReflectionProbe>();
+        if(baker == null)
+            baker = gameObject.AddComponent<ReflectionProbe>();
+            
         RenderSettings.skybox = RenderSettings.skybox;
         DynamicGI.UpdateEnvironment();
         baker.cullingMask = 0;

@@ -22,6 +22,7 @@ public class RemnantController : EnemyControllerBase
     private float m_RandomSpeedMod = 1;
     private bool m_CanAttack = false;
     private float m_FallingBackTime =0;
+    private string m_CurAnimationName = "";
 
     public override void Init(EnemyControllerInitConfig config)
     {
@@ -55,11 +56,27 @@ public class RemnantController : EnemyControllerBase
         
     }
 
+    public override void OnNet()
+    {
+        //m_CurAnimationName = m_TargetAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+        base.OnNet();
+        //m_TargetAnimator.enabled = false;
+        m_TargetAnimator.speed = 0;
+    }
+
+    protected override void OnNetEnd()
+    {
+        base.OnNetEnd();
+        m_TargetAnimator.speed = 1;
+        //m_TargetAnimator.enabled = true;
+        //m_TargetAnimator.Play(m_CurAnimationName);
+    }
+
     private void Update() {
         if( IsThisDead )
             return;
 
-         if(!m_CanAttack&&Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
+         if(!m_CanAttack && Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f && !m_IsNeted){
             // close enough for attack 
 
             m_TargetAnimator.speed = 1;
@@ -68,7 +85,7 @@ public class RemnantController : EnemyControllerBase
             m_CanAttack = true;
             StartCoroutine(TrunAndLookAndCamera());
 
-        }else if(m_FallingBackTime <=0){
+        }else if(m_FallingBackTime <=0 && !m_IsNeted){
             // move forward
             float locationSpeedMod = BaseDefenceManager.GetInstance().GetLocationScriptable().SpeedMutation/100f +1f;
             m_TargetAnimator.SetFloat("Speed",Scriptable.MoveSpeed*m_RandomSpeedMod*locationSpeedMod);
@@ -76,8 +93,8 @@ public class RemnantController : EnemyControllerBase
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
 
-        }else{
-            // move backward
+        }else if(!m_IsNeted){
+            // TODO : move backward
             m_TargetAnimator.SetFloat("Speed",-0.5f);
             float moveDistance = -0.5f * Time.deltaTime *m_RandomSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(

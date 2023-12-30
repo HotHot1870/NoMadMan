@@ -61,6 +61,8 @@ Material:
     - _Ambient: 0
     - _FresnelPower: 3
     - _GrowStrength: 0.25
+    - _LineSpeed: -52
+    - _LineThiccness: 0
     - _Metallic: 1
     - _NoiseDensity: 0.65
     - _Normalized: 1
@@ -70,6 +72,7 @@ Material:
     - _Smoothness: 1
     m_Colors:
     - _BackColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0, g: 4, b: 0, a: 1}
     - _FresnelColor: {r: 0, g: 0.25161663, b: 2.9960785, a: 0}
     - _MainColor: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
   m_BuildTextureStacks: []

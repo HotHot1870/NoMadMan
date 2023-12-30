@@ -30,6 +30,9 @@ public abstract class EnemyControllerBase : MonoBehaviour
     protected Camera MainCamera;
     protected int SpawnId;
     [SerializeField] protected ParticleSystem m_ExplodeHitParticle;
+    [SerializeField] protected List<MeshRenderer> m_AllNetMeshRenderer = new List<MeshRenderer>();
+    [SerializeField] protected List<SkinnedMeshRenderer> m_AllNetSkinnedMeshRenderer = new List<SkinnedMeshRenderer>();
+    protected bool m_IsNeted = false;
  
     
     
@@ -44,6 +47,63 @@ public abstract class EnemyControllerBase : MonoBehaviour
         HpCanvas.worldCamera = config.camera;
         BaseDefenceManager.GetInstance().AddEnemyToList(this.transform);
         HpParent.SetActive(false);
+    }
+
+    public virtual void OnNet(){
+        m_IsNeted = transform;
+        // net effect
+        foreach (var item in m_AllNetMeshRenderer)
+        {
+            if(item == null)
+                continue;
+            foreach (var material in item.materials)
+            {
+                material.SetFloat("_LineThiccness", 0.2f);
+            }
+        }
+
+        foreach (var item in m_AllNetSkinnedMeshRenderer)
+        {
+            if(item == null)
+                continue;
+            foreach (var material in item.materials)
+            {
+                material.SetFloat("_LineThiccness", 0.2f);
+            }
+        }
+        StartCoroutine(NetTime());
+        // TODO : pause animation
+    }
+
+    private IEnumerator NetTime(){
+        yield return new WaitForSeconds(BaseDefenceManager.GetInstance().GetLocationScriptable().Level*0.5f+2f);
+        OnNetEnd();
+    }
+
+    protected virtual void OnNetEnd(){
+        m_IsNeted = false;
+
+        // remove net effect
+        foreach (var item in m_AllNetMeshRenderer)
+        {
+            if(item == null)
+                continue;
+            foreach (var material in item.materials)
+            {
+                material.SetFloat("_LineThiccness", 0f);
+            }
+        }
+
+        foreach (var item in m_AllNetSkinnedMeshRenderer)
+        {
+            if(item == null)
+                continue;
+            foreach (var material in item.materials)
+            {
+                material.SetFloat("_LineThiccness", 0f);
+            }
+        }
+
     }
 
     public int GetId(){

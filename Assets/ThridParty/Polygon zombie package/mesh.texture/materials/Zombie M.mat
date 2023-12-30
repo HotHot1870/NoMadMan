@@ -104,6 +104,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _GrowStrength: 0.005
+    - _LineSpeed: -62
+    - _LineThiccness: 0
     - _Metallic: 0
     - _Mode: 0
     - _NoiseDensity: 0.7
@@ -123,11 +125,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BackColor: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.19999999}
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.19999999}
+    - _Color: {r: 0, g: 2.9490197, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MainColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4524630869742092182
