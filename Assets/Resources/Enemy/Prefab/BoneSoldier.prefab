@@ -76,6 +76,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &353965235968066832
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &854476322975419334
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +351,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &1103269174707581560
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +457,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &1441905739675993080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1215,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 4055506494677254806}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &4101614470669635088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1292,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &4146817470569732411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1398,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &4429290726920777914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,6 +1770,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &5761872656368678522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,6 +1910,9 @@ MonoBehaviour:
   HpBar: {fileID: 1094665305725724911}
   HpParent: {fileID: 6376162186369387513}
   m_ExplodeHitParticle: {fileID: 1632561448610358924, guid: cae3cba78585ca44f8e106b38a56cbd2, type: 3}
+  m_AllNetMeshRenderer: []
+  m_AllNetSkinnedMeshRenderer:
+  - {fileID: 4055506494677254806}
   m_Self: {fileID: 6345075452338266797}
   m_Animator: {fileID: 2979771216696041646}
   m_AttackStartUp: 0.45
@@ -2147,6 +2158,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &6758295183542947031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,6 +2264,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &6999536319591033567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,6 +2657,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &7739080241071693583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,6 +2764,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &8168805320062804159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,6 +2902,7 @@ MonoBehaviour:
   m_BodyType: 0
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 0}
+  m_BodyPartHpPresentage: 1
 --- !u!1 &8466820807918122904
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class GhostController : EnemyControllerBase
     [SerializeField] private float m_AttackStartUp = 0.45f;
     [SerializeField] private float m_AnimationWalkSpeed=9f;
     [SerializeField] private GameObject m_DeadEffect;
+    [SerializeField] private Animator m_Animator;
 
     private IEnumerator Start() {
         var deadEffect = Instantiate(m_DeadEffect,this.transform.parent);
@@ -21,12 +22,25 @@ public class GhostController : EnemyControllerBase
         
     }
 
+
+    public override void OnNet()
+    {
+        base.OnNet();
+        m_Animator.speed = 0;
+    }
+
+    protected override void OnNetEnd()
+    {
+        base.OnNetEnd();
+        m_Animator.speed = 1;
+    }
+
     private void Update() {
         if( IsThisDead )
             return;
         
 
-        if(Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
+        if(Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f ){
             // close enough for attack 
 
             Attack();
@@ -40,7 +54,7 @@ public class GhostController : EnemyControllerBase
     }
 
     public void Attack(){
-        if(IsThisDead)
+        if(IsThisDead )
             return;
 
         BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);

@@ -31,12 +31,25 @@ public class BoneSoldierController : EnemyControllerBase
         
     }
 
+    public override void OnNet()
+    {
+        base.OnNet();
+        m_Animator.speed = 0;
+    }
+
+    protected override void OnNetEnd()
+    {
+        base.OnNetEnd();
+        m_Animator.speed = 1;
+    }
+
+
     private void Update() {
         if( IsThisDead )
             return;
         
 
-        if(!m_CanAttack&&Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f){
+        if(!m_CanAttack&&Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f && !m_IsNeted){
             // close enough for attack 
 
             m_Animator.speed = 1;
@@ -53,7 +66,7 @@ public class BoneSoldierController : EnemyControllerBase
         }
 
         // attack wall handler
-        if(m_CanAttack){
+        if(m_CanAttack && !m_IsNeted){
             if(m_AttackDelay <=0){
                 // attack
                 StartCoroutine(Attack());
