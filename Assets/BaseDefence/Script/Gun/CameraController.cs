@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float m_CrosshairAffection=0.5f;
     private Vector3 m_ShootCameraStartPos;
 
-
+/*
 
     private void Start()
     {
@@ -41,5 +41,5 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         
         BaseDefenceManager.GetInstance().ChangeGameStage(gameStage);
-    }
+    }*/
 }

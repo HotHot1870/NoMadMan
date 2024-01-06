@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class AssistPanelController : MonoBehaviour
 {
@@ -55,7 +56,16 @@ public class AssistPanelController : MonoBehaviour
     }
 
     private void OnClickShield(){
+        StartCoroutine(SetShield());
+        Close();
         
+    }
+
+
+    private IEnumerator SetShield(){
+        BaseDefenceManager.GetInstance().SetShieldStage(true);
+        yield return new WaitForSeconds( (BaseDefenceManager.GetInstance().GetLocationScriptable().Level+1) * 2f);
+        BaseDefenceManager.GetInstance().SetShieldStage(false);
     }
 
 }

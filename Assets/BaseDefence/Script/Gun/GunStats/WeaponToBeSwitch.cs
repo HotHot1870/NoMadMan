@@ -12,7 +12,7 @@ public class WeaponToBeSwitch : MapChooseWeaponSlot
         if(BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon &&
             m_WeaponSlotIndex != -1){
             BaseDefenceManager.GetInstance().SwitchSelectedWeapon(m_WeaponSlotIndex );
-            BaseDefenceManager.GetInstance().DoneSwitchWeapon();
+            //BaseDefenceManager.GetInstance().DoneSwitchWeapon();
         }
     }
 

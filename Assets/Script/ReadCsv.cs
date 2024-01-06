@@ -322,13 +322,13 @@ public class ReadCsv : MonoBehaviour
                     float mutationValue = float.Parse(item.Split('@')[1]);
                     switch (mutationTypeId)
                     {
-                        case 1:
+                        case 0:
                             location.HealthMutation = mutationValue;
                         break;
-                        case 2:
+                        case 1:
                             location.DamageMutation = mutationValue;
                         break;
-                        case 3:
+                        case 2:
                             location.SpeedMutation = mutationValue;
                         break;
                         default:

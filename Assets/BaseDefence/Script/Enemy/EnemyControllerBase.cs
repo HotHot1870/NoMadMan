@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +12,8 @@ public class EnemyControllerInitConfig{
     public Vector3 spawnPos;
     public Camera camera;
     public int spawnId;
+    // only servant need this
+    public XinController xin = null;
 }
 
 public abstract class EnemyControllerBase : MonoBehaviour
@@ -33,21 +33,25 @@ public abstract class EnemyControllerBase : MonoBehaviour
     [SerializeField] protected List<MeshRenderer> m_AllNetMeshRenderer = new List<MeshRenderer>();
     [SerializeField] protected List<SkinnedMeshRenderer> m_AllNetSkinnedMeshRenderer = new List<SkinnedMeshRenderer>();
     protected bool m_IsNeted = false;
+    private Coroutine m_HideHpCoroutine = null;
  
     
     
     public virtual void Init(EnemyControllerInitConfig config){
         Scriptable = config.scriptable;
         Destination = config.destination;
-        CurHp = Scriptable.MaxHp;
+        CurHp = GetMaxHp();
         CameraPos = config.cameraPos;
         MainCamera =config.camera;
         SpawnId = config.spawnId;
         this.transform.position = config.spawnPos;
-        HpCanvas.worldCamera = config.camera;
+        if(HpCanvas!= null){
+            HpCanvas.worldCamera = config.camera;
+            HpParent.SetActive(false);
+        }
         BaseDefenceManager.GetInstance().AddEnemyToList(this.transform);
-        HpParent.SetActive(false);
     }
+
 
     public virtual void OnNet(){
         m_IsNeted = transform;
@@ -117,18 +121,25 @@ public abstract class EnemyControllerBase : MonoBehaviour
         if( IsThisDead )
             return;
 
+        if(m_HideHpCoroutine != null){
+            StopCoroutine(m_HideHpCoroutine);
+        }
         CurHp += changes;
-        
-        HpParent.SetActive(true);
-        HpParent.transform.rotation = new Quaternion(0,0,0,0);
-        HpBar.fillAmount = CurHp / Scriptable.MaxHp;
-        StartCoroutine(HideHpUI());
-        CurHp = Mathf.Clamp(CurHp,0f,Scriptable.MaxHp);
+    
+        CurHp = Mathf.Clamp(CurHp,0f,GetMaxHp());
         if( CurHp<=0 ){
             // dead
             IsThisDead = true;
-            HpParent.SetActive(false);
+            HpBar.fillAmount = 0;
             OnDead();
+        }else{
+            if(HpCanvas == null){
+                return;
+            }
+            HpParent.SetActive(true);
+            HpParent.transform.rotation = new Quaternion(0,0,0,0);
+            HpBar.fillAmount = CurHp / GetMaxHp();
+            m_HideHpCoroutine = StartCoroutine(HideHpUI());
         }
     }
 
@@ -157,6 +168,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
 
     protected virtual void OnDead(){
+        HpParent.SetActive(false);
         BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
         MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
         OnDeadAction?.Invoke();

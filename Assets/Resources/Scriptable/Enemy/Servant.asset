@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 967e9543349118c4ba624738b61e5bc4, type: 3}
-  m_Name: Elwood
+  m_Name: Servant
   m_EditorClassIdentifier: 
-  Id: 5
-  Prefab: {fileID: 7077179325366279935, guid: cf9d8cce3976c4b4a9f39be93f395c8d, type: 3}
-  DisplayName: Elwood
+  Id: 7
+  Prefab: {fileID: 2093178529471939041, guid: 61a4b669cafd160409950ad3c4199f13, type: 3}
+  DisplayName: Servant
   DisplayImage: {fileID: 0}
-  MaxHp: 650
-  Damage: 3
-  AttackDelay: 7
-  MoveSpeed: 0
-  DangerValue: 8
-  GooOnKill: 13
-  ExplodeDamageMod: 0.75
+  MaxHp: 125
+  Damage: 13
+  AttackDelay: 1
+  MoveSpeed: 2.25
+  DangerValue: 0
+  GooOnKill: 0
+  ExplodeDamageMod: 0.15

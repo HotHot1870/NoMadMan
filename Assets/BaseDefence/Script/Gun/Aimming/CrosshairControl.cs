@@ -117,7 +117,7 @@ public class CrosshairControl : MonoBehaviour
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
                 ) ;
-            BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
+            //BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
         //}
         /*
         else

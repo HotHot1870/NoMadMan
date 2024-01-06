@@ -144,6 +144,10 @@ public class RemnantController : EnemyControllerBase
     public IEnumerator Attack(){
         while (!IsThisDead)
         {
+            if(m_IsNeted){
+                yield return null;
+                continue;
+            }
             m_TargetAnimator.speed = 1;
             // wait delay
             //m_TargetAnimator.Play("Idle");

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using BaseDefenceNameSpace;
 using UnityEngine.Rendering;
+using Cinemachine;
 
 namespace BaseDefenceNameSpace
 {
@@ -55,6 +56,7 @@ public class BaseDefenceManager : MonoBehaviour
     [SerializeField] private GameObject m_ReloadControllerPanel;
     [SerializeField] private Transform m_EnvironmentParent;
     [SerializeField] private List<DefenceEnvironment> m_AllEnvironmentPrefab = new List<DefenceEnvironment>();
+    [SerializeField] private CinemachineVirtualCamera m_XinCamera;
     private ReflectionProbe baker;
 
     private float m_CurrentAccruacy = 100f;
@@ -62,6 +64,8 @@ public class BaseDefenceManager : MonoBehaviour
     // hp
     private float m_CurrentHp = 100;
     private float m_MaxHp = 100;
+
+    private bool m_IsShielded = false;
 
 
 
@@ -133,8 +137,15 @@ public class BaseDefenceManager : MonoBehaviour
         return m_MaxHp;
     }
 
+
+    public void SetShieldStage(bool isShielded){
+        m_IsShielded = isShielded;
+    }
+
     public void ChangeHp(float changes){
-        m_CurrentHp += changes;
+        if(!m_IsShielded || changes>0)
+            m_CurrentHp += changes;
+
         if(m_CurrentHp<0){
             m_CurrentHp = 0;
         }else if(m_CurrentHp>m_MaxHp){
@@ -308,9 +319,18 @@ public class BaseDefenceManager : MonoBehaviour
         if(CurHp<=0)
             GameOver(true);*/
     }
-
+/*
     public void DoneSwitchWeapon(){
         m_CameraController.CameraLookUp(m_BaseDefenceUIController.OnClickCloseSwitchWeaponPanel );
+    }*/
+
+    public void LookAtXin(){
+        m_XinCamera.Priority = 10;
+    }
+
+    
+    public void LookAtField(){
+        m_XinCamera.Priority = 0;
     }
 
 

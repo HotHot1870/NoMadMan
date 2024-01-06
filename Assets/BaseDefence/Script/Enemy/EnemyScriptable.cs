@@ -9,11 +9,11 @@ public class EnemyScriptable : ScriptableObject
     public GameObject Prefab;
     public string DisplayName;
     public Sprite DisplayImage;
-    [Range(0.1f,10000)] public float MaxHp = 100;
-    [Range(0.1f,100)] public float Damage = 33;
-    [Range(0.1f,5f)] public float AttackDelay = 1.5f;
-    [Range(1, 25)] public float MoveSpeed = 5;
-    [Range(1f, 100)]public float DangerValue;
-    [Range(0f, 1000)]public float GooOnKill=10;
-    [Range(0f, 2)]public float ExplodeDamageMod=1;
+    public float MaxHp = 100;
+    public float Damage = 33;
+    public float AttackDelay = 1.5f;
+    public float MoveSpeed = 5;
+    public float DangerValue;
+    public float GooOnKill=10;
+    public float ExplodeDamageMod=1;
 }

@@ -68,6 +68,27 @@ public class EnemyBodyPart : MonoBehaviour
             m_SkinRenderer.material.SetFloat("_Normalized",  1);
     }
 
+    
+    
+    public void SetSpawnMeshNormalized(float setValue){
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_Normalized",  setValue);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_Normalized",  setValue);
+        
+    }
+    public float GetSpawnMeshNormalized(){
+        if(m_Renderer != null)
+            return m_Renderer.material.GetFloat("_Normalized");
+
+        if(m_SkinRenderer != null)
+            return m_SkinRenderer.material.GetFloat("_Normalized");
+
+        return 0;
+
+    }
+
 
     public float GetExplosiveDamageMod(){
         return m_EnemyController.GetScriptable().ExplodeDamageMod;

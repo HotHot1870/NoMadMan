@@ -42,7 +42,8 @@ public class EnemySpawnController : MonoBehaviour
 
     public Vector3 GetOneRandomEnemyPos(){
         Vector3 ans = Vector3.zero;
-        while (ans == Vector3.zero && m_AllEnemyTrans.Count>=1 )
+        int tryCount = 0;
+        while (tryCount< m_AllEnemyTrans.Count * 3f && m_AllEnemyTrans.Count>=1 )
         {
             int randomInt = UnityEngine.Random.Range(0,m_AllEnemyTrans.Count);
             if(m_AllEnemyTrans[randomInt] != null){
@@ -109,6 +110,11 @@ public class EnemySpawnController : MonoBehaviour
     private IEnumerator SpawnEnemy(float delay, EnemyScriptable enemyData, float index)
     {
         float passedTime = 0;
+        // TODO : Xin 
+        if(enemyData.Id == 6){
+            passedTime =1+ delay;
+            //newEnemy.transform.position = spawnPos;
+        }
         while (passedTime < delay)
         {
             passedTime += Time.deltaTime;
@@ -136,6 +142,7 @@ public class EnemySpawnController : MonoBehaviour
         m_EnemySpawnId++;
 
         newEnemy.GetComponent<EnemyControllerBase>().Init(enemyConfig);
+
 
 
     }
