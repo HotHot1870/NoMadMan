@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class XinController : EnemyControllerBase
@@ -7,6 +8,8 @@ public class XinController : EnemyControllerBase
     [SerializeField] private GameObject m_Self;
     [SerializeField] private GameObject m_BossHPBarPrefab;
     [SerializeField] private GameObject m_ServantPrefab;
+    [SerializeField] private GameObject m_SpawnBallPrefab;
+    [SerializeField] private Transform m_SpawnBallStartPos;
     [SerializeField] private EnemyScriptable m_ServantScriptable;
     [SerializeField] private List<Transform> m_ServantSpawnPoint = new List<Transform>();
     [SerializeField] private List<Transform> m_ServantDestination = new List<Transform>();
@@ -17,7 +20,8 @@ public class XinController : EnemyControllerBase
             // TODO : auto load serveant scriptable
             Debug.Log("missing serveant scriptable");
         }
-        SpawnNewWave();
+        BaseDefenceManager.GetInstance().LookAtXin();
+        StartCoroutine(WaveEnd());
     }
 
     public override void Init(EnemyControllerInitConfig config)
@@ -30,26 +34,37 @@ public class XinController : EnemyControllerBase
 
     } 
 
-    public void SpawnNewWave(){
-            BaseDefenceManager.GetInstance().LookAtField();
-        //int randomInt = Random.Range(0,3); // 0,1,2
-        int randomInt = 0; // 0,1,2
-        switch (randomInt)
-        {
-            case 0: 
-                StartCoroutine( SpawnRecoverServant() );
-            break;
-            case 1:
-                //StartCoroutine( SpawnWeakServant() );
-            break;
-            case 2:
-                //StartCoroutine( SpawnLinkServant() );
-            break;
-            default:
-            break;
-        }
+    public IEnumerator WaveEnd(){
+        yield return new WaitForSeconds(1f);
+        BaseDefenceManager.GetInstance().LookAtXin();
+        yield return new WaitForSeconds(1f);
+        // TODO : spawn ball
+        var spawnBall = Instantiate(m_SpawnBallPrefab, m_SpawnBallStartPos.position, Quaternion.identity,this.transform);
+        spawnBall.GetComponent<XinSpawnBallController>().Init(this);
+      
+    }
+    public void StartWave(){
+        BaseDefenceManager.GetInstance().LookAtField();
+        int randomInt = UnityEngine.Random.Range(0,2);
+        StartCoroutine( SpawnServant( (ServantType) randomInt ) );
     }
 
+    public void WeakServantDeadHandler(){
+        // TODO : call by servant on dead
+        foreach (var item in m_AllServants)
+        {
+            if(item != null){
+                if(item.TryGetComponent<ServantController>(out var servantController)){
+                    if(servantController.GetCurHp()>0){
+                        // one still alive 
+                        return;
+                    }
+                }
+            }
+        }
+
+        StartCoroutine(WaveEnd());
+    }
 
     public bool IsAllServantRecovering(){
         foreach (var item in m_AllServants)
@@ -75,24 +90,24 @@ public class XinController : EnemyControllerBase
         }
         m_AllServants.Clear();
 
-
-        // look at xin
-        BaseDefenceManager.GetInstance().LookAtXin();
+        StartCoroutine(WaveEnd());
         return true;
     }
 
-    private IEnumerator SpawnRecoverServant(){
-        // TODO : spawn 3 , if 0 hp and other still alive , full recover in 3 sec
+    private IEnumerator SpawnServant(ServantType type){
+        // spawn 3 , if 0 hp and other still alive , full recover in 3 sec
         List<int> m_UnusedInt = new List<int>();
         for (int i = 0; i < m_ServantSpawnPoint.Count; i++)
         {   
             m_UnusedInt.Add(i);
         }
+
+        Transform previousServant = null;
         for (int i = 0; i < 3; i++)
         {
             Transform newServant = Instantiate(m_ServantPrefab,this.transform.parent).transform;
             newServant.position = m_ServantSpawnPoint[0].position;
-            int randomInt = m_UnusedInt[Random.Range(0,m_UnusedInt.Count)];
+            int randomInt = m_UnusedInt[UnityEngine.Random.Range(0,m_UnusedInt.Count)];
             m_UnusedInt.Remove(randomInt);
             newServant.position = m_ServantSpawnPoint[randomInt].position;
 
@@ -105,7 +120,19 @@ public class XinController : EnemyControllerBase
                 spawnId = SpawnId,
                 xin = this
             };
-            newServant.GetComponent<ServantController>().InitRecover(enemyConfig);
+
+            var newServantController = newServant.GetComponent<ServantController>();
+            switch (type)
+            {
+                case ServantType.Reover:
+                    newServantController.InitRecover(enemyConfig);
+                break;
+                case ServantType.Weak:
+                    newServantController.InitWeak(enemyConfig);
+                break;
+                default:
+                break;
+            }
             m_AllServants.Add(newServant);
             yield return new WaitForSeconds(0.5f);
         }

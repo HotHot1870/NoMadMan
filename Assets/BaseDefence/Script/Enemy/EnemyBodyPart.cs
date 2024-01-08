@@ -5,7 +5,8 @@ public enum EnemyBodyPartEnum
 {
     Body = 0,
     Shield = 1,
-    Crit = 2
+    Crit = 2,
+    Heal = 3
 }
 
 
@@ -13,11 +14,11 @@ public class EnemyBodyPart : MonoBehaviour
 {
     [SerializeField] private EnemyControllerBase m_EnemyController;
     [SerializeField] private ParticleSystem m_OnHitEffect=null;
-    [SerializeField][Range(0f, 3f)] private float m_DamageMod = 1;
+    [SerializeField] private float m_DamageMod = 1;
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
     [SerializeField] private MeshRenderer m_Renderer = null;
     [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
-    [SerializeField][Range(0f, 1f)] private float m_BodyPartHpPresentage = 1f;
+    [SerializeField] private float m_BodyPartHpPresentage = 1f;
     private Collider m_Collider;
    // [SerializeField] private AudioSource m_AudioPlayer;
    // [SerializeField] private AudioClip m_OnHitSound;
@@ -68,7 +69,9 @@ public class EnemyBodyPart : MonoBehaviour
             m_SkinRenderer.material.SetFloat("_Normalized",  1);
     }
 
-    
+    public void SetDamageMod(float damageMod){
+        m_DamageMod = damageMod;
+    }
     
     public void SetSpawnMeshNormalized(float setValue){
         if(m_Renderer != null)
@@ -128,13 +131,16 @@ public class EnemyBodyPart : MonoBehaviour
                 case EnemyBodyPartEnum.Crit:
                     color = Color.red;
                 break;
+                case EnemyBodyPartEnum.Heal:
+                    color = Color.green;
+                break;
                 default:
                 break;
             }
 
         BaseDefenceManager.GetInstance().SetDamageText(damage * m_DamageMod,color,screenPos);
         if(m_BodyPartHpPresentage <=0){
-            // destory body part
+            // Destroy body part
             StartCoroutine(OnDeadEffect());
 
             if(!m_EnemyController.IsDead()){
@@ -149,6 +155,9 @@ public class EnemyBodyPart : MonoBehaviour
             m_CanPlayHitSound = false;
             StartCoroutine(HitSoundBlocker());
         }*/
+    }
+    public void ChangeBodyType(EnemyBodyPartEnum bodytype){
+        m_BodyType = bodytype;
     }
 /*
     private IEnumerator HitSoundBlocker(){

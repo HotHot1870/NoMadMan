@@ -109,25 +109,13 @@ public class CrosshairControl : MonoBehaviour
         // accrucy lose for moving
         float mouseCurToPassDiatance = Vector3.Distance(m_AimTouchPreviousPos,m_AimDragTouchEndPos);
 
-        //if (mouseCurToPassDiatance <=0f)
-        //{
             // draging but almost not moving , gain accruacy over time
             curAcc = GainAccOvertime(curAcc);
             m_CrosshairToScreenOffsetNormalized = new Vector2(
                     (m_CrosshairParent.position.x - (Screen.width/2f) ) /Screen.width,
                     (m_CrosshairParent.position.y - (Screen.height/2f) ) /Screen.height
                 ) ;
-            //BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
-        //}
-        /*
-        else
-        {
             BaseDefenceManager.GetInstance().GetCameraController().ShootCameraMoveByCrosshair(m_CrosshairToScreenOffsetNormalized);
-            // acc lose
-            curAcc -= Time.deltaTime*mouseCurToPassDiatance*1f;
-            curAcc = GainAccOvertime(curAcc);
-            m_AimTouchPreviousPos = m_AimDragTouchEndPos;
-        }*/
         BaseDefenceManager.GetInstance().SetAccruacy(curAcc);
     }
 

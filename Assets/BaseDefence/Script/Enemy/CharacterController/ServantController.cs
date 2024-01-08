@@ -6,15 +6,13 @@ using UnityEngine;
 public enum ServantType
 {
     Reover = 0,
-    Weak,
-    Link
+    Weak
 
 }
 public class ServantController : EnemyControllerBase
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Animator m_Animator;
-    [SerializeField] private GameObject m_Shield;
     [SerializeField] private float m_AttackStartUp = 0.45f;
     [SerializeField] private List<EnemyBodyPart> m_AllWeakSpots = new List<EnemyBodyPart>();
     [SerializeField] private List<EnemyBodyPart> m_AllNormalBodypart = new List<EnemyBodyPart>();
@@ -25,7 +23,7 @@ public class ServantController : EnemyControllerBase
     protected float m_AttackDelay = 0.3f;
     private ServantType m_ServantType = ServantType.Reover;
     private XinController m_Xin;
-
+    private ServantController m_GuardServant = null;
     private bool m_IsRecovering = false;
 
 
@@ -54,19 +52,22 @@ public class ServantController : EnemyControllerBase
     public void InitRecover(EnemyControllerInitConfig config){
         Init(config);
         m_ServantType = ServantType.Reover; 
-        Destroy(m_Shield);
+        // remove all weak point
+        foreach (var item in m_AllWeakSpots)
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     public void InitWeak(EnemyControllerInitConfig config){
         Init(config);
         m_ServantType = ServantType.Weak;
-        Destroy(m_Shield);
 
-    }
-
-    public void InitLink(EnemyControllerInitConfig config){
-        Init(config);
-        m_ServantType = ServantType.Link;
+        foreach (var item in m_AllNormalBodypart)
+        {
+            item.SetDamageMod(-0.5f);
+            item.ChangeBodyType(EnemyBodyPartEnum.Heal);
+        }
 
     }
     public override void OnNet()
@@ -81,7 +82,7 @@ public class ServantController : EnemyControllerBase
         m_Animator.speed = 1;
     }
 
-        private void Update() {
+    private void Update() {
         if( IsThisDead )
             return;
         
@@ -120,10 +121,6 @@ public class ServantController : EnemyControllerBase
         return CurHp;
     }
 
-    public void CloseShield(){
-        // TODO : call if link parent dead
-        Destroy(m_Shield);
-    }
 
     public void OnAllRecoverDead(){
         // all recover servant dead 
@@ -184,6 +181,8 @@ public class ServantController : EnemyControllerBase
             
             return;
         }
+        
+        m_Xin.WeakServantDeadHandler();
 
         base.OnDead();
         m_Animator.speed = 1;

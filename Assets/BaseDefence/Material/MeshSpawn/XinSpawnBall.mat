@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-430270479837519414
+--- !u!114 &-1836079448234207716
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlueMeshSpawnWithFresnel
+  m_Name: XinSpawnBall
   m_Shader: {fileID: -6465566751694194690, guid: 98235931860c8b64c8ff001304810536, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -59,21 +59,20 @@ Material:
     m_Ints: []
     m_Floats:
     - _Ambient: 0
-    - _FresnelPower: 3
-    - _GrowStrength: 0.25
-    - _LineSpeed: -52
+    - _FresnelPower: 5
+    - _GrowStrength: 0.1
+    - _LineSpeed: 0.5
     - _LineThiccness: 0
-    - _MaxGrow: 1
-    - _Metallic: 1
-    - _NoiseDensity: 0.65
-    - _Normalized: 1
+    - _Metallic: 0
+    - _NoiseDensity: 1
+    - _Normalized: 0.8
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Seed: 0
-    - _Smoothness: 1
+    - _Smoothness: 0
     m_Colors:
     - _BackColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 0, g: 4, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 0.25161663, b: 2.9960785, a: 0}
-    - _MainColor: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

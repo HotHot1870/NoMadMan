@@ -36,7 +36,7 @@ public class PuppeteerController : EnemyControllerBase
 
         m_PuppetController = puppet.GetComponent<PuppetController>();
         m_PuppetController.Init(enemyConfig);
-        m_PuppetController.AddOnDeadAction(DestoryElectic);
+        m_PuppetController.AddOnDeadAction(DestroyElectic);
     }
     
     private IEnumerator Start() {
@@ -57,7 +57,7 @@ public class PuppeteerController : EnemyControllerBase
         
     }
 
-    public void DestoryElectic(){
+    public void DestroyElectic(){
         if(m_Electic != null)
             Destroy(m_Electic);
     }
@@ -120,7 +120,7 @@ public class PuppeteerController : EnemyControllerBase
     protected override void OnDead(){
         base.OnDead();
         
-        DestoryElectic();
+        DestroyElectic();
 
         // remove puppet shield
         if(m_PuppetController != null){

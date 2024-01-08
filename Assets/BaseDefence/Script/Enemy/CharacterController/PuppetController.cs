@@ -96,7 +96,7 @@ public class PuppetController  : EnemyControllerBase
     }
 
     public void OnPuppeteerDead(){
-        // destory shield
+        // Destroy shield
         StartCoroutine(ShieldFadeOut());
     }
 
