@@ -40,6 +40,8 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private TMP_Text m_ResultTitle;
     [SerializeField] private Button2D m_BackFromResultBtn;
     
+    [Header("Reload")]
+    [SerializeField] private GameObject m_ReloadPanel;
 
     [Header("Switch weapon")]
     [SerializeField] private Animator m_SwitchWeaponAnimator;
@@ -136,7 +138,9 @@ public class BaseDefenceUIController : MonoBehaviour
 
     private void TurnOffAllPanel(){
         m_ShootPanel.SetActive(false);
+        m_ReloadPanel.SetActive(false);
     }
+    
     private void TurnOnAllPanel(){
         m_ShootPanel.SetActive(true);
     }

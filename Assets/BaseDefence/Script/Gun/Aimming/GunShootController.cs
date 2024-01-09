@@ -65,6 +65,9 @@ public class GunShootController : MonoBehaviour
     }
 
     public void OnShootBtnDown(){
+        if(BaseDefenceManager.GetInstance().GetCurHp() <=0){
+            return;
+        }
         if (m_CurrentAmmo <= 0)
         {
             // do not shoot if out of ammo
@@ -155,8 +158,11 @@ public class GunShootController : MonoBehaviour
     }
     private IEnumerator SemiAutoShoot()
     {
-        while (m_CurrentAmmo > 0)
+        while (m_CurrentAmmo > 0 )
         {
+            if(BaseDefenceManager.GetInstance().GetCurHp() <=0){
+                yield break;
+            }
             Shoot();
             yield return null;
         }
@@ -171,6 +177,8 @@ public class GunShootController : MonoBehaviour
         if (m_CurrentShootCoolDown > 0)
             return;
 
+        if(BaseDefenceManager.GetInstance().GetCurHp() <=0)
+            return;
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
@@ -184,6 +192,7 @@ public class GunShootController : MonoBehaviour
         if(gunModelAnimator!=null && m_SelectedGun.DisplayName != "Minigun"){
             gunModelAnimator.Play("Shoot");
         }else if(m_SelectedGun.DisplayName == "Minigun" && !gunModelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Shoot")){
+            // play shoot animation only when shoot animation is not already playing for minigun
             gunModelAnimator.Play("Shoot");
         }
 
