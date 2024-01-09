@@ -382,6 +382,7 @@ public class BaseDefenceManager : MonoBehaviour
         gun = selectedGunlist[slotIndex];
         m_GunModelController.ChangeGunModel(gun);
         m_GunShootController.SetSelectedGun(gun, slotIndex);
+        m_BaseDefenceUIController.OnClickCloseSwitchWeaponPanel();
     }
 
 }

@@ -35,9 +35,9 @@ public class XinController : EnemyControllerBase
     } 
 
     public IEnumerator WaveEnd(){
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtXin();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         // TODO : spawn ball
         var spawnBall = Instantiate(m_SpawnBallPrefab, m_SpawnBallStartPos.position, Quaternion.identity,this.transform);
         spawnBall.GetComponent<XinSpawnBallController>().Init(this);

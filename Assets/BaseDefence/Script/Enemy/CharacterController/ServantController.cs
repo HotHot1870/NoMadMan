@@ -69,6 +69,18 @@ public class ServantController : EnemyControllerBase
             item.ChangeBodyType(EnemyBodyPartEnum.Heal);
         }
 
+        int mustShowInt = Random.Range(0,m_AllWeakSpots.Count);
+        for (int i = 0; i < m_AllWeakSpots.Count; i++)
+        {
+            if(i==mustShowInt)
+                continue;
+
+            int randomInt = Random.Range(0,2);
+            if(randomInt==1){
+                Destroy(m_AllWeakSpots[i].gameObject);
+            }
+        }
+
     }
     public override void OnNet()
     {

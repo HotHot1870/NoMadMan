@@ -9,8 +9,9 @@ public class WeaponToBeSwitch : MapChooseWeaponSlot
 {
 
     public override void OnClickWeaponSlot(){
-        if(BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon &&
-            m_WeaponSlotIndex != -1){
+        if(/*BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.SwitchWeapon &&
+            */m_WeaponSlotIndex != -1){
+                Debug.Log("Set switch weapon");
             BaseDefenceManager.GetInstance().SwitchSelectedWeapon(m_WeaponSlotIndex );
             //BaseDefenceManager.GetInstance().DoneSwitchWeapon();
         }

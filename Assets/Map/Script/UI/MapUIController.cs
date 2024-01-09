@@ -173,9 +173,9 @@ public class MapUIController : MonoBehaviour
             GunScriptable targetGunScriptable = allWeapon.Find(x=>x.Id == targetGunId);
             if( targetGunScriptable == null ){
                 //no selected weapon
-                m_ChooseWeaponBtns[i].Init(index , null);
+                m_ChooseWeaponBtns[index].Init(index , null);
             }else{
-                m_ChooseWeaponBtns[i].Init(index ,targetGunScriptable.DisplayImage);
+                m_ChooseWeaponBtns[index].Init(index ,targetGunScriptable.DisplayImage);
 
             }
             
