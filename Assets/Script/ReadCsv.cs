@@ -29,6 +29,7 @@ public class ReadCsv : MonoBehaviour
     [SerializeField] private MainGameManager m_MainGameManager;
     private EnemyScriptable m_GhostScriptable = null;
     private EnemyScriptable m_PuppetScriptable = null;
+    private EnemyScriptable m_ServantScriptable = null;
     public List<UniqueText> m_UniqueText = new List<UniqueText>();
 
 
@@ -92,6 +93,12 @@ public class ReadCsv : MonoBehaviour
         EditorUtility.SetDirty(m_MainGameManager);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+
+        // xin auto read csv
+        var xin = Resources.Load<GameObject>("Enemy/Prefab/Xin");
+        var xinController = xin.GetComponent<XinController>();
+        EditorUtility.SetDirty(xinController);
+        xinController.SetServantScriptable(m_ServantScriptable);
     }
 
 
@@ -145,6 +152,11 @@ public class ReadCsv : MonoBehaviour
             //record Puppet scriptable
             if(Enemy.Id == 3){
                 m_PuppetScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
+            }
+
+            //record Servant scriptable
+            if(Enemy.Id == 7){
+                m_ServantScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
             }
 
             allEnemy.Add(Enemy);

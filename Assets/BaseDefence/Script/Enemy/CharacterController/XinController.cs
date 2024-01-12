@@ -18,7 +18,6 @@ public class XinController : EnemyControllerBase
 
     void Start(){
         if(m_ServantScriptable == null){
-            // TODO : auto load serveant scriptable
             Debug.Log("missing serveant scriptable");
         }
         BaseDefenceManager.GetInstance().LookAtXin();
@@ -36,6 +35,10 @@ public class XinController : EnemyControllerBase
     void Update(){
 
     } 
+
+    public void SetServantScriptable(EnemyScriptable enemyScriptable){
+        m_ServantScriptable = enemyScriptable;
+    }
 
     public IEnumerator WaveEnd(){
         yield return new WaitForSeconds(0.5f);
