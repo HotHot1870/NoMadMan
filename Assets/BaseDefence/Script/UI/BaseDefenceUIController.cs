@@ -35,6 +35,9 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private Image m_HpBarFiller;
     [SerializeField] private TMP_Text m_HpText;
 
+    [Header("XinHp")]
+    [SerializeField] private GameObject m_XinHpPanel;
+
     [Header("Result")]
     [SerializeField] private GameObject m_ResultParent;
     [SerializeField] private TMP_Text m_ResultTitle;
@@ -131,7 +134,12 @@ public class BaseDefenceUIController : MonoBehaviour
     public void ShowDamageText(float damage, Color color,Vector2 pos){
         var newDamageText = Instantiate(m_DamageText,m_DamageTextParent);
         var TMP = newDamageText.GetComponent<TMP_Text>();
-        TMP.text = System.String.Format("{0:0.#}", damage);
+        if(damage<0){
+            // gain hp
+            TMP.text="+" + System.String.Format("{0:0.#}", damage*-1);
+        }else{
+            TMP.text = System.String.Format("{0:0.#}", damage);
+        }
         TMP.color = color;
         newDamageText.GetComponent<RectTransform>().anchoredPosition = pos;
     }
@@ -139,6 +147,7 @@ public class BaseDefenceUIController : MonoBehaviour
     private void TurnOffAllPanel(){
         m_ShootPanel.SetActive(false);
         m_ReloadPanel.SetActive(false);
+        m_XinHpPanel.SetActive(false);
     }
     
     private void TurnOnAllPanel(){
@@ -176,6 +185,11 @@ public class BaseDefenceUIController : MonoBehaviour
 
     public void OnClickBackFromResult(){
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
+        // TODO : Hard Coded , try change it later
+        if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
+            MainGameManager.GetInstance().SaveData<int>("RocketLauncher"+8.ToString(),0);
+            MainGameManager.GetInstance().SaveData<int>("Minigun"+9.ToString(),0);
+        }
     }
     private void ShowDialogOnEndGame(){
         if(m_IsWin)

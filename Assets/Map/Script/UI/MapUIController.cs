@@ -99,7 +99,12 @@ public class MapUIController : MonoBehaviour
 
     private void ChangeLevel(int levelChanges){
         var curSelectedlocationLevel = MainGameManager.GetInstance().GetSelectedLocation().Level;
-        var newSelectedLocation = MainGameManager.GetInstance().GetAllLocation().Find(x=>x.Level==curSelectedlocationLevel+levelChanges);
+        MapLocationScriptable newSelectedLocation =null;
+        if(levelChanges<0){
+            newSelectedLocation = MainGameManager.GetInstance().GetAllLocation().FindLast(x=>x.Level==curSelectedlocationLevel+levelChanges);
+        }else{
+            newSelectedLocation = MainGameManager.GetInstance().GetAllLocation().Find(x=>x.Level==curSelectedlocationLevel+levelChanges);
+        }
         MainGameManager.GetInstance().SetSelectedLocation(newSelectedLocation);
         MapManager.GetInstance().SpawnAllLocation();
         MapManager.GetInstance().CameraLookAtSelectedLocation();

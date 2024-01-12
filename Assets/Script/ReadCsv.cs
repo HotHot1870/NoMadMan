@@ -171,7 +171,8 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/WeaponUpgrade").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 5;
+        int collumeCount = 6;
+        // last row is for easier to read on excel
         var allWeapon = m_MainGameManager.GetAllWeapon();
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
@@ -364,7 +365,8 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Gun").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 14;
+        // last line for unlock by level complete
+        int collumeCount = 15;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;

@@ -212,12 +212,15 @@ public class GunShootController : MonoBehaviour
             );
 
             // spawn dot for player to see
+            /*
             var shotPoint = Instantiate(m_ShotPointPrefab,m_ShotDotParent);
-            var dotPos = accuracyOffset + BaseDefenceManager.GetInstance().GetCrosshairPos();
             shotPoint.GetComponent<RectTransform>().position = dotPos;
 
-            CaseRayWithShootDot(dotPos, shotPoint.GetComponent<ShootDotController>() );
-            Destroy(shotPoint, 0.3f);
+            Destroy(shotPoint, 0.3f);*/
+            var dotPos = accuracyOffset + BaseDefenceManager.GetInstance().GetCrosshairPos();
+            CaseRayWithShootDot(dotPos);
+
+            // TODO : spawn bullet fly to target
         }
         
             // acc lose on shoot            
@@ -229,7 +232,7 @@ public class GunShootController : MonoBehaviour
         ChangeAmmoCount(-1, false);
     }
 
-    private void CaseRayWithShootDot(Vector3 dotPos, ShootDotController dotController){
+    private void CaseRayWithShootDot(Vector3 dotPos/*, ShootDotController dotController*/){
         Ray ray = Camera.main.ScreenPointToRay(dotPos);
         RaycastHit hitEnemy;
         RaycastHit hitEnvironmentAndEnemy;
@@ -242,7 +245,12 @@ public class GunShootController : MonoBehaviour
         {
             case BulletType.BasicBullet:
                 // normal 
-                BasicShootHandler(hitEnvironmentAndEnemy,dotController);
+                BasicShootHandler(hitEnvironmentAndEnemy/*,dotController*/);
+
+                var bullet = Instantiate(m_AllProjectile[BulletType.BasicBullet].Prefab);
+                // set spawn point to gun point
+                bullet.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
+                bullet.GetComponent<BulletController>().Init(hitEnvironmentAndEnemy.point);
             break;
             case BulletType.Puncture:
                 RaycastHit[] hits;
@@ -250,7 +258,7 @@ public class GunShootController : MonoBehaviour
                 List<int> hitedEnemySpawnId = new List<int>();
                 foreach (var item in hits)
                 {
-                    hitedEnemySpawnId.Add(BasicShootHandler(item,dotController,hitedEnemySpawnId)); 
+                    hitedEnemySpawnId.Add(BasicShootHandler(item,hitedEnemySpawnId)); 
                 }
             break;
             case BulletType.PillBomb:
@@ -282,7 +290,7 @@ public class GunShootController : MonoBehaviour
 
     }
 
-    private int BasicShootHandler(RaycastHit hit , ShootDotController dotController, List<int> allHittedSpawnId = null){
+    private int BasicShootHandler(RaycastHit hit /*, ShootDotController dotController */,List<int> allHittedSpawnId = null){
         if (hit.transform != null)//Physics.Raycast(ray, out hit, 500, 1<<12))
         {
             if(hit.transform.TryGetComponent<EnemyBodyPart>(out var bodyPart)){
@@ -298,6 +306,7 @@ public class GunShootController : MonoBehaviour
                     }
                 }
                 if(!bodyPart.IsDead()){
+                    /*
                     switch (bodyPart.GetBodyType())
                     {
                         case EnemyBodyPartEnum.Body:
@@ -311,23 +320,23 @@ public class GunShootController : MonoBehaviour
                         break;
                         default:
                         break;
-                    }
+                    }*/
 
                     // foreach puncture count , reduce damage by 50%
                     bodyPart.OnHit((float)System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage) ) * 
                         (1 * Mathf.Pow( 0.5f ,punctureCount)), 
                         Camera.main.WorldToScreenPoint(hit.point),
                         hit.point);
-                }else{
+                }/*else{
                     dotController.OnMiss();
-                }
+                }*/
                 
                 return bodyPart.GetEnemySpawnId();
             }else if(hit.transform.TryGetComponent<GroundController>(out var groundController)){
                 // if hit ground , if so , emit mud
                 groundController.EmitMud(hit.point);
             }
-            dotController.OnMiss();
+            //dotController.OnMiss();
         }else{
         }
         return -1;

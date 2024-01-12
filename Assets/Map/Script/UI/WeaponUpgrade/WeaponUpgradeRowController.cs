@@ -49,10 +49,11 @@ public class WeaponUpgradeRowController : MonoBehaviour
 
 
         // clear all blocks
-        for (int i = 0; i < m_BlockParent.childCount; i++)
-        {
-            Destroy(m_BlockParent.GetChild(i).gameObject);
-        }
+        if(m_BlockParent != null)
+            for (int i = 0; i < m_BlockParent.childCount; i++)
+            {
+                Destroy(m_BlockParent.GetChild(i).gameObject);
+            }
 
         for (int i = 0; i < m_UpgradeDetail.CostAndValue.Count; i++)
         {

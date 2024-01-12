@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class ShootDotController : MonoBehaviour
 {
-    [SerializeField] private Image m_Image;
 
+    [SerializeField] private Image m_Image;
+/*
     [SerializeField] private Color m_MissColor = Color.grey;
     [SerializeField] private Color m_HitColor = Color.yellow;
     [SerializeField] private Color m_CritColor = Color.red;
@@ -26,5 +27,5 @@ public class ShootDotController : MonoBehaviour
 
     public void OnHitShield(){
         m_Image.color = m_HitShieldColor;
-    }
+    }*/
 }

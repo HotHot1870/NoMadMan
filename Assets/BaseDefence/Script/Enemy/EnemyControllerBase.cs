@@ -117,7 +117,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
     /// <summary>
     /// use negative for damage
     /// </summary>
-    public void ChangeHp(float changes){
+    public virtual void ChangeHp(float changes){
         if( IsThisDead )
             return;
 

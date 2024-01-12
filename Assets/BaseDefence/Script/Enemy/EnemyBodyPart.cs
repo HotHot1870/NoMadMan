@@ -142,11 +142,11 @@ public class EnemyBodyPart : MonoBehaviour
         if(m_BodyPartHpPresentage <=0){
             // Destroy body part
             StartCoroutine(OnDeadEffect());
-
+/*
             if(!m_EnemyController.IsDead()){
-            // TODO : play fall back animation if not dead
-                
-            }
+            //  play fall back animation if not dead
+                m_EnemyController.FallBack();
+            }*/
         }
 /*
         // Hit sound

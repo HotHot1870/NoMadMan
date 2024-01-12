@@ -21,8 +21,9 @@ public class RemnantController : EnemyControllerBase
     private Animator m_TargetAnimator = null;
     private float m_RandomSpeedMod = 1;
     private bool m_CanAttack = false;
+    //private bool m_IsFallingback = false;
     private float m_FallingBackTime =0;
-    private string m_CurAnimationName = "";
+    //private string m_CurAnimationName = "";
 
     public override void Init(EnemyControllerInitConfig config)
     {
@@ -76,6 +77,7 @@ public class RemnantController : EnemyControllerBase
         if( IsThisDead )
             return;
 
+
          if(!m_CanAttack && Vector3.Distance(m_Self.transform.position , Destination)<Scriptable.MoveSpeed * Time.deltaTime*2f && !m_IsNeted){
             // close enough for attack 
 
@@ -118,22 +120,31 @@ public class RemnantController : EnemyControllerBase
         StartCoroutine(FirstAttack());
 
     }
-
+/*
     private IEnumerator FallingBack(){
+        // fallback
+        m_IsFallingback = true;
         float duration = 1;
-        while (m_FallingBackTime < duration)
+        m_FallingBackTime = duration;
+        m_TargetAnimator.Play("FallBack");
+        while (m_FallingBackTime>0)
         {
-            m_FallingBackTime += Time.deltaTime;
+            m_FallingBackTime -= Time.deltaTime;
             yield return null;
         }
+        m_IsFallingback = false;
+        
+        m_TargetAnimator.Play("Move");
         
     }
-
+*/
     private IEnumerator FirstAttack(){
         if(IsThisDead)
             yield break;
+
         m_TargetAnimator.Play("Attack");
-            // attack animation delay
+        
+        // attack animation delay
         yield return new WaitForSeconds(m_AttackAnimationStartUp);
         if(IsThisDead)
             yield break;
@@ -164,6 +175,12 @@ public class RemnantController : EnemyControllerBase
         }
 
     }
+/*
+    public override void FallBack()
+    {
+        base.FallBack();
+        StartCoroutine(FallingBack() );
+    }*/
 
     protected override void OnDead(){
         base.OnDead();

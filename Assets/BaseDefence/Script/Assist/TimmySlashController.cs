@@ -22,7 +22,7 @@ public class TimmySlashController : MonoBehaviour
 
     private IEnumerator Slash(float delay, int index){
         yield return new WaitForSeconds(delay);
-        // TODO : play sound
+        // play sound
         m_AudioSource.Play();
         m_SlashEffects[index].Play();
         var allEnemy = m_EnemySpawnController.GetAllEnemyTrans().ToList();

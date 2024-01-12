@@ -11,8 +11,8 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
     [SerializeField] private Image m_GunDisplayImage;
     [SerializeField] private GameObject m_UpgradeStatRowPrefab;
     [SerializeField] private RectTransform m_Content;
-    [SerializeField] private List<(WeaponUpgradeRowController,WeaponUpgradeDetail,GunScriptable)> m_AllRow =
-        new List<(WeaponUpgradeRowController,WeaponUpgradeDetail,GunScriptable)>();
+    [SerializeField] private List<WeaponUpgradeRowController> m_AllRow =
+        new List<WeaponUpgradeRowController>();
 
 
 
@@ -44,7 +44,7 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
             var rowController = row.GetComponent<WeaponUpgradeRowController>();
             WeaponUpgradeDetail weaponUpgradeDetail =item;
             var gunScriptableCopy = gunScriptable;
-            m_AllRow.Add((rowController,weaponUpgradeDetail,gunScriptableCopy));
+            m_AllRow.Add(rowController);
             row.GetComponent<WeaponUpgradeRowController>().Init(item,gunScriptable,ResetAllRow);
         }
         
@@ -57,10 +57,7 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
 
     // TODO : reset just the goo instead
     private void ResetAllRow(){
-        foreach (var item in m_AllRow)
-        {
-            item.Item1.Init(item.Item2,item.Item3,ResetAllRow);
-        }
+        Init(m_GunScriptable);
     }
 
 }

@@ -13,7 +13,7 @@ public class ServantController : EnemyControllerBase
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Animator m_Animator;
-    [SerializeField] private float m_AttackStartUp = 0.45f;
+    [SerializeField] private float m_AttackStartUp = 0.35f;
     [SerializeField] private List<EnemyBodyPart> m_AllWeakSpots = new List<EnemyBodyPart>();
     [SerializeField] private List<EnemyBodyPart> m_AllNormalBodypart = new List<EnemyBodyPart>();
 
@@ -25,6 +25,7 @@ public class ServantController : EnemyControllerBase
     private XinController m_Xin;
     private ServantController m_GuardServant = null;
     private bool m_IsRecovering = false;
+    private Coroutine m_Recovering = null;
 
 
     private IEnumerator Start() {
@@ -65,7 +66,7 @@ public class ServantController : EnemyControllerBase
 
         foreach (var item in m_AllNormalBodypart)
         {
-            item.SetDamageMod(-0.5f);
+            item.SetDamageMod(-0.75f * (1+BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.1f));
             item.ChangeBodyType(EnemyBodyPartEnum.Heal);
         }
 
@@ -82,6 +83,23 @@ public class ServantController : EnemyControllerBase
         }
 
     }
+
+
+
+    private IEnumerator FirstAttack(){
+        if(IsThisDead)
+            yield break;
+
+        m_Animator.Play("Attack");
+        
+        // attack animation delay
+        yield return new WaitForSeconds(m_AttackStartUp);
+        if(IsThisDead)
+            yield break;
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+        StartCoroutine(Attack());
+    }
+
     public override void OnNet()
     {
         base.OnNet();
@@ -108,24 +126,12 @@ public class ServantController : EnemyControllerBase
 
             m_CanAttack = true;
             m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
+            StartCoroutine(FirstAttack());
         }else if(!m_IsNeted && !m_IsRecovering) {
             // move
-            float moveDistance = Scriptable.MoveSpeed * Time.deltaTime;
+            float moveDistance =  Scriptable.MoveSpeed * Time.deltaTime;
             m_Self.transform.position = Vector3.MoveTowards(
                 m_Self.transform.position, Destination, moveDistance);
-        }
-
-        // attack wall handler
-        if(m_CanAttack && !m_IsNeted && !m_IsRecovering){
-            if(m_AttackDelay <=0){
-                // attack
-                StartCoroutine(Attack());
-                
-            }else{
-                // wait
-                m_AttackDelay -= Time.deltaTime;
-                
-            }
         }
     }
 
@@ -144,19 +150,32 @@ public class ServantController : EnemyControllerBase
 
 
     public IEnumerator Attack(){
-        m_Animator.speed = 1;
-        m_Animator.Play("Attack");
-        m_AttackDelay = Scriptable.AttackDelay + m_AttackStartUp;
-        yield return new WaitForSeconds(m_AttackStartUp);
-        if(IsThisDead)
-            yield break;
 
-        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+    while (!IsThisDead)
+        {
+            if(m_IsNeted){
+                yield return null;
+                continue;
+            }
+            m_Animator.speed = 1;
+            // wait delay
+            //m_TargetAnimator.Play("Idle");
+            yield return new WaitForSeconds(Scriptable.AttackDelay);
+            if(IsThisDead)
+                yield break;
+            
+            m_Animator.Play("Attack");
+            // attack animation delay
+            yield return new WaitForSeconds(m_AttackStartUp);
+            if(IsThisDead)
+                yield break;
+            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+        }
     }
 
     private IEnumerator RecoverHp(){
         float timePass = 0;
-        float totalTimeTakeIfNoInterfere = 6;
+        float totalTimeTakeIfNoInterfere = 4 - BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*1f;
         while (CurHp < GetMaxHp())
         {
             // TODO : Mesh blooming
@@ -187,7 +206,10 @@ public class ServantController : EnemyControllerBase
                 Destroy(m_Self,1);
             }else if(!m_IsRecovering){
                 // Not all dead, recover
-                StartCoroutine(RecoverHp());
+                if(m_Recovering != null){
+                    StopCoroutine(m_Recovering);
+                }
+                m_Recovering = StartCoroutine(RecoverHp());
             }
             m_IsRecovering = true;
             

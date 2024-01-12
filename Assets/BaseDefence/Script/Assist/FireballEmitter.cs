@@ -26,11 +26,11 @@ public class FireballEmitter : MonoBehaviour
         }
         
         bool shouldAim = false;
-        shouldAim = (BaseDefenceManager.GetInstance().GetLocationScriptable().Level+1) * 0.17f > Random.Range(0f,1f);
+        shouldAim = 0.5f > Random.Range(0f,1f);
         Vector3 randomAngel = Vector3.zero;
         Vector3 targetPos = Vector3.zero;
         if(shouldAim){
-            // TODO : aim at one random enemy
+            // aim at one random enemy
             targetPos = m_EnemySpawnController.GetOneRandomEnemyPos();
             randomAngel = new Vector3(
                 Random.Range(-0.25f,0.25f),

@@ -57,6 +57,7 @@ public class BaseDefenceManager : MonoBehaviour
     [SerializeField] private Transform m_EnvironmentParent;
     [SerializeField] private List<DefenceEnvironment> m_AllEnvironmentPrefab = new List<DefenceEnvironment>();
     [SerializeField] private CinemachineVirtualCamera m_XinCamera;
+    [SerializeField] private XinHpController m_XinHpController;
     private ReflectionProbe baker;
 
     private float m_CurrentAccruacy = 100f;
@@ -324,12 +325,18 @@ public class BaseDefenceManager : MonoBehaviour
         m_CameraController.CameraLookUp(m_BaseDefenceUIController.OnClickCloseSwitchWeaponPanel );
     }*/
 
+    public XinHpController GetXinHpController(){
+        return m_XinHpController;
+    }
+
     public void LookAtXin(){
+        m_XinHpController.SetHpVisable(true);
         m_XinCamera.Priority = 10;
     }
 
     
     public void LookAtField(){
+        m_XinHpController.SetHpVisable(false);
         m_XinCamera.Priority = 0;
     }
 

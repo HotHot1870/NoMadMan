@@ -17,40 +17,40 @@ MonoBehaviour:
   UpgradeDetails:
   - UpgradeStat: 0
     CostAndValue:
-    - Cost: 100
+    - Cost: 1500
       UpgradeValue: 95
-    - Cost: 200
+    - Cost: 3000
       UpgradeValue: 110
-    - Cost: 300
+    - Cost: 4500
       UpgradeValue: 125
-    - Cost: 400
+    - Cost: 6000
       UpgradeValue: 140
-    - Cost: 500
+    - Cost: 7500
       UpgradeValue: 155
   - UpgradeStat: 4
     CostAndValue:
-    - Cost: 100
-      UpgradeValue: 88
     - Cost: 200
-      UpgradeValue: 91
-    - Cost: 300
-      UpgradeValue: 94
+      UpgradeValue: 88
     - Cost: 400
+      UpgradeValue: 91
+    - Cost: 600
+      UpgradeValue: 94
+    - Cost: 800
       UpgradeValue: 97
-    - Cost: 500
+    - Cost: 1000
       UpgradeValue: 100
   - UpgradeStat: 3
     CostAndValue:
-    - Cost: 100
-      UpgradeValue: 1.5
     - Cost: 200
-      UpgradeValue: 1.75
-    - Cost: 300
-      UpgradeValue: 2
+      UpgradeValue: 1.5
     - Cost: 400
-      UpgradeValue: 2.25
-    - Cost: 500
+      UpgradeValue: 2
+    - Cost: 600
       UpgradeValue: 2.5
+    - Cost: 800
+      UpgradeValue: 3
+    - Cost: 1000
+      UpgradeValue: 3.5
   - UpgradeStat: 2
     CostAndValue:
     - Cost: 100
@@ -65,5 +65,5 @@ MonoBehaviour:
       UpgradeValue: 10
   - UpgradeStat: 8
     CostAndValue:
-    - Cost: 1000
+    - Cost: 10000
       UpgradeValue: Puncture
