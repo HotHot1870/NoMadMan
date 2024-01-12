@@ -58,6 +58,7 @@ public class ServantController : EnemyControllerBase
         {
             Destroy(item.gameObject);
         }
+        m_MeshShader.SetBackColor(Color.green);
     }
 
     public void InitWeak(EnemyControllerInitConfig config){
@@ -87,16 +88,19 @@ public class ServantController : EnemyControllerBase
 
 
     private IEnumerator FirstAttack(){
-        if(IsThisDead)
-            yield break;
+        if (!m_IsRecovering)
+        {
+            if(IsThisDead)
+                yield break;
 
-        m_Animator.Play("Attack");
-        
-        // attack animation delay
-        yield return new WaitForSeconds(m_AttackStartUp);
-        if(IsThisDead)
-            yield break;
-        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+            m_Animator.Play("Attack");
+            
+            // attack animation delay
+            yield return new WaitForSeconds(m_AttackStartUp);
+            if(IsThisDead)
+                yield break;
+            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+        }
         StartCoroutine(Attack());
     }
 
@@ -151,37 +155,47 @@ public class ServantController : EnemyControllerBase
 
     public IEnumerator Attack(){
 
-    while (!IsThisDead)
+        while (!IsThisDead)
         {
-            if(m_IsNeted){
+            while (m_IsRecovering)
+            {
                 yield return null;
-                continue;
             }
-            m_Animator.speed = 1;
-            // wait delay
-            //m_TargetAnimator.Play("Idle");
-            yield return new WaitForSeconds(Scriptable.AttackDelay);
-            if(IsThisDead)
-                yield break;
-            
-            m_Animator.Play("Attack");
-            // attack animation delay
-            yield return new WaitForSeconds(m_AttackStartUp);
-            if(IsThisDead)
-                yield break;
-            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+                if(m_IsNeted){
+                    yield return null;
+                    continue;
+                }
+                m_Animator.speed = 1;
+                // wait delay
+                yield return new WaitForSeconds(Scriptable.AttackDelay);            
+                while (m_IsRecovering)
+                {
+                    yield return null;
+                }
+                if(IsThisDead)
+                    yield break;
+                    m_Animator.Play("Attack");
+                    // attack animation delay
+                    yield return new WaitForSeconds(m_AttackStartUp);            
+                    while (m_IsRecovering)
+                    {
+                        yield return null;
+                    }
+                    if(IsThisDead)
+                        yield break;
+                    BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage); 
+                    yield return null;
         }
     }
 
     private IEnumerator RecoverHp(){
         float timePass = 0;
+        m_MeshShader.SetSpawnMeshNormalized( 0.7f);
         float totalTimeTakeIfNoInterfere = 4 - BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*1f;
         while (CurHp < GetMaxHp())
         {
-            // TODO : Mesh blooming
-            //float newNormalized = m_MeshShader.GetSpawnMeshNormalized() ;
-            //m_MeshShader.SetSpawnMeshNormalized( Mathf.Clamp01( newNormalized ));
-
+            // Mesh blooming
+            m_MeshShader.ChangeMaterialNoiseDensity( Random.Range(-0.2f,0.3f) * Time.deltaTime);
             timePass+=Time.deltaTime;
             ChangeHp(Time.deltaTime * GetMaxHp() / totalTimeTakeIfNoInterfere);
             yield return null;

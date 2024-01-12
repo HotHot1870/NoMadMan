@@ -72,6 +72,15 @@ public class EnemyBodyPart : MonoBehaviour
     public void SetDamageMod(float damageMod){
         m_DamageMod = damageMod;
     }
+
+    public void SetBackColor(Color color){
+        if(m_Renderer != null)
+            m_Renderer.material.SetColor("_BackColor", color);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetColor("_BackColor", color);
+
+    }
     
     public void SetSpawnMeshNormalized(float setValue){
         if(m_Renderer != null)
@@ -90,6 +99,23 @@ public class EnemyBodyPart : MonoBehaviour
 
         return 0;
 
+    }
+
+    public void ChangeMaterialNoiseDensity(float changes){
+
+        float baseValue = 0;
+        if(m_Renderer != null){
+            baseValue = m_Renderer.material.GetFloat("_NoiseDensity");
+        }else if(m_SkinRenderer != null){
+            baseValue = m_SkinRenderer.material.GetFloat("_NoiseDensity");
+        }
+
+
+        if(m_Renderer != null)
+            m_Renderer.material.SetFloat("_NoiseDensity",  baseValue+changes);
+
+        if(m_SkinRenderer != null)
+            m_SkinRenderer.material.SetFloat("_NoiseDensity",  baseValue+changes);
     }
 
 

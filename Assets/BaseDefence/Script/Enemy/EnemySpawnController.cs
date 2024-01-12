@@ -110,7 +110,6 @@ public class EnemySpawnController : MonoBehaviour
     private IEnumerator SpawnEnemy(float delay, EnemyScriptable enemyData, float index)
     {
         float passedTime = 0;
-        // TODO : Xin 
         if(enemyData.Id == 6){
             passedTime =1+ delay;
             //newEnemy.transform.position = spawnPos;

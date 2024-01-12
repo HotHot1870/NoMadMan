@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour
     {
         m_GainGooBtn.onClick.AddListener(()=>{
             float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
-            PlayerPrefs.SetFloat("Goo",curGoo+1000);
+            PlayerPrefs.SetFloat("Goo",curGoo+10000);
         });
         m_unlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
 

@@ -37,7 +37,7 @@ public class MainGameManager : MonoBehaviour
     static void GetGooDebug()
     {
         float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
-        PlayerPrefs.SetFloat("Goo",curGoo+1000);
+        PlayerPrefs.SetFloat("Goo",curGoo+10000);
     }
     
     [MenuItem("Scene/MainMenu")]

@@ -76,7 +76,6 @@ public abstract class EnemyControllerBase : MonoBehaviour
             }
         }
         StartCoroutine(NetTime());
-        // TODO : pause animation
     }
 
     private IEnumerator NetTime(){

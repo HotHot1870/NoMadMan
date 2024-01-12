@@ -96,7 +96,6 @@ public class RemnantController : EnemyControllerBase
                 m_Self.transform.position, Destination, moveDistance);
 
         }else if(!m_IsNeted){
-            // TODO : move backward
             m_TargetAnimator.SetFloat("Speed",-0.5f);
             float moveDistance = -0.5f * Time.deltaTime *m_RandomSpeedMod;
             m_Self.transform.position = Vector3.MoveTowards(
