@@ -126,15 +126,18 @@ public abstract class EnemyControllerBase : MonoBehaviour
         CurHp += changes;
     
         CurHp = Mathf.Clamp(CurHp,0f,GetMaxHp());
+
         if( CurHp<=0 ){
             // dead
             IsThisDead = true;
-            HpBar.fillAmount = 0;
+            if(HpBar != null)
+                HpBar.fillAmount = 0;
             OnDead();
         }else{
             if(HpCanvas == null){
                 return;
             }
+            
             HpParent.SetActive(true);
             HpParent.transform.rotation = new Quaternion(0,0,0,0);
             HpBar.fillAmount = CurHp / GetMaxHp();
@@ -167,7 +170,8 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
 
     protected virtual void OnDead(){
-        HpParent.SetActive(false);
+        if(HpBar != null)
+            HpParent.SetActive(false);
         BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
         MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
         OnDeadAction?.Invoke();

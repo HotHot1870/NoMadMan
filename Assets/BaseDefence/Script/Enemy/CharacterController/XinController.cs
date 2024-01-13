@@ -44,7 +44,7 @@ public class XinController : EnemyControllerBase
         yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtXin();
         yield return new WaitForSeconds(3f);
-        // TODO : spawn ball
+        // spawn ball
         var spawnBall = Instantiate(m_SpawnBallPrefab, m_SpawnBallStartPos.position, Quaternion.identity,this.transform);
         spawnBall.GetComponent<XinSpawnBallController>().Init(this);
       
@@ -56,7 +56,7 @@ public class XinController : EnemyControllerBase
     }
 
     public void WeakServantDeadHandler(){
-        // TODO : call by servant on dead
+        // call by servant on dead
         foreach (var item in m_AllServants)
         {
             if(item != null){
@@ -149,14 +149,14 @@ public class XinController : EnemyControllerBase
             yield return new WaitForSeconds(0.5f);
         }
     }
-/*
-    private void SpawnWeakServant(){
-        for (int i = 0; i < 3; i++)
-        {
-            Transform newServant = Instantiate(m_ServantPrefab,this.transform.parent).transform;
-            newServant.position = m_ServantSpawnPoint[i].position;
-            m_AllServants.Add(newServant);
-        }
-    }*/
+
+    // xin die , win
+    protected override void OnDead(){
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
+        StopAllCoroutines();
+        base.OnDead();
+        
+    }
+
 
 }

@@ -202,7 +202,7 @@ public class BaseDefenceUIController : MonoBehaviour
         m_ResultParent.SetActive(true);
         m_BGAnimator.Play("Open");
         m_IsWin = isWin;
-        m_ResultTitle.text = isWin?"You Win":"Loser";
+        m_ResultTitle.text = isWin?"Coast Clear":"Defeated";
 
         if(isWin){
             var locationData = BaseDefenceManager.GetInstance().GetLocationScriptable();

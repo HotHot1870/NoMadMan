@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using ExtendedButtons;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class MapUIController : MonoBehaviour
 {
@@ -16,14 +17,6 @@ public class MapUIController : MonoBehaviour
     [Header("Option")]
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
-
-    [Header("Location")]
-    [SerializeField] private GameObject m_LocationDetailPanel; 
-    [SerializeField] private TMP_Text m_LocationName;  
-    [SerializeField] private TMP_Text m_EnemyText;  
-    [SerializeField] private Transform m_EnemyList;  
-    [SerializeField] private Button m_DefenceBtn;
-    [SerializeField] private Button m_CancelLocationDetailBtn;
 
 
     [Header("WeaponUpgradeSelect")]
@@ -43,6 +36,8 @@ public class MapUIController : MonoBehaviour
 
     [Header("Dialog")]
     [SerializeField] private MapDialogController m_DialogController;
+    [Header("Location")]
+    [SerializeField] private LocationPanelController m_LocationPanelController;
 
 
     private void Start() {
@@ -76,10 +71,6 @@ public class MapUIController : MonoBehaviour
         m_MapDragBtn.onExit.AddListener(freeCameraController.OnDragMapBtnUp);
 
 
-        // location detail
-        //m_FortifyBtn.onClick.AddListener(OnClickFortify);
-        m_DefenceBtn.onClick.AddListener(OnClickDefence);
-        m_CancelLocationDetailBtn.onClick.AddListener(CancelLocationDetail);
 
         // WorkShop
         m_WorkShopBtn.onClick.AddListener(OnClickWorkShop);
@@ -146,24 +137,13 @@ public class MapUIController : MonoBehaviour
         m_WorkShopChooseWeaponController.gameObject.SetActive(true);
     }
 
-    private void CancelLocationDetail() {
-        m_LocationDetailPanel.SetActive(false);
-        MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(0);
-        StartCoroutine(SetMovable());
-        
-    }
 
-    private IEnumerator SetMovable(){
-        // wait until location detail panel are hidden , then set movable
-        yield return null;
-
-    }
 
     public void ShowChangeWeaponInSlotPanel(int weaponSlotIndex){
         m_ChangeWeaponInSlotController.ShowWeaponListPanel(weaponSlotIndex);
     }
 
-    private void OnClickDefence(){
+    public void OnClickDefence(){
         TurnOffAllPanel();
 
         // set choose weapon panel
@@ -193,7 +173,7 @@ public class MapUIController : MonoBehaviour
 
     private void OnClickCancelInChooseWeapon(){
         m_ChooseWeaponPanel.SetActive(false);
-        m_LocationDetailPanel.SetActive(true);
+        m_LocationPanelController.gameObject.SetActive(true);
     }
 
     public void OnEndDefenceShowDialog(){
@@ -217,26 +197,6 @@ public class MapUIController : MonoBehaviour
     private void OnDialogEndByStartDefence(){
         MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
         MainGameManager.GetInstance().SetBaseDefenceScene(locationData);
-    }
-
-    public bool ShouldShowLocationDetail(){
-        return !m_LocationDetailPanel.activeSelf;
-    }
-
-    public void ShowLocationDetail(){
-        MapLocationScriptable locationData = MapManager.GetInstance().GetLocationController().GetScriptable();
-        if(locationData==null || m_LocationDetailPanel.activeSelf)
-            return;
-
-        
-        MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);
-
-        m_LocationDetailPanel.SetActive(true);
-        m_DefenceBtn.gameObject.SetActive( !MapManager.GetInstance().GetLocationController().ShouldShowCorruption() );
-        m_LocationName.text = locationData.DisplayName;
-
-        // TODO : enemy list
-
     }
 
     public void ShowWeaponListPanel(int weaponSlotIndex){
@@ -368,7 +328,7 @@ public class MapUIController : MonoBehaviour
 
     private void TurnOffAllPanel(){
         m_ChooseWeaponPanel.SetActive(false);
-        m_LocationDetailPanel.SetActive(false);
+        m_LocationPanelController.gameObject.SetActive(false);
         m_WorkShopChooseWeaponController.gameObject.SetActive(false);
         //m_WeaponListPanel.SetActive(false);
     }

@@ -41,7 +41,7 @@ public class XinSpawnBallController : MonoBehaviour
             m_Xin.StartWave();
             m_ShouldStop = true;
             Destroy(m_Self, 3f);
-            // TODO : explode effect
+            // explode effect
             m_Renderer.material.SetFloat("_Normalized",0.75f);
             m_Self.transform.localScale = Vector3.one * 5;
         }

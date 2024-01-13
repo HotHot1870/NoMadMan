@@ -191,7 +191,7 @@ public class ServantController : EnemyControllerBase
     private IEnumerator RecoverHp(){
         float timePass = 0;
         m_MeshShader.SetSpawnMeshNormalized( 0.7f);
-        float totalTimeTakeIfNoInterfere = 4 - BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*1f;
+        float totalTimeTakeIfNoInterfere = 6 - BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.5f;
         while (CurHp < GetMaxHp())
         {
             // Mesh blooming
@@ -211,7 +211,6 @@ public class ServantController : EnemyControllerBase
         if(m_ServantType == ServantType.Reover){
             IsThisDead = false;
             m_Animator.Play("Dead");
-            // TODO : check if other is dead , if not , heal in 3 second , if so , dead
             if(m_Xin.IsAllServantRecovering()){
                 // all dead
                 IsThisDead = true;

@@ -140,7 +140,7 @@ public class ReadCsv : MonoBehaviour
             Enemy.AttackDelay = float.Parse(contents[index+5]);
             Enemy.DangerValue = float.Parse(contents[index+6]);
             Enemy.GooOnKill = float.Parse(contents[index+7]);
-            // TODO : Enemy.DisplayImage = Resources.Load<Sprite>("Enemy/DisplayImage/"+displayName.Replace(" ", ""));
+            Enemy.DisplayImage = Resources.Load<Sprite>("Enemy/DisplayImage/"+displayName.Replace(" ", ""));
             Enemy.ExplodeDamageMod = float.Parse(contents[index+8]);
             Enemy.Prefab = Resources.Load<GameObject>("Enemy/Prefab/"+displayName.Replace(" ", ""));
 

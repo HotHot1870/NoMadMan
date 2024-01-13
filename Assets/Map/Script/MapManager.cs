@@ -18,6 +18,7 @@ public class MapManager : MonoBehaviour
     public static MapManager m_Instance = null;
     [SerializeField] private MapFreeCameraController m_MapFreeCameraController;
     [SerializeField] private MapUIController m_MapUIController;
+    [SerializeField] private LocationPanelController m_LocationPanelController;
     [SerializeField] private Transform m_MapLocationParent;
     [SerializeField] private Transform m_MapEnvironemntParent;
     private MapLocationController m_LocationController = null;
@@ -62,11 +63,11 @@ public class MapManager : MonoBehaviour
     }
 
     public void ShowLocationDetail(){
-        m_MapUIController.ShowLocationDetail();
+        m_LocationPanelController.Init();
     }
 
     public bool ShouldShowLocationDetail(){
-        return m_MapUIController.ShouldShowLocationDetail();
+        return m_LocationPanelController.ShouldShowLocationDetail();
     }
 
 
