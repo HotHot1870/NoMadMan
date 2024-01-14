@@ -9,8 +9,8 @@ public class LocationPanelController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self; 
     [SerializeField] private TMP_Text m_LocationName;   
-    [SerializeField] private Transform m_EnemyBloackParent;  
-    [SerializeField] private GameObject m_EnemyBloackPrefab; 
+    [SerializeField] private Transform m_EnemyBlockParent;  
+    [SerializeField] private GameObject m_EnemyBlockPrefab; 
     [SerializeField] private Button m_DefenceBtn;
     [SerializeField] private Button m_CancelLocationDetailBtn;
 
@@ -55,13 +55,13 @@ public class LocationPanelController : MonoBehaviour
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
         var allEnemyId = locationData.NormalWaveEnemy.Union<int>(locationData.FinalWaveEnemy).ToList<int>();
         
-        for (int i = 0; i < m_EnemyBloackParent.childCount; i++)
+        for (int i = 0; i < m_EnemyBlockParent.childCount; i++)
         {
-            Destroy(m_EnemyBloackParent.GetChild(i).gameObject);
+            Destroy(m_EnemyBlockParent.GetChild(i).gameObject);
         }
         foreach (var item in allEnemyId.Distinct())
         {
-            var newEnemyBlock = Instantiate(m_EnemyBloackPrefab,m_EnemyBloackParent );
+            var newEnemyBlock = Instantiate(m_EnemyBlockPrefab,m_EnemyBlockParent );
             var enemyScriptable = allenemy.Find(x=>x.Id==item);
             newEnemyBlock.GetComponent<EnemyBlockController>().Init(enemyScriptable);
         }

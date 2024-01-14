@@ -39,9 +39,9 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private GameObject m_XinHpPanel;
 
     [Header("Result")]
-    [SerializeField] private GameObject m_ResultParent;
+    [SerializeField] private BaseDefenceResultPanel m_BaseDefenceResultPanel;/*
     [SerializeField] private TMP_Text m_ResultTitle;
-    [SerializeField] private Button2D m_BackFromResultBtn;
+    [SerializeField] private Button2D m_BackFromResultBtn;*/
     
     [Header("Reload")]
     [SerializeField] private GameObject m_ReloadPanel;
@@ -58,8 +58,6 @@ public class BaseDefenceUIController : MonoBehaviour
 
     private void Start() {
         m_BGAnimator.Play("Hidden");
-        m_ResultParent.SetActive(false);
-        m_BackFromResultBtn.onClick.AddListener(OnClickBackFromResult);
 
         var crosshairController = BaseDefenceManager.GetInstance().GetCrosshairController();
 
@@ -183,26 +181,13 @@ public class BaseDefenceUIController : MonoBehaviour
         m_HpParent.SetActive(isActive);
     }
 
-    public void OnClickBackFromResult(){
-        MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
-        // TODO : Hard Coded , try change it later
-        if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
-            MainGameManager.GetInstance().SaveData<int>("RocketLauncher"+8.ToString(),0);
-            MainGameManager.GetInstance().SaveData<int>("Minigun"+9.ToString(),0);
-        }
-    }
-    private void ShowDialogOnEndGame(){
-        if(m_IsWin)
-            MapManager.GetInstance().ShowEndDefenceDialog();
-    }
 
 
     public void SetResultPanel(bool isWin){
         TurnOffAllPanel();
-        m_ResultParent.SetActive(true);
+        m_BaseDefenceResultPanel.Init(isWin);
         m_BGAnimator.Play("Open");
         m_IsWin = isWin;
-        m_ResultTitle.text = isWin?"Coast Clear":"Defeated";
 
         if(isWin){
             var locationData = BaseDefenceManager.GetInstance().GetLocationScriptable();

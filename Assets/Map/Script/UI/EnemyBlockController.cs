@@ -16,7 +16,13 @@ public class EnemyBlockController : MonoBehaviour
         //m_OnClickBtn.onClick.AddListener();
         m_Image.sprite = enemyScriptable.DisplayImage;
 
+        m_CountText.text = "";
         
+    }
+
+    public void SetText(string text){
+        m_CountText.text = text;
+
     }
 
 }
