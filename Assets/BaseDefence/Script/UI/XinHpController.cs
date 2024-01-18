@@ -16,8 +16,9 @@ public class XinHpController : MonoBehaviour
     private float m_CurHp = 100;
     private float m_SubHp = 100;
     private float m_MaxSubHp = 100;
-    private EnemyScriptable m_Xin;
+    private EnemyScriptable m_XinScriptable;
     private int m_SkullCount =0;
+    private XinController m_XinController;
 
     void Start(){
         m_Self.SetActive(false);
@@ -30,15 +31,16 @@ public class XinHpController : MonoBehaviour
 
     }
 
-    public void Init(EnemyScriptable xin){
+    public void Init(EnemyScriptable xin, XinController xincontroller){
         m_Self.SetActive(true);
-        m_Xin = xin;
-        m_CurHp = m_Xin.MaxHp;
-        m_SubHp = m_Xin.MaxHp/25f;
-        m_MaxSubHp = m_Xin.MaxHp/25f;
+        m_XinScriptable = xin;
+        m_XinController = xincontroller;
+        m_CurHp = m_XinScriptable.MaxHp;
+        m_SubHp = m_XinScriptable.MaxHp/25f;
+        m_MaxSubHp = m_XinScriptable.MaxHp/25f;
         m_SkullCount =0;
 
-        m_HpImage.fillAmount = m_CurHp/m_Xin.MaxHp;
+        m_HpImage.fillAmount = m_CurHp/m_XinScriptable.MaxHp;
         m_SubHpImage.fillAmount = m_SubHp/m_MaxSubHp;
         for (int i = 0; i < m_Skulls.Count; i++)
         {
@@ -58,30 +60,46 @@ public class XinHpController : MonoBehaviour
         
     }
 
+    
+    public void GainOneStar(){
+        if(m_SkullCount >= m_Skulls.Count)
+            return;
+
+        m_SkullCount++;
+        for (int i = 0; i < m_Skulls.Count; i++)
+        {
+            m_Skulls[i].SetActive(i<m_SkullCount);
+        }
+        m_XinController.ResetAllWeakPoint();
+    }
+
+
     public int GetSkullCount(){
         return m_SkullCount;
     }
 
     public void ChangeHp(float change){
         m_CurHp += change;
-        if(m_CurHp <=0){
-            // TODO : xin dead
-            BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
-            BaseDefenceManager.GetInstance().ChangeGameStage(BaseDefenceStage.Result);
+        if(m_CurHp<=0){
+            // TODO : close Hp bar
+            m_XinController.StartCoroutine( m_XinController.SetResult());
+            m_XinController.m_IsDyingEffect = true;
+            m_Self.SetActive(false);
+            return;
         }
 
-        m_SubHp += change;
-        if( m_SubHp <= 0 && m_SkullCount < m_Skulls.Count ){
-            // sub hp to 0
-            m_SubHp = m_MaxSubHp - m_SubHp;
-            m_SkullCount++;
-            for (int i = 0; i < m_Skulls.Count; i++)
-            {
-                m_Skulls[i].SetActive(i<m_SkullCount);
+        if(change<0){
+            m_SubHp += change;
+            if( m_SubHp <= 0 && m_SkullCount < m_Skulls.Count ){
+                // sub hp to 0
+                m_SubHp = m_MaxSubHp - m_SubHp;
+                GainOneStar();
+
             }
+
         }
         
-        m_HpImage.fillAmount = m_CurHp/m_Xin.MaxHp;
+        m_HpImage.fillAmount = m_CurHp/m_XinScriptable.MaxHp;
         m_SubHpImage.fillAmount = m_SubHp/m_MaxSubHp;
 
     }

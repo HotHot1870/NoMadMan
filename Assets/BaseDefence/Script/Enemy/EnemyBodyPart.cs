@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public enum EnemyBodyPartEnum
@@ -127,7 +128,7 @@ public class EnemyBodyPart : MonoBehaviour
         m_EnemyController.ChangeHp(changes);
     }
 
-    public void OnHit(float damage, Vector2 screenPos, Vector3 hitPos)
+    public virtual void OnHit(float damage, Vector2 screenPos, Vector3 hitPos)
     {
         m_BodyPartHpPresentage -= ((damage * m_DamageMod) / m_EnemyController.GetMaxHp());
         m_EnemyController.ChangeHp(damage * m_DamageMod * -1);
@@ -231,7 +232,7 @@ public class EnemyBodyPart : MonoBehaviour
         StartCoroutine(OnDeadEffect());
     }
 
-    private IEnumerator OnDeadEffect()
+    protected virtual IEnumerator OnDeadEffect()
     {
         if(m_Renderer == null && m_SkinRenderer == null)
             yield break;

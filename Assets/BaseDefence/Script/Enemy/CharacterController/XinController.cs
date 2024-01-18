@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -10,11 +11,17 @@ public class XinController : EnemyControllerBase
     [SerializeField] private GameObject m_ServantPrefab;
     [SerializeField] private GameObject m_SpawnBallPrefab;
     [SerializeField] private Transform m_SpawnBallStartPos;
+    [SerializeField] private SkinnedMeshRenderer m_XinSkinMesh;
     [SerializeField] private EnemyScriptable m_ServantScriptable;
+    [SerializeField] private List<XinBodyPart> m_AllXinBodyPart = new List<XinBodyPart>();
     [SerializeField] private List<Transform> m_ServantSpawnPoint = new List<Transform>();
     [SerializeField] private List<Transform> m_ServantDestination = new List<Transform>();
     private List<Transform> m_AllServants = new List<Transform>();
     private XinHpController m_HpController = null;
+    private GameObject m_SpawnBall = null;
+
+    public bool m_IsDyingEffect = false;
+    
 
     void Start(){
         if(m_ServantScriptable == null){
@@ -22,14 +29,14 @@ public class XinController : EnemyControllerBase
         }
         BaseDefenceManager.GetInstance().LookAtXin();
         StartCoroutine(WaveEnd());
+        m_HpController = BaseDefenceManager.GetInstance().GetXinHpController();
+        m_HpController.Init(Scriptable,this);
     }
 
     public override void Init(EnemyControllerInitConfig config)
     {
         base.Init(config);
         m_Self.transform.localPosition = new Vector3(0,0,17);
-        m_HpController = BaseDefenceManager.GetInstance().GetXinHpController();
-        m_HpController.Init(Scriptable);
     }
 
     void Update(){
@@ -41,13 +48,24 @@ public class XinController : EnemyControllerBase
     }
 
     public IEnumerator WaveEnd(){
+        ResetAllWeakPoint();
         yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtXin();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
+        if(m_IsDyingEffect)
+            yield break;
         // spawn ball
-        var spawnBall = Instantiate(m_SpawnBallPrefab, m_SpawnBallStartPos.position, Quaternion.identity,this.transform);
-        spawnBall.GetComponent<XinSpawnBallController>().Init(this);
+        m_SpawnBall = Instantiate(m_SpawnBallPrefab, m_SpawnBallStartPos.position, Quaternion.identity,this.transform);
+        m_SpawnBall.GetComponent<XinSpawnBallController>().Init(this);
       
+    }
+
+    public void ResetAllWeakPoint(){
+        int randomInt = UnityEngine.Random.Range(0,m_AllXinBodyPart.Count);
+        for (int i = 0; i < m_AllXinBodyPart.Count; i++)
+        {
+            m_AllXinBodyPart[i].SetXinBodyPart(i!=randomInt);
+        }
     }
     public void StartWave(){
         BaseDefenceManager.GetInstance().LookAtField();
@@ -74,7 +92,7 @@ public class XinController : EnemyControllerBase
 
     public override void ChangeHp(float changes)
     {
-        base.ChangeHp(changes);
+        //base.ChangeHp(changes);
         m_HpController.ChangeHp(changes);
     }
 
@@ -115,9 +133,16 @@ public class XinController : EnemyControllerBase
             m_UnusedInt.Add(i);
         }
 
-        for (int i = 0; i < 3; i++)
+        int servantCount = 3;
+        if(MainGameManager.GetInstance().GetSelectedLocation().Id == 20){
+            // finial
+            servantCount = 4;
+
+        }
+        for (int i = 0; i < servantCount; i++)
         {
             Transform newServant = Instantiate(m_ServantPrefab,this.transform.parent).transform;
+            BaseDefenceManager.GetInstance().AddEnemyToList(newServant);
             newServant.position = m_ServantSpawnPoint[0].position;
             int randomInt = m_UnusedInt[UnityEngine.Random.Range(0,m_UnusedInt.Count)];
             m_UnusedInt.Remove(randomInt);
@@ -150,10 +175,29 @@ public class XinController : EnemyControllerBase
         }
     }
 
+    public IEnumerator SetResult(){
+        if(m_SpawnBall != null)
+            Destroy(m_SpawnBall);
+
+        float passtime = 0f;
+        float duration = 1f;
+        OnDead();
+        while (passtime<duration)
+        {
+            passtime += Time.deltaTime;
+            foreach (var item in m_XinSkinMesh.materials)
+            {
+                item.SetFloat("_Normalized",(duration-passtime)/duration);
+            }
+            yield return null;
+        }
+        // TODO : explode
+        yield return new WaitForSeconds(3);
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
+    }
+
     // xin die , win
     protected override void OnDead(){
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
-        StopAllCoroutines();
         base.OnDead();
         
     }

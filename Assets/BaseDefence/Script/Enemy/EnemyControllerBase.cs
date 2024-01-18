@@ -170,6 +170,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
 
     protected virtual void OnDead(){
+        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().RecordDeadEnemy(Scriptable);
         if(HpBar != null)
             HpParent.SetActive(false);
         BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);

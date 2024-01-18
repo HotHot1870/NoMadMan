@@ -115,6 +115,10 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
 
+    public void RecordDeadEnemy(EnemyScriptable enemyScriptable){
+        m_BaseDefenceResultPanel.RecordDeadEnemy( enemyScriptable);
+    }
+
     private void ShowAssistPanel(){
         m_AssistPanel.Init();
     }

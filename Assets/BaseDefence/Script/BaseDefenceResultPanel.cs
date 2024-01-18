@@ -10,11 +10,12 @@ public class BaseDefenceResultPanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private TMP_Text m_ResultTitle;
+    [SerializeField] private TMP_Text m_TotalGainText;
     [SerializeField] private Transform m_EnemyBlockParent;
     [SerializeField] private GameObject m_EnemyBlockPrefab;
     [SerializeField] private Button2D m_CloseBtn;
     private bool m_IsWin = false;
-    private List<int> m_AllKilledEnemy = new List<int>();
+    private List<EnemyScriptable> m_AllKilledEnemy = new List<EnemyScriptable>();
     private Dictionary<int,EnemyBlockController> m_AllEnemyBlock = new Dictionary<int,EnemyBlockController>();
     
     private void Start()
@@ -23,9 +24,9 @@ public class BaseDefenceResultPanel : MonoBehaviour
         m_CloseBtn.onClick.AddListener(OnClickBackFromResult);
     }
 
-    // TODO : record dead enemy
-    public void DeadEnemyId(int id){
-        m_AllKilledEnemy.Add(id);
+    // record dead enemy
+    public void RecordDeadEnemy(EnemyScriptable enemyScriptable){
+        m_AllKilledEnemy.Add( enemyScriptable);
     }
 
     public void Init(bool isWin){
@@ -38,16 +39,22 @@ public class BaseDefenceResultPanel : MonoBehaviour
         {
             Destroy(m_EnemyBlockParent.GetChild(i).gameObject);
         }
+        float totalGain = 0;
         foreach (var item in m_AllKilledEnemy.Distinct())
         {
             // spawn enemy block
             var newEnemyBlock = Instantiate(m_EnemyBlockPrefab,m_EnemyBlockParent );
-            var enemyScriptable = allenemy.Find(x=>x.Id==item);
+            var enemyScriptable = allenemy.Find(x=>x.Id==item.Id);
             var enemyBlockController = newEnemyBlock.GetComponent<EnemyBlockController>();
-            m_AllEnemyBlock.Add(item,enemyBlockController);
+            m_AllEnemyBlock.Add(item.Id,enemyBlockController);
             enemyBlockController.Init(enemyScriptable);
             enemyBlockController.SetText( m_AllKilledEnemy.Where(x => x == item).Count().ToString() );
         }
+        foreach (var item in m_AllKilledEnemy)
+        {
+            totalGain += item.GooOnKill;
+        }
+        m_TotalGainText.text = totalGain.ToString("0.#");
     }
 
     private void ShowDialogOnEndGame(){
@@ -58,6 +65,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
     public void OnClickBackFromResult(){
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
         // TODO : Hard Coded , try change it later
+        // unlock gun by win 
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
             MainGameManager.GetInstance().SaveData<int>("RocketLauncher"+8.ToString(),0);
             MainGameManager.GetInstance().SaveData<int>("Minigun"+9.ToString(),0);

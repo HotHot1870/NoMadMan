@@ -25,6 +25,7 @@ public class EnemySpawnController : MonoBehaviour
 
     private List<Transform> m_AllEnemyTrans = new List<Transform>();
 
+
     private void Start()
     {
         BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;

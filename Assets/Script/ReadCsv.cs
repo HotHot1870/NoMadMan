@@ -323,7 +323,6 @@ public class ReadCsv : MonoBehaviour
             colume++;
             location.EndDialogId =  int.Parse(contents[colume]);
             colume++;
-            // TODO : mutation
             
             if(contents[colume].Trim() != string.Empty)
                 foreach (var item in contents[colume].Split('|'))

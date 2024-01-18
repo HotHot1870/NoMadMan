@@ -220,7 +220,6 @@ public class GunShootController : MonoBehaviour
             var dotPos = accuracyOffset + BaseDefenceManager.GetInstance().GetCrosshairPos();
             CaseRayWithShootDot(dotPos);
 
-            // TODO : spawn bullet fly to target
         }
         
             // acc lose on shoot            

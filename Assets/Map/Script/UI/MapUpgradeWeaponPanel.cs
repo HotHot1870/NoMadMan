@@ -54,8 +54,6 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
         EditorUtility.SetDirty(m_Content);
 #endif
     }
-
-    // TODO : reset just the goo instead
     private void ResetAllRow(){
         Init(m_GunScriptable);
     }
