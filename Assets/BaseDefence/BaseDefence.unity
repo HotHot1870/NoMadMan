@@ -22973,7 +22973,6 @@ MonoBehaviour:
   m_ShootBtn: {fileID: 61383350}
   m_SwitchWeaponBtn: {fileID: 1400379373}
   m_AssistBtn: {fileID: 1224636902}
-  m_AssistPanel: {fileID: 1420484676}
   m_CloseSwitchWeaponBtn: {fileID: 2138075528}
   m_OptionPanel: {fileID: 2098608960}
   m_HpParent: {fileID: 1049700872}
@@ -22982,9 +22981,11 @@ MonoBehaviour:
   m_XinHpPanel: {fileID: 1748138896}
   m_BaseDefenceResultPanel: {fileID: 709838543}
   m_ReloadPanel: {fileID: 7275959}
+  m_SwitchWeaponPanel: {fileID: 323216232}
   m_SwitchWeaponAnimator: {fileID: 323216235}
   m_DamageText: {fileID: 6541667532697765394, guid: b6618d50666a7f046b5030b76253eace, type: 3}
   m_DamageTextParent: {fileID: 2029508072}
+  m_AssistPanel: {fileID: 1420484676}
 --- !u!1 &1818940917
 GameObject:
   m_ObjectHideFlags: 3

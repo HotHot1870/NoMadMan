@@ -57,4 +57,12 @@ public class ProjectileController : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
+    public void SetParent(Transform parent){
+        foreach (var item in m_DeParentOnDead)
+        {
+            item.SetParent(parent);
+            Destroy(item.gameObject,10f);
+        }
+    }
 }

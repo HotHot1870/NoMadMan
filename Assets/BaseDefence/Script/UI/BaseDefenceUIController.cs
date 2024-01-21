@@ -23,7 +23,6 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private Button2D m_ShootBtn;
     [SerializeField] private Button2D m_SwitchWeaponBtn;
     [SerializeField] private Button2D m_AssistBtn;
-    [SerializeField] private AssistPanelController m_AssistPanel;
     [SerializeField] private Button2D m_CloseSwitchWeaponBtn;
 
     
@@ -47,11 +46,14 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private GameObject m_ReloadPanel;
 
     [Header("Switch weapon")]
+    [SerializeField] private GameObject m_SwitchWeaponPanel;
     [SerializeField] private Animator m_SwitchWeaponAnimator;
 
     [Header("Dmagae text")]
     [SerializeField] private GameObject m_DamageText;
     [SerializeField] private Transform m_DamageTextParent;
+    [Header("Assist")]
+    [SerializeField] private AssistPanelController m_AssistPanel;
 
 
 
@@ -147,6 +149,8 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     private void TurnOffAllPanel(){
+        m_SwitchWeaponPanel.SetActive(false);
+        m_AssistPanel.gameObject.SetActive(false);
         m_ShootPanel.SetActive(false);
         m_ReloadPanel.SetActive(false);
         m_XinHpPanel.SetActive(false);
@@ -188,6 +192,10 @@ public class BaseDefenceUIController : MonoBehaviour
 
 
     public void SetResultPanel(bool isWin){
+        if(m_BaseDefenceResultPanel.gameObject.activeSelf){
+            return;
+        }
+
         TurnOffAllPanel();
         m_BaseDefenceResultPanel.Init(isWin);
         m_BGAnimator.Play("Open");

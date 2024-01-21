@@ -28,7 +28,7 @@ public class EnemySpawnController : MonoBehaviour
 
     private void Start()
     {
-        BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;
+        //BaseDefenceManager.GetInstance().m_ShootUpdateAction += EnemySpawnUpdate;
         //GetAttackerSpotInOrder( new Vector3(1,2,3));
     }
 
@@ -55,7 +55,7 @@ public class EnemySpawnController : MonoBehaviour
         return ans;
     }
 
-    private void EnemySpawnUpdate(){
+    void Update(){
 
         // check time pass to prevent all wave start at begin
         if(m_TimePassed>=m_MaxSpawnDelay){

@@ -16,10 +16,10 @@ public class XinController : EnemyControllerBase
     [SerializeField] private List<XinBodyPart> m_AllXinBodyPart = new List<XinBodyPart>();
     [SerializeField] private List<Transform> m_ServantSpawnPoint = new List<Transform>();
     [SerializeField] private List<Transform> m_ServantDestination = new List<Transform>();
+    [SerializeField] private GameObject m_DyingXinPrefab = null;
     private List<Transform> m_AllServants = new List<Transform>();
     private XinHpController m_HpController = null;
     private GameObject m_SpawnBall = null;
-
     public bool m_IsDyingEffect = false;
     
 
@@ -191,9 +191,13 @@ public class XinController : EnemyControllerBase
             }
             yield return null;
         }
-        // TODO : explode
-        yield return new WaitForSeconds(3);
-        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
+        yield return new WaitForSeconds(0.5f);
+        BaseDefenceManager.GetInstance().LookAtField();
+        // TODO : spawn dying xin
+        var dyingXin  = Instantiate(m_DyingXinPrefab);
+        dyingXin.transform.position = m_Self.transform.position;
+        dyingXin.GetComponent<DyingXinController>().Init(m_ServantDestination[0].position);
+        Destroy(m_Self);
     }
 
     // xin die , win

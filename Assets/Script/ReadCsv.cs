@@ -30,6 +30,7 @@ public class ReadCsv : MonoBehaviour
     private EnemyScriptable m_GhostScriptable = null;
     private EnemyScriptable m_PuppetScriptable = null;
     private EnemyScriptable m_ServantScriptable = null;
+    private EnemyScriptable m_DyingXintScriptable = null;
     public List<UniqueText> m_UniqueText = new List<UniqueText>();
 
 
@@ -99,6 +100,12 @@ public class ReadCsv : MonoBehaviour
         var xinController = xin.GetComponent<XinController>();
         EditorUtility.SetDirty(xinController);
         xinController.SetServantScriptable(m_ServantScriptable);
+
+        // dying xin auto read csv
+        var dyingXin = Resources.Load<GameObject>("Enemy/Prefab/DyingXin");
+        var dyingXinController = dyingXin.GetComponent<DyingXinController>();
+        EditorUtility.SetDirty(dyingXinController);
+        dyingXinController.SetDyingXinScriptable(m_DyingXintScriptable);
     }
 
 
@@ -157,6 +164,11 @@ public class ReadCsv : MonoBehaviour
             //record Servant scriptable
             if(Enemy.Id == 7){
                 m_ServantScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
+            }
+
+            //record Dying Xin scriptable
+            if(Enemy.Id == 8){
+               m_DyingXintScriptable = AssetDatabase.LoadAssetAtPath(m_ScriptablePath+"/Enemy/"+displayName.Replace(" ", "")+".asset", typeof(EnemyScriptable)) as EnemyScriptable;
             }
 
             allEnemy.Add(Enemy);

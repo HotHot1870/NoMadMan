@@ -21,7 +21,7 @@ public class FireballController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            transform.position += transform.forward * Time.deltaTime * m_Speed;
+        transform.position += transform.forward * Time.deltaTime * m_Speed;
     }
 
     private void OnTriggerEnter(Collider other)
