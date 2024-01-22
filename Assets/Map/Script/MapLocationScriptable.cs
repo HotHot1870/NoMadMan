@@ -16,6 +16,7 @@ public class MapLocationScriptable : ScriptableObject
     public float HealthMutation = 0;
     public float DamageMutation = 0;
     public float SpeedMutation = 0;
+    public float ExtraReward = 0;
     
     [Header("Normal")]
     public int NormalWavesCount = 2;

@@ -81,7 +81,7 @@ public class XinHpController : MonoBehaviour
     public void ChangeHp(float change){
         m_CurHp += change;
         if(m_CurHp<=0){
-            // TODO : close Hp bar
+            // close Hp bar
             m_XinController.StartCoroutine( m_XinController.SetResult());
             m_XinController.m_IsDyingEffect = true;
             m_Self.SetActive(false);

@@ -193,7 +193,7 @@ public class XinController : EnemyControllerBase
         }
         yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtField();
-        // TODO : spawn dying xin
+        // spawn dying xin
         var dyingXin  = Instantiate(m_DyingXinPrefab);
         dyingXin.transform.position = m_Self.transform.position;
         dyingXin.GetComponent<DyingXinController>().Init(m_ServantDestination[0].position);

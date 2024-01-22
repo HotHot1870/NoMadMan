@@ -8,9 +8,9 @@ public class MapLocationController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera m_LocationCamera;
     [SerializeField] private List<GameObject> m_CoruuptionObject = new List<GameObject>();
     [SerializeField] private MapLocationScriptable m_Scriptable;
-    private Color m_CorrupColor = new Color(50f/255f,0,1,0);
-    private Color m_BaseColor = new Color(0,0,0,0);
-    private Color m_NeverPlayedColor = new Color(1,1,0,0);
+    //private Color m_CorrupColor = new Color(50f/255f,0,1,0);
+    //private Color m_BaseColor = new Color(0,0,0,0);
+    //private Color m_NeverPlayedColor = new Color(1,1,0,0);
     private bool m_ShouldShowCorruption = false;
 
 
@@ -51,14 +51,15 @@ public class MapLocationController : MonoBehaviour
         // Set coruption actiove
         foreach (var item in m_CoruuptionObject)
         {
-            //item.SetActive( m_ShouldShowCorruption );
+            item.SetActive( m_ShouldShowCorruption );
+            /*
             var targetColor = m_ShouldShowCorruption? m_CorrupColor : m_BaseColor;
             if(!m_ShouldShowCorruption && (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(m_Scriptable.DisplayName+m_Scriptable.Id) ) <=0){
                 // never played before
                 targetColor = m_NeverPlayedColor;
             }
             item.GetComponent<MeshRenderer>().material.SetColor("_Color",  targetColor); 
-            item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  targetColor); 
+            item.GetComponent<MeshRenderer>().material.SetColor("_IntersectColor",  targetColor); */
         }
 
     }

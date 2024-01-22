@@ -43,18 +43,18 @@ Material:
     - _DepthStrength: 0.664
     - _FullAmount: 0.323
     - _Heigh: 0.4
-    - _IntersectDensity: 1
+    - _IntersectDensity: 0.445
     - _IntersectDistance: 5
     - _IntersectRotation: 0
     - _IntersectSpeed: 0
-    - _IntersectStrength: 1.5
+    - _IntersectStrength: 5.82
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 0.25
     m_Colors:
-    - _Color: {r: 0.178957, g: 0, b: 1, a: 0}
+    - _Color: {r: 0.178957, g: 0, b: 1, a: 1}
     - _DepthColor: {r: 0, g: 0, b: 0, a: 0}
-    - _IntersectColor: {r: 0.18039216, g: 0, b: 1, a: 0}
+    - _IntersectColor: {r: 0.18039216, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6874922704132310837
 MonoBehaviour:

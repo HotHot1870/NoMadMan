@@ -17,12 +17,13 @@ MonoBehaviour:
   LockBy: 06000000
   Level: 3
   Prefab: {fileID: 4132685869403777302, guid: 079b83cec01edb04ba13218ddda3ade9, type: 3}
-  Pos: {x: -20, y: 0, z: 1}
+  Pos: {x: -20, y: 0, z: 0}
   StartDialogId: 198
   EndDialogId: 206
   HealthMutation: 100
   DamageMutation: 300
   SpeedMutation: 50
+  ExtraReward: 0.95
   NormalWavesCount: 2
   NormalWavesStrength: 30
   NormalWaveEnemy: 00000000010000000200000005000000

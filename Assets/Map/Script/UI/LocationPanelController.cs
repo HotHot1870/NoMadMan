@@ -50,7 +50,7 @@ public class LocationPanelController : MonoBehaviour
         m_DefenceBtn.gameObject.SetActive( !MapManager.GetInstance().GetLocationController().ShouldShowCorruption() );
         m_LocationName.text = locationData.DisplayName;
 
-        // TODO : enemy list
+        // enemy list
         
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
         var allEnemyId = locationData.NormalWaveEnemy.Union<int>(locationData.FinalWaveEnemy).ToList<int>();
@@ -66,5 +66,6 @@ public class LocationPanelController : MonoBehaviour
             newEnemyBlock.GetComponent<EnemyBlockController>().Init(enemyScriptable);
         }
 
+        // TODO : Mutation
     }
 }

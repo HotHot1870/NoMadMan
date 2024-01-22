@@ -275,7 +275,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Location").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 13;
+        int collumeCount = 14;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -296,8 +296,6 @@ public class ReadCsv : MonoBehaviour
             float posX = float.Parse(contents[colume].Split('|')[0]);
             float posZ = float.Parse(contents[colume].Split('|')[1]);
             location.Pos = new Vector3(posX,0,posZ);
-            //location.RewardGunId = int.Parse(contents[index+4]);
-            //location.FortifyCost = int.Parse(contents[index+5]);
             
             colume++;
             location.NormalWavesCount = int.Parse(contents[colume]);
@@ -337,29 +335,31 @@ public class ReadCsv : MonoBehaviour
             colume++;
             
             if(contents[colume].Trim() != string.Empty)
-                foreach (var item in contents[colume].Split('|'))
+            foreach (var item in contents[colume].Split('|'))
+            {
+                if(item.Trim() == string.Empty)
+                    continue;
+
+                float mutationTypeId = float.Parse(item.Split('@')[0]);
+                float mutationValue = float.Parse(item.Split('@')[1]);
+                switch (mutationTypeId)
                 {
-                    if(item.Trim() == string.Empty)
-                        continue;
-
-                    float mutationTypeId = float.Parse(item.Split('@')[0]);
-                    float mutationValue = float.Parse(item.Split('@')[1]);
-                    switch (mutationTypeId)
-                    {
-                        case 0:
-                            location.HealthMutation = mutationValue;
-                        break;
-                        case 1:
-                            location.DamageMutation = mutationValue;
-                        break;
-                        case 2:
-                            location.SpeedMutation = mutationValue;
-                        break;
-                        default:
-                        break;
-                    }
+                    case 0:
+                        location.HealthMutation = mutationValue;
+                    break;
+                    case 1:
+                        location.DamageMutation = mutationValue;
+                    break;
+                    case 2:
+                        location.SpeedMutation = mutationValue;
+                    break;
+                    default:
+                    break;
                 }
-
+            }
+            colume++;
+            // TODO : extra reward
+            location.ExtraReward = float.Parse(contents[colume]);
 
             allLocation.Add(location);
 
