@@ -15,21 +15,21 @@ public class MapUIController : MonoBehaviour
     [SerializeField]private Animator m_CoverAnimator;
 
     [Header("Option")]
-    [SerializeField] private Button m_OptionBtn;
+    [SerializeField] private Button2D m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 
 
     [Header("WeaponUpgradeSelect")]
     [SerializeField] private WorkShopChooseWeaponController m_WorkShopChooseWeaponController;
-    [SerializeField] private Button m_WorkShopBtn;
+    [SerializeField] private Button2D m_WorkShopBtn;
 
 
     [Header("ChooseWeapon")]
     [SerializeField] private GameObject m_ChooseWeaponPanel;
     [SerializeField] private List<MapChooseWeaponSlot> m_ChooseWeaponBtns = new List<MapChooseWeaponSlot>();
    // [SerializeField] private Transform m_ChooseWeaponEnemyList;
-    [SerializeField] private Button m_StartDefenceBtn;  
-    [SerializeField] private Button m_CancelChooseWeaponBtn;  
+    [SerializeField] private Button2D m_StartDefenceBtn;  
+    [SerializeField] private Button2D m_CancelChooseWeaponBtn;  
     
     [Header("Weaponlist")]
     [SerializeField] private MapChangeWeaponInSlotController m_ChangeWeaponInSlotController;
@@ -73,15 +73,44 @@ public class MapUIController : MonoBehaviour
 
 
         // WorkShop
+        m_WorkShopBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_WorkShopBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_WorkShopBtn.onClick.AddListener(OnClickWorkShop);
 
-        // choose weapon
+
+
+        m_StartDefenceBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_StartDefenceBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_StartDefenceBtn.onClick.AddListener(OnClickStartDefence);
+
+        
+
+        m_CancelChooseWeaponBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_CancelChooseWeaponBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_CancelChooseWeaponBtn.onClick.AddListener(OnClickCancelInChooseWeapon);
 /*
         // weapon list panel
         m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);*/
 
+        
+        m_OptionBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_OptionBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_OptionBtn.onClick.AddListener(()=>{
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
             optionController.Open();

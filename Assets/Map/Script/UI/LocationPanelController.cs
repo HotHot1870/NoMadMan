@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ExtendedButtons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +12,28 @@ public class LocationPanelController : MonoBehaviour
     [SerializeField] private TMP_Text m_LocationName;   
     [SerializeField] private Transform m_EnemyBlockParent;  
     [SerializeField] private GameObject m_EnemyBlockPrefab; 
-    [SerializeField] private Button m_DefenceBtn;
-    [SerializeField] private Button m_CancelLocationDetailBtn;
+    [SerializeField] private Button2D m_DefenceBtn;
+    [SerializeField] private Button2D m_CancelLocationDetailBtn;
 
     
 
     void Start(){
+
+        m_DefenceBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_DefenceBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_DefenceBtn.onClick.AddListener(MapManager.GetInstance().GetMapUIController().OnClickDefence);
+
+
+        m_CancelLocationDetailBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_CancelLocationDetailBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_CancelLocationDetailBtn.onClick.AddListener(CancelLocationDetail);
     }
 

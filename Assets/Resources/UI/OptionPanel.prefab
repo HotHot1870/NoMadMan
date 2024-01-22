@@ -481,8 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b692e5b91591f6429b21812b938e38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ResumeBtn: {fileID: 2494430782804584440}
-  m_QuitGameBtn: {fileID: 7535282467547620294}
+  m_ResumeBtn: {fileID: 8126932381243712933}
+  m_QuitGameBtn: {fileID: 2645516835549943025}
   m_AimSensitivitySlider: {fileID: 2209168731540950050}
   m_VolumeSlider: {fileID: 7503915329647535750}
   m_OptionPanel: {fileID: 1971712377341594864}
@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 348580235323600910}
   - component: {fileID: 5566520768295116983}
   - component: {fileID: 5966744569584584645}
-  - component: {fileID: 7535282467547620294}
+  - component: {fileID: 2645516835549943025}
   m_Layer: 5
   m_Name: QuitGameBtn
   m_TagString: Untagged
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7535282467547620294
+--- !u!114 &2645516835549943025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4562036895600459946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ec17c3f7a304f44b2721c7a1f40139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1208,6 +1208,18 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5966744569584584645}
   m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5025012170773541084
@@ -1585,7 +1597,7 @@ GameObject:
   - component: {fileID: 3923043719715270067}
   - component: {fileID: 5915889012027718500}
   - component: {fileID: 5285884750466161025}
-  - component: {fileID: 2494430782804584440}
+  - component: {fileID: 8126932381243712933}
   m_Layer: 5
   m_Name: ResumeBtn
   m_TagString: Untagged
@@ -1651,7 +1663,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2494430782804584440
+--- !u!114 &8126932381243712933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1660,7 +1672,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5835172262987077558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ec17c3f7a304f44b2721c7a1f40139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1693,6 +1705,18 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5285884750466161025}
   m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6362851305772739650

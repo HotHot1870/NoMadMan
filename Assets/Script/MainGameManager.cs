@@ -25,6 +25,12 @@ public class MainGameManager : MonoBehaviour
     [SerializeField]private Canvas m_LoadingCanvas;
     [SerializeField]private Image m_LoadAmountImage;
     [SerializeField]private Animator m_BgAnimator;
+        
+    [Header("Click sound")]
+    [SerializeField] private AudioSource m_AudioPlayer;
+    [SerializeField] private AudioClip m_OnClickStartSound;
+    [SerializeField] private AudioClip m_OnClickEndSound;
+
 
     
 #if UNITY_EDITOR
@@ -66,6 +72,14 @@ public class MainGameManager : MonoBehaviour
             m_Instance = new GameObject().AddComponent<MainGameManager>();
         }
         return m_Instance;
+    }
+
+    public void OnClickStartSound(){
+        m_AudioPlayer.PlayOneShot(m_OnClickStartSound);
+    }
+
+    public void OnClickEndSound(){
+        m_AudioPlayer.PlayOneShot(m_OnClickEndSound);
     }
 
 

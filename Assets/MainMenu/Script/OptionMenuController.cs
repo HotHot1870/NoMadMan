@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedButtons;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +9,8 @@ using UnityEngine.UI;
 public class OptionMenuController : MonoBehaviour
 {
     
-    [SerializeField] private Button m_ResumeBtn;
-    [SerializeField] private Button m_QuitGameBtn;
+    [SerializeField] private Button2D m_ResumeBtn;
+    [SerializeField] private Button2D m_QuitGameBtn;
 
     [SerializeField] private Slider m_AimSensitivitySlider;
     [SerializeField] private Slider m_VolumeSlider;
@@ -32,11 +33,24 @@ public class OptionMenuController : MonoBehaviour
             MainGameManager.GetInstance().UpdateVolume();
         });
         
+        m_ResumeBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_ResumeBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         
         m_ResumeBtn.onClick.AddListener(()=>{
             m_BgAnimator?.Play("Close");
         });
 
+        
+        m_QuitGameBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_QuitGameBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         
         m_QuitGameBtn.onClick.AddListener(()=>{
             switch (SceneManager.GetActiveScene().name)
