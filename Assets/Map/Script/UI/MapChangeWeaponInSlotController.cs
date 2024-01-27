@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedButtons;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,14 +23,30 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
 
     [SerializeField] private Transform m_WeaponListSlotParent;
     [SerializeField] private GameObject m_WeaponListSlotPrefab; 
-    [SerializeField] private Button m_ComfirmWeaponChangeBtn; 
-    [SerializeField] private Button m_CancelWeaponChangeBtn; 
+    [SerializeField] private Button2D m_ComfirmWeaponChangeBtn; 
+    [SerializeField] private Button2D m_CancelWeaponChangeBtn; 
 
     private int m_SlotIndex = -1;
     private GunScriptable m_SelectedGunScriptable;
 
     IEnumerator Start(){
         yield return null;
+
+        
+
+        m_ComfirmWeaponChangeBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_ComfirmWeaponChangeBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
+        
+        m_CancelWeaponChangeBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_CancelWeaponChangeBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_CancelWeaponChangeBtn.onClick.AddListener(()=>{
             MapManager.GetInstance().GetMapUIController().ResetPreFightPanel();
             m_WeaponInSlotPanel.SetActive(false);
@@ -40,7 +57,6 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
         m_SlotIndex = weaponSlotIndex;
         m_WeaponInSlotPanel.SetActive(true);
         m_ComfirmWeaponChangeBtn.onClick.RemoveAllListeners();
-
         m_ComfirmWeaponChangeBtn.onClick.AddListener(()=>{
             MainGameManager.GetInstance().SaveData<int>("SelectedWeapon"+m_SlotIndex.ToString(),m_SelectedGunScriptable.Id);
             MapManager.GetInstance().GetMapUIController().ResetPreFightPanel();
@@ -67,6 +83,7 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
             m_SelectedGunScriptable = targetGun;
         }else{
             // RESET show detail if no selected weapon
+            m_ComfirmWeaponChangeBtn.gameObject.SetActive(false);
             ReseretWeaponListSelectedWeaponData();
         }   
 

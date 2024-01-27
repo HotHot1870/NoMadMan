@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedButtons;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class MapUpgradeWeaponPanel : MonoBehaviour
 {
-    [SerializeField] private Button m_BackBtn; 
+    [SerializeField] private Button2D m_BackBtn; 
     [SerializeField] private Image m_GunDisplayImage;
     [SerializeField] private GameObject m_UpgradeStatRowPrefab;
     [SerializeField] private RectTransform m_Content;
@@ -19,6 +20,13 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
     private GunScriptable m_GunScriptable;
 
     private void Start(){
+
+        m_BackBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_BackBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_BackBtn.onClick.AddListener(()=>
             this.gameObject.SetActive(false)
         );

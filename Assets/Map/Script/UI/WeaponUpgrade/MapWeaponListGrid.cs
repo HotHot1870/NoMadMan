@@ -13,7 +13,6 @@ public class MapWeaponListGrid : MonoBehaviour
     private int m_WeaponSlotIndex;
 
     public void Init(GunScriptable gunScriptable, int weaponSlotIndex, bool isUnlocked){
-            
         m_Btn.onClick.RemoveAllListeners();
         m_Btn.onClick.AddListener(OnClickBtnWithUnlockWeapon);
         m_IsWeaponLocked = !isUnlocked;

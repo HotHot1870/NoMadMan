@@ -10,6 +10,7 @@ public class EnemyBlockController : MonoBehaviour
     [SerializeField] private Image m_Image;
     [SerializeField] private TMP_Text m_CountText;
     [SerializeField] private Button m_OnClickBtn;
+    [SerializeField] private Animator m_Animator;
 
     public void Init(EnemyScriptable enemyScriptable){
         // TODO : enemy block 
@@ -18,6 +19,10 @@ public class EnemyBlockController : MonoBehaviour
 
         m_CountText.text = "";
         
+    }
+
+    public void PlayGrowAnimation(){
+        m_Animator.Play("Grow");
     }
 
     public void SetText(string text){

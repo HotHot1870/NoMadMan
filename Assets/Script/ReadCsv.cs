@@ -358,7 +358,7 @@ public class ReadCsv : MonoBehaviour
                 }
             }
             colume++;
-            // TODO : extra reward
+            // extra reward
             location.ExtraReward = float.Parse(contents[colume]);
 
             allLocation.Add(location);
@@ -435,6 +435,14 @@ public class ReadCsv : MonoBehaviour
             colume++;
             gunScriptable.ExplodeRadius = float.Parse(contents[colume]);
             gunScriptable.ReloadScriptable = AssetDatabase.LoadAssetAtPath<GunReloadScriptable>(m_ScriptablePath+"/Reload/"+displayName.Replace(" ", "")+"_Reload.asset");
+
+            // Auto load upgrade scriptable
+            WeaponUpgradeScriptable weaponUpgradeScriptable = AssetDatabase.LoadAssetAtPath<WeaponUpgradeScriptable>(m_ScriptablePath+"/WeaponUpgrade/"+displayName+"_Upgrade.asset");
+            if(weaponUpgradeScriptable != null){
+                gunScriptable.UpgradeScriptable = weaponUpgradeScriptable;
+            }else{
+                Debug.Log("Missing upgrade scriptable :"+displayName);
+            }
 
             gunScriptable.GunStats = stats;
             allGuns.Add(gunScriptable.Id,gunScriptable);

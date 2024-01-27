@@ -27,6 +27,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private List<MapEnvironment> m_AllEnvironmentPrefab = new List<MapEnvironment>();
     private GameObject m_SpawnedEnvironment = null;
     private ReflectionProbe baker;
+    [SerializeField] private AudioSource m_AudioPlayer;
+    [SerializeField] private AudioClip m_OnSelectSound;
 
 
     private void Awake()
@@ -63,6 +65,7 @@ public class MapManager : MonoBehaviour
     }
 
     public void ShowLocationDetail(){
+        m_AudioPlayer.PlayOneShot(m_OnSelectSound);
         m_LocationPanelController.Init();
     }
 

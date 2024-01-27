@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   DisplayName: Minigun
-  UnlockCost: 1000
+  UnlockCost: 666666
   DisplayImage: {fileID: 21300000, guid: 55bc2709311445c42accfd0b50f1faeb, type: 3}
   FPSPrefab: {fileID: 8181188354269715084, guid: 78e3bfc1e6b646f4e87008a8e1954bd7, type: 3}
   ShootSound: {fileID: 8300000, guid: dd19b1813b6307648b4b34ed10557afb, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
     ClipSize: 200
     BulletType: 0
     IsSemiAuto: 1
-    FireRate: 50
+    FireRate: 35
     Accuracy: 65
     Handling: 40
     Recoil: 15

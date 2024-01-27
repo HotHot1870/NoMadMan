@@ -10,7 +10,8 @@ public class KineticTransmitterController : MonoBehaviour
         var allEnemy = m_EnemySpawnController.GetAllEnemyTrans().ToList();
         foreach (var item in allEnemy)
         {
-            item.GetComponent<EnemyControllerBase>().OnNet();
+            if(item != null)
+                item.GetComponent<EnemyControllerBase>().OnNet();
         }
     }
 }

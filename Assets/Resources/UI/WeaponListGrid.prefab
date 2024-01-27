@@ -86,8 +86,8 @@ GameObject:
   - component: {fileID: 2770183024553607443}
   - component: {fileID: 863469750042456904}
   - component: {fileID: 441260232929816401}
-  - component: {fileID: 6606214612860980286}
   - component: {fileID: 4043388805725038565}
+  - component: {fileID: 999374488430754455}
   m_Layer: 5
   m_Name: WeaponListGrid
   m_TagString: Untagged
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6606214612860980286
+--- !u!114 &4043388805725038565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +162,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3630917713144208795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e0dedc76cae3a304e9f10a41c5b7059f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Border: {fileID: 441260232929816401}
+  m_Btn: {fileID: 999374488430754455}
+  m_WeaponDisplayImage: {fileID: 9032535264615117156}
+--- !u!114 &999374488430754455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3630917713144208795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ec17c3f7a304f44b2721c7a1f40139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -197,18 +212,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4043388805725038565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630917713144208795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0dedc76cae3a304e9f10a41c5b7059f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Border: {fileID: 441260232929816401}
-  m_Btn: {fileID: 6606214612860980286}
-  m_WeaponDisplayImage: {fileID: 9032535264615117156}
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []

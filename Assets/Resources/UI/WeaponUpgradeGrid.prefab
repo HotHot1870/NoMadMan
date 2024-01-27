@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 223423543662543504}
   - component: {fileID: 3412166994100208514}
   - component: {fileID: 3487821631655955541}
-  - component: {fileID: 1044304991332234309}
   - component: {fileID: 6320211309777822576}
+  - component: {fileID: 4905567168353783182}
   m_Layer: 5
   m_Name: WeaponUpgradeGrid
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1044304991332234309
+--- !u!114 &6320211309777822576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +88,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3786452604834216494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ec49508c9571bb408053ca657485f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Border: {fileID: 3487821631655955541}
+  m_WeaponImage: {fileID: 7146930335557026349}
+  m_Btn: {fileID: 4905567168353783182}
+  m_Lock: {fileID: 8659969500457582128}
+--- !u!114 &4905567168353783182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3786452604834216494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ec17c3f7a304f44b2721c7a1f40139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -123,22 +139,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6320211309777822576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3786452604834216494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec49508c9571bb408053ca657485f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Border: {fileID: 3487821631655955541}
-  m_WeaponImage: {fileID: 7146930335557026349}
-  m_Btn: {fileID: 1044304991332234309}
-  m_Lock: {fileID: 8659969500457582128}
+  onEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8659969500457582128
 GameObject:
   m_ObjectHideFlags: 0

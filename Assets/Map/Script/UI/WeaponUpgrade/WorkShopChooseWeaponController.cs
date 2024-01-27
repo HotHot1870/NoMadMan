@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class WorkShopChooseWeaponController : MonoBehaviour
 {
-    [SerializeField] private Button m_BackBtn; 
+    [SerializeField] private Button2D m_BackBtn; 
     [SerializeField] private MapUpgradeWeaponPanel m_MapUpgradeWeaponPanel; 
-    [SerializeField] private Button m_UpgradeBtn; 
+    [SerializeField] private Button2D m_UpgradeBtn; 
     [SerializeField] private TMP_Text m_GooText;
 
     [Header("Unlock")]
@@ -42,9 +42,26 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     void Start(){
         
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
+
+
+        m_BackBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_BackBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_BackBtn.onClick.AddListener(()=>{
             this.gameObject.SetActive(false);
             });
+
+
+        
+        m_UpgradeBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_UpgradeBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_UpgradeBtn.onClick.AddListener(()=>{
             m_MapUpgradeWeaponPanel.gameObject.SetActive(true);
             m_MapUpgradeWeaponPanel.Init(m_SelectedGun);
@@ -147,6 +164,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private void OnDownUnlockBtn(){
+        MainGameManager.GetInstance().OnClickStartSound();
         if(m_Unfilling != null)
             StopCoroutine( m_Unfilling);
 
@@ -158,6 +176,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private void OnLetGoUnlockBtn(){
+        MainGameManager.GetInstance().OnClickEndSound();
         if(m_Filling != null)
             StopCoroutine( m_Filling);
             

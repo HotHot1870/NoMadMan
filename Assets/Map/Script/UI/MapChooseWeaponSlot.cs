@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedButtons;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class MapChooseWeaponSlot : MonoBehaviour
 {
     [SerializeField] private Image m_Border;
-    [SerializeField] private Button m_Btn;
+    [SerializeField] private Button2D m_Btn;
     [SerializeField] private Image m_WeaponDisplayImage;
     protected int m_WeaponSlotIndex = -1;
 
@@ -18,6 +19,14 @@ public class MapChooseWeaponSlot : MonoBehaviour
             m_WeaponDisplayImage.sprite = weaponImage;
         }
         m_Btn.onClick.RemoveAllListeners();
+        m_Btn.onDown.RemoveAllListeners();
+        m_Btn.onUp.RemoveAllListeners();
+        m_Btn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_Btn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_Btn.onClick.AddListener(OnClickWeaponSlot);
 
     }
