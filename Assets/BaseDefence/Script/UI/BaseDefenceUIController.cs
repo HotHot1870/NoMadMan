@@ -203,7 +203,7 @@ public class BaseDefenceUIController : MonoBehaviour
 
         if(isWin){
             var locationData = BaseDefenceManager.GetInstance().GetLocationScriptable();
-            MainGameManager.GetInstance().SaveData<int>(locationData.DisplayName+locationData.Id, 1);
+            MainGameManager.GetInstance().SaveData<int>("Win"+locationData.Id.ToString(), 1);
         }
     }
 }

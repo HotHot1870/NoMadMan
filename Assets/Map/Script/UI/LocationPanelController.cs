@@ -81,7 +81,5 @@ public class LocationPanelController : MonoBehaviour
             var enemyScriptable = allenemy.Find(x=>x.Id==item);
             newEnemyBlock.GetComponent<EnemyBlockController>().Init(enemyScriptable);
         }
-
-        // TODO : Mutation
     }
 }

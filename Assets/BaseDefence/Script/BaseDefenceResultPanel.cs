@@ -93,12 +93,12 @@ public class BaseDefenceResultPanel : MonoBehaviour
         // TODO : curretn version extra is fake 
 
         float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp()*100f;
-        float reduceByHp = totalGain * hpPresentage/100f;
-        m_HpLeft.text = "HP : "+hpPresentage+"% (-" + reduceByHp.ToString("0.#")+")";;
+        float gooReduceByHp = totalGain * (1-hpPresentage)/100f;
+        m_HpLeft.text = "HP : "+hpPresentage+"% (-" + gooReduceByHp.ToString("0.#")+")";;
         float extra = BaseDefenceManager.GetInstance().GetLocationScriptable().ExtraReward;
         m_DifficultyBouns.text = "Difficulty Bouns : "+ extra*100f+"% (+" + (extra*totalGain).ToString("0.#")+")";
         
-        totalGain = totalGain + extra*totalGain - reduceByHp;
+        totalGain = totalGain + extra*totalGain - gooReduceByHp;
         m_TotalGainText.text = "Total : "+totalGain.ToString("0.#");
         
         
@@ -115,8 +115,8 @@ public class BaseDefenceResultPanel : MonoBehaviour
         // TODO : Hard Coded , try change it later
         // unlock gun by win 
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
-            MainGameManager.GetInstance().SaveData<int>("RocketLauncher"+8.ToString(),0);
-            MainGameManager.GetInstance().SaveData<int>("Minigun"+9.ToString(),0);
+            MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+8.ToString(),0);
+            MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+9.ToString(),0);
         }
     }
 }

@@ -53,7 +53,6 @@ public class ReadCsv : MonoBehaviour
 
     [EButton("ReadCsvGun")]
     private void ReadCsvFileGun(){
-        // TODO : get upgrade data auto
         StartCoroutine(ReadGunCSV());
 
         EditorUtility.SetDirty(m_MainGameManager);

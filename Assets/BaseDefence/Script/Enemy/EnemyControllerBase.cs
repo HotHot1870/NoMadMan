@@ -174,7 +174,6 @@ public abstract class EnemyControllerBase : MonoBehaviour
         if(HpBar != null)
             HpParent.SetActive(false);
         BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
-        MainGameManager.GetInstance().ChangeGooAmount(Scriptable.GooOnKill);
         OnDeadAction?.Invoke();
     }
 }

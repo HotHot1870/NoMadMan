@@ -25,10 +25,25 @@ public class AssistPanelController : MonoBehaviour
 
 
     void Start(){
-        m_FireballBtn.onClick.AddListener(OnClickFireball);
-        m_SwordBtn.onClick.AddListener(OnClickSword);
-        m_NetBtn.onClick.AddListener(OnClickNet);
-        m_ShieldBtn.onClick.AddListener(OnClickShield);
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win1") == 1 ){
+            m_FireballBtn.onClick.AddListener(OnClickFireball);
+            m_SwordBtn.onClick.AddListener(OnClickSword);
+        }else{
+            m_FireballBtn.gameObject.SetActive(false);
+            m_SwordBtn.gameObject.SetActive(false);
+        }
+
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win6") == 1 ){
+            m_NetBtn.onClick.AddListener(OnClickNet);
+        }else{
+            m_NetBtn.gameObject.SetActive(false);
+        }
+        
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win12") == 1 ){
+            m_ShieldBtn.onClick.AddListener(OnClickNet);
+        }else{
+            m_ShieldBtn.gameObject.SetActive(false);
+        }
         m_CloseBtn.onClick.AddListener(Close);
         m_Self.SetActive(false);
 

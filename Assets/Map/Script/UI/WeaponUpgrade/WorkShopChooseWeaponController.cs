@@ -103,8 +103,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         if(unlockCost>gooOwnedAmount){
             // not enough goo too unlock
             m_IsEnoughGoo = false;
-            m_SelectedWeaponUnlockCost.color = Color.red;
         }
+        m_SelectedWeaponUnlockCost.color = unlockCost>gooOwnedAmount?Color.red:Color.white;
         
         //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
 

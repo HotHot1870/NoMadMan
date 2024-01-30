@@ -13,8 +13,7 @@ public class EnemyBlockController : MonoBehaviour
     [SerializeField] private Animator m_Animator;
 
     public void Init(EnemyScriptable enemyScriptable){
-        // TODO : enemy block 
-        //m_OnClickBtn.onClick.AddListener();
+        // enemy block 
         m_Image.sprite = enemyScriptable.DisplayImage;
 
         m_CountText.text = "";
