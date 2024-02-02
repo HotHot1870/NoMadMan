@@ -21,15 +21,11 @@ public class EnemyBodyPart : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
     [SerializeField] private float m_BodyPartHpPresentage = 1f;
     private Collider m_Collider;
-   // [SerializeField] private AudioSource m_AudioPlayer;
-   // [SerializeField] private AudioClip m_OnHitSound;
     private bool m_CanPlayHitSound = true;
     private float m_EmissionDelay = 0;
 
     private IEnumerator Start()
     {
-       // m_OnHitSound = Resources.Load<AudioClip>("Enemy/Audio/Hit");
-       // m_AudioPlayer = this.AddComponent<AudioSource>();
         m_Collider = this.GetComponent<Collider>();
         if(m_Renderer != null)
             m_Renderer.material.SetFloat("_Normalized",  0);

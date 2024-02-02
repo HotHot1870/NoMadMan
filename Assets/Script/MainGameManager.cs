@@ -12,8 +12,13 @@ public class MainGameManager : MonoBehaviour
     public static MainGameManager m_Instance = null;
     private List<AudioSource> m_AllAudioSource = new List<AudioSource>();
 
-    [SerializeField] private float m_Volume = 0.75f;
-    [SerializeField] private float m_AimSensitivity = 0.5f;
+    private float m_Volume = 0.75f;
+    private float m_AimSensitivity = 0.5f;
+    [SerializeField] private AudioClip m_MapBGM;
+    [SerializeField] private AudioClip m_MainBGM;
+    
+    [SerializeField] private AudioClip m_BattleBGM;
+    [SerializeField] private AudioSource m_BGMplayer;
 
     [SerializeField] private List<DialogScriptable> m_AllDialog = new List<DialogScriptable>();
     [SerializeField] private List<GunScriptable> m_AllWeapon = new List<GunScriptable>();
@@ -82,9 +87,24 @@ public class MainGameManager : MonoBehaviour
         m_AudioPlayer.PlayOneShot(m_OnClickEndSound);
     }
 
+    public void PlayBGM(AudioClip clip){
+        m_BGMplayer.clip = clip;
+        m_BGMplayer.Play();
+    }
 
     private void Start()
     {
+        PlayBGM(m_MainBGM);
+        if((float)GetData<float>("AimSensitivity") != 0){
+            m_AimSensitivity = (float)GetData<float>("AimSensitivity");
+        }else{
+            SaveData<float>("AimSensitivity",0.5f);
+        }
+        if((float)GetData<float>("Volume") != 0){
+            m_Volume = (float)GetData<float>("Volume");
+        }else{
+            SaveData<float>("Volume",0.1f);
+        }
 		Application.targetFrameRate = 50;
         
         // unlock pistol
@@ -94,6 +114,8 @@ public class MainGameManager : MonoBehaviour
             SaveData<int>("SelectedWeapon"+0.ToString(),0);
         
         m_BgAnimator.Play("Hidden");
+        AddNewAudioSource(m_AudioPlayer);
+        AddNewAudioSource(m_BGMplayer);
     }
 
     public void SetSelectedLocation(MapLocationScriptable location){
@@ -233,6 +255,8 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
+        
+        PlayBGM(m_BattleBGM);
         LoadSceneWithTransition("BaseDefence", 
             ()=>BaseDefenceManager.GetInstance().StartWave(location));
     }
@@ -243,6 +267,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetMapScene(){
+        PlayBGM(m_MapBGM);
         LoadSceneWithTransition("Map");
     }
 
@@ -252,11 +277,13 @@ public class MainGameManager : MonoBehaviour
     public void SetAimSensitivity(float sensitivity)
     {
         m_AimSensitivity = sensitivity;
+        SaveData<float>("AimSensitivity",sensitivity);
     }
 
     public void SetVolume(float volume)
     {
         m_Volume = volume;
+        SaveData<float>("Volume",volume);
     }
     public float GetVolume()
     {
@@ -277,6 +304,7 @@ public class MainGameManager : MonoBehaviour
 
     public void UpdateVolume()
     {
+        // remove deleted audio Source
         List<int> toBeRemove = new List<int>();
         for (int i = 0; i < m_AllAudioSource.Count; i++)
         {

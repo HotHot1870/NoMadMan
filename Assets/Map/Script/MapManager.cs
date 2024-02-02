@@ -45,6 +45,7 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        MainGameManager.GetInstance().AddNewAudioSource(m_AudioPlayer);
         SpawnAllLocation();
         CameraLookAtSelectedLocation();
     }

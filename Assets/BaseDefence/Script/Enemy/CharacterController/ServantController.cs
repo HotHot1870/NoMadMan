@@ -214,6 +214,8 @@ public class ServantController : EnemyControllerBase
             if(m_Xin.IsAllServantRecovering()){
                 // all dead
                 IsThisDead = true;
+                
+                BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
                 base.OnDead();
                 m_Animator.speed = 1;
                 Destroy(m_Self,1);
@@ -229,6 +231,7 @@ public class ServantController : EnemyControllerBase
             return;
         }
         
+        BaseDefenceManager.GetInstance().RemoveDeadEnemyFromList(this.transform);
         m_Xin.WeakServantDeadHandler();
 
         base.OnDead();

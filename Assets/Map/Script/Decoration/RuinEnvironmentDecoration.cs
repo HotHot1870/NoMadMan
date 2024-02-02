@@ -11,9 +11,10 @@ public class RuinEnvironmentDecoration : MonoBehaviour
     [SerializeField] private GameObject m_BulletPrefab;
     [SerializeField] private GameObject m_ExplodeEffect;
     [SerializeField] private AudioClip m_DistanceShot;
-    [SerializeField] private AudioSource m_AutioPlayer;
+    [SerializeField] private AudioSource m_AudioPlayer;
     // Start is called before the first frame update
         void Start(){
+        MainGameManager.GetInstance().AddNewAudioSource(m_AudioPlayer);
         InvokeRepeating("RepeatSpawnEnemy", 2, 7f);
         // do one more time to warm up
         RepeatSpawnEnemy();
@@ -43,7 +44,7 @@ public class RuinEnvironmentDecoration : MonoBehaviour
         newBullet.transform.LookAt(targetPosForBullet);
         newBullet.transform.localScale = Vector3.one + new Vector3(1.5f,1.5f,0);
         // shoot sound
-        m_AutioPlayer.PlayOneShot(m_DistanceShot);
+        m_AudioPlayer.PlayOneShot(m_DistanceShot);
         float passTime = 0f;
         float duration = 0.125f;
         while (passTime<duration)

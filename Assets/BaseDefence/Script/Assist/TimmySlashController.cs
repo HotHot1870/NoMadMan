@@ -11,6 +11,9 @@ public class TimmySlashController : MonoBehaviour
     [SerializeField] private Color m_Color;
     [SerializeField] private AudioSource m_AudioSource;
     
+    void Start(){
+        MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
+    }
     public void Slash(){
         for (int i = 0; i < BaseDefenceManager.GetInstance().GetLocationScriptable().Level+1; i++)
         {

@@ -104,7 +104,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             // not enough goo too unlock
             m_IsEnoughGoo = false;
         }
-        m_SelectedWeaponUnlockCost.color = unlockCost>gooOwnedAmount?Color.red:Color.white;
+        m_SelectedWeaponUnlockCost.color = unlockCost>gooOwnedAmount?Color.red:Color.black;
         
         //m_SelectedWeaponExplodeRadius.gameObject.SetActive(m_SelectedGun.ExplodeRadius>0);
 
@@ -197,6 +197,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             
         }
         m_UnlockFill.fillAmount = 1;
+        // TODO : Sound
+        MainGameManager.GetInstance().OnClickEndSound();
         // Unlock weapon
         MainGameManager.GetInstance().ChangeGooAmount(-1f*m_SelectedGun.UnlockCost);
         MainGameManager.GetInstance().UnlockGun(m_SelectedGun.Id);
