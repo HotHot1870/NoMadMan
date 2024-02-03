@@ -197,7 +197,6 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             
         }
         m_UnlockFill.fillAmount = 1;
-        // TODO : Sound
         MainGameManager.GetInstance().OnClickEndSound();
         // Unlock weapon
         MainGameManager.GetInstance().ChangeGooAmount(-1f*m_SelectedGun.UnlockCost);

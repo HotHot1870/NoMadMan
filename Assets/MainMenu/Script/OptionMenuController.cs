@@ -11,10 +11,11 @@ public class OptionMenuController : MonoBehaviour
     [SerializeField] private Button2D m_QuitGameBtn;
 
     [SerializeField] private Slider m_AimSensitivitySlider;
-    [SerializeField] private Slider m_VolumeSlider;
+    [SerializeField] private Slider m_SoundVolumeSlider;
     [SerializeField] private GameObject m_OptionPanel;
     [SerializeField] private Animator m_BgAnimator;
     [Header("BGM")]
+    [SerializeField] private Slider m_BGMVolumeSlider;
     [SerializeField] private AudioClip m_MainBGM;
     [SerializeField] private AudioClip m_MapBGM;
     [SerializeField] private AudioClip m_BattleBGM;
@@ -22,17 +23,26 @@ public class OptionMenuController : MonoBehaviour
     void Start(){
         m_BgAnimator?.Play("Hidden");
         
-        m_AimSensitivitySlider.value = Mathf.InverseLerp(0.1f,1f, MainGameManager.GetInstance().GetAimSensitivity() );
-        m_VolumeSlider.value = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetVolume() );
+        m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,1f, MainGameManager.GetInstance().GetAimSensitivity() );
+        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetVolume() );
+        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetBGMVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
             MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1f,m_AimSensitivitySlider.normalizedValue) );
         });
 
-        m_VolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetVolume( Mathf.Lerp(0f, 2f,m_VolumeSlider.normalizedValue) );
-            MainGameManager.GetInstance().UpdateVolume();
+        m_SoundVolumeSlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1.25f,m_SoundVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().UpdateSoundVolume();
+        });
+
+        
+        m_BGMVolumeSlider.value = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetBGMVolume() );
+
+        m_BGMVolumeSlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1.25f,m_BGMVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().UpdateBGMVolume();
         });
         
         m_ResumeBtn.onDown.AddListener(()=>{
@@ -75,16 +85,24 @@ public class OptionMenuController : MonoBehaviour
     public void Init(Action onClickResume)
     {
         m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,2f, MainGameManager.GetInstance().GetAimSensitivity() );
-        m_VolumeSlider.normalizedValue = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetVolume() );
+        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue) );
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1.25f,m_AimSensitivitySlider.normalizedValue) );
         });
 
-        m_VolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetVolume( Mathf.Lerp(0f, 2f,m_VolumeSlider.normalizedValue) );
-            MainGameManager.GetInstance().UpdateVolume();
+        m_SoundVolumeSlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1.25f,m_SoundVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().UpdateSoundVolume();
+        });        
+        
+        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetBGMVolume() );
+
+
+        m_BGMVolumeSlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1.25f,m_BGMVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().UpdateBGMVolume();
         });
         
         

@@ -14,11 +14,6 @@ public class MainGameManager : MonoBehaviour
 
     private float m_Volume = 0.75f;
     private float m_AimSensitivity = 0.5f;
-    [SerializeField] private AudioClip m_MapBGM;
-    [SerializeField] private AudioClip m_MainBGM;
-    
-    [SerializeField] private AudioClip m_BattleBGM;
-    [SerializeField] private AudioSource m_BGMplayer;
 
     [SerializeField] private List<DialogScriptable> m_AllDialog = new List<DialogScriptable>();
     [SerializeField] private List<GunScriptable> m_AllWeapon = new List<GunScriptable>();
@@ -35,7 +30,14 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private AudioSource m_AudioPlayer;
     [SerializeField] private AudioClip m_OnClickStartSound;
     [SerializeField] private AudioClip m_OnClickEndSound;
-
+        
+    [Header("BGM")]
+    [SerializeField] private AudioClip m_MapBGM;
+    [SerializeField] private AudioClip m_MainBGM;
+    [SerializeField] private AudioClip m_BattleBGM;
+    [SerializeField] private AudioSource m_BGMplayer;
+    private float m_BGMVolume = 0.75f;
+    private List<AudioSource> m_AllBGMAudioSource = new List<AudioSource>();
 
     
 #if UNITY_EDITOR
@@ -105,6 +107,11 @@ public class MainGameManager : MonoBehaviour
         }else{
             SaveData<float>("Volume",0.1f);
         }
+        if((float)GetData<float>("BGMVolume") != 0){
+            m_BGMVolume = (float)GetData<float>("BGMVolume");
+        }else{
+            SaveData<float>("BGMVolume",0.1f);
+        }
 		Application.targetFrameRate = 50;
         
         // unlock pistol
@@ -115,7 +122,7 @@ public class MainGameManager : MonoBehaviour
         
         m_BgAnimator.Play("Hidden");
         AddNewAudioSource(m_AudioPlayer);
-        AddNewAudioSource(m_BGMplayer);
+        AddNewBGMAudioSource(m_BGMplayer);
     }
 
     public void SetSelectedLocation(MapLocationScriptable location){
@@ -280,29 +287,86 @@ public class MainGameManager : MonoBehaviour
         SaveData<float>("AimSensitivity",sensitivity);
     }
 
-    public void SetVolume(float volume)
+
+    public void SetBGMVolume(float volume)
+    {
+        m_BGMVolume = volume;
+        SaveData<float>("BGMVolume",volume);
+    }
+
+    public float GetBGMVolume()
+    {
+        if((float)GetData<float>("BGMVolume") != 0){
+            m_BGMVolume = (float)GetData<float>("BGMVolume");
+        }else{
+            SaveData<float>("BGMVolume",0.1f);
+        }
+        return m_BGMVolume;
+    }
+
+    public void SetSoundVolume(float volume)
     {
         m_Volume = volume;
         SaveData<float>("Volume",volume);
     }
     public float GetVolume()
     {
+        if((float)GetData<float>("Volume") != 0){
+            m_Volume = (float)GetData<float>("Volume");
+        }else{
+            SaveData<float>("Volume",0.1f);
+        }
         return m_Volume;
     }
     public float GetAimSensitivity()
     {
+        if((float)GetData<float>("AimSensitivity") != 0){
+            m_AimSensitivity = (float)GetData<float>("AimSensitivity");
+        }else{
+            SaveData<float>("AimSensitivity",0.5f);
+        }
         return m_AimSensitivity;
     }
+
 
     public void AddNewAudioSource(AudioSource audioSource)
     {
         m_AllAudioSource.Add(audioSource);
         audioSource.volume = m_Volume;
 
-        UpdateVolume();
+        UpdateSoundVolume();
     }
 
-    public void UpdateVolume()
+    public void UpdateBGMVolume()
+    {
+        // remove deleted audio Source
+        List<int> toBeRemove = new List<int>();
+        for (int i = 0; i < m_AllBGMAudioSource.Count; i++)
+        {
+            if (m_AllBGMAudioSource[i] != null)
+            {
+                m_AllBGMAudioSource[i].volume = m_BGMVolume;
+            }
+            else
+            {
+                toBeRemove.Add(i);
+            }
+        }
+        for (int i = 0; i < toBeRemove.Count; i++)
+        {
+            m_AllBGMAudioSource.RemoveAt(toBeRemove[i] - i);
+        }
+    }
+
+    public void AddNewBGMAudioSource(AudioSource audioSource)
+    {
+        m_AllBGMAudioSource.Add(audioSource);
+        audioSource.volume = m_BGMVolume;
+
+        UpdateSoundVolume();
+    }
+
+    public void UpdateSoundVolume()
     {
         // remove deleted audio Source
         List<int> toBeRemove = new List<int>();

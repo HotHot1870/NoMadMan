@@ -90,9 +90,8 @@ public class BaseDefenceResultPanel : MonoBehaviour
             totalGain += item.GooOnKill;
         }
 
-        // TODO : curretn version extra is fake 
 
-        float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp()*100f;
+        float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp();
         float gooReduceByHp = totalGain * (1-hpPresentage)/100f;
         m_HpLeft.text = "HP : "+hpPresentage+"% (-" + gooReduceByHp.ToString("0.#")+")";;
         float extra = BaseDefenceManager.GetInstance().GetLocationScriptable().ExtraReward;

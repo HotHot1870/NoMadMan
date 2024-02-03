@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1643168965}
-  m_IndirectSpecularColor: {r: 0.33493546, g: 0.6628107, b: 0.8949349, a: 1}
+  m_IndirectSpecularColor: {r: 0.21653506, g: 0.36403716, b: 0.47373945, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11864,7 +11864,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -12581,9 +12581,73 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1020696793}
     m_Modifications:
+    - target: {fileID: 348580235323600910, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 348580235323600910, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 348580235323600910, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 348580235323600910, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1971712377341594864, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_Name
       value: OptionPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341879310071027667, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341879310071027667, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341879310071027667, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341879310071027667, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923043719715270067, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923043719715270067, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923043719715270067, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923043719715270067, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196922982420708503, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196922982420708503, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196922982420708503, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196922982420708503, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5460909622367155433, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12591,6 +12655,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5460909622367155433, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586431876768850084, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586431876768850084, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586431876768850084, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586431876768850084, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749565688155788877, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
@@ -12679,6 +12759,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7240255279695454094, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630541159867742734, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630541159867742734, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630541159867742734, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8689996202336616167, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
@@ -15072,7 +15164,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_Intensity: 0.35
   m_Range: 10
   m_SpotAngle: 30
