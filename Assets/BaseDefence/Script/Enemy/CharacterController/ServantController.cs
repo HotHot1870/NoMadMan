@@ -67,7 +67,7 @@ public class ServantController : EnemyControllerBase
 
         foreach (var item in m_AllNormalBodypart)
         {
-            item.SetDamageMod(-0.75f * (1+BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.1f));
+            item.SetDamageMod(-0.5f * (1+BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.1f));
             item.ChangeBodyType(EnemyBodyPartEnum.Heal);
         }
 

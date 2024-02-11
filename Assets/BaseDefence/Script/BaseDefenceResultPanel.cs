@@ -36,11 +36,22 @@ public class BaseDefenceResultPanel : MonoBehaviour
         m_AllKilledEnemy.Add( enemyScriptable);
     }
 
+    // TODO : pp20 reload clip image missing
+
     public void Init(bool isWin){
         if(m_Self.activeSelf)
             return;
 
+        // End game Music
+        if (!isWin)
+        {
+            // lose
+            MainGameManager.GetInstance().ChangeBGM(BGM.Defeated,0.15f);
+        }else{
+            // win BGM
+            MainGameManager.GetInstance().ChangeBGM(BGM.None,1f);
 
+        }
         m_Self.SetActive(true);
         m_IsWin = isWin;
         m_ResultTitle.text = isWin?"Coast Clear":"Defeated";
@@ -70,7 +81,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
             var enemyBlockController = newEnemyBlock.GetComponent<EnemyBlockController>();
             m_AllEnemyBlock.Add(item.Id,enemyBlockController);
             enemyBlockController.Init(enemyScriptable);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.15f);
             int currentCount = 1;
             enemyBlockController.SetText( currentCount.ToString() );
 
@@ -81,7 +92,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
                 currentCount++;
                 enemyBlockController.SetText( currentCount.ToString() );
                 enemyBlockController.PlayGrowAnimation();
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.15f);
             }
         }
         
@@ -92,12 +103,12 @@ public class BaseDefenceResultPanel : MonoBehaviour
 
 
         float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp();
-        float gooReduceByHp = totalGain * (1-hpPresentage)/100f;
-        m_HpLeft.text = "HP : "+hpPresentage+"% (-" + gooReduceByHp.ToString("0.#")+")";;
+        float gooReduceByHp = totalGain * (1f-hpPresentage);
+        m_HpLeft.text = "HP : "+hpPresentage*100f+"% (-" + gooReduceByHp.ToString("0.#")+")";;
         float extra = BaseDefenceManager.GetInstance().GetLocationScriptable().ExtraReward;
         m_DifficultyBouns.text = "Difficulty Bouns : "+ extra*100f+"% (+" + (extra*totalGain).ToString("0.#")+")";
         
-        totalGain = totalGain + extra*totalGain - gooReduceByHp;
+        totalGain = Mathf.Clamp(totalGain + extra*totalGain - gooReduceByHp,0f,99999999f) ;
         m_TotalGainText.text = "Total : "+totalGain.ToString("0.#");
         
         
@@ -111,6 +122,9 @@ public class BaseDefenceResultPanel : MonoBehaviour
     
     public void OnClickBackFromResult(){
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
+
+        // TODO : hard coded , dont get audio clip from other , store in main game controller
+        MainGameManager.GetInstance().ChangeBGM(BGM.Map);
         // TODO : Hard Coded , try change it later
         // unlock gun by win 
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){

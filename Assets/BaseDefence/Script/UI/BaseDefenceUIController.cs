@@ -120,6 +120,7 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     private void ShowAssistPanel(){
+        m_AssistPanel.gameObject.SetActive(true);
         m_AssistPanel.Init();
     }
 
@@ -166,6 +167,7 @@ public class BaseDefenceUIController : MonoBehaviour
     }
 
     private void OnClickShowSwitchWeaponPanel(){
+        m_SwitchWeaponPanel.SetActive(true);
         m_SwitchWeaponAnimator.Play("Up");
         BaseDefenceManager.GetInstance().ChangeGameStage(BaseDefenceNameSpace.BaseDefenceStage.SwitchWeapon);
         m_ShootPanel.SetActive(false);

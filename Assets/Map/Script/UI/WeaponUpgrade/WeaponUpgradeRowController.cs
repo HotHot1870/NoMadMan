@@ -25,7 +25,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
         m_UpgradeDetail = upgradeDetail;
         m_GunScriptable = gunScriptable;
 
-        string upgradeSaveKey = m_GunScriptable.DisplayName+m_UpgradeDetail.UpgradeStat.ToString();
+        string upgradeSaveKey = m_GunScriptable.Id+m_UpgradeDetail.UpgradeStat.ToString();
         m_StatName.text = m_UpgradeDetail.UpgradeStat+" : "+ gunScriptable.GetStatValue(m_UpgradeDetail.UpgradeStat).ToString();
 
         m_UpgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey,"0");
@@ -79,7 +79,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
 
             // cost goo
             MainGameManager.GetInstance().ChangeGooAmount(m_UpgradeDetail.CostAndValue[m_UpgradeCount].Cost*-1);
-            string upgradeSaveKey = m_GunScriptable.DisplayName+m_UpgradeDetail.UpgradeStat.ToString();
+            string upgradeSaveKey = m_GunScriptable.Id+m_UpgradeDetail.UpgradeStat.ToString();
 /*
             m_UpgradeCount++;
             m_AllBlock[m_UpgradeCount-1].m_BG.color = Color.green;

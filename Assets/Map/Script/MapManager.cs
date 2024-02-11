@@ -29,6 +29,8 @@ public class MapManager : MonoBehaviour
     private ReflectionProbe baker;
     [SerializeField] private AudioSource m_AudioPlayer;
     [SerializeField] private AudioClip m_OnSelectSound;
+    [SerializeField] private Color m_RedFog;
+    [SerializeField] private Color m_WhiteFog;
 
 
     private void Awake()
@@ -138,6 +140,9 @@ public class MapManager : MonoBehaviour
             Debug.LogError($"Level {selectedLevel} Map environment not found ");
             return;
         }
+        // Red fog in level 2 and 3 (last 2 level)
+        RenderSettings.fogColor = selectedLevel <2?m_WhiteFog:m_RedFog;
+        RenderSettings.fogStartDistance = selectedLevel <2?35f:60f;
 
         m_SpawnedEnvironment = Instantiate(targetEnvironment.Prefeb,m_MapEnvironemntParent);
         // change sky box

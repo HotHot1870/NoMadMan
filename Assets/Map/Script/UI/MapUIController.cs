@@ -41,6 +41,7 @@ public class MapUIController : MonoBehaviour
 
 
     private void Start() {
+        m_OptionPanel.GetComponent<OptionMenuController>().Init(null) ;
         // TODO : Split all ui panel
         m_CoverAnimator.Play("Hidden");
         TurnOffAllPanel();

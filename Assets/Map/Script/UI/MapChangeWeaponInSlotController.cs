@@ -78,7 +78,7 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
         int curSelectedWeaponId =  (int)MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+weaponSlotIndex.ToString(),"-1") ; 
         if(curSelectedWeaponId > -1){
             GunScriptable targetGun = allWeapon.Find(x=>x.Id == curSelectedWeaponId);
-            bool isWeaponOwned = (int)MainGameManager.GetInstance().GetData<int>(targetGun.DisplayName+targetGun.Id.ToString(),"-1") ==1 ; 
+            bool isWeaponOwned = (int)MainGameManager.GetInstance().GetData<int>("WeaponUnlock"+targetGun.Id.ToString(),"-1") ==1 ; 
             SetWeaponListSelectedWeaponData( targetGun, isWeaponOwned);
             m_SelectedGunScriptable = targetGun;
         }else{
@@ -96,7 +96,7 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
 
         for (int i = 0; i < allWeapon.Count; i++)
         {
-            string gunUnlockKey = allWeapon[i].DisplayName+allWeapon[i].Id.ToString();
+            string gunUnlockKey = "WeaponUnlock"+allWeapon[i].Id.ToString();
             bool isUnlocked = System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>(gunUnlockKey))==1;
             bool isEquipbyOtherSlot = allSelectedWeaponId.Contains( allWeapon[i].Id);
             if( !isEquipbyOtherSlot && isUnlocked){

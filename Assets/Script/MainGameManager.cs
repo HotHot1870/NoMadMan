@@ -7,6 +7,15 @@ using UnityEditor;
 using UnityEngine.UI;
 
 
+public enum BGM
+{
+    None = 0,
+    MainMenu,
+    Map,
+    Battle,
+    Defeated
+}
+
 public class MainGameManager : MonoBehaviour
 {
     public static MainGameManager m_Instance = null;
@@ -35,6 +44,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private AudioClip m_MapBGM;
     [SerializeField] private AudioClip m_MainBGM;
     [SerializeField] private AudioClip m_BattleBGM;
+    [SerializeField] private AudioClip m_DefeatedBGM;
     [SerializeField] private AudioSource m_BGMplayer;
     private float m_BGMVolume = 0.75f;
     private List<AudioSource> m_AllBGMAudioSource = new List<AudioSource>();
@@ -89,9 +99,14 @@ public class MainGameManager : MonoBehaviour
         m_AudioPlayer.PlayOneShot(m_OnClickEndSound);
     }
 
-    public void PlayBGM(AudioClip clip){
-        m_BGMplayer.clip = clip;
-        m_BGMplayer.Play();
+    private void PlayBGM(AudioClip clip){
+        m_BGMplayer.volume = m_BGMVolume;
+        if(clip != null){
+            m_BGMplayer.clip = clip;
+            m_BGMplayer.Play();
+        }else{
+            m_BGMplayer.Stop();
+        }
     }
 
     private void Start()
@@ -105,17 +120,17 @@ public class MainGameManager : MonoBehaviour
         if((float)GetData<float>("Volume") != 0){
             m_Volume = (float)GetData<float>("Volume");
         }else{
-            SaveData<float>("Volume",0.1f);
+            SaveData<float>("Volume",0.5f);
         }
         if((float)GetData<float>("BGMVolume") != 0){
             m_BGMVolume = (float)GetData<float>("BGMVolume");
         }else{
-            SaveData<float>("BGMVolume",0.1f);
+            SaveData<float>("BGMVolume",0.5f);
         }
 		Application.targetFrameRate = 50;
         
         // unlock pistol
-        SaveData<int>(m_AllWeapon[0].DisplayName+m_AllWeapon[0].Id.ToString(),1);
+        SaveData<int>("WeaponUnlock"+m_AllWeapon[0].Id.ToString(),1);
         // can use pistol by default , if no gun selected
         if((int)System.Convert.ToSingle(GetData<int>("SelectedWeapon"+0.ToString(), "-1")) < 0)
             SaveData<int>("SelectedWeapon"+0.ToString(),0);
@@ -248,7 +263,7 @@ public class MainGameManager : MonoBehaviour
     public void UnlockGun(int id){
         var targetGun = m_AllWeapon.Find(x=>x.Id==id);
 
-        SaveData<int>(targetGun.DisplayName+targetGun.Id.ToString(),1);
+        SaveData<int>("WeaponUnlock"+targetGun.Id.ToString(),1);
     }
 
 
@@ -262,8 +277,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetBaseDefenceScene(MapLocationScriptable location){
-        
-        PlayBGM(m_BattleBGM);
+        ChangeBGM(BGM.Battle);
         LoadSceneWithTransition("BaseDefence", 
             ()=>BaseDefenceManager.GetInstance().StartWave(location));
     }
@@ -274,12 +288,46 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void SetMapScene(){
-        PlayBGM(m_MapBGM);
+        ChangeBGM(BGM.Map);
         LoadSceneWithTransition("Map");
     }
 
 
+    public void ChangeBGM(BGM bgm,float fadeOutTime = 1f){
+        StartCoroutine(FadeOutAndInBGM(bgm));
+    }
 
+    private IEnumerator FadeOutAndInBGM(BGM bgm){
+        float duration = 1.5f;
+        float passTime = 0;
+        while (passTime <duration)
+        {
+            passTime+=Time.deltaTime;
+            m_BGMplayer.volume = Mathf.Lerp(m_BGMVolume,0,passTime/duration);
+            yield return null;
+        }
+
+        switch (bgm)
+        {
+            case BGM.MainMenu:
+                PlayBGM(m_MainBGM);
+            break;
+            case BGM.Map:
+                PlayBGM(m_MapBGM);
+            break;
+            case BGM.Battle:
+                PlayBGM(m_BattleBGM);
+            break;
+            case BGM.Defeated:
+                PlayBGM(m_DefeatedBGM);
+            break;
+            case BGM.None:
+                PlayBGM(null);
+            break;
+            default:
+            break;
+        }
+    }
 
     public void SetAimSensitivity(float sensitivity)
     {

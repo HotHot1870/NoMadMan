@@ -16,32 +16,29 @@ public class OptionMenuController : MonoBehaviour
     [SerializeField] private Animator m_BgAnimator;
     [Header("BGM")]
     [SerializeField] private Slider m_BGMVolumeSlider;
-    [SerializeField] private AudioClip m_MainBGM;
-    [SerializeField] private AudioClip m_MapBGM;
-    [SerializeField] private AudioClip m_BattleBGM;
 
     void Start(){
         m_BgAnimator?.Play("Hidden");
         
-        m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,1f, MainGameManager.GetInstance().GetAimSensitivity() );
-        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetVolume() );
-        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetBGMVolume() );
+        m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,2f, MainGameManager.GetInstance().GetAimSensitivity() );
+        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetVolume() );
+        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetBGMVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1f,m_AimSensitivitySlider.normalizedValue) );
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue) );
         });
 
         m_SoundVolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1.25f,m_SoundVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1f,m_SoundVolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateSoundVolume();
         });
 
         
-        m_BGMVolumeSlider.value = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetBGMVolume() );
+        m_BGMVolumeSlider.value = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetBGMVolume() );
 
         m_BGMVolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1.25f,m_BGMVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1f,m_BGMVolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateBGMVolume();
         });
         
@@ -85,23 +82,23 @@ public class OptionMenuController : MonoBehaviour
     public void Init(Action onClickResume)
     {
         m_AimSensitivitySlider.normalizedValue = Mathf.InverseLerp(0.1f,2f, MainGameManager.GetInstance().GetAimSensitivity() );
-        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,2f, MainGameManager.GetInstance().GetVolume() );
+        m_SoundVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetVolume() );
 
 
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 1.25f,m_AimSensitivitySlider.normalizedValue) );
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue) );
         });
 
         m_SoundVolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1.25f,m_SoundVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().SetSoundVolume( Mathf.Lerp(0f, 1f,m_SoundVolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateSoundVolume();
         });        
         
-        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1.25f, MainGameManager.GetInstance().GetBGMVolume() );
+        m_BGMVolumeSlider.normalizedValue = Mathf.InverseLerp(0f,1f, MainGameManager.GetInstance().GetBGMVolume() );
 
 
         m_BGMVolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1.25f,m_BGMVolumeSlider.normalizedValue) );
+            MainGameManager.GetInstance().SetBGMVolume( Mathf.Lerp(0f, 1f,m_BGMVolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateBGMVolume();
         });
         
@@ -115,15 +112,15 @@ public class OptionMenuController : MonoBehaviour
             switch (SceneManager.GetActiveScene().name)
             {
                 case "BaseDefence":
-                    MainGameManager.GetInstance().PlayBGM(m_MapBGM);
+                    MainGameManager.GetInstance().ChangeBGM(BGM.Map);
                     MainGameManager.GetInstance().LoadSceneWithTransition("Map");
                 return;
                 case "Map":
-                    MainGameManager.GetInstance().PlayBGM(m_MainBGM);
+                    MainGameManager.GetInstance().ChangeBGM(BGM.MainMenu);
                     MainGameManager.GetInstance().LoadSceneWithTransition("MainMenu");
                 return;
                 default:
-                    MainGameManager.GetInstance().PlayBGM(m_BattleBGM);
+                    MainGameManager.GetInstance().ChangeBGM(BGM.Battle);
                     m_BgAnimator?.Play("Hidden");
                 break;
             }

@@ -42,7 +42,7 @@ public class AssistPanelController : MonoBehaviour
         }
         
         if( (int)MainGameManager.GetInstance().GetData<int>("Win12") == 1 || m_IsTest){
-            m_ShieldBtn.onClick.AddListener(OnClickNet);
+            m_ShieldBtn.onClick.AddListener(OnClickShield);
         }else{
             m_ShieldBtn.gameObject.SetActive(false);
         }

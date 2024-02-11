@@ -13951,7 +13951,7 @@ MonoBehaviour:
   m_EnemyBlockPrefab: {fileID: 6008397871600903575, guid: 3a2be1fe9cb6a46448e36c90bc680ddb, type: 3}
   m_CloseBtn: {fileID: 2121934170}
   m_AudioPlayer: {fileID: 709838544}
-  m_SpawnSound: {fileID: 8300000, guid: df4336d28f6d5dd45acab98cd5433778, type: 3}
+  m_SpawnSound: {fileID: 8300000, guid: 21974ad73392a234d90a3b2749916f2a, type: 3}
 --- !u!82 &709838544
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24673,6 +24673,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1794693721}
     m_Modifications:
+    - target: {fileID: 120866788712785658, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120866788712785658, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120866788712785658, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 348580235323600910, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -24863,6 +24875,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8630541159867742734, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638611701698952310, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638611701698952310, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8689996202336616167, guid: 8a3d600699dcc4d4991b974022835ea9, type: 3}
@@ -25269,8 +25289,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
-  m_Intensity: 0.7
+  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

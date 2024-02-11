@@ -64,7 +64,9 @@ public class XinController : EnemyControllerBase
         int randomInt = UnityEngine.Random.Range(0,m_AllXinBodyPart.Count);
         for (int i = 0; i < m_AllXinBodyPart.Count; i++)
         {
-            m_AllXinBodyPart[i].SetXinBodyPart(i!=randomInt);
+            int index = i;
+            Debug.Log(index!=randomInt);
+            m_AllXinBodyPart[i].SetXinBodyPart(index!=randomInt);
         }
     }
     public void StartWave(){

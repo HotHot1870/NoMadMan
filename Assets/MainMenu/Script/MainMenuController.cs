@@ -33,7 +33,7 @@ public class MainMenuController : MonoBehaviour
             var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
             
             // unlock pistol
-            MainGameManager.GetInstance().SaveData<int>(allWeapon.Find(x=>x.Id ==0).DisplayName+0.ToString(),1);
+            MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+0.ToString(),1);
             // can use pistol by default , if no gun selected
             if((int)System.Convert.ToSingle(MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+0.ToString(), "-1")) < 0)
                 MainGameManager.GetInstance().SaveData<int>("SelectedWeapon"+0.ToString(),0);

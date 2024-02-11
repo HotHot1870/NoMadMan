@@ -116,7 +116,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         //m_SelectedWeaponPuncture.gameObject.SetActive(m_SelectedGun.GunStats.BulletType == BulletType.Puncture);
 
 
-        string gunUnlockKey = m_SelectedGun.DisplayName+m_SelectedGun.Id;
+        string gunUnlockKey = "WeaponUnlock"+m_SelectedGun.Id;
 
         bool isOwned = (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(gunUnlockKey)) == 1;
         m_SelectedWeaponUnlockCost.gameObject.SetActive(!isOwned);
@@ -143,7 +143,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             var newWeaponListSlot = Instantiate(m_WeaponListGrid, m_WeaponListContent);
             var gun = allWeapon[index];
             
-            string gunUnlockKey = gun.DisplayName+gun.Id.ToString();
+            string gunUnlockKey = "WeaponUnlock"+gun.Id.ToString();
 
             bool isOwned = (int)System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(gunUnlockKey)) == 1;
             var config = new WeaponUpgradeGridConfig{

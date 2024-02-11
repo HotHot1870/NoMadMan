@@ -13,18 +13,18 @@ public enum EnemyBodyPartEnum
 
 public class EnemyBodyPart : MonoBehaviour
 {
-    [SerializeField] private EnemyControllerBase m_EnemyController;
+    [SerializeField] protected EnemyControllerBase m_EnemyController;
     [SerializeField] private ParticleSystem m_OnHitEffect=null;
     [SerializeField] private float m_DamageMod = 1;
     [SerializeField] private EnemyBodyPartEnum m_BodyType;
-    [SerializeField] private MeshRenderer m_Renderer = null;
-    [SerializeField] private SkinnedMeshRenderer m_SkinRenderer = null;
+    [SerializeField] protected MeshRenderer m_Renderer = null;
+    [SerializeField] protected SkinnedMeshRenderer m_SkinRenderer = null;
     [SerializeField] private float m_BodyPartHpPresentage = 1f;
-    private Collider m_Collider;
+    protected Collider m_Collider;
     private bool m_CanPlayHitSound = true;
     private float m_EmissionDelay = 0;
 
-    private IEnumerator Start()
+    protected virtual IEnumerator Start()
     {
         m_Collider = this.GetComponent<Collider>();
         if(m_Renderer != null)

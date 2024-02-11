@@ -19,13 +19,13 @@ MonoBehaviour:
     - StartDragSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
       StartDragUnderText: Drag
       StartDragPosition: {x: 0, y: 50}
-      MainGunSpriteOnStart: {fileID: 21300000, guid: 13a7d4ea08cc181478619b245278959b, type: 3}
+      MainGunSpriteOnStart: {fileID: 21300000, guid: cfca97a2f63592945b9b8045a8c289b5, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 4103461729302453843, guid: e9a929f3a6a704a4c949a6e4b89c002b, type: 3}
       EndDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       EndDragUnderText: 
       EndDragPosition: {x: 300, y: 200}
-      MainGunSpriteOnEnd: {fileID: 21300000, guid: 13a7d4ea08cc181478619b245278959b, type: 3}
+      MainGunSpriteOnEnd: {fileID: 21300000, guid: cfca97a2f63592945b9b8045a8c289b5, type: 3}
       ResultAction: 80
     TapFunction:
     - TapEndSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
@@ -38,7 +38,7 @@ MonoBehaviour:
     - StartDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       StartDragUnderText: Drag
       StartDragPosition: {x: 400, y: 200}
-      MainGunSpriteOnStart: {fileID: 21300000, guid: 13a7d4ea08cc181478619b245278959b, type: 3}
+      MainGunSpriteOnStart: {fileID: 21300000, guid: cfca97a2f63592945b9b8045a8c289b5, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 4103461729302453843, guid: e9a929f3a6a704a4c949a6e4b89c002b, type: 3}
       EndDragSound: {fileID: 8300000, guid: 0c08d8bb7fd92524da8a3f7cb8c86ee1, type: 3}
@@ -54,6 +54,7 @@ MonoBehaviour:
       ResultAction: 2
     ExtraImages:
     - Position: {x: 400, y: 200}
+      Size: {x: 100, y: 100}
       ImagePrefab: {fileID: 3865114204791723661, guid: fcbe4a5eadba8874583665f7b9e9731b, type: 3}
   - DragFunction: []
     TapFunction:

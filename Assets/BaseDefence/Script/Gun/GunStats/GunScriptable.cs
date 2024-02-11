@@ -90,7 +90,7 @@ public class GunScriptable : ScriptableObject
     public object GetUpgradedGunStat(GunScriptableStatEnum statName, object baseValue){
         var targetList = UpgradeScriptable.UpgradeDetails.Where(x=>x.UpgradeStat == statName).ToList();
         if(targetList.Count>0){
-            string upgradeSaveKey = DisplayName+targetList[0].UpgradeStat.ToString() ;
+            string upgradeSaveKey = Id+targetList[0].UpgradeStat.ToString() ;
             int upgradeCount = (int)MainGameManager.GetInstance().GetData<int>(upgradeSaveKey) ;
             if(upgradeCount-1 <0){
                 return baseValue;
