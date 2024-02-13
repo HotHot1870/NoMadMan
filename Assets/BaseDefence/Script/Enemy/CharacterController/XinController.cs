@@ -48,6 +48,10 @@ public class XinController : EnemyControllerBase
     }
 
     public IEnumerator WaveEnd(){
+        if(m_HpController==null)
+            m_HpController = BaseDefenceManager.GetInstance().GetXinHpController();
+
+        m_HpController.ResetRound();
         ResetAllWeakPoint();
         yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtXin();
@@ -65,7 +69,6 @@ public class XinController : EnemyControllerBase
         for (int i = 0; i < m_AllXinBodyPart.Count; i++)
         {
             int index = i;
-            Debug.Log(index!=randomInt);
             m_AllXinBodyPart[i].SetXinBodyPart(index!=randomInt);
         }
     }
@@ -111,7 +114,6 @@ public class XinController : EnemyControllerBase
             }
         }
 
-        m_HpController.ResetRound();
 
         // tell all other servant to die because ondead only call once on hp reach 0
         foreach (var item in m_AllServants)
@@ -183,13 +185,16 @@ public class XinController : EnemyControllerBase
 
         float passtime = 0f;
         float duration = 1f;
-        OnDead();
         while (passtime<duration)
         {
             passtime += Time.deltaTime;
             foreach (var item in m_XinSkinMesh.materials)
             {
                 item.SetFloat("_Normalized",(duration-passtime)/duration);
+            }
+            foreach (var item in m_AllXinBodyPart)
+            {
+                item.SetNormalized((duration-passtime)/duration);
             }
             yield return null;
         }
@@ -198,8 +203,10 @@ public class XinController : EnemyControllerBase
         // spawn dying xin
         var dyingXin  = Instantiate(m_DyingXinPrefab);
         dyingXin.transform.position = m_Self.transform.position;
+        BaseDefenceManager.GetInstance().AddEnemyToList(dyingXin.transform);
         dyingXin.GetComponent<DyingXinController>().Init(m_ServantDestination[0].position);
-        Destroy(m_Self);
+        yield return null;
+        OnDead();
     }
 
     // xin die , win

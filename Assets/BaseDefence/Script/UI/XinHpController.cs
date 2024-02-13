@@ -79,6 +79,11 @@ public class XinHpController : MonoBehaviour
     }
 
     public void ChangeHp(float change){
+        // already dying 
+        if(m_XinController.m_IsDyingEffect)
+            return;
+            
+        
         m_CurHp += change;
         if(m_CurHp<=0){
             // close Hp bar

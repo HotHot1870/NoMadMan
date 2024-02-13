@@ -294,11 +294,11 @@ public class MainGameManager : MonoBehaviour
 
 
     public void ChangeBGM(BGM bgm,float fadeOutTime = 1f){
-        StartCoroutine(FadeOutAndInBGM(bgm));
+        StartCoroutine(FadeOutAndInBGM(bgm, fadeOutTime));
     }
 
-    private IEnumerator FadeOutAndInBGM(BGM bgm){
-        float duration = 1.5f;
+    private IEnumerator FadeOutAndInBGM(BGM bgm,float fadeOutTime){
+        float duration = fadeOutTime;
         float passTime = 0;
         while (passTime <duration)
         {

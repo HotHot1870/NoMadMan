@@ -147,7 +147,10 @@ public class RemnantController : EnemyControllerBase
         yield return new WaitForSeconds(m_AttackAnimationStartUp);
         if(IsThisDead)
             yield break;
-        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+            
+        PlayHitPlayerSound();
+        var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage,hitScreenPos);
         StartCoroutine(Attack());
     }
 
@@ -170,7 +173,11 @@ public class RemnantController : EnemyControllerBase
             yield return new WaitForSeconds(m_AttackAnimationStartUp);
             if(IsThisDead)
                 yield break;
-            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+
+            
+            PlayHitPlayerSound();
+            var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);
+            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage,hitScreenPos);
         }
 
     }

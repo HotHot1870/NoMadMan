@@ -35,6 +35,7 @@ public class DyingXinController : EnemyControllerBase
     }
 
     private void SetResult(){
+        BaseDefenceManager.GetInstance().ChangeGameStage( BaseDefenceNameSpace.BaseDefenceStage.Result );
         BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
     }
 }

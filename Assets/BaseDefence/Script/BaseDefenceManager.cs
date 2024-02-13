@@ -45,6 +45,7 @@ namespace BaseDefenceNameSpace
 public class BaseDefenceManager : MonoBehaviour
 {
     public static BaseDefenceManager m_Instance = null;
+    [SerializeField] private BloodPanel m_BloodPanel;
     [SerializeField] private EnemySpawnController m_EnemySpawnController;
     [SerializeField] private BaseDefenceUIController m_BaseDefenceUIController;
     [SerializeField] private GunShootController m_GunShootController;
@@ -300,11 +301,15 @@ public class BaseDefenceManager : MonoBehaviour
         return m_GunShootController;
     }
 
-    public void OnPlayerHit(float damage){
+    public void OnPlayerHit(float damage, Vector2 hitScreenPos){
         if(m_GameStage == BaseDefenceStage.Result){
             // game over already
             return;
         }
+
+        // Blood effect
+        m_BloodPanel.SpawnBloodEffect(hitScreenPos);
+        // TODO : Hit sound
         m_TotalHpBarStayTime = 4;
         ChangeHp(-damage*(1f+m_CurlocationData.DamageMutation/100f));
         //float CurHp = MainGameManager.GetInstance().GetCurHp();

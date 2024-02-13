@@ -65,8 +65,8 @@ public class EnemySpawnController : MonoBehaviour
                 
                 if(m_IsFinalWaveStarted){
                         // all dead
-                        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
                         BaseDefenceManager.GetInstance().ChangeGameStage(BaseDefenceStage.Result);
+                        BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
                     return;
                 }
 

@@ -8,10 +8,13 @@ public class XinBodyPart : EnemyBodyPart
     [SerializeField] private Color m_HealColor;
     [SerializeField] private Color m_Orange;
 
+    protected void Awake(){
+        m_Collider = this.GetComponent<BoxCollider>();
+        ChangeBodyType(EnemyBodyPartEnum.Crit);
+    }
+
     protected override IEnumerator Start()
     {
-        
-        m_Collider = this.GetComponent<Collider>();
         if(m_Renderer != null)
             m_Renderer.material.SetFloat("_Normalized",  0);
 
@@ -34,7 +37,7 @@ public class XinBodyPart : EnemyBodyPart
             foreach (var item in m_MeshRenderer.materials)
             {
                 item.SetColor("_MainColor",m_Orange);
-                ChangeBodyType(EnemyBodyPartEnum.Heal);
+                //ChangeBodyType(EnemyBodyPartEnum.Heal);
                 StartCoroutine(HiddenEffect());
                 m_Collider.enabled = false;
             }
@@ -43,9 +46,26 @@ public class XinBodyPart : EnemyBodyPart
             {
                 item.SetColor("_MainColor",m_Orange);
                 SetDamageMod(1);
-                ChangeBodyType(EnemyBodyPartEnum.Crit);
                 StartCoroutine(ShowEffect());
                 m_Collider.enabled = true;
+            }
+        }
+    }
+
+    public void SetNormalized(float normalized, bool hideOnLower = true){
+        if(m_Renderer != null){
+            foreach (var item in m_Renderer.materials)
+            {
+                if(!hideOnLower && normalized < item.GetFloat("_Normalized"))
+                    item.SetFloat("_Normalized",  normalized);
+            }
+        }
+
+        if(m_SkinRenderer != null){
+            foreach (var item in m_SkinRenderer.materials)
+            { 
+                if(!hideOnLower && normalized < item.GetFloat("_Normalized"))
+                    item.SetFloat("_Normalized",  normalized);
             }
         }
     }
@@ -85,7 +105,7 @@ public class XinBodyPart : EnemyBodyPart
         }
     }
 
-        private IEnumerator ShowEffect(){
+    private IEnumerator ShowEffect(){
         if(m_Renderer == null && m_SkinRenderer == null)
             yield break;
 

@@ -46,7 +46,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
         if (!isWin)
         {
             // lose
-            MainGameManager.GetInstance().ChangeBGM(BGM.Defeated,0.15f);
+            MainGameManager.GetInstance().ChangeBGM(BGM.Defeated,0f);
         }else{
             // win BGM
             MainGameManager.GetInstance().ChangeBGM(BGM.None,1f);

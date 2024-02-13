@@ -13,13 +13,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button m_GainGooBtn;
     [SerializeField] private Button m_unlockAllLevelBtn;
     [SerializeField] private GameObject m_OptionPanel;
-    [SerializeField] private TMP_Text m_PlayerName;
+    //[SerializeField] private TMP_Text m_PlayerName;
 
 
     void Start()
     {
         m_OptionPanel.GetComponent<OptionMenuController>().Init(null);
-        m_PlayerName.text = MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim();
+        //m_PlayerName.text = MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim();
         m_GainGooBtn.onClick.AddListener(()=>{
             float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
             PlayerPrefs.SetFloat("Goo",curGoo+10000);

@@ -27,6 +27,8 @@ public class ServantController : EnemyControllerBase
     private bool m_IsRecovering = false;
     private Coroutine m_Recovering = null;
 
+    // TODO : net effect
+
 
     private IEnumerator Start() {
         m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
@@ -67,7 +69,7 @@ public class ServantController : EnemyControllerBase
 
         foreach (var item in m_AllNormalBodypart)
         {
-            item.SetDamageMod(-0.5f * (1+BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.1f));
+            item.SetDamageMod(-0.5f * (1+BaseDefenceManager.GetInstance().GetXinHpController().GetSkullCount()*0.05f));
             item.ChangeBodyType(EnemyBodyPartEnum.Heal);
         }
 
@@ -99,7 +101,10 @@ public class ServantController : EnemyControllerBase
             yield return new WaitForSeconds(m_AttackStartUp);
             if(IsThisDead)
                 yield break;
-            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+              
+            PlayHitPlayerSound();
+            var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);  
+            BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage, hitScreenPos);
         }
         StartCoroutine(Attack());
     }
@@ -183,7 +188,10 @@ public class ServantController : EnemyControllerBase
                     }
                     if(IsThisDead)
                         yield break;
-                    BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage); 
+
+                    PlayHitPlayerSound();
+                    var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);  
+                    BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage,hitScreenPos); 
                     yield return null;
         }
     }

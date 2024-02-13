@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,12 +31,16 @@ public abstract class EnemyControllerBase : MonoBehaviour
     protected Camera MainCamera;
     protected int SpawnId;
     [SerializeField] protected ParticleSystem m_ExplodeHitParticle;
+    [SerializeField] protected AudioSource m_HitPlayerSoundPlayer;
+    [SerializeField] protected AudioClip m_HitPlayerSound;
     [SerializeField] protected List<MeshRenderer> m_AllNetMeshRenderer = new List<MeshRenderer>();
     [SerializeField] protected List<SkinnedMeshRenderer> m_AllNetSkinnedMeshRenderer = new List<SkinnedMeshRenderer>();
     protected bool m_IsNeted = false;
     private Coroutine m_HideHpCoroutine = null;
  
-    
+    void Start(){
+        MainGameManager.GetInstance().AddNewAudioSource(m_HitPlayerSoundPlayer);
+    }
     
     public virtual void Init(EnemyControllerInitConfig config){
         Scriptable = config.scriptable;
@@ -166,6 +171,10 @@ public abstract class EnemyControllerBase : MonoBehaviour
 
     public EnemyScriptable GetScriptable(){
         return Scriptable;
+    }
+
+    protected void PlayHitPlayerSound(){
+        m_HitPlayerSoundPlayer.PlayOneShot(m_HitPlayerSound);
     }
 
 

@@ -57,7 +57,9 @@ public class GhostController : EnemyControllerBase
         if(IsThisDead )
             return;
 
-        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage);
+        PlayHitPlayerSound();
+        var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);
+        BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage,hitScreenPos);
         OnDead();
     }
 

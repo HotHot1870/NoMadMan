@@ -160,9 +160,9 @@ public class GunShootController : MonoBehaviour
     {
         while (m_CurrentAmmo > 0 )
         {
-            if(BaseDefenceManager.GetInstance().GetCurHp() <=0){
+            if(BaseDefenceManager.GetInstance().GetCurHp() <=0 || BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.Result)
                 yield break;
-            }
+            
             Shoot();
             yield return null;
         }
@@ -174,7 +174,7 @@ public class GunShootController : MonoBehaviour
 
     private void Shoot()
     {
-        if (m_CurrentShootCoolDown > 0)
+        if (m_CurrentShootCoolDown > 0 || BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.Result)
             return;
 
         if(BaseDefenceManager.GetInstance().GetCurHp() <=0)
