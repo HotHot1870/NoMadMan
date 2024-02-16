@@ -38,11 +38,9 @@ public abstract class EnemyControllerBase : MonoBehaviour
     protected bool m_IsNeted = false;
     private Coroutine m_HideHpCoroutine = null;
  
-    void Start(){
-        MainGameManager.GetInstance().AddNewAudioSource(m_HitPlayerSoundPlayer);
-    }
     
     public virtual void Init(EnemyControllerInitConfig config){
+        MainGameManager.GetInstance().AddNewAudioSource(m_HitPlayerSoundPlayer);
         Scriptable = config.scriptable;
         Destination = config.destination;
         CurHp = GetMaxHp();
@@ -174,7 +172,8 @@ public abstract class EnemyControllerBase : MonoBehaviour
     }
 
     protected void PlayHitPlayerSound(){
-        m_HitPlayerSoundPlayer.PlayOneShot(m_HitPlayerSound);
+        if(BaseDefenceManager.GetInstance().GameStage != BaseDefenceNameSpace.BaseDefenceStage.Result)
+            m_HitPlayerSoundPlayer.PlayOneShot(m_HitPlayerSound);
     }
 
 

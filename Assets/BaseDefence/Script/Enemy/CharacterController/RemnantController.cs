@@ -164,7 +164,7 @@ public class RemnantController : EnemyControllerBase
             m_TargetAnimator.speed = 1;
             // wait delay
             //m_TargetAnimator.Play("Idle");
-            yield return new WaitForSeconds(Scriptable.AttackDelay);
+            yield return new WaitForSeconds(Scriptable.AttackDelay+UnityEngine.Random.Range(0,0.25f));
             if(IsThisDead)
                 yield break;
             

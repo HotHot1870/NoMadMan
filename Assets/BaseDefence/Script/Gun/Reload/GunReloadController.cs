@@ -233,7 +233,9 @@ public class GunReloadController : MonoBehaviour
         if(m_IsDraging)
             return;
 
-        m_GunReloadAudioSource.PlayOneShot(dragFunction.StartDragSound);
+        if(dragFunction.StartDragSound != null)
+            m_GunReloadAudioSource.PlayOneShot(dragFunction.StartDragSound);
+            
         m_IsDraging = true;
         //m_Gray.SetActive(m_IsDraging);
 

@@ -41,7 +41,7 @@ public class MapLocationController : MonoBehaviour
                 break;
             }
             var targetScriptable = allLocationScriptable.Find(x=>x.Id==item);
-            if( System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>(targetScriptable.DisplayName+item) ) <=0f ){
+            if( System.Convert.ToSingle( MainGameManager.GetInstance().GetData<int>("Win"+item) ) <=0f ){
 
                 m_ShouldShowCorruption = true;
                 break;
