@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
   m_Name: RocketLauncher_Upgrade
   m_EditorClassIdentifier: 
-  Id: 36
-  WeaponId: 7
+  Id: 40
+  WeaponId: 8
   UpgradeDetails:
   - UpgradeStat: 0
     CostAndValue:
     - Cost: 3000
-      UpgradeValue: 110
-    - Cost: 6000
-      UpgradeValue: 120
-    - Cost: 9000
       UpgradeValue: 130
-    - Cost: 12000
+    - Cost: 6000
       UpgradeValue: 140
-    - Cost: 15000
+    - Cost: 9000
       UpgradeValue: 150
+    - Cost: 12000
+      UpgradeValue: 160
+    - Cost: 15000
+      UpgradeValue: 170
   - UpgradeStat: 4
     CostAndValue:
     - Cost: 1000

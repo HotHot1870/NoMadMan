@@ -16,7 +16,8 @@ public class XinController : EnemyControllerBase
     [SerializeField] private List<XinBodyPart> m_AllXinBodyPart = new List<XinBodyPart>();
     [SerializeField] private List<Transform> m_ServantSpawnPoint = new List<Transform>();
     [SerializeField] private List<Transform> m_ServantDestination = new List<Transform>();
-    [SerializeField] private GameObject m_DyingXinPrefab = null;
+    [SerializeField] private GameObject m_DyingXinPrefab = null;    
+    [SerializeField] private GameObject m_Star;
     private List<Transform> m_AllServants = new List<Transform>();
     private XinHpController m_HpController = null;
     private GameObject m_SpawnBall = null;
@@ -27,6 +28,9 @@ public class XinController : EnemyControllerBase
         if(m_ServantScriptable == null){
             Debug.Log("missing serveant scriptable");
         }
+
+        m_Star.SetActive(BaseDefenceManager.GetInstance().GetLocationScriptable().Id==20);
+        
         BaseDefenceManager.GetInstance().LookAtXin();
         StartCoroutine(WaveEnd());
         m_HpController = BaseDefenceManager.GetInstance().GetXinHpController();

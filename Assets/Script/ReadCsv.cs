@@ -488,7 +488,7 @@ public class ReadCsv : MonoBehaviour
         string json = Resources.Load<TextAsset>("CSV/Dialog").ToString();
 
         var contents = json.Split('\n',',');
-        int collumeCount = 6;
+        int collumeCount = 5;
         for (int i = collumeCount; i < contents.Length; i+=collumeCount)
         {
             int index = i;
@@ -497,27 +497,23 @@ public class ReadCsv : MonoBehaviour
             DialogScriptable DialogScriptable = ScriptableObject.CreateInstance<DialogScriptable>();
 
             DialogScriptable.Id = int.Parse(contents[colume]);
-            colume++;
-            string displayName = DialogScriptable.Id.ToString()+contents[colume].Trim();
-            DialogScriptable.SpeakerName = contents[colume].Trim();
+            string displayName = DialogScriptable.Id.ToString().Trim();
             colume++;
             AssetDatabase.CreateAsset(DialogScriptable, m_ScriptablePath+"/Dialog/"+displayName.Replace(" ", "")+".asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            // tra chinese
+            // TODO : tra chinese
             colume++;
-            // sim chinese
+            // TODO : sim chinese
             colume++;
             DialogScriptable.EngDialog = contents[colume].Trim();
             DialogScriptable.EngDialog = ReplaceText(DialogScriptable.EngDialog);
             colume++;
-            foreach (var item in contents[colume].Split('|'))
-            {
-                int tragetInt = -2;
-                if(int.TryParse(item, out tragetInt))
-                    DialogScriptable.NextId.Add(tragetInt);
-            }
+            int tragetInt = -2;
+            if(int.TryParse(contents[colume], out tragetInt))
+                DialogScriptable.NextId.Add(tragetInt);
+            
             allDialogs.Add(DialogScriptable.Id,DialogScriptable);
 
             allDialogScriptable.Add(DialogScriptable);
@@ -591,7 +587,7 @@ public class ReadCsv : MonoBehaviour
 
         
         // Dialog
-        www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=287695030&single=true&output=csv");
+        www = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/e/2PACX-1vQy-u5Mkn62XtESQPB1QMFcG6udxGm9uIIegghRND3_fufm6GlGznw_4NOqTTIeVGzdIWtex3QWZnh7/pub?gid=1308878352&single=true&output=csv");
         yield return www.SendWebRequest();
         if(www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError){
             Debug.Log("Error: " + www.error);

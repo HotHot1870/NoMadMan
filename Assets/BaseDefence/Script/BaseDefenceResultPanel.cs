@@ -21,6 +21,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioSource m_AudioPlayer;
     [SerializeField] private AudioClip m_SpawnSound;
+    [SerializeField] private AudioClip m_ShotSound;
     private bool m_IsWin = false;
     private List<EnemyScriptable> m_AllKilledEnemy = new List<EnemyScriptable>();
     private Dictionary<int,EnemyBlockController> m_AllEnemyBlock = new Dictionary<int,EnemyBlockController>();
@@ -102,14 +103,22 @@ public class BaseDefenceResultPanel : MonoBehaviour
         }
 
 
-        float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp();
-        float gooReduceByHp = totalGain * (1f-hpPresentage);
-        m_HpLeft.text = "HP : "+hpPresentage*100f+"% (-" + gooReduceByHp.ToString("0.#")+")";;
         float extra = BaseDefenceManager.GetInstance().GetLocationScriptable().ExtraReward;
         m_DifficultyBouns.text = "Difficulty Bouns : "+ extra*100f+"% (+" + (extra*totalGain).ToString("0.#")+")";
+        m_AudioPlayer.PlayOneShot(m_ShotSound);
+        yield return new WaitForSeconds(0.45f);
+
+        float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp();
+        float gooReduceByHp = totalGain * (1f-hpPresentage);
+        m_HpLeft.text = "HP : "+hpPresentage*100f+"% (-" + gooReduceByHp.ToString("0.#")+")";
+        m_AudioPlayer.PlayOneShot(m_ShotSound);
+        yield return new WaitForSeconds(0.45f);
+
         
         totalGain = Mathf.Clamp(totalGain + extra*totalGain - gooReduceByHp,0f,99999999f) ;
-        m_TotalGainText.text = "Total : "+totalGain.ToString("0.#");
+        float total = MainGameManager.GetInstance().GetGooAmount()+totalGain;
+        m_TotalGainText.text = "Total : "+ total.ToString("0.#") +"(+"+totalGain.ToString("0.#")+")";
+        m_AudioPlayer.PlayOneShot(m_ShotSound);
         
         
         MainGameManager.GetInstance().ChangeGooAmount(totalGain);

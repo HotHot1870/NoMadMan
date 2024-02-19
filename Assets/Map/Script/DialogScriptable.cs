@@ -8,7 +8,6 @@ using UnityEngine;
 public class DialogScriptable : ScriptableObject
 {
     public int Id;
-    public string SpeakerName;
     public string EngDialog;
     public List<int> NextId = new List<int>();
 }

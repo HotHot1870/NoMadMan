@@ -10,14 +10,12 @@ public class EnterNamePanel : MonoBehaviour
     [SerializeField] private GameObject m_BtnPrefab;
     [SerializeField] private Transform m_BtnParent;
     [SerializeField] private TMP_Text m_NameText;
-    [SerializeField] private TMP_Text m_PlayerName;
     [SerializeField] private Button m_BackBtn;
     [SerializeField] private Button m_ComfirmBtn;
     private string m_EnterName = "";
     void Start()
     {
         if( MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim() !=""){
-            m_PlayerName.text = MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim() ;
             this.gameObject.SetActive(false);
             return;
         }
@@ -38,9 +36,8 @@ public class EnterNamePanel : MonoBehaviour
     }
 
     private void OnCLickComfirm(){
-        // TODO : comfirm name
+        // comfirm name
         MainGameManager.GetInstance().SaveData<string>("PlayerName",m_EnterName);
-        m_PlayerName.text = m_EnterName;
         this.gameObject.SetActive(false);
     }
 
