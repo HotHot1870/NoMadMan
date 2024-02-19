@@ -11,6 +11,9 @@ public class MainMenuWalkerSpawn : MonoBehaviour
 
     void Start(){
         StartCoroutine(SpawnWalkers());
+        SpawnSingleWalker(Random.Range(2f,18f));
+        SpawnSingleWalker(Random.Range(2f,18f));
+        SpawnSingleWalker(Random.Range(2f,18f));
     }
 
     private IEnumerator SpawnWalkers(){
@@ -21,23 +24,27 @@ public class MainMenuWalkerSpawn : MonoBehaviour
             passTime += Time.deltaTime;
             yield return null;
             if(passTime >duration){
-                var newWalker = Instantiate(m_WalkerPrefab,m_WalkerParent);
-                newWalker.transform.position = new Vector3(
-                    Random.Range(-6,6),
-                    0,
-                    0
-                )+this.transform.position;
-
-                var destination = m_Destination.position+new Vector3(
-                    Random.Range(-8,8),
-                    0,
-                    0
-                );
-                newWalker.transform.LookAt(destination);
-                newWalker.GetComponent<WalkerController>().Init(destination);
+                SpawnSingleWalker();
                 passTime = 0;
             }
         }
+    }
+
+    private void SpawnSingleWalker(float forwardMove = 0){
+        var newWalker = Instantiate(m_WalkerPrefab,m_WalkerParent);
+        newWalker.transform.position = new Vector3(
+            Random.Range(-6+Mathf.InverseLerp(0f,4f,forwardMove),6-Mathf.InverseLerp(0f,4f,forwardMove)),
+            0,
+            0+forwardMove
+        )+this.transform.position;
+
+        var destination = m_Destination.position+new Vector3(
+            Random.Range(-8,8),
+            0,
+            0
+        );
+        newWalker.transform.LookAt(destination);
+        newWalker.GetComponent<WalkerController>().Init(destination);
     }
 
 

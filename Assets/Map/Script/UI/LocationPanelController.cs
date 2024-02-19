@@ -15,6 +15,14 @@ public class LocationPanelController : MonoBehaviour
     [SerializeField] private Button2D m_DefenceBtn;
     [SerializeField] private Button2D m_CancelLocationDetailBtn;
 
+    [Header("Mutation")]
+    [SerializeField] private GameObject m_Hp; 
+    [SerializeField] private TMP_Text m_HpPresentage;  
+    [SerializeField] private GameObject m_Damage; 
+    [SerializeField] private TMP_Text m_DamagePresentage;  
+    [SerializeField] private GameObject m_Speed; 
+    [SerializeField] private TMP_Text m_SpeedPresentage;  
+
     
 
     void Start(){
@@ -59,7 +67,15 @@ public class LocationPanelController : MonoBehaviour
         if(locationData==null || m_Self.activeSelf)
             return;
 
-        
+
+        // mutation
+        m_Hp.SetActive(locationData.HealthMutation>0); 
+        m_HpPresentage.text=100f+locationData.HealthMutation+"%";  
+        m_Damage.SetActive(locationData.DamageMutation>0); 
+        m_DamagePresentage.text=100f+locationData.DamageMutation+"%";    
+        m_Speed.SetActive(locationData.SpeedMutation>0); 
+        m_SpeedPresentage.text=100f+locationData.SpeedMutation+"%";   
+    
         MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);
 
         m_Self.SetActive(true);

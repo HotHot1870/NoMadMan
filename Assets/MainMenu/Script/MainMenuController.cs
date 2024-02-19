@@ -1,4 +1,5 @@
 
+using System.Collections;
 using ExtendedButtons;
 using TMPro;
 using UnityEngine;
@@ -12,12 +13,14 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_GainGooBtn;
     [SerializeField] private Button m_unlockAllLevelBtn;
+    [SerializeField] private Image m_Black;
     [SerializeField] private GameObject m_OptionPanel;
     //[SerializeField] private TMP_Text m_PlayerName;
 
 
     void Start()
     {
+        StartCoroutine(BlackFadeOut());
         m_OptionPanel.GetComponent<OptionMenuController>().Init(null);
         //m_PlayerName.text = MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim();
         m_GainGooBtn.onClick.AddListener(()=>{
@@ -72,6 +75,17 @@ public class MainMenuController : MonoBehaviour
         m_QuitGameBtn.onClick.AddListener(()=>{
             Application.Quit();
         });
+    }
+
+    private IEnumerator BlackFadeOut(){
+        float passTime = 0;
+        float duration = 0.75f;
+        while (passTime<duration)
+        {
+            yield return null;
+            passTime += Time.deltaTime;
+            m_Black.color = Color.Lerp(Color.black,Color.clear,passTime/duration);
+        }
     }
 
 }
