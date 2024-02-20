@@ -16,11 +16,11 @@ public class LocationPanelController : MonoBehaviour
     [SerializeField] private Button2D m_CancelLocationDetailBtn;
 
     [Header("Mutation")]
-    [SerializeField] private GameObject m_Hp; 
+    [SerializeField] private Image m_HpImage; 
     [SerializeField] private TMP_Text m_HpPresentage;  
-    [SerializeField] private GameObject m_Damage; 
+    [SerializeField] private Image m_DamageImage; 
     [SerializeField] private TMP_Text m_DamagePresentage;  
-    [SerializeField] private GameObject m_Speed; 
+    [SerializeField] private Image m_SpeedImage; 
     [SerializeField] private TMP_Text m_SpeedPresentage;  
 
     
@@ -69,11 +69,11 @@ public class LocationPanelController : MonoBehaviour
 
 
         // mutation
-        m_Hp.SetActive(locationData.HealthMutation>0); 
+        m_HpImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.HealthMutation/200f) );
         m_HpPresentage.text=100f+locationData.HealthMutation+"%";  
-        m_Damage.SetActive(locationData.DamageMutation>0); 
+        m_DamageImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.DamageMutation/200f) );
         m_DamagePresentage.text=100f+locationData.DamageMutation+"%";    
-        m_Speed.SetActive(locationData.SpeedMutation>0); 
+        m_SpeedImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.SpeedMutation/200f) );; 
         m_SpeedPresentage.text=100f+locationData.SpeedMutation+"%";   
     
         MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);

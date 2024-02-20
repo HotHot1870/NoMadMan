@@ -33,7 +33,7 @@ public class MainMenuWalkerSpawn : MonoBehaviour
     private void SpawnSingleWalker(float forwardMove = 0){
         var newWalker = Instantiate(m_WalkerPrefab,m_WalkerParent);
         newWalker.transform.position = new Vector3(
-            Random.Range(-6+Mathf.InverseLerp(0f,4f,forwardMove),6-Mathf.InverseLerp(0f,4f,forwardMove)),
+            Random.Range(-6+Mathf.InverseLerp(0f,2f,forwardMove),6-Mathf.InverseLerp(0f,2f,forwardMove)),
             0,
             0+forwardMove
         )+this.transform.position;

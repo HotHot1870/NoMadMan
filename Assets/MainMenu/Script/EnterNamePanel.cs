@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using ExtendedButtons;
 
 public class EnterNamePanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_BtnPrefab;
     [SerializeField] private Transform m_BtnParent;
     [SerializeField] private TMP_Text m_NameText;
-    [SerializeField] private Button m_BackBtn;
-    [SerializeField] private Button m_ComfirmBtn;
+    [SerializeField] private Button2D m_BackBtn;
+    [SerializeField] private Button2D m_ComfirmBtn;
     private string m_EnterName = "";
+    [SerializeField] private Image m_Black;
+    [SerializeField] private AnimationCurve m_BlackFadeCurve;
     void Start()
     {
         if( MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim() !=""){
@@ -29,15 +32,41 @@ public class EnterNamePanel : MonoBehaviour
             string alphaBit = alpha[i].ToString();
             var newBtn = Instantiate(m_BtnPrefab,m_BtnParent);
             newBtn.GetComponent<AlphaBitBtn>().m_Text.text = alphaBit;
-            newBtn.GetComponent<Button>().onClick.AddListener(()=> OnClickAlphaBtn(alphaBit) );
+
+            var btnComponent = newBtn.GetComponent<Button2D>();
+
+            btnComponent.onDown.AddListener(()=>{
+                MainGameManager.GetInstance().OnClickStartSound();
+            });
+            btnComponent.onUp.AddListener(()=>{
+                MainGameManager.GetInstance().OnClickEndSound();
+            });
+        
+            btnComponent.onClick.AddListener(()=> OnClickAlphaBtn(alphaBit) );
         }
+
+        m_BackBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_BackBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_BackBtn.onClick.AddListener(OnClickRemoveLast);
+
+        
+        m_ComfirmBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_ComfirmBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_ComfirmBtn.onClick.AddListener(OnCLickComfirm);
     }
 
     private void OnCLickComfirm(){
         // comfirm name
         MainGameManager.GetInstance().SaveData<string>("PlayerName",m_EnterName);
+        StartCoroutine(BlackFadeOut());
         this.gameObject.SetActive(false);
     }
 
@@ -55,5 +84,17 @@ public class EnterNamePanel : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private IEnumerator BlackFadeOut(){
+        float passTime = 0;
+        float duration = 1.5f;
+        while (passTime<duration)
+        {
+            yield return null;
+            passTime += Time.deltaTime;
+            m_Black.color = Color.Lerp(Color.black,Color.clear, m_BlackFadeCurve.Evaluate(passTime/duration));
+        }
+        Destroy(m_Black.gameObject);
     }
 }

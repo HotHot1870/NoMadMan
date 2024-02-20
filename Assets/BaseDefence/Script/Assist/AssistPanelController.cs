@@ -17,7 +17,9 @@ public class AssistPanelController : MonoBehaviour
     [SerializeField] private TimmySlashController m_SlashController;
     [SerializeField] private KineticTransmitterController m_KineticTransmitterController;
 
-    [Header("CoolDown")]
+    // TODO : "thrid hand" reload gun on use
+
+    [Header("Check is used")]
     private bool m_IsFireBallUsed = false;
     private bool m_IsTimmySwordUsed = false;
     private bool m_IsNetUsed = false;

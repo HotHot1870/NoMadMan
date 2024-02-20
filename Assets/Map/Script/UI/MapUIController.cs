@@ -10,8 +10,8 @@ using Unity.VisualScripting;
 public class MapUIController : MonoBehaviour
 {
     [SerializeField] private Button2D m_MapDragBtn;  
-    [SerializeField] private Button m_NextLevelBtn;
-    [SerializeField] private Button m_LastLevelBtn;
+    [SerializeField] private Button2D m_NextLevelBtn;
+    [SerializeField] private Button2D m_LastLevelBtn;
     [SerializeField]private Animator m_CoverAnimator;
 
     [Header("Option")]
@@ -48,6 +48,12 @@ public class MapUIController : MonoBehaviour
         m_WorkShopChooseWeaponController.gameObject.SetActive(true);
 
         m_NextLevelBtn.onClick.RemoveAllListeners();
+        m_NextLevelBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_NextLevelBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_NextLevelBtn.onClick.AddListener(()=>{
             // to next level
             m_NextLevelBtn.gameObject.SetActive(false);
@@ -57,6 +63,13 @@ public class MapUIController : MonoBehaviour
         m_NextLevelBtn.gameObject.SetActive(false);
 
         m_LastLevelBtn.onClick.RemoveAllListeners();
+
+        m_LastLevelBtn.onDown.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickStartSound();
+        });
+        m_LastLevelBtn.onUp.AddListener(()=>{
+            MainGameManager.GetInstance().OnClickEndSound();
+        });
         m_LastLevelBtn.onClick.AddListener(()=>{
             // to last level
             m_LastLevelBtn.gameObject.SetActive(false);

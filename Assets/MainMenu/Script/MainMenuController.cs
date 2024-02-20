@@ -12,10 +12,10 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button2D m_QuitGameBtn;
     [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_GainGooBtn;
-    [SerializeField] private Button m_unlockAllLevelBtn;
+    [SerializeField] private Button m_UnlockAllLevelBtn;
     [SerializeField] private Image m_Black;
+    [SerializeField] private AnimationCurve m_BlackFadeCurve;
     [SerializeField] private GameObject m_OptionPanel;
-    //[SerializeField] private TMP_Text m_PlayerName;
 
 
     void Start()
@@ -27,7 +27,7 @@ public class MainMenuController : MonoBehaviour
             float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
             PlayerPrefs.SetFloat("Goo",curGoo+10000);
         });
-        m_unlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
+        m_UnlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
 
 
         m_ClearDataBtn.onClick.AddListener(()=>{
@@ -79,13 +79,14 @@ public class MainMenuController : MonoBehaviour
 
     private IEnumerator BlackFadeOut(){
         float passTime = 0;
-        float duration = 0.75f;
+        float duration = 1.5f;
         while (passTime<duration)
         {
             yield return null;
             passTime += Time.deltaTime;
-            m_Black.color = Color.Lerp(Color.black,Color.clear,passTime/duration);
+            m_Black.color = Color.Lerp(Color.black,Color.clear, m_BlackFadeCurve.Evaluate(passTime/duration));
         }
+        Destroy(m_Black.gameObject);
     }
 
 }

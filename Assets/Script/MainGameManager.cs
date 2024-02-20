@@ -152,7 +152,7 @@ public class MainGameManager : MonoBehaviour
     public void UnlockAllLevel(){
         foreach (var item in m_AllLocation)
         {
-            SaveData<int>(item.DisplayName + item.Id, 1);  
+            SaveData<int>("Win"+ item.Id, 1);  
         }
     }
 
@@ -344,10 +344,10 @@ public class MainGameManager : MonoBehaviour
 
     public float GetBGMVolume()
     {
-        if((float)GetData<float>("BGMVolume") != 0){
+        if((float)GetData<float>("BGMVolume","-1") != -1){
             m_BGMVolume = (float)GetData<float>("BGMVolume");
         }else{
-            SaveData<float>("BGMVolume",0.1f);
+            SaveData<float>("BGMVolume",0.5f);
         }
         return m_BGMVolume;
     }
@@ -359,19 +359,19 @@ public class MainGameManager : MonoBehaviour
     }
     public float GetVolume()
     {
-        if((float)GetData<float>("Volume") != 0){
+        if((float)GetData<float>("Volume","-1") != -1){
             m_Volume = (float)GetData<float>("Volume");
         }else{
-            SaveData<float>("Volume",0.1f);
+            SaveData<float>("Volume",0.5f);
         }
         return m_Volume;
     }
     public float GetAimSensitivity()
     {
-        if((float)GetData<float>("AimSensitivity") != 0){
+        if((float)GetData<float>("AimSensitivity","-1") != -1){
             m_AimSensitivity = (float)GetData<float>("AimSensitivity");
         }else{
-            SaveData<float>("AimSensitivity",0.5f);
+            SaveData<float>("AimSensitivity",0.6f);
         }
         return m_AimSensitivity;
     }
