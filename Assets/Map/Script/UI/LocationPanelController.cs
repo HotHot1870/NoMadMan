@@ -69,11 +69,11 @@ public class LocationPanelController : MonoBehaviour
 
 
         // mutation
-        m_HpImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.HealthMutation/200f) );
+        m_HpImage.color = Color.Lerp(Color.white,Color.red, Mathf.Clamp01(locationData.HealthMutation/100f) );
         m_HpPresentage.text=100f+locationData.HealthMutation+"%";  
-        m_DamageImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.DamageMutation/200f) );
+        m_DamageImage.color = Color.Lerp(Color.white,Color.red, Mathf.Clamp01(locationData.DamageMutation/100f) );
         m_DamagePresentage.text=100f+locationData.DamageMutation+"%";    
-        m_SpeedImage.color = Color.Lerp(Color.green,Color.red, Mathf.Clamp01(locationData.SpeedMutation/200f) );; 
+        m_SpeedImage.color = Color.Lerp(Color.white,Color.red, Mathf.Clamp01(locationData.SpeedMutation/100f) );; 
         m_SpeedPresentage.text=100f+locationData.SpeedMutation+"%";   
     
         MapManager.GetInstance().GetLocationController().SetLocationCameraPiority(10);

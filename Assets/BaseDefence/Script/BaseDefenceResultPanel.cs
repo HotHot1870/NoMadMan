@@ -30,6 +30,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
     {
         m_Self.SetActive(false);
         m_CloseBtn.onClick.AddListener(OnClickBackFromResult);
+        m_CloseBtn.gameObject.SetActive(false);
     }
 
     // record dead enemy
@@ -122,6 +123,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
         
         
         MainGameManager.GetInstance().ChangeGooAmount(totalGain);
+        m_CloseBtn.gameObject.SetActive(true);
     }
 
     private void ShowDialogOnEndGame(){
@@ -130,15 +132,21 @@ public class BaseDefenceResultPanel : MonoBehaviour
     }
     
     public void OnClickBackFromResult(){
-        MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
+        if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 20){
+            // TODO : endgame
+            MainGameManager.GetInstance().LoadSceneWithTransition("EndGame");
+            MainGameManager.GetInstance().ChangeBGM(BGM.MainMenu);
+        }else{
+            MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
+            MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+        }
 
-        // TODO : hard coded , dont get audio clip from other , store in main game controller
-        MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+        /*
         // TODO : Hard Coded , try change it later
         // unlock gun by win 
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
             MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+8.ToString(),0);
             MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+9.ToString(),0);
-        }
+        }*/
     }
 }

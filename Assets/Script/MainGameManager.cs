@@ -14,6 +14,7 @@ public enum BGM
     Map,
     Battle,
     Defeated
+    // TODO : Xin BGM
 }
 
 public class MainGameManager : MonoBehaviour
@@ -61,6 +62,12 @@ public class MainGameManager : MonoBehaviour
     {
         float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
         PlayerPrefs.SetFloat("Goo",curGoo+10000);
+    }
+
+    [MenuItem("Scene/EndGame")]
+    static void ToEndGame()
+    {
+        UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/EndGame/EndGame.unity");
     }
     
     [MenuItem("Scene/MainMenu")]
@@ -379,6 +386,9 @@ public class MainGameManager : MonoBehaviour
 
     public void AddNewAudioSource(AudioSource audioSource)
     {
+        if(audioSource == null){
+            return;
+        }
         m_AllAudioSource.Add(audioSource);
         audioSource.volume = m_Volume;
 
