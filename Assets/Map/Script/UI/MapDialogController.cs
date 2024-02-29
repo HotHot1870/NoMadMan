@@ -9,13 +9,13 @@ using System;
 public class MapDialogController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
-    [SerializeField] private GameObject m_DialogRowPrefab;
-    [SerializeField] private Transform m_DialogRowParent;
-    [SerializeField] private ScrollRect m_ScrollRect;
-    [SerializeField] private Animator m_BgAnimator;
+    // TODO : dialog animator
+    //[SerializeField] private Animator m_Animator;
     [SerializeField] private Button m_NextDialogBtn;
     [SerializeField] private Button m_EndDialogBtn;
     [SerializeField] private TMP_Text m_EndDialogBtnText;
+    [SerializeField] private TMP_Text m_ContentText;
+    [SerializeField] private GameObject m_ContentParent;
     private DialogScriptable m_CurDialogScriptable = null;
 
     public void Init(int startDialogId , Action onDialogEnd){
@@ -24,11 +24,7 @@ public class MapDialogController : MonoBehaviour
             return;
         }
         
-        for (int i = 0; i < m_DialogRowParent.childCount-1; i++)
-        {
-            Destroy(m_DialogRowParent.GetChild(i).gameObject);
-        }
-
+        m_ContentText.text = "";
 
         m_Self.SetActive(true);
         
@@ -37,9 +33,7 @@ public class MapDialogController : MonoBehaviour
             if(m_CurDialogScriptable.NextId[0] == -1){
                 // close dialog
                 onDialogEnd?.Invoke();
-                m_BgAnimator.Play("Close");
             }else{
-                // TODO : choose at the end
                 // next dialog
                 m_CurDialogScriptable = GetDialogScritapble(m_CurDialogScriptable.NextId[0]);
                 SetDialogRow();
@@ -49,19 +43,17 @@ public class MapDialogController : MonoBehaviour
         m_EndDialogBtn.onClick.RemoveAllListeners();
         m_EndDialogBtn.onClick.AddListener(()=>{
             onDialogEnd?.Invoke();
-            m_BgAnimator.Play("Close");
         });
 
         m_CurDialogScriptable = GetDialogScritapble(startDialogId);
-        m_BgAnimator.Play("Open");
+        //m_Animator.Play("Show");
         SetDialogRow();
     }
 
     void Start(){
-        m_BgAnimator.Play("Hidden");
-
+        //m_Animator.Play("Hidden");
         m_Self.SetActive(false);
-    }
+    }/*
     private IEnumerator AddNewDialogRow(){
         var newBlock = Instantiate(m_DialogRowPrefab,m_DialogRowParent);
         newBlock.transform.SetSiblingIndex(newBlock.transform.GetSiblingIndex()-1);
@@ -86,10 +78,14 @@ public class MapDialogController : MonoBehaviour
         m_ScrollRect.verticalNormalizedPosition = 0;
         
 
-    }
+    }*/
+
+    private void SetContentText(){
+        m_ContentText.text = m_CurDialogScriptable.EngDialog;
+    } 
 
     private void SetDialogRow(){
-        StartCoroutine(AddNewDialogRow());
+        SetContentText();
         // hide next dialog btn if no next dialog
         m_NextDialogBtn.gameObject.SetActive(m_CurDialogScriptable.NextId[0] != -1);
         m_EndDialogBtnText.text = m_CurDialogScriptable.NextId[0] != -1?"Skip":"End";
