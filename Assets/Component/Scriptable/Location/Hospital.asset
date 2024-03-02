@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d008e3715cfc0d14e9a1b3a734dcaf4b, type: 3}
+  m_Name: Hospital
+  m_EditorClassIdentifier: 
+  Id: 6
+  DisplayName: Hospital
+  LockBy: 05000000
+  Level: 1
+  Prefab: {fileID: 4100855384420710729, guid: 95952419085fc054a8bf9749e064a047, type: 3}
+  Pos: {x: -15, y: 0, z: -4}
+  StartDialogId: 8
+  EndDialogId: -1
+  HealthMutation: 25
+  DamageMutation: 0
+  SpeedMutation: 0
+  ExtraReward: 0.6
+  NormalWavesCount: 2
+  NormalWavesStrength: 25
+  NormalWaveEnemy: 0000000001000000
+  FinalWaveStrength: 35
+  FinalWaveEnemy: 0000000001000000

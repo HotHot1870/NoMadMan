@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: RocketLauncher
+  m_EditorClassIdentifier: 
+  Id: 8
+  DisplayName: RocketLauncher
+  UnlockCost: 30000
+  DisplayImage: {fileID: 21300000, guid: 57a1431a413c39b4a87d7ac7a0801516, type: 3}
+  FPSPrefab: {fileID: 4526605565837180159, guid: 99d65673ee970394c835c45c53a8c99b, type: 3}
+  ShootSound: {fileID: 8300000, guid: 281510071df85174695694ff29da0b9f, type: 3}
+  GunStats:
+    DamagePerPellet: 120
+    PelletPerShot: 1
+    ClipSize: 1
+    BulletType: 3
+    IsSemiAuto: 0
+    FireRate: 1
+    Accuracy: 60
+    Handling: 0
+    Recoil: 25
+  ReloadScriptable: {fileID: 11400000, guid: 23eb7dec9cf92cd47a41363dee98cb90, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 23aba24ca9ec2b240b7adb6ab613eeb9, type: 2}
+  ExplodeRadius: 13

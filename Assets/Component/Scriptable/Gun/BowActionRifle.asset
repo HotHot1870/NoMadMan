@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: BowActionRifle
+  m_EditorClassIdentifier: 
+  Id: 7
+  DisplayName: BowActionRifle
+  UnlockCost: 15000
+  DisplayImage: {fileID: 21300000, guid: 7b2ae00c9748e5e459fdee8f671374a4, type: 3}
+  FPSPrefab: {fileID: 35110134421944926, guid: ad40c44d2e72db043bb3f8809ccc73d8, type: 3}
+  ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
+  GunStats:
+    DamagePerPellet: 25
+    PelletPerShot: 1
+    ClipSize: 12
+    BulletType: 4
+    IsSemiAuto: 1
+    FireRate: 5
+    Accuracy: 70
+    Handling: 50
+    Recoil: 15
+  ReloadScriptable: {fileID: 11400000, guid: deb0733a7330b5e43b03e80792791ec0, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 76b75eb5bdbf8e34a8ef49c0da6936f8, type: 2}
+  ExplodeRadius: 1

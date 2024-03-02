@@ -87,10 +87,10 @@ public class MapFreeCameraController : MonoBehaviour
             Mathf.Clamp(m_CameraParent.position.z,m_CameraBottomLeft.y, m_CameraTopRight.y)
          ) ;
 
-        if(m_CameraParent.position.x>=m_CameraTopRight.x*0.95f){
+        if(m_CameraParent.position.x>=m_CameraTopRight.x*0.85f){
             // to next 
             MapManager.GetInstance().SetToOtherLevelBtnStage( MapToOtherLevelBtnStage.ToNext);
-        }else if(m_CameraParent.position.x<=m_CameraBottomLeft.x*0.95f){
+        }else if(m_CameraParent.position.x<=m_CameraBottomLeft.x*0.85f){
             // to Last
             MapManager.GetInstance().SetToOtherLevelBtnStage( MapToOtherLevelBtnStage.ToLast);
         }else{

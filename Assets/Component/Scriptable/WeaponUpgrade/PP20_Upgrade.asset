@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
+  m_Name: PP20_Upgrade
+  m_EditorClassIdentifier: 
+  Id: 24
+  WeaponId: 4
+  UpgradeDetails:
+  - UpgradeStat: 0
+    CostAndValue:
+    - Cost: 2000
+      UpgradeValue: 27
+    - Cost: 4000
+      UpgradeValue: 29
+    - Cost: 6000
+      UpgradeValue: 31
+    - Cost: 8000
+      UpgradeValue: 33
+    - Cost: 10000
+      UpgradeValue: 35
+  - UpgradeStat: 2
+    CostAndValue:
+    - Cost: 1500
+      UpgradeValue: 24
+    - Cost: 3000
+      UpgradeValue: 28
+    - Cost: 4500
+      UpgradeValue: 32
+    - Cost: 6000
+      UpgradeValue: 36
+    - Cost: 7500
+      UpgradeValue: 40
+  - UpgradeStat: 6
+    CostAndValue:
+    - Cost: 1000
+      UpgradeValue: 9
+    - Cost: 2000
+      UpgradeValue: 8
+    - Cost: 3000
+      UpgradeValue: 7
+    - Cost: 4000
+      UpgradeValue: 6
+    - Cost: 5000
+      UpgradeValue: 5
+  - UpgradeStat: 3
+    CostAndValue:
+    - Cost: 1500
+      UpgradeValue: 11
+    - Cost: 3000
+      UpgradeValue: 12
+    - Cost: 4500
+      UpgradeValue: 13
+    - Cost: 6000
+      UpgradeValue: 14
+    - Cost: 7500
+      UpgradeValue: 15
+  - UpgradeStat: 4
+    CostAndValue:
+    - Cost: 1000
+      UpgradeValue: 78
+    - Cost: 2000
+      UpgradeValue: 81
+    - Cost: 3000
+      UpgradeValue: 84
+    - Cost: 4000
+      UpgradeValue: 87
+    - Cost: 5000
+      UpgradeValue: 90

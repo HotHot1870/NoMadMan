@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f5a9deda098544fab5833bec03d366, type: 3}
+  m_Name: Revolver_Upgrade
+  m_EditorClassIdentifier: 
+  Id: 14
+  WeaponId: 2
+  UpgradeDetails:
+  - UpgradeStat: 0
+    CostAndValue:
+    - Cost: 1500
+      UpgradeValue: 80
+    - Cost: 3000
+      UpgradeValue: 90
+    - Cost: 4500
+      UpgradeValue: 100
+    - Cost: 6000
+      UpgradeValue: 110
+    - Cost: 7500
+      UpgradeValue: 120
+  - UpgradeStat: 2
+    CostAndValue:
+    - Cost: 300
+      UpgradeValue: 6
+    - Cost: 400
+      UpgradeValue: 7
+    - Cost: 500
+      UpgradeValue: 8
+  - UpgradeStat: 3
+    CostAndValue:
+    - Cost: 1500
+      UpgradeValue: 6
+    - Cost: 3000
+      UpgradeValue: 7
+    - Cost: 4500
+      UpgradeValue: 8
+    - Cost: 6000
+      UpgradeValue: 9
+    - Cost: 7500
+      UpgradeValue: 10
+  - UpgradeStat: 4
+    CostAndValue:
+    - Cost: 200
+      UpgradeValue: 80
+    - Cost: 400
+      UpgradeValue: 85
+    - Cost: 600
+      UpgradeValue: 90
+    - Cost: 800
+      UpgradeValue: 95
+    - Cost: 1000
+      UpgradeValue: 100
+  - UpgradeStat: 5
+    CostAndValue:
+    - Cost: 100
+      UpgradeValue: 55
+    - Cost: 200
+      UpgradeValue: 60
+    - Cost: 300
+      UpgradeValue: 65
+    - Cost: 400
+      UpgradeValue: 70
+    - Cost: 500
+      UpgradeValue: 75

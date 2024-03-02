@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: Minigun
+  m_EditorClassIdentifier: 
+  Id: 9
+  DisplayName: Minigun
+  UnlockCost: 50000
+  DisplayImage: {fileID: 21300000, guid: 55bc2709311445c42accfd0b50f1faeb, type: 3}
+  FPSPrefab: {fileID: 8181188354269715084, guid: 78e3bfc1e6b646f4e87008a8e1954bd7, type: 3}
+  ShootSound: {fileID: 8300000, guid: dd19b1813b6307648b4b34ed10557afb, type: 3}
+  GunStats:
+    DamagePerPellet: 5
+    PelletPerShot: 2
+    ClipSize: 200
+    BulletType: 0
+    IsSemiAuto: 1
+    FireRate: 35
+    Accuracy: 65
+    Handling: 40
+    Recoil: 15
+  ReloadScriptable: {fileID: 11400000, guid: 98c10ac8154d7434ebf6aba4ecf164a2, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 8c73bcca5d9c12b459494d64a321770b, type: 2}
+  ExplodeRadius: 0

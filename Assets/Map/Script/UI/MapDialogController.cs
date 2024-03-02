@@ -9,24 +9,24 @@ using System;
 public class MapDialogController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
-    // TODO : dialog animator
-    //[SerializeField] private Animator m_Animator;
+    [SerializeField] private Animator m_Animator;
     [SerializeField] private Button m_NextDialogBtn;
     [SerializeField] private Button m_EndDialogBtn;
     [SerializeField] private TMP_Text m_EndDialogBtnText;
     [SerializeField] private TMP_Text m_ContentText;
-    [SerializeField] private GameObject m_ContentParent;
+    [SerializeField] private AudioSource m_AudioSource;
+    [SerializeField] private AudioClip m_VoiceRecorder;
     private DialogScriptable m_CurDialogScriptable = null;
+
 
     public void Init(int startDialogId , Action onDialogEnd){
         if(startDialogId == -1){
             onDialogEnd?.Invoke();
             return;
         }
+        m_Self.SetActive(true);
         
         m_ContentText.text = "";
-
-        m_Self.SetActive(true);
         
         m_NextDialogBtn.onClick.RemoveAllListeners();
         m_NextDialogBtn.onClick.AddListener(()=>{
@@ -46,12 +46,14 @@ public class MapDialogController : MonoBehaviour
         });
 
         m_CurDialogScriptable = GetDialogScritapble(startDialogId);
-        //m_Animator.Play("Show");
+        m_AudioSource.PlayOneShot(m_VoiceRecorder);
+        m_Animator.Play("Show");
         SetDialogRow();
     }
 
     void Start(){
-        //m_Animator.Play("Hidden");
+        MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
+        m_Animator.Play("Hidden");
         m_Self.SetActive(false);
     }/*
     private IEnumerator AddNewDialogRow(){
@@ -88,7 +90,7 @@ public class MapDialogController : MonoBehaviour
         SetContentText();
         // hide next dialog btn if no next dialog
         m_NextDialogBtn.gameObject.SetActive(m_CurDialogScriptable.NextId[0] != -1);
-        m_EndDialogBtnText.text = m_CurDialogScriptable.NextId[0] != -1?"Skip":"End";
+        m_EndDialogBtnText.gameObject.SetActive(m_CurDialogScriptable.NextId[0] == -1);
     }
 
     private DialogScriptable GetDialogScritapble(int id){

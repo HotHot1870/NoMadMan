@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2aa91b79573c714a9beea2d18f6b9f3, type: 3}
+  m_Name: Revolver
+  m_EditorClassIdentifier: 
+  Id: 2
+  DisplayName: Revolver
+  UnlockCost: 1000
+  DisplayImage: {fileID: 21300000, guid: 5ef15f72b33507c48a1e43901ae30c5e, type: 3}
+  FPSPrefab: {fileID: 1466696141579975733, guid: c75821895e130f54488ea6d82d527b0c, type: 3}
+  ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
+  GunStats:
+    DamagePerPellet: 70
+    PelletPerShot: 1
+    ClipSize: 5
+    BulletType: 0
+    IsSemiAuto: 0
+    FireRate: 5
+    Accuracy: 75
+    Handling: 50
+    Recoil: 5
+  ReloadScriptable: {fileID: 11400000, guid: 942e6f2cc6f086b4c9c5723380d5a3da, type: 2}
+  UpgradeScriptable: {fileID: 11400000, guid: 6d137a614bfc55048b1415da38c977c1, type: 2}
+  ExplodeRadius: 0
