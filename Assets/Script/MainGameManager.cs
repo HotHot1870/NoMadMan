@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEditor;
 using UnityEngine.UI;
+using ExtendedButtons;
 
 
 public enum BGM
@@ -14,7 +15,6 @@ public enum BGM
     Map,
     Battle,
     Defeated
-    // TODO : Xin BGM
 }
 
 public class MainGameManager : MonoBehaviour
@@ -98,12 +98,28 @@ public class MainGameManager : MonoBehaviour
         return m_Instance;
     }
 
-    public void OnClickStartSound(){
-        m_AudioPlayer.PlayOneShot(m_OnClickStartSound);
+    public void AddOnClickBaseAction(Button2D btn,RectTransform rectTransform = null){
+        btn.onDown.AddListener(()=>{
+                OnClickStartSound(rectTransform);
+            });
+
+        btn.onUp.AddListener(()=>{
+            OnClickEndSound(rectTransform);
+        });
     }
 
-    public void OnClickEndSound(){
+    private void OnClickStartSound(RectTransform rectTransform = null){
+        m_AudioPlayer.PlayOneShot(m_OnClickStartSound);
+        if(rectTransform != null){
+            rectTransform.localScale = Vector3.one * 0.9f;
+        }
+    }
+
+    private void OnClickEndSound(RectTransform rectTransform = null){
         m_AudioPlayer.PlayOneShot(m_OnClickEndSound);
+        if(rectTransform != null){
+            rectTransform.localScale = Vector3.one * 1f;
+        }
     }
 
     private void PlayBGM(AudioClip clip){
@@ -163,12 +179,12 @@ public class MainGameManager : MonoBehaviour
         }
     }
 
-    public void LoadSceneWithTransition(string sceneName,Action doneLoadSenceAction = null){
+    public void LoadSceneWithTransition(string sceneName,Action doneLoadsceneAction = null){
         m_LoadingCanvas.sortingOrder = 1;
-        StartCoroutine(LoadAsync(sceneName,doneLoadSenceAction));
+        StartCoroutine(LoadAsync(sceneName,doneLoadsceneAction));
     }
 
-    private IEnumerator LoadAsync(string sceneName,Action doneLoadSenceAction){
+    private IEnumerator LoadAsync(string sceneName,Action doneLoadsceneAction){
         float timePass = 0;
         m_BgAnimator.Play("Open");
         while (timePass<=0.75f)
@@ -188,7 +204,7 @@ public class MainGameManager : MonoBehaviour
         
         yield return null;
 
-        doneLoadSenceAction?.Invoke();
+        doneLoadsceneAction?.Invoke();
         
     }
 

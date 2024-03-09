@@ -123,8 +123,6 @@ public class ReadCsv : MonoBehaviour
         AssetDatabase.Refresh();
 
         string json = Resources.Load<TextAsset>("CSV/Enemy").ToString();
-        EnemyScriptable ghostScriptable = null; 
-        EnemyScriptable puppetScriptable = null; 
 
         var contents = json.Split('\n',',');
         int collumeCount = 9;

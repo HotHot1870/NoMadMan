@@ -35,31 +35,16 @@ public class EnterNamePanel : MonoBehaviour
 
             var btnComponent = newBtn.GetComponent<Button2D>();
 
-            btnComponent.onDown.AddListener(()=>{
-                MainGameManager.GetInstance().OnClickStartSound();
-            });
-            btnComponent.onUp.AddListener(()=>{
-                MainGameManager.GetInstance().OnClickEndSound();
-            });
-        
+            MainGameManager.GetInstance().AddOnClickBaseAction(btnComponent,newBtn.GetComponent<RectTransform>());
             btnComponent.onClick.AddListener(()=> OnClickAlphaBtn(alphaBit) );
         }
 
-        m_BackBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_BackBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_BackBtn,m_BackBtn.GetComponent<RectTransform>());
         m_BackBtn.onClick.AddListener(OnClickRemoveLast);
 
         
-        m_ComfirmBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_ComfirmBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_ComfirmBtn,m_ComfirmBtn.GetComponent<RectTransform>());
         m_ComfirmBtn.onClick.AddListener(OnCLickComfirm);
     }
 

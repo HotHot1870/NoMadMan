@@ -27,21 +27,13 @@ public class LocationPanelController : MonoBehaviour
 
     void Start(){
 
-        m_DefenceBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_DefenceBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_DefenceBtn, m_DefenceBtn.GetComponent<RectTransform>());
         m_DefenceBtn.onClick.AddListener(MapManager.GetInstance().GetMapUIController().OnClickDefence);
 
 
-        m_CancelLocationDetailBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_CancelLocationDetailBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_CancelLocationDetailBtn, m_CancelLocationDetailBtn.GetComponent<RectTransform>());
         m_CancelLocationDetailBtn.onClick.AddListener(CancelLocationDetail);
     }
 

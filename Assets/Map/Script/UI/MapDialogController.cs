@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using ExtendedButtons;
 
 public class MapDialogController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Animator m_Animator;
-    [SerializeField] private Button m_NextDialogBtn;
-    [SerializeField] private Button m_EndDialogBtn;
+    [SerializeField] private Button2D m_NextDialogBtn;
+    [SerializeField] private Button2D m_EndDialogBtn;
     [SerializeField] private TMP_Text m_EndDialogBtnText;
     [SerializeField] private TMP_Text m_ContentText;
     [SerializeField] private AudioSource m_AudioSource;
@@ -29,6 +30,7 @@ public class MapDialogController : MonoBehaviour
         m_ContentText.text = "";
         
         m_NextDialogBtn.onClick.RemoveAllListeners();
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_NextDialogBtn,m_NextDialogBtn.GetComponent<RectTransform>());
         m_NextDialogBtn.onClick.AddListener(()=>{
             if(m_CurDialogScriptable.NextId[0] == -1){
                 // close dialog
@@ -41,6 +43,7 @@ public class MapDialogController : MonoBehaviour
         });
 
         m_EndDialogBtn.onClick.RemoveAllListeners();
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_EndDialogBtn,m_EndDialogBtn.GetComponent<RectTransform>());
         m_EndDialogBtn.onClick.AddListener(()=>{
             onDialogEnd?.Invoke();
         });
@@ -90,7 +93,7 @@ public class MapDialogController : MonoBehaviour
         SetContentText();
         // hide next dialog btn if no next dialog
         m_NextDialogBtn.gameObject.SetActive(m_CurDialogScriptable.NextId[0] != -1);
-        m_EndDialogBtnText.gameObject.SetActive(m_CurDialogScriptable.NextId[0] == -1);
+        m_EndDialogBtn.gameObject.SetActive(m_CurDialogScriptable.NextId[0] == -1);
     }
 
     private DialogScriptable GetDialogScritapble(int id){

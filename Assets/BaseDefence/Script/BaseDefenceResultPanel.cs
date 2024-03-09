@@ -25,11 +25,15 @@ public class BaseDefenceResultPanel : MonoBehaviour
     private bool m_IsWin = false;
     private List<EnemyScriptable> m_AllKilledEnemy = new List<EnemyScriptable>();
     private Dictionary<int,EnemyBlockController> m_AllEnemyBlock = new Dictionary<int,EnemyBlockController>();
+    [Header("Bonus")]
+    [SerializeField] private AdPanel m_AdPanel;
+    private float m_TotalGain = 0;
     
     private void Start()
     {
         m_Self.SetActive(false);
         m_CloseBtn.onClick.AddListener(OnClickBackFromResult);
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_CloseBtn,m_CloseBtn.GetComponent<RectTransform>());
         m_CloseBtn.gameObject.SetActive(false);
     }
 
@@ -48,6 +52,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
         if (!isWin)
         {
             // lose
+            m_CloseBtn.gameObject.SetActive(true);
             MainGameManager.GetInstance().ChangeBGM(BGM.Defeated,0f);
         }else{
             // win BGM
@@ -72,7 +77,6 @@ public class BaseDefenceResultPanel : MonoBehaviour
     private IEnumerator ShowEnemyBlockOneByOne(){
         yield return new WaitForSeconds(1.25f);
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
-        float totalGain = 0;
         foreach (var item in m_AllKilledEnemy.Distinct())
         {
             // sound spawn enemy killed block 
@@ -100,29 +104,29 @@ public class BaseDefenceResultPanel : MonoBehaviour
         
         foreach (var item in m_AllKilledEnemy)
         {
-            totalGain += item.GooOnKill;
+            m_TotalGain += item.GooOnKill;
         }
 
 
         float extra = BaseDefenceManager.GetInstance().GetLocationScriptable().ExtraReward;
-        m_DifficultyBouns.text = "Difficulty Bouns : "+ extra*100f+"% (+" + (extra*totalGain).ToString("0.#")+")";
+        m_DifficultyBouns.text = "Difficulty Bouns : "+ extra*100f+"% (+" + (extra*m_TotalGain).ToString("0.#")+")";
         m_AudioPlayer.PlayOneShot(m_ShotSound);
         yield return new WaitForSeconds(0.45f);
 
         float hpPresentage = BaseDefenceManager.GetInstance().GetCurHp()/BaseDefenceManager.GetInstance().GetMaxHp();
-        float gooReduceByHp = totalGain * (1f-hpPresentage);
+        float gooReduceByHp = m_TotalGain * (1f-hpPresentage);
         m_HpLeft.text = "HP : "+hpPresentage*100f+"% (-" + gooReduceByHp.ToString("0.#")+")";
         m_AudioPlayer.PlayOneShot(m_ShotSound);
         yield return new WaitForSeconds(0.45f);
 
         
-        totalGain = Mathf.Clamp(totalGain + extra*totalGain - gooReduceByHp,0f,99999999f) ;
-        float total = MainGameManager.GetInstance().GetGooAmount()+totalGain;
-        m_TotalGainText.text = "Total : "+ total.ToString("0.#") +"(+"+totalGain.ToString("0.#")+")";
+        m_TotalGain = Mathf.Clamp(m_TotalGain + extra*m_TotalGain - gooReduceByHp,0f,99999999f) ;
+        float total = MainGameManager.GetInstance().GetGooAmount()+m_TotalGain;
+        m_TotalGainText.text = "Total : "+ total.ToString("0.#") +"(+"+m_TotalGain.ToString("0.#")+")";
         m_AudioPlayer.PlayOneShot(m_ShotSound);
         
         
-        MainGameManager.GetInstance().ChangeGooAmount(totalGain);
+        MainGameManager.GetInstance().ChangeGooAmount(m_TotalGain);
         m_CloseBtn.gameObject.SetActive(true);
     }
 
@@ -132,17 +136,24 @@ public class BaseDefenceResultPanel : MonoBehaviour
     }
     
     public void OnClickBackFromResult(){
+
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 20){
-            // TODO : endgame
+            // endgame
             MainGameManager.GetInstance().LoadSceneWithTransition("EndGame");
             MainGameManager.GetInstance().ChangeBGM(BGM.MainMenu);
         }else{
-            MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
-            MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+            if(m_IsWin){
+                // win , show ad panel if 
+                m_AdPanel.gameObject.SetActive(true);
+                m_AdPanel.Init(m_TotalGain);
+            }else{
+                // Lose , back to map scene
+                MainGameManager.GetInstance().LoadSceneWithTransition("Map",ShowDialogOnEndGame);
+                MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+            }
         }
 
         /*
-        // TODO : Hard Coded , try change it later
         // unlock gun by win 
         if(m_IsWin && MainGameManager.GetInstance().GetSelectedLocation().Id == 17){
             MainGameManager.GetInstance().SaveData<int>("WeaponUnlock"+8.ToString(),0);

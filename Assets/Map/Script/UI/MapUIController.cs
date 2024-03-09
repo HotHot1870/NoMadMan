@@ -48,12 +48,7 @@ public class MapUIController : MonoBehaviour
         m_WorkShopChooseWeaponController.gameObject.SetActive(true);
 
         m_NextLevelBtn.onClick.RemoveAllListeners();
-        m_NextLevelBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_NextLevelBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_NextLevelBtn,m_NextLevelBtn.GetComponent<RectTransform>());
         m_NextLevelBtn.onClick.AddListener(()=>{
             // to next level
             m_NextLevelBtn.gameObject.SetActive(false);
@@ -64,12 +59,8 @@ public class MapUIController : MonoBehaviour
 
         m_LastLevelBtn.onClick.RemoveAllListeners();
 
-        m_LastLevelBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_LastLevelBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_LastLevelBtn,m_LastLevelBtn.GetComponent<RectTransform>());
         m_LastLevelBtn.onClick.AddListener(()=>{
             // to last level
             m_LastLevelBtn.gameObject.SetActive(false);
@@ -87,44 +78,24 @@ public class MapUIController : MonoBehaviour
 
 
         // WorkShop
-        m_WorkShopBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_WorkShopBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_WorkShopBtn,m_WorkShopBtn.GetComponent<RectTransform>());
         m_WorkShopBtn.onClick.AddListener(OnClickWorkShop);
 
 
 
-        m_StartDefenceBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_StartDefenceBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_StartDefenceBtn,m_StartDefenceBtn.GetComponent<RectTransform>());
         m_StartDefenceBtn.onClick.AddListener(OnClickStartDefence);
 
         
-
-        m_CancelChooseWeaponBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_CancelChooseWeaponBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_CancelChooseWeaponBtn,m_CancelChooseWeaponBtn.GetComponent<RectTransform>());
         m_CancelChooseWeaponBtn.onClick.AddListener(OnClickCancelInChooseWeapon);
 /*
         // weapon list panel
         m_ComfirmWeaponChangeBtn.onClick.AddListener(OnClickComfirmInWeaponList);*/
 
         
-        m_OptionBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_OptionBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_OptionBtn,m_OptionBtn.GetComponent<RectTransform>());
         m_OptionBtn.onClick.AddListener(()=>{
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
             optionController.Open();
@@ -370,6 +341,8 @@ public class MapUIController : MonoBehaviour
     }*/
 
     private void TurnOffAllPanel(){
+        m_NextLevelBtn.gameObject.SetActive(false);
+        m_LastLevelBtn.gameObject.SetActive(false);
         m_ChooseWeaponPanel.SetActive(false);
         m_LocationPanelController.gameObject.SetActive(false);
         m_WorkShopChooseWeaponController.gameObject.SetActive(false);

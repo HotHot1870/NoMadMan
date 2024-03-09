@@ -21,12 +21,8 @@ public class MapUpgradeWeaponPanel : MonoBehaviour
 
     private void Start(){
 
-        m_BackBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_BackBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_BackBtn, m_BackBtn.GetComponent<RectTransform>());
         m_BackBtn.onClick.AddListener(()=>
             this.gameObject.SetActive(false)
         );

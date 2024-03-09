@@ -83,7 +83,7 @@ public class BoneSoldierController : EnemyControllerBase
         m_Animator.speed = 1;
         m_Animator.Play("RightAttack");
         m_AttackDelay = Scriptable.AttackDelay + m_AttackStartUp;
-        yield return new WaitForSeconds(m_AttackStartUp);
+        yield return new WaitForSeconds(m_AttackStartUp*UnityEngine.Random.Range(0.9f,1.1f));
         if(IsThisDead)
             yield break;
 

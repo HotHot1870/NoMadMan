@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Playables;
 
 public class EndGameCreditController : MonoBehaviour
 {
-    [SerializeField] private PlayableDirector m_Director;
     [SerializeField] private List<CanvasGroup> m_AllTextGroup = new List<CanvasGroup>();
     [SerializeField] private GameObject m_PlayerTextGroup;
     [SerializeField] private Text m_PlayerNameText ;
@@ -18,16 +15,10 @@ public class EndGameCreditController : MonoBehaviour
         {
             m_AllTextGroup[i].alpha = 0;
         }
-        m_Director.Play();
         StartCoroutine(ShowCridit());
     }
 
     private IEnumerator ShowCridit(){
-        yield return null;
-        while (m_Director.state == PlayState.Playing)
-        {
-            yield return null;
-        }
         float passTime = 0f;
 
         // row cridit

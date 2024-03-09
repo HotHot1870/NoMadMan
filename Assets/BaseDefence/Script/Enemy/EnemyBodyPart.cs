@@ -21,7 +21,6 @@ public class EnemyBodyPart : MonoBehaviour
     [SerializeField] protected SkinnedMeshRenderer m_SkinRenderer = null;
     [SerializeField] private float m_BodyPartHpPresentage = 1f;
     protected Collider m_Collider;
-    private bool m_CanPlayHitSound = true;
     private float m_EmissionDelay = 0;
 
     protected virtual IEnumerator Start()

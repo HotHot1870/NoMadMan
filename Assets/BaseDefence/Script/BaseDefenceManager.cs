@@ -67,7 +67,6 @@ public class BaseDefenceManager : MonoBehaviour
     private float m_CurrentHp = 100;
     private float m_MaxHp = 100;
 
-    private bool m_IsShielded = false;
 
 
 
@@ -129,7 +128,9 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
 
-    
+    public void SetFullAmmo(){
+        m_GunShootController.SetClipAmmoToFull();
+    }
 
     public float GetCurHp(){
         return m_CurrentHp;
@@ -140,14 +141,11 @@ public class BaseDefenceManager : MonoBehaviour
     }
 
 
-    public void SetShieldStage(bool isShielded){
-        m_IsShielded = isShielded;
-    }
 
     public void ChangeHp(float changes){
-        if(!m_IsShielded || changes>0)
-            m_CurrentHp += changes;
+        m_CurrentHp += changes;
 
+        // prevent overflow
         if(m_CurrentHp<0){
             m_CurrentHp = 0;
         }else if(m_CurrentHp>m_MaxHp){
@@ -309,7 +307,6 @@ public class BaseDefenceManager : MonoBehaviour
 
         // Blood effect
         m_BloodPanel.SpawnBloodEffect(hitScreenPos);
-        // TODO : Hit sound
         m_TotalHpBarStayTime = 4;
         ChangeHp(-damage*(1f+m_CurlocationData.DamageMutation/100f));
         //float CurHp = MainGameManager.GetInstance().GetCurHp();
@@ -321,9 +318,6 @@ public class BaseDefenceManager : MonoBehaviour
             m_BaseDefenceUIController.SetResultPanel(false);
         }
         
-        /*
-        if(CurHp<=0)
-            GameOver(true);*/
     }
 /*
     public void DoneSwitchWeapon(){

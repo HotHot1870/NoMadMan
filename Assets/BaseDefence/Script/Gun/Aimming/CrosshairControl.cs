@@ -16,11 +16,11 @@ public class CrosshairControl : MonoBehaviour
     private Vector3 m_CrossHairDragStartPos;
     private Vector3 m_AimTouchPreviousPos = Vector3.zero;
     private bool m_IsCrosshairMoving = false;
-    private int m_TouchIndex = -1;
 
     private Vector2 m_CrosshairToScreenOffsetNormalized = Vector2.zero;
 
-
+    // DO NOT delete , for phone
+    private int m_TouchIndex = -1;
     public float m_MaxAccuracyLose = 100f;
 
 
@@ -36,7 +36,6 @@ public class CrosshairControl : MonoBehaviour
 
     public void OnAimBtnUp(){
         m_IsCrosshairMoving = false;
-        m_TouchIndex = -1;
         m_AimDragTouchStartPos = Vector2.zero;
         m_AimTouchPreviousPos = Vector3.zero;
         m_CrossHairDragStartPos = m_CrosshairParent.position;

@@ -110,6 +110,8 @@ public class GunShootController : MonoBehaviour
         BaseDefenceManager.GetInstance().StartReload(gunReloadConfig);
     }
 
+    
+
     private void ShootCoolDown()
     {
         // fire rate
@@ -152,7 +154,7 @@ public class GunShootController : MonoBehaviour
         ChangeAmmoCount(0, true);
     }
 
-    private void SetClipAmmoToFull()
+    public void SetClipAmmoToFull()
     {
         ChangeAmmoCount((float) System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.ClipSize)), true);
     }

@@ -11,13 +11,14 @@ public class AssistPanelController : MonoBehaviour
     [SerializeField] private Button m_FireballBtn; 
     [SerializeField] private Button m_SwordBtn;
     [SerializeField] private Button m_NetBtn;
-    [SerializeField] private Button m_ShieldBtn;
+    [SerializeField] private Button m_ReloadBtn;
     [SerializeField] private Button m_CloseBtn;
     [SerializeField] private FireballEmitter m_FireballEmitter;
     [SerializeField] private TimmySlashController m_SlashController;
     [SerializeField] private KineticTransmitterController m_KineticTransmitterController;
 
     // TODO : "thrid hand" reload gun on use
+    // TODO : gain ability AFTER complete level
 
     [Header("Check is used")]
     private bool m_IsFireBallUsed = false;
@@ -25,11 +26,10 @@ public class AssistPanelController : MonoBehaviour
     private bool m_IsNetUsed = false;
     private bool m_IsShieldUsed = false;
 
-    [SerializeField] private bool m_IsTest = true;
 
 
     void Start(){
-        if( (int)MainGameManager.GetInstance().GetData<int>("Win1") == 1 || m_IsTest){
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win1") == 1 ){
             m_FireballBtn.onClick.AddListener(OnClickFireball);
             m_SwordBtn.onClick.AddListener(OnClickSword);
         }else{
@@ -37,16 +37,22 @@ public class AssistPanelController : MonoBehaviour
             m_SwordBtn.gameObject.SetActive(false);
         }
 
-        if( (int)MainGameManager.GetInstance().GetData<int>("Win6") == 1 || m_IsTest){
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win3") == 1 ){
             m_NetBtn.onClick.AddListener(OnClickNet);
         }else{
             m_NetBtn.gameObject.SetActive(false);
         }
-        
-        if( (int)MainGameManager.GetInstance().GetData<int>("Win12") == 1 || m_IsTest){
-            m_ShieldBtn.onClick.AddListener(OnClickShield);
+
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win7") == 1 ){
+            m_SwordBtn.onClick.AddListener(OnClickSword);
         }else{
-            m_ShieldBtn.gameObject.SetActive(false);
+            m_SwordBtn.gameObject.SetActive(false);
+        }
+        
+        if( (int)MainGameManager.GetInstance().GetData<int>("Win12") == 1 ){
+            m_ReloadBtn.onClick.AddListener(OnClickReload);
+        }else{
+            m_ReloadBtn.gameObject.SetActive(false);
         }
         m_CloseBtn.onClick.AddListener(Close);
         m_Self.SetActive(false);
@@ -97,22 +103,21 @@ public class AssistPanelController : MonoBehaviour
         
     }
 
-    private void OnClickShield(){
+    private void OnClickReload(){
         if(m_IsShieldUsed)
             return;
 
-        StartCoroutine(SetShield());
+        Reload();
         Close();
         m_IsShieldUsed = true;
-        m_ShieldBtn.GetComponent<Image>().color = Color.gray;
+        m_ReloadBtn.GetComponent<Image>().color = Color.gray;
         
     }
 
 
-    private IEnumerator SetShield(){
-        BaseDefenceManager.GetInstance().SetShieldStage(true);
-        yield return new WaitForSeconds( (BaseDefenceManager.GetInstance().GetLocationScriptable().Level+1) * 2f);
-        BaseDefenceManager.GetInstance().SetShieldStage(false);
+    private void Reload(){
+        // ability reload 
+        BaseDefenceManager.GetInstance().SetFullAmmo();
     }
 
 }

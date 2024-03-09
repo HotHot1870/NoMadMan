@@ -21,12 +21,7 @@ public class MapChooseWeaponSlot : MonoBehaviour
         m_Btn.onClick.RemoveAllListeners();
         m_Btn.onDown.RemoveAllListeners();
         m_Btn.onUp.RemoveAllListeners();
-        m_Btn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_Btn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_Btn,m_Btn.GetComponent<RectTransform>());
         m_Btn.onClick.AddListener(OnClickWeaponSlot);
 
     }

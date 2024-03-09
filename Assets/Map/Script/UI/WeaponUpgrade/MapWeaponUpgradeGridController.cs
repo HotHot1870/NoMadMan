@@ -17,6 +17,7 @@ public class MapWeaponUpgradeGridController : MonoBehaviour
         m_WeaponImage.sprite = config.gunScriptsble.DisplayImage;
         m_OnClickAction = config.onClickAction;
 
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_Btn, m_Btn.GetComponent<RectTransform>());
         m_Btn.onClick.AddListener(()=>{
             m_OnClickAction(m_GunOwnership);
             StartCoroutine(ClickSound());
@@ -25,9 +26,9 @@ public class MapWeaponUpgradeGridController : MonoBehaviour
     }
 
     private IEnumerator ClickSound(){
-        MainGameManager.GetInstance().OnClickStartSound();
+        // TODO :? MainGameManager.GetInstance().OnClickStartSound();
         yield return new WaitForSeconds(0.07f);
-        MainGameManager.GetInstance().OnClickEndSound();
+        // TODO :? MainGameManager.GetInstance().OnClickEndSound();
     }
 
 }

@@ -42,25 +42,15 @@ public class OptionMenuController : MonoBehaviour
             MainGameManager.GetInstance().UpdateBGMVolume();
         });
         
-        m_ResumeBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_ResumeBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
         
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_ResumeBtn,m_ResumeBtn.GetComponent<RectTransform>());
         m_ResumeBtn.onClick.AddListener(()=>{
             m_BgAnimator?.Play("Close");
         });
 
         
-        m_QuitGameBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_QuitGameBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
         
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_QuitGameBtn,m_QuitGameBtn.GetComponent<RectTransform>());
         m_QuitGameBtn.onClick.AddListener(()=>{
             switch (SceneManager.GetActiveScene().name)
             {

@@ -12,6 +12,9 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     [SerializeField] private TMP_Text m_GooText;
 
     [Header("Unlock")]
+    [SerializeField] private AudioSource m_UnlockSound; 
+    [SerializeField] private AudioClip m_UnlockingClip; 
+    [SerializeField] private AudioClip m_UnlockDoneClip; 
     [SerializeField] private Button2D m_UnlockBtn; 
     [SerializeField] private Image m_UnlockFill;
     [SerializeField] private TMP_Text m_SelectedWeaponUnlockCost;
@@ -43,29 +46,23 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
 
-
-        m_BackBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_BackBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddNewAudioSource(m_UnlockSound);
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_BackBtn,m_BackBtn.GetComponent<RectTransform>());
         m_BackBtn.onClick.AddListener(()=>{
             this.gameObject.SetActive(false);
             });
 
 
         
-        m_UpgradeBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_UpgradeBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_UpgradeBtn,m_UpgradeBtn.GetComponent<RectTransform>());
         m_UpgradeBtn.onClick.AddListener(()=>{
             m_MapUpgradeWeaponPanel.gameObject.SetActive(true);
             m_MapUpgradeWeaponPanel.Init(m_SelectedGun);
         });
+
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_UnlockBtn,null);
         m_UnlockBtn.onDown.AddListener(OnDownUnlockBtn);
         m_UnlockBtn.onUp.AddListener(OnLetGoUnlockBtn);
         m_UnlockBtn.onExit.AddListener(OnLetGoUnlockBtn);
@@ -164,7 +161,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private void OnDownUnlockBtn(){
-        MainGameManager.GetInstance().OnClickStartSound();
+        m_UnlockSound.clip = m_UnlockingClip;
+        m_UnlockSound.Play();
         if(m_Unfilling != null)
             StopCoroutine( m_Unfilling);
 
@@ -176,7 +174,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private void OnLetGoUnlockBtn(){
-        MainGameManager.GetInstance().OnClickEndSound();
+        m_UnlockSound.Stop();
         if(m_Filling != null)
             StopCoroutine( m_Filling);
             
@@ -187,7 +185,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private IEnumerator FillUnlockImage(){
-        float duration = 1;
+        float duration = 3f;
         float timePass = Mathf.Max(0.15f,m_UnlockFill.fillAmount) * duration;
         while (timePass<duration && m_UnlockFill.fillAmount <1)
         {
@@ -197,7 +195,9 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             
         }
         m_UnlockFill.fillAmount = 1;
-        MainGameManager.GetInstance().OnClickEndSound();
+        m_UnlockSound.Stop();
+        m_UnlockSound.clip = m_UnlockDoneClip;
+        m_UnlockSound.Play();
         // Unlock weapon
         MainGameManager.GetInstance().ChangeGooAmount(-1f*m_SelectedGun.UnlockCost);
         MainGameManager.GetInstance().UnlockGun(m_SelectedGun.Id);

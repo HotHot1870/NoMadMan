@@ -58,7 +58,6 @@ public class WeaponUpgradeRowController : MonoBehaviour
         for (int i = 0; i < m_UpgradeDetail.CostAndValue.Count; i++)
         {
             var block = Instantiate(m_UpgradeStatSmallBoxPrefab,m_BlockParent);
-            float upgradeValue =0;
             var blockController = block.GetComponent<WeaponUpgradeBoxController>();
             m_AllBlock.Add(blockController);
             blockController.m_Text.text = m_UpgradeDetail.CostAndValue[i].UpgradeValue;
@@ -70,6 +69,7 @@ public class WeaponUpgradeRowController : MonoBehaviour
         }
         
         m_UpgradeBtn.onClick.RemoveAllListeners();
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_UpgradeBtn,m_UpgradeBtn.GetComponent<RectTransform>());
         m_UpgradeBtn.onClick.AddListener(()=>{
             // TODO : On Hold , not on click
             if(!m_IsEnoughGoo){

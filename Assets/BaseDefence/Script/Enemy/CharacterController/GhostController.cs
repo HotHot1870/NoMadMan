@@ -5,8 +5,6 @@ using UnityEngine;
 public class GhostController : EnemyControllerBase
 {
     [SerializeField] private GameObject m_Self;
-    [SerializeField] private float m_AttackStartUp = 0.45f;
-    [SerializeField] private float m_AnimationWalkSpeed=9f;
     [SerializeField] private GameObject m_DeadEffect;
     [SerializeField] private Animator m_Animator;
 

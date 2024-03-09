@@ -34,19 +34,10 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
 
         
 
-        m_ComfirmWeaponChangeBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_ComfirmWeaponChangeBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_ComfirmWeaponChangeBtn, m_ComfirmWeaponChangeBtn.GetComponent<RectTransform>());
         
-        m_CancelWeaponChangeBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_CancelWeaponChangeBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_CancelWeaponChangeBtn, m_CancelWeaponChangeBtn.GetComponent<RectTransform>());
         m_CancelWeaponChangeBtn.onClick.AddListener(()=>{
             MapManager.GetInstance().GetMapUIController().ResetPreFightPanel();
             m_WeaponInSlotPanel.SetActive(false);

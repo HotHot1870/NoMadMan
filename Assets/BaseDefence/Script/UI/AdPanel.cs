@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,16 +14,21 @@ public class AdSliderAndBtn
 
 public class AdPanel : MonoBehaviour
 {
+    [SerializeField] private GameObject m_Self;
     [SerializeField] private List<AdSliderAndBtn> m_AllSlider = new List<AdSliderAndBtn>();
     [SerializeField] private Button2D m_SkipBtn;
     [SerializeField] private GameObject m_TotalGainPanel;
     [SerializeField] private AnimationCurve m_Curve;
+    [SerializeField] private TMP_Text m_TotalGainText;
     private int m_ShowSliderIndex = -1;
     private int m_PlayerHitCount = 0;
     private float m_TimePass = 0;
     private float m_OneLoopTimeNeed = 2f;
+    private float m_BaseGain = 0;
 
-    private void Init(){
+    public void Init(float baseGain){
+        m_Self.SetActive(true);
+        m_BaseGain = baseGain;
         m_PlayerHitCount = 0;
         m_ShowSliderIndex = -1;
         m_TimePass = 0;
@@ -34,12 +40,20 @@ public class AdPanel : MonoBehaviour
         }
         ShowNextSlider();
     }
+    
+
+    private void OnClickSkip(){
+        MainGameManager.GetInstance().LoadSceneWithTransition("Map",()=>MapManager.GetInstance().ShowEndDefenceDialog());
+        MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+    }
 
     private void ShowNextSlider(){
         m_ShowSliderIndex++;
         if(m_ShowSliderIndex>=m_AllSlider.Count){
             // no more slider to show 
             m_TotalGainPanel.SetActive(true);
+            m_TotalGainText.text = "Extra : "+ m_BaseGain*m_PlayerHitCount;
+            MainGameManager.GetInstance().ChangeGooAmount(m_BaseGain*m_PlayerHitCount);
             return;
         }
         m_TimePass = 0;
@@ -50,16 +64,14 @@ public class AdPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TODO : for test , remove later
-        Init();
-
-
-
+        m_SkipBtn.onClick.AddListener(OnClickSkip);
         for (int i = 0; i < m_AllSlider.Count; i++)
         {
             int index = i ;
             m_AllSlider[index].StopBtn.onClick.AddListener(()=>OnClickStopSlider(m_AllSlider[index].Slider));
         }
+
+        m_Self.SetActive(false);
     }
 
 
@@ -68,7 +80,6 @@ public class AdPanel : MonoBehaviour
         if(slider.normalizedValue >= 0.4f && slider.normalizedValue <=0.6f ){
             // hit
             m_PlayerHitCount++;
-            Debug.Log("Hit");
         }
 
         ShowNextSlider();
@@ -77,7 +88,7 @@ public class AdPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_ShowSliderIndex>=m_AllSlider.Count){
+        if(m_ShowSliderIndex>=m_AllSlider.Count || m_ShowSliderIndex <0){
             // no more slider to show 
             return;
         }

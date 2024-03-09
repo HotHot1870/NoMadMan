@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private Button2D m_StartGameBtn;
     [SerializeField] private Button2D m_OptionBtn;
+    [SerializeField] private Button2D m_CreditBtn;
     [SerializeField] private Button2D m_QuitGameBtn;
     [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_GainGooBtn;
@@ -16,6 +17,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Image m_Black;
     [SerializeField] private AnimationCurve m_BlackFadeCurve;
     [SerializeField] private GameObject m_OptionPanel;
+    [SerializeField] private CreditController m_CreditController;
 
 
     void Start()
@@ -43,38 +45,29 @@ public class MainMenuController : MonoBehaviour
         });
 
 
-        m_StartGameBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_StartGameBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_StartGameBtn,m_StartGameBtn.GetComponent<RectTransform>());
         m_StartGameBtn.onClick.AddListener(()=>{
             MainGameManager.GetInstance().SetMapScene();
         });
         
 
-        
-        m_OptionBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_OptionBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_OptionBtn,m_OptionBtn.GetComponent<RectTransform>());
         m_OptionBtn.onClick.AddListener(()=>{
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();
             optionController.Open();
         });
 
-        m_QuitGameBtn.onDown.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickStartSound();
-        });
-        m_QuitGameBtn.onUp.AddListener(()=>{
-            MainGameManager.GetInstance().OnClickEndSound();
-        });
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_QuitGameBtn,m_QuitGameBtn.GetComponent<RectTransform>());
         m_QuitGameBtn.onClick.AddListener(()=>{
             Application.Quit();
         });
+
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_CreditBtn,m_CreditBtn.GetComponent<RectTransform>());
+        m_CreditBtn.onClick.AddListener(ShowCredit);
+    }
+
+    private void ShowCredit(){
+        m_CreditController.Init(true);
     }
 
     private IEnumerator BlackFadeOut(){

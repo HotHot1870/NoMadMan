@@ -23,7 +23,6 @@ public class ServantController : EnemyControllerBase
     protected float m_AttackDelay = 0.3f;
     private ServantType m_ServantType = ServantType.Reover;
     private XinController m_Xin;
-    private ServantController m_GuardServant = null;
     private bool m_IsRecovering = false;
     private Coroutine m_Recovering = null;
 

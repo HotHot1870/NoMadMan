@@ -17,6 +17,10 @@ public class BulletController : MonoBehaviour
         m_Destination = destination;
         m_StartDistince = Vector3.Distance(m_Self.position, m_Destination);
         m_TimeNeedToReach = m_StartDistince / m_Speed;
+        if(m_StartDistince<3){
+            // too close , almost instade delete instead, or bullet looks odd
+            m_TimeNeedToReach = 0.01f;
+        }
         StartCoroutine(Move());
         m_Self.LookAt(destination);
     }
