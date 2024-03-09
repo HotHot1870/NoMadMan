@@ -36,6 +36,8 @@ public class CrosshairControl : MonoBehaviour
 
     public void OnAimBtnUp(){
         m_IsCrosshairMoving = false;
+        // do NOT remove , for mobile
+        m_TouchIndex = -1;
         m_AimDragTouchStartPos = Vector2.zero;
         m_AimTouchPreviousPos = Vector3.zero;
         m_CrossHairDragStartPos = m_CrosshairParent.position;

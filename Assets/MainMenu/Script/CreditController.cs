@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedButtons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class CreditController : MonoBehaviour
@@ -10,11 +13,16 @@ public class CreditController : MonoBehaviour
     [SerializeField] private GameObject m_Self;
     [SerializeField] private GameObject m_BG;
     [SerializeField] private List<CanvasGroup> m_AllTextGroup = new List<CanvasGroup>();
-    [SerializeField] private CanvasGroup m_PlayerTextTitle;
-    [SerializeField] private CanvasGroup m_PlayerTextContent;
     [SerializeField] private TMP_Text m_PlayerNameText;
     [SerializeField] private Button m_SkipFullCreenBtn;
+    [SerializeField] private Button2D m_SkipAllBtn;
+    [Header("Canvas Group")]
+    [SerializeField] private CanvasGroup m_PlayerTitleCanvas;
+    [SerializeField] private CanvasGroup m_PlayerNameCanvas;
+    [SerializeField] private CanvasGroup m_PlayerContentCanvas;
     private bool m_IsSkipNext = false;
+    private Coroutine m_ShowCridit=null;
+
 
     void Start(){
         m_SkipFullCreenBtn.onClick.AddListener(()=>{m_IsSkipNext = true;});
@@ -23,8 +31,17 @@ public class CreditController : MonoBehaviour
         {
             m_AllTextGroup[i].alpha = 0;
         }
-        m_PlayerTextTitle.alpha = 0;
-        m_PlayerTextContent.alpha = 0;
+        m_PlayerTitleCanvas.alpha = 0;
+        m_PlayerContentCanvas.alpha = 0;
+        m_PlayerNameCanvas.alpha = 0;
+
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_SkipAllBtn,m_SkipAllBtn.GetComponent<RectTransform>());
+        m_SkipAllBtn.onClick.AddListener(()=>{
+            if(m_ShowCridit != null){
+                StopCoroutine(m_ShowCridit);
+            }
+            m_Self.SetActive(false);
+        });
         m_Self.SetActive(false);
     }
 
@@ -95,37 +112,58 @@ public class CreditController : MonoBehaviour
         float thankPlayerFadeIn = 0.5f;
         while (passTime < thankPlayerFadeIn)
         {
-            m_PlayerTextTitle.alpha = (thankPlayerFadeIn - passTime)/thankPlayerFadeIn;
+            m_PlayerTitleCanvas.alpha = passTime/thankPlayerFadeIn;
             passTime += Time.deltaTime;
             yield return null;
         }
+        m_PlayerTitleCanvas.alpha=1f;
+        yield return new WaitForSeconds(1f);
+
+        // player name
+        passTime = 0f;
+        float playerNameFadeIn = 0.5f;
+        m_PlayerNameText.text = MainGameManager.GetInstance().GetData<String>("PlayerName").ToString();
+        while (passTime < thankPlayerFadeIn)
+        {
+            m_PlayerNameCanvas.alpha = passTime/thankPlayerFadeIn;
+            passTime += Time.deltaTime;
+            yield return null;
+        }
+        m_PlayerNameCanvas.alpha=1f;
         yield return new WaitForSeconds(1f);
         
         passTime = 0f;
         float thankPlayerSecondFadeIn = 0.5f;
         while (passTime < thankPlayerSecondFadeIn)
         {
-            m_PlayerTextContent.alpha = (thankPlayerSecondFadeIn - passTime)/thankPlayerSecondFadeIn;
+            m_PlayerContentCanvas.alpha = passTime/thankPlayerSecondFadeIn;
             passTime += Time.deltaTime;
             yield return null;
         }
+        m_PlayerContentCanvas.alpha=1f;
         yield return new WaitForSeconds(3f);
 
         passTime = 0f;
         while (passTime < 0.5f)
         {
-            m_PlayerTextContent.alpha = (0.5f - passTime)/0.5f;
-            m_PlayerTextTitle.alpha = (0.5f - passTime)/0.5f;
+            m_PlayerContentCanvas.alpha = (0.5f - passTime)/0.5f;
+            m_PlayerTitleCanvas.alpha = (0.5f - passTime)/0.5f;
+            m_PlayerNameCanvas.alpha = (0.5f - passTime)/0.5f;
             passTime += Time.deltaTime;
             yield return null;
         }
 
-        m_PlayerTextTitle.alpha = 0;
-        m_PlayerTextContent.alpha = 0;
+        m_PlayerTitleCanvas.alpha = 0;
+        m_PlayerContentCanvas.alpha = 0;
+        yield return new WaitForSeconds(0.5f);
 
-        // go backm to main if end game
+        // go back to main if end game
         if(SceneManager.GetActiveScene().name=="EndGame"){
             SceneManager.LoadSceneAsync("MainMenu");
         }
+
+        m_Self.SetActive(false);
     }
+
+    
 }

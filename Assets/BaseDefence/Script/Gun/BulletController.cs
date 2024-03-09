@@ -18,13 +18,20 @@ public class BulletController : MonoBehaviour
         m_StartDistince = Vector3.Distance(m_Self.position, m_Destination);
         m_TimeNeedToReach = m_StartDistince / m_Speed;
         if(m_StartDistince<3){
-            // too close , almost instade delete instead, or bullet looks odd
-            m_TimeNeedToReach = 0.01f;
+            // too close , instade delete instead, or bullet looks odd
+            StartCoroutine(RemoveEarly());
+            return;
         }
         StartCoroutine(Move());
         m_Self.LookAt(destination);
     }
-    
+
+    private IEnumerator RemoveEarly(){
+        yield return null;
+        yield return null;
+        
+        Destroy(this.gameObject);
+    }
 
     private IEnumerator Move(){
         float passedTime = 0;

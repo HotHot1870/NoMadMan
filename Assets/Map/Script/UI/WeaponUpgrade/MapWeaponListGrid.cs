@@ -1,12 +1,13 @@
 
 using System.Runtime.CompilerServices;
+using ExtendedButtons;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MapWeaponListGrid : MonoBehaviour
 {
     [SerializeField] private Image m_Border;
-    [SerializeField] private Button m_Btn;
+    [SerializeField] private Button2D m_Btn;
     [SerializeField] private Image m_WeaponDisplayImage;
     private GunScriptable m_GunScriptable = null;
     private bool m_IsWeaponLocked;
@@ -15,6 +16,7 @@ public class MapWeaponListGrid : MonoBehaviour
     public void Init(GunScriptable gunScriptable, int weaponSlotIndex, bool isUnlocked){
         m_Btn.onClick.RemoveAllListeners();
         m_Btn.onClick.AddListener(OnClickBtnWithUnlockWeapon);
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_Btn, m_Btn.GetComponent<RectTransform>());
         m_IsWeaponLocked = !isUnlocked;
         m_WeaponDisplayImage.color =isUnlocked?Color.white: Color.black;
         

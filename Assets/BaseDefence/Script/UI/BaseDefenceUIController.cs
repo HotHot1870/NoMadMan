@@ -80,6 +80,8 @@ public class BaseDefenceUIController : MonoBehaviour
             // no touch detected
             return;
         } 
+
+        // check if touch inside circle
         if(Vector2.Distance(Input.GetTouch(touchIndex).position, shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/1.75f ){
             gunShootController.OnShootBtnDown();
         }else{
@@ -87,6 +89,7 @@ public class BaseDefenceUIController : MonoBehaviour
         }    
 #endif
 #if UNITY_EDITOR
+        // check if touch inside circle
         if(Vector2.Distance(Input.mousePosition , shootBtnRect.position)< shootBtnBGRect.sizeDelta.x/2f ){
             gunShootController.OnShootBtnDown();
         }else{

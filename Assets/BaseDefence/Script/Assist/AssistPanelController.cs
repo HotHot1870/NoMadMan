@@ -28,6 +28,7 @@ public class AssistPanelController : MonoBehaviour
 
 
 
+
     void Start(){
         if( (int)MainGameManager.GetInstance().GetData<int>("Win1") == 1 ){
             m_FireballBtn.onClick.AddListener(OnClickFireball);
