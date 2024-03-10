@@ -161,8 +161,6 @@ public class WorkShopChooseWeaponController : MonoBehaviour
     }
 
     private void OnDownUnlockBtn(){
-        m_UnlockSound.clip = m_UnlockingClip;
-        m_UnlockSound.Play();
         if(m_Unfilling != null)
             StopCoroutine( m_Unfilling);
 
@@ -170,6 +168,8 @@ public class WorkShopChooseWeaponController : MonoBehaviour
             // not enough goo
             return;
         }
+        m_UnlockSound.clip = m_UnlockingClip;
+        m_UnlockSound.Play();
         m_Filling = StartCoroutine(FillUnlockImage());
     }
 
@@ -186,7 +186,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
     private IEnumerator FillUnlockImage(){
         float duration = 3f;
-        float timePass = Mathf.Max(0.15f,m_UnlockFill.fillAmount) * duration;
+        float timePass = 0.15f * duration;
         while (timePass<duration && m_UnlockFill.fillAmount <1)
         {
             timePass+=Time.deltaTime;

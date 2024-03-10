@@ -32,8 +32,6 @@ public class GunShootController : MonoBehaviour
     private Dictionary<int, float> m_GunsClipAmmo = new Dictionary<int, float>(); // how many ammo left on gun when switching
 
     [Header("Shooting")]
-    [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
-    [SerializeField] private Transform m_ShotDotParent;
     [SerializeField] private AudioSource m_ShootAudioSource;
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
     private Coroutine m_SemiAutoShootCoroutine = null;

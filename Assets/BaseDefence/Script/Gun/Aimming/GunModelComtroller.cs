@@ -78,7 +78,7 @@ public class GunModelComtroller : MonoBehaviour
 
     private void GunModelOffset(Vector2 crosshairPosNormalized){
         // offset by scrosshair
-        
+        // 15f*crosshairPosNormalized.x for gun to look toward right more 
         m_ModelAim.localEulerAngles = m_ModelAimStartRotation + new Vector3(
             crosshairPosNormalized.y * -m_CrosshairOffsetStrength.x,
             crosshairPosNormalized.x * m_CrosshairOffsetStrength.y,

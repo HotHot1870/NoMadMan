@@ -16,7 +16,7 @@ public class BaseDefenceUIController : MonoBehaviour
     [SerializeField] private GameObject m_ShootPanel;
     [SerializeField] private TMP_Text m_AmmoText;
     [SerializeField] private Button m_ReloadBtn;
-    [SerializeField] private Button m_OptionBtn;
+    [SerializeField] private Button2D m_OptionBtn;
     [SerializeField] private Button2D m_AimBtn;    
     [SerializeField] private Button2D m_ShootBtn;
     [SerializeField] private Button2D m_SwitchWeaponBtn;
@@ -101,6 +101,7 @@ public class BaseDefenceUIController : MonoBehaviour
         m_ShootBtn.onUp.AddListener(gunShootController.OnShootBtnUp);
         m_ShootBtn.onExit.AddListener(gunShootController.OnShootBtnUp);
         
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_OptionBtn, m_OptionBtn.GetComponent<RectTransform>());
         m_OptionBtn.onClick.AddListener(()=>{
             TurnOffAllPanel();
             var optionController = m_OptionPanel.GetComponent<OptionMenuController>();

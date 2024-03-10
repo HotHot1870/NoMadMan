@@ -563,7 +563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c479ecf5764924e45a85c5ee33c6c768, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1917f9b73e3ac5145963cf81a0ea83e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -911,7 +911,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c479ecf5764924e45a85c5ee33c6c768, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1917f9b73e3ac5145963cf81a0ea83e8, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9884,15 +9884,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 23aba24ca9ec2b240b7adb6ab613eeb9, type: 2}
   - {fileID: 11400000, guid: 8c73bcca5d9c12b459494d64a321770b, type: 2}
   m_AllEnemy:
-  - {fileID: 11400000, guid: b588c9c995c86d84bafb93ea08f95673, type: 2}
-  - {fileID: 11400000, guid: 51a932acda08e3e449533953bbbcfc37, type: 2}
-  - {fileID: 11400000, guid: c6314b6ed806b7849bdab708d169d166, type: 2}
-  - {fileID: 11400000, guid: d423e823838d4cc49bb0742c817c57c3, type: 2}
-  - {fileID: 11400000, guid: 0438cb817c56a9441a74a88655b809d3, type: 2}
-  - {fileID: 11400000, guid: c05d23ccb5f71ab43b64f5bf071ae6f9, type: 2}
-  - {fileID: 11400000, guid: 0905e9f9bfc7ef740ae1cb55d3633802, type: 2}
-  - {fileID: 11400000, guid: 17292a263d72f6d418b53510e2e6daf8, type: 2}
-  - {fileID: 11400000, guid: 45fc039437e58ee4db5bdabaf344ecae, type: 2}
+  - {fileID: 11400000, guid: 92a675e9809a0f44b9cca0cae8c38ea7, type: 2}
+  - {fileID: 11400000, guid: 485dedc9cbba58e4bacdce905d1b2082, type: 2}
+  - {fileID: 11400000, guid: c77cba5c8795bce4c95fed570dc9e3e9, type: 2}
+  - {fileID: 11400000, guid: d2fdaaf9f9e1f84488b7799e2e4644d2, type: 2}
+  - {fileID: 11400000, guid: aa09f25fa12e9794cb473f5a5a0308cc, type: 2}
+  - {fileID: 11400000, guid: 4bcbf6686ad71104c8578fb4662d6645, type: 2}
+  - {fileID: 11400000, guid: 5640ead02c02648458e3e2ea5246035c, type: 2}
+  - {fileID: 11400000, guid: 49d76e28b8b9bb54ea308eef1e264acb, type: 2}
+  - {fileID: 11400000, guid: 6e63d1e21afaa914eaf9a13eae94d498, type: 2}
   m_LoadingCanvas: {fileID: 1435346224}
   m_LoadAmountImage: {fileID: 190365640}
   m_BgAnimator: {fileID: 1870043632}
@@ -9916,8 +9916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb7421078afbae43bc9580ea1b031bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ResourcesPath: Assets/Component
-  m_ScriptablePath: Assets/Component/Scriptable
+  m_ResourcesPath: Assets/Resources
+  m_ScriptablePath: Assets/Resources/Scriptable
   m_MainGameManager: {fileID: 1526301687}
   m_UniqueText:
   - Key: _@@Comma@@_
