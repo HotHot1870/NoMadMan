@@ -66,6 +66,10 @@ SpriteAtlas:
     - {fileID: 2800000, guid: dcc9af6acb68670429ab1b6c2c649754, type: 3}
     - {fileID: 2800000, guid: a4df11be2a870d84580a04d220ef9bce, type: 3}
     - {fileID: 2800000, guid: cdc7c8e70f0f437459232b4c424a3d43, type: 3}
+    - {fileID: 2800000, guid: 0b38066b9e97d244e9c1ab1bebb0e352, type: 3}
+    - {fileID: 2800000, guid: 08cb558bd340a164f919b260ef018685, type: 3}
+    - {fileID: 2800000, guid: f9ae6d84961ceb741a88cd63493d4dac, type: 3}
+    - {fileID: 2800000, guid: 48904e6bf0a671a42b0b9fcba375cfc5, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -76,6 +80,7 @@ SpriteAtlas:
     - ce10b7b2df6c72e4ca57e3df5a8146ff: 21300000
     - 2b985dc3946abf847980d9468f0a7fca: 21300000
     - 5cd6465439e241745bdcb8d7f8cc4d48: 21300000
+    - f9ae6d84961ceb741a88cd63493d4dac: 21300000
     - 6b576894859de6b4897f301590719909: 21300000
     - c479ecf5764924e45a85c5ee33c6c768: 21300000
     - 6157a7f686ac04b48b32d5b1fb584db5: 21300000
@@ -84,6 +89,9 @@ SpriteAtlas:
     - e3e0a9b928ddde346b4d7c4a8c7c7352: 21300000
     - dcc9af6acb68670429ab1b6c2c649754: 21300000
     - 356b10caebb20a040b2db2062ed9094b: 21300000
+    - 0b38066b9e97d244e9c1ab1bebb0e352: 21300000
+    - 48904e6bf0a671a42b0b9fcba375cfc5: 21300000
+    - 08cb558bd340a164f919b260ef018685: 21300000
     - 048ac4bbb81f0034f89c573326e1cc1b: 21300000
     - fd23be8c72c485744b0edf54c9e4bde6: 21300000
     - 01fa476e547c76549a1c6c6ab3f29393: 21300000
@@ -98,6 +106,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ce10b7b2df6c72e4ca57e3df5a8146ff, type: 3}
   - {fileID: 21300000, guid: 2b985dc3946abf847980d9468f0a7fca, type: 3}
   - {fileID: 21300000, guid: 5cd6465439e241745bdcb8d7f8cc4d48, type: 3}
+  - {fileID: 21300000, guid: f9ae6d84961ceb741a88cd63493d4dac, type: 3}
   - {fileID: 21300000, guid: 6b576894859de6b4897f301590719909, type: 3}
   - {fileID: 21300000, guid: c479ecf5764924e45a85c5ee33c6c768, type: 3}
   - {fileID: 21300000, guid: 6157a7f686ac04b48b32d5b1fb584db5, type: 3}
@@ -106,6 +115,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e3e0a9b928ddde346b4d7c4a8c7c7352, type: 3}
   - {fileID: 21300000, guid: dcc9af6acb68670429ab1b6c2c649754, type: 3}
   - {fileID: 21300000, guid: 356b10caebb20a040b2db2062ed9094b, type: 3}
+  - {fileID: 21300000, guid: 0b38066b9e97d244e9c1ab1bebb0e352, type: 3}
+  - {fileID: 21300000, guid: 48904e6bf0a671a42b0b9fcba375cfc5, type: 3}
+  - {fileID: 21300000, guid: 08cb558bd340a164f919b260ef018685, type: 3}
   - {fileID: 21300000, guid: 048ac4bbb81f0034f89c573326e1cc1b, type: 3}
   - {fileID: 21300000, guid: fd23be8c72c485744b0edf54c9e4bde6, type: 3}
   - {fileID: 21300000, guid: 01fa476e547c76549a1c6c6ab3f29393, type: 3}
@@ -119,6 +131,7 @@ SpriteAtlas:
   - Parallelogram
   - CricleBorder
   - blood-png-81
+  - WeaponSwap
   - DragHand
   - White
   - ArrowLook
@@ -127,6 +140,9 @@ SpriteAtlas:
   - BgSpike
   - Tap
   - circle
+  - White_Noise
+  - World_RoseOfWinds
+  - DragBg_Noice
   - DragBg
   - ArrowUp
   - BgSliced

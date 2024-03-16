@@ -126,11 +126,14 @@ public class CrosshairControl : MonoBehaviour
 
     private void OutOffBountPrevention(){
         float border = 80f;
+        var orginPos = new Vector2(m_CrosshairParent.position.x,m_CrosshairParent.position.y);
         m_CrosshairParent.position = new Vector3(
             Mathf.Clamp(m_CrosshairParent.position.x, Screen.width - Screen.height*16f/9f +border , Screen.height*16f/9f-border ),
             Mathf.Clamp(m_CrosshairParent.position.y, border, Screen.height - border),
             0
             );
+
+        m_AimDragTouchStartPos+= orginPos - new Vector2(m_CrosshairParent.position.x,m_CrosshairParent.position.y);
     }
 /*
     public void SetCrosshairRecoil(Vector2 recoil){

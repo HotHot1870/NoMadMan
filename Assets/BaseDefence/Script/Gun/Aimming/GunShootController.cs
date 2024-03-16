@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BaseDefenceNameSpace;
+using Cinemachine;
 
 [System.Serializable]
 public class ProjectileDetail
@@ -25,6 +26,8 @@ public class GunShootController : MonoBehaviour
 {
     private GunScriptable m_SelectedGun = null;
     [SerializeField] private AudioClip m_OutOfAmmoSound;
+    [SerializeField] private CinemachineVirtualCamera m_ShootCamera;
+    private Coroutine m_CameraShakeCoroutine = null;
 
     [Header("Ammo")]
     private float m_CurrentAmmo = 0;
@@ -172,6 +175,21 @@ public class GunShootController : MonoBehaviour
 
 
 
+    private IEnumerator ShakeCamera(){
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 3.5f;
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 3.5f;
+        float passTime = 0;
+        float duration =0.15f;
+        while (passTime <duration)
+        {
+            passTime += Time.deltaTime;
+            yield return null;
+        }
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0f;
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0f;
+
+    }
+
     private void Shoot()
     {
         if (m_CurrentShootCoolDown > 0 || BaseDefenceManager.GetInstance().GameStage == BaseDefenceStage.Result)
@@ -181,6 +199,10 @@ public class GunShootController : MonoBehaviour
             return;
         // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
+        if(m_CameraShakeCoroutine!= null){
+            StopCoroutine(m_CameraShakeCoroutine);
+        }
+        m_CameraShakeCoroutine = StartCoroutine(ShakeCamera());
 
         // muzzel
         var muzzleFlash = BaseDefenceManager.GetInstance().GetCurrentGunMuzzelPartical();

@@ -42,8 +42,6 @@ public class BaseDefenceResultPanel : MonoBehaviour
         m_AllKilledEnemy.Add( enemyScriptable);
     }
 
-    // TODO : pp20 reload clip image missing
-
     public void Init(bool isWin){
         if(m_Self.activeSelf)
             return;

@@ -17,7 +17,7 @@ public class AssistPanelController : MonoBehaviour
     [SerializeField] private TimmySlashController m_SlashController;
     [SerializeField] private KineticTransmitterController m_KineticTransmitterController;
 
-    // TODO : "thrid hand" reload gun on use
+    // "thrid hand" reload gun on use
     // TODO : gain ability AFTER complete level
 
     [Header("Check is used")]

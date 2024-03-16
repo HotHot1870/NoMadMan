@@ -57,7 +57,6 @@ public class EndGameCreditController : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
         }
 
-        // TODO : player credit
         
     }
 }

@@ -26,7 +26,6 @@ public class ServantController : EnemyControllerBase
     private bool m_IsRecovering = false;
     private Coroutine m_Recovering = null;
 
-    // TODO : net effect
 
 
     private IEnumerator Start() {

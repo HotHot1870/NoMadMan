@@ -505,8 +505,8 @@ public class ReadCsv : MonoBehaviour
             colume++;
             // TODO : sim chinese
             colume++;
-            DialogScriptable.EngDialog = contents[colume].Trim();
-            DialogScriptable.EngDialog = ReplaceText(DialogScriptable.EngDialog);
+            DialogScriptable.Content = contents[colume].Trim();
+            DialogScriptable.Content = ReplaceText(DialogScriptable.Content);
             colume++;
             int tragetInt = -2;
             if(int.TryParse(contents[colume], out tragetInt))

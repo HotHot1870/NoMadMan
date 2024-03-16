@@ -107,7 +107,6 @@ public class CreditController : MonoBehaviour
             yield return new WaitForSeconds(0.75f);
         }
 
-        // TODO : player credit
         passTime = 0f;
         float thankPlayerFadeIn = 0.5f;
         while (passTime < thankPlayerFadeIn)

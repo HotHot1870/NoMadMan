@@ -9,6 +9,6 @@ public class DialogScriptable : ScriptableObject
 {
     public int Id;
     // TODO : wrong name
-    public string EngDialog;
+    public string Content;
     public List<int> NextId = new List<int>();
 }

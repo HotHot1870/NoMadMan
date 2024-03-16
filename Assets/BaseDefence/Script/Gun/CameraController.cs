@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
             crosshairPosNormalized.x,
             crosshairPosNormalized.y,
             0) * m_CrosshairAffection;
+
     }
 
 }

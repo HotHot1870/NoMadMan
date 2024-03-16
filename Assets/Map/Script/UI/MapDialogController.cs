@@ -86,7 +86,7 @@ public class MapDialogController : MonoBehaviour
     }*/
 
     private void SetContentText(){
-        m_ContentText.text = m_CurDialogScriptable.EngDialog;
+        m_ContentText.text = m_CurDialogScriptable.Content;
     } 
 
     private void SetDialogRow(){

@@ -22,6 +22,7 @@ public class EnemySpawnController : MonoBehaviour
     private float m_TimePassed = 0;
     private bool m_IsFinalWaveStarted = false;
     private float m_MaxSpawnDelay = 10f;
+    private float m_StrengthBase = 0;
 
     private List<Transform> m_AllEnemyTrans = new List<Transform>();
 
@@ -80,10 +81,15 @@ public class EnemySpawnController : MonoBehaviour
 
     private void StartNextNormalWave()
     {
-        if(m_WaveCount>=m_LocationData.NormalWavesCount){
+        if(m_LocationData.Id ==21){
+            // get stronger overtime
+            m_StrengthBase++;
+        }
+        // last level infinite 
+        if(m_WaveCount>=m_LocationData.NormalWavesCount && m_LocationData.Id !=21 ){
             m_IsFinalWaveStarted = true;
         }
-        float Strength = m_IsFinalWaveStarted?m_LocationData.FinalWaveStrength:m_LocationData.NormalWavesStrength;
+        float Strength = m_IsFinalWaveStarted?m_LocationData.FinalWaveStrength:m_LocationData.NormalWavesStrength + m_StrengthBase;
         List<int> taregtEnemyTypes = m_IsFinalWaveStarted?m_LocationData.FinalWaveEnemy:m_LocationData.NormalWaveEnemy;
         Dictionary<int,EnemyScriptable> allPossibleEnemy = new Dictionary<int,EnemyScriptable>();
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
