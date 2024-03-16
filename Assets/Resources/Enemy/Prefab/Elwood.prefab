@@ -749,7 +749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
-  m_DamageMod: 1.5
+  m_DamageMod: 3
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 4943171535433664837}
@@ -2116,12 +2116,14 @@ MonoBehaviour:
   HpBar: {fileID: 461577747910884392}
   HpParent: {fileID: 5549230947829776670}
   m_ExplodeHitParticle: {fileID: 8314652227003925356, guid: e4809a8873a567d488878c0628ddcc49, type: 3}
+  m_HitPlayerSoundPlayer: {fileID: 0}
+  m_HitPlayerSound: {fileID: 0}
   m_AllNetMeshRenderer: []
   m_AllNetSkinnedMeshRenderer: []
   m_Self: {fileID: 7077179325366279935}
   m_AttackStartUp: 0
   m_Ghost: {fileID: 7904047251304199293, guid: 753b4a3202b1abc488b0c54cc2a11cc8, type: 3}
-  m_GhostScriptable: {fileID: 11400000, guid: 0438cb817c56a9441a74a88655b809d3, type: 2}
+  m_GhostScriptable: {fileID: 11400000, guid: aa09f25fa12e9794cb473f5a5a0308cc, type: 2}
   m_SpawnGhostPos: {fileID: 525504339171953228}
   m_AttackDelayPerSpawn: 1
 --- !u!1 &7667335144930759286
@@ -2348,7 +2350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
-  m_DamageMod: 1.5
+  m_DamageMod: 3
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 2577048822393745810}
@@ -2460,7 +2462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 3056453051600076715}
   m_OnHitEffect: {fileID: 1632561448610358924, guid: 0be17ccf55c5b494ea40690ff5344fa5, type: 3}
-  m_DamageMod: 1.5
+  m_DamageMod: 3
   m_BodyType: 2
   m_Renderer: {fileID: 0}
   m_SkinRenderer: {fileID: 8035835111316926212}

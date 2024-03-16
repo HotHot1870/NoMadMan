@@ -176,8 +176,8 @@ public class GunShootController : MonoBehaviour
 
 
     private IEnumerator ShakeCamera(){
-        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 3.5f;
-        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 3.5f;
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1f;
+        m_ShootCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 5f;
         float passTime = 0;
         float duration =0.15f;
         while (passTime <duration)

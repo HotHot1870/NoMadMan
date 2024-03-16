@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +22,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
     public Image HpBar;
     public GameObject HpParent;
     protected EnemyScriptable Scriptable;
-    protected float CurHp;
+    protected float CurHp=1;
     public Action OnDeadAction = null;
     protected bool IsThisDead = false;
     protected Vector3 CameraPos;
@@ -43,11 +42,11 @@ public abstract class EnemyControllerBase : MonoBehaviour
         MainGameManager.GetInstance().AddNewAudioSource(m_HitPlayerSoundPlayer);
         Scriptable = config.scriptable;
         Destination = config.destination;
-        CurHp = GetMaxHp();
         CameraPos = config.cameraPos;
         MainCamera =config.camera;
         SpawnId = config.spawnId;
         this.transform.position = config.spawnPos;
+        CurHp = GetMaxHp();
         if(HpCanvas!= null){
             HpCanvas.worldCamera = config.camera;
             HpParent.SetActive(false);
