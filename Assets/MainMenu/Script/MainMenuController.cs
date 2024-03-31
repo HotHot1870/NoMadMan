@@ -27,7 +27,7 @@ public class MainMenuController : MonoBehaviour
         //m_PlayerName.text = MainGameManager.GetInstance().GetData<string>("PlayerName", "").ToString().Trim();
         m_GainGooBtn.onClick.AddListener(()=>{
             float curGoo = PlayerPrefs.GetFloat("Goo", 0 );
-            PlayerPrefs.SetFloat("Goo",curGoo+10000);
+            PlayerPrefs.SetFloat("Goo",curGoo+100000);
         });
         m_UnlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
 

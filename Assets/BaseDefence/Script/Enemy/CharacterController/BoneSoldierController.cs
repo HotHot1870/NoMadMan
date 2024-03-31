@@ -45,6 +45,9 @@ public class BoneSoldierController : EnemyControllerBase
 
 
     private void Update() {
+        if(BaseDefenceManager.GetInstance().GetCurHp()<=0)
+            this.enabled = false;
+
         if( IsThisDead )
             return;
         

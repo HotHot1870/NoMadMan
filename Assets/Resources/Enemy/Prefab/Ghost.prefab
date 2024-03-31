@@ -2419,8 +2419,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -9.09, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5247935130250185526}
   - {fileID: 1694048809602459485}
@@ -2470,8 +2470,6 @@ MonoBehaviour:
   m_AllNetSkinnedMeshRenderer:
   - {fileID: 1629170161330112704}
   m_Self: {fileID: 7904047251304199293}
-  m_AttackStartUp: 0
-  m_AnimationWalkSpeed: 9
   m_DeadEffect: {fileID: 4283614080345403091, guid: e4809a8873a567d488878c0628ddcc49, type: 3}
   m_Animator: {fileID: 6103346745525368624}
 --- !u!82 &5870325642855342124

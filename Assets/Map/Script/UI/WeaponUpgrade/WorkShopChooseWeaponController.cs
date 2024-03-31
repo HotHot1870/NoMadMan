@@ -30,6 +30,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
     [Header("WeaponDetail")]
     [SerializeField] private Image m_SelectedWeaponImage;
+    [SerializeField] private Image m_SelectedWeaponShadow;
     [SerializeField] private TMP_Text m_SelectedWeaponName;
     [SerializeField] private TMP_Text m_SelectedWeaponDamage;
     [SerializeField] private TMP_Text m_SelectedWeaponClipSize;
@@ -43,6 +44,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
 
 
     void Start(){
+        InvokeRepeating("RefreshScrapCount",10,10);
         
         m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
 
@@ -83,6 +85,7 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         
         m_SelectedWeaponId = m_SelectedGun.Id;
         m_SelectedWeaponImage.sprite = m_SelectedGun.DisplayImage;
+        m_SelectedWeaponShadow.sprite = m_SelectedGun.WhiteImage;
         m_SelectedWeaponName.text = "Name : "+m_SelectedGun.DisplayName;
         m_SelectedWeaponFireRate.text = "Fire Rate : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.FireRate));
         m_SelectedWeaponDamage.text = "Damage : "+ System.Convert.ToSingle(m_SelectedGun.GetStatValue(GunScriptableStatEnum.Damage))+" x "+ 
@@ -121,11 +124,15 @@ public class WorkShopChooseWeaponController : MonoBehaviour
         m_UpgradeBtn.gameObject.SetActive(isOwned);
     }
 
+    private void RefreshScrapCount(){
+        // TODO : ui need update , such as scrap image
+        m_GooText.text = "Scrap : "+MainGameManager.GetInstance().GetGooAmount();
+
+    }
 
     public void Init(){
         m_UnlockFill.fillAmount = 0;
-        m_GooText.text = "Goo : "+MainGameManager.GetInstance().GetGooAmount();
-        
+        RefreshScrapCount();
         var allWeapon = MainGameManager.GetInstance().GetAllWeapon();
         
         // clear all spawn slot

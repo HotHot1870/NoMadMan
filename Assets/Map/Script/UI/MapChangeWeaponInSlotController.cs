@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ExtendedButtons;
 using TMPro;
 using Unity.VisualScripting;
@@ -10,7 +11,8 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
 {
     // chosing weapon on a slot
     [SerializeField] private GameObject m_WeaponInSlotPanel;
-    [SerializeField] private Image m_SelectedSlotWeapon;
+    [SerializeField] private Image m_SelectedSlotWeapon;    
+    [SerializeField] private Image m_SelectedSlotWeaponShadow;
 
     [SerializeField] private TMP_Text m_SelectedWeaponName;
     [SerializeField] private TMP_Text m_SelectedWeaponDamage;
@@ -60,10 +62,12 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
         List<GunScriptable> allSelectedWeawpon = MainGameManager.GetInstance().GetAllSelectedWeapon();
         List<GunScriptable> allWeapon = MainGameManager.GetInstance().GetAllWeapon();
         List<int> allSelectedWeaponId = new List<int>();
-        foreach (var item in allSelectedWeawpon)
+        for (int i = 0; i < allSelectedWeawpon.Count; i++)
         {
-            if(item != null)
-                allSelectedWeaponId.Add(item.Id);
+            int index = i;
+            if(allSelectedWeawpon[index] != null && index != weaponSlotIndex)
+                allSelectedWeaponId.Add(allSelectedWeawpon[index].Id);
+
         }
 
         int curSelectedWeaponId =  (int)MainGameManager.GetInstance().GetData<int>("SelectedWeapon"+weaponSlotIndex.ToString(),"-1") ; 
@@ -121,6 +125,7 @@ public class MapChangeWeaponInSlotController : MonoBehaviour
         m_SelectedWeaponRecoil.text = "Recoil : "+ System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.Recoil));
         m_SelectedWeaponHandling.text = "Handling : "+ System.Convert.ToSingle(selectedGunScriptable.GetStatValue(GunScriptableStatEnum.Handling));
         m_SelectedSlotWeapon.sprite = selectedGunScriptable.DisplayImage;
+        m_SelectedSlotWeaponShadow.sprite = selectedGunScriptable.WhiteImage;
         m_SelectedSlotWeapon.color = isWeaponOwned ? Color.white : Color.black;
 
     }

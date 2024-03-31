@@ -29,13 +29,19 @@ public class DyingXinController : EnemyControllerBase
         m_Self.transform.position = Vector3.MoveTowards(
             m_Self.transform.position, Destination, moveDistance);
 
-        if(Vector3.Distance(m_Self.transform.position, Destination)<0.25f){
+        if(Vector3.Distance(m_Self.transform.position, Destination)<1f){
             OnDead();
         }
     }
 
     private void SetResult(){
+        StartCoroutine(DeadDelay());
+    }
+    private IEnumerator DeadDelay(){
+        yield return new WaitForSeconds(0.75f);
         BaseDefenceManager.GetInstance().ChangeGameStage( BaseDefenceNameSpace.BaseDefenceStage.Result );
         BaseDefenceManager.GetInstance().GetBaseDefenceUIController().SetResultPanel(true);
+
     }
+
 }

@@ -81,7 +81,7 @@ public abstract class EnemyControllerBase : MonoBehaviour
     }
 
     private IEnumerator NetTime(){
-        yield return new WaitForSeconds(BaseDefenceManager.GetInstance().GetLocationScriptable().Level*0.5f+2f);
+        yield return new WaitForSeconds(BaseDefenceManager.GetInstance().GetLocationScriptable().Level*2f+5f);
         OnNetEnd();
     }
 

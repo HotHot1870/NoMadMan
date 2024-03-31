@@ -7,6 +7,7 @@ public class XinBodyPart : EnemyBodyPart
     [SerializeField] private MeshRenderer m_MeshRenderer;
     [SerializeField] private Color m_HealColor;
     [SerializeField] private Color m_Orange;
+    private Coroutine m_Spawning = null;
 
     protected void Awake(){
         m_Collider = this.GetComponent<BoxCollider>();
@@ -33,12 +34,15 @@ public class XinBodyPart : EnemyBodyPart
     }
 
     public void SetXinBodyPart(bool isHideden){
+        if(m_Spawning != null){
+            StopCoroutine(m_Spawning);
+        }
         if(isHideden){
             foreach (var item in m_MeshRenderer.materials)
             {
                 item.SetColor("_MainColor",m_Orange);
                 //ChangeBodyType(EnemyBodyPartEnum.Heal);
-                StartCoroutine(HiddenEffect());
+                m_Spawning = StartCoroutine(HiddenEffect());
                 m_Collider.enabled = false;
             }
         }else{
@@ -46,7 +50,7 @@ public class XinBodyPart : EnemyBodyPart
             {
                 item.SetColor("_MainColor",m_Orange);
                 SetDamageMod(1);
-                StartCoroutine(ShowEffect());
+                m_Spawning = StartCoroutine(ShowEffect());
                 m_Collider.enabled = true;
             }
         }
@@ -104,6 +108,25 @@ public class XinBodyPart : EnemyBodyPart
 
         }
     }
+/*
+    public void DespawnImmediate(){
+        if(m_Spawning != null){
+            StopCoroutine(m_Spawning);
+        }
+        if(m_Renderer != null){
+            foreach (var item in m_Renderer.materials)
+            {
+                item.SetFloat("_Normalized",  0);
+            }
+        }
+
+        if(m_SkinRenderer != null){
+            foreach (var item in m_SkinRenderer.materials)
+            {
+                item.SetFloat("_Normalized",  0);
+            }
+        }
+    }*/
 
     private IEnumerator ShowEffect(){
         if(m_Renderer == null && m_SkinRenderer == null)

@@ -112,7 +112,10 @@ public class BaseDefenceUIController : MonoBehaviour
 
         var cameraController = BaseDefenceManager.GetInstance().GetCameraController();
 
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_SwitchWeaponBtn,m_SwitchWeaponBtn.GetComponent<RectTransform>());
         m_SwitchWeaponBtn.onDown.AddListener(OnClickShowSwitchWeaponPanel);
+
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_AssistBtn,m_AssistBtn.GetComponent<RectTransform>());
         m_AssistBtn.onDown.AddListener(ShowAssistPanel);
 
         m_CloseSwitchWeaponBtn.onDown.AddListener(OnClickCloseSwitchWeaponPanel);
@@ -120,7 +123,8 @@ public class BaseDefenceUIController : MonoBehaviour
 
 
     public void RecordDeadEnemy(EnemyScriptable enemyScriptable){
-        m_BaseDefenceResultPanel.RecordDeadEnemy( enemyScriptable);
+        if(BaseDefenceManager.GetInstance().GetCurHp()>0)
+            m_BaseDefenceResultPanel.RecordDeadEnemy( enemyScriptable);
     }
 
     private void ShowAssistPanel(){

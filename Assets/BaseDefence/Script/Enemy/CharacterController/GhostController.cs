@@ -34,6 +34,9 @@ public class GhostController : EnemyControllerBase
     }
 
     private void Update() {
+        if(BaseDefenceManager.GetInstance().GetCurHp()<=0)
+            this.enabled = false;
+            
         if( IsThisDead )
             return;
         
@@ -52,10 +55,12 @@ public class GhostController : EnemyControllerBase
     }
 
     public void Attack(){
-        if(IsThisDead )
+        if(IsThisDead || BaseDefenceManager.GetInstance().GetCurHp()<=0)
             return;
 
+        IsThisDead = true;
         PlayHitPlayerSound();
+        m_HitPlayerSoundPlayer.PlayOneShot(m_HitPlayerSound);
         var hitScreenPos = Camera.main.WorldToScreenPoint(m_Self.transform.position+Vector3.up*1.5f);
         BaseDefenceManager.GetInstance().OnPlayerHit(Scriptable.Damage,hitScreenPos);
         OnDead();
@@ -67,8 +72,8 @@ public class GhostController : EnemyControllerBase
         deadEffect.transform.position = m_Self.transform.position;
         deadEffect.GetComponent<ParticleSystem>().Play();
         Destroy(deadEffect,5);
-
-        Destroy(m_Self);
+        m_Self.transform.localScale = Vector3.zero;
+        Destroy(m_Self,1.5f);
     }
 
 }

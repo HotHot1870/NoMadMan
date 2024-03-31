@@ -8,6 +8,7 @@ public class MapWeaponListGrid : MonoBehaviour
 {
     [SerializeField] private Image m_Border;
     [SerializeField] private Button2D m_Btn;
+    [SerializeField] private Image m_WeaponShadowImage;
     [SerializeField] private Image m_WeaponDisplayImage;
     private GunScriptable m_GunScriptable = null;
     private bool m_IsWeaponLocked;
@@ -29,6 +30,7 @@ public class MapWeaponListGrid : MonoBehaviour
             return;
         }
         m_GunScriptable = gunScriptable;
+        m_WeaponShadowImage.sprite = gunScriptable.WhiteImage;
         m_WeaponDisplayImage.sprite = gunScriptable.DisplayImage;
         
     }

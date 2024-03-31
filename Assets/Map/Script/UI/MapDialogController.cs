@@ -46,6 +46,7 @@ public class MapDialogController : MonoBehaviour
         MainGameManager.GetInstance().AddOnClickBaseAction(m_EndDialogBtn,m_EndDialogBtn.GetComponent<RectTransform>());
         m_EndDialogBtn.onClick.AddListener(()=>{
             onDialogEnd?.Invoke();
+            m_Self.SetActive(false);
         });
 
         m_CurDialogScriptable = GetDialogScritapble(startDialogId);
@@ -56,6 +57,9 @@ public class MapDialogController : MonoBehaviour
 
     void Start(){
         MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
+        m_EndDialogBtn.onClick.RemoveAllListeners();
+        m_EndDialogBtn.onClick.AddListener(()=>m_Self.SetActive(false));
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_EndDialogBtn,m_EndDialogBtn.GetComponent<RectTransform>());
         m_Animator.Play("Hidden");
         m_Self.SetActive(false);
     }/*

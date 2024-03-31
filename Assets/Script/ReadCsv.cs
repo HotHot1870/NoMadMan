@@ -405,6 +405,8 @@ public class ReadCsv : MonoBehaviour
             gunScriptable.Id = int.Parse(contents[index]);
             gunScriptable.DisplayName = displayName;
 
+            
+            gunScriptable.WhiteImage = Resources.Load<Sprite>("Gun/DisplayImage/"+displayName.Replace(" ", "")+"_White");
             gunScriptable.DisplayImage = Resources.Load<Sprite>("Gun/DisplayImage/"+displayName.Replace(" ", ""));
             gunScriptable.FPSPrefab = Resources.Load<GameObject>("Gun/3DModel/"+displayName.Replace(" ", ""));
 

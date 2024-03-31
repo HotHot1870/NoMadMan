@@ -6,6 +6,7 @@ using System;
 using UnityEditor;
 using UnityEngine.UI;
 using ExtendedButtons;
+using UnityEngine.Rendering;
 
 
 public enum BGM
@@ -49,6 +50,11 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private AudioSource m_BGMplayer;
     private float m_BGMVolume = 0.75f;
     private List<AudioSource> m_AllBGMAudioSource = new List<AudioSource>();
+
+    [Header("Fog")]
+    [SerializeField] private Color m_RedFog;
+    [SerializeField] private Color m_WhiteFog;
+    private ReflectionProbe baker;
 
     
 #if UNITY_EDITOR
@@ -99,10 +105,12 @@ public class MainGameManager : MonoBehaviour
     }
 
     public void AddOnClickBaseAction(Button2D btn,RectTransform rectTransform = null){
+        btn.onDown.RemoveAllListeners();
         btn.onDown.AddListener(()=>{
                 OnClickStartSound(rectTransform);
             });
 
+        btn.onUp.RemoveAllListeners();
         btn.onUp.AddListener(()=>{
             OnClickEndSound(rectTransform);
         });
@@ -302,7 +310,40 @@ public class MainGameManager : MonoBehaviour
     public void SetBaseDefenceScene(MapLocationScriptable location){
         ChangeBGM(BGM.Battle);
         LoadSceneWithTransition("BaseDefence", 
-            ()=>BaseDefenceManager.GetInstance().StartWave(location));
+            ()=>{
+                BaseDefenceManager.GetInstance().StartWave(location);
+                
+                // fog
+                SetFog(location.Level>=2);
+            });
+
+    }
+
+    public void SetFog(bool isRed){
+        RenderSettings.fogColor = isRed?m_RedFog:m_WhiteFog;
+        ChangeSkyBox();
+    }
+    
+    private void ChangeSkyBox() {
+        if(baker == null)
+            baker = gameObject.AddComponent<ReflectionProbe>();
+            
+        RenderSettings.skybox = RenderSettings.skybox;
+        DynamicGI.UpdateEnvironment();
+        baker.cullingMask = 0;
+        baker.refreshMode = ReflectionProbeRefreshMode.ViaScripting;
+        baker.mode = ReflectionProbeMode.Realtime;
+        baker.timeSlicingMode = ReflectionProbeTimeSlicingMode.NoTimeSlicing;
+
+        RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+        StartCoroutine(UpdateEnvironment());
+    }
+
+    IEnumerator UpdateEnvironment() {
+        DynamicGI.UpdateEnvironment();
+        baker.RenderProbe();
+        yield return new WaitForEndOfFrame();
+        RenderSettings.customReflectionTexture= baker.texture;
     }
 
     private IEnumerator StartWave(MapLocationScriptable location){

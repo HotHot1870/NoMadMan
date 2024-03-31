@@ -50,6 +50,9 @@ public class PuppetController  : EnemyControllerBase
     }
 
     private void Update() {
+        if(BaseDefenceManager.GetInstance().GetCurHp()<=0)
+            this.enabled = false;
+            
         if( IsThisDead )
             return;
         
@@ -71,7 +74,7 @@ public class PuppetController  : EnemyControllerBase
         }
 
         // attack wall handler
-        if(m_CanAttack && !m_IsNeted){
+        if(m_CanAttack && !m_IsNeted && BaseDefenceManager.GetInstance().GetCurHp()>0){
             if(m_AttackDelay <=0){
                 // attack
                 StartCoroutine(Attack());

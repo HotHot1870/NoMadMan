@@ -26,7 +26,7 @@ public class FireballEmitter : MonoBehaviour
         }
         
         bool shouldAim = false;
-        shouldAim = 0.5f > Random.Range(0f,1f);
+        shouldAim = 0.65f > Random.Range(0f,1f);
         Vector3 randomAngel = Vector3.zero;
         Vector3 targetPos = Vector3.zero;
         if(shouldAim){

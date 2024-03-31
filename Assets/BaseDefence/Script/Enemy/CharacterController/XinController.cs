@@ -184,6 +184,7 @@ public class XinController : EnemyControllerBase
     }
 
     public IEnumerator SetResult(){
+        m_IsDyingEffect = true;
         if(m_SpawnBall != null)
             Destroy(m_SpawnBall);
 
@@ -202,6 +203,11 @@ public class XinController : EnemyControllerBase
             }
             yield return null;
         }
+        m_AllXinBodyPart.RemoveAll(s => s == null);
+        foreach (var item in m_AllXinBodyPart)
+        {
+            Destroy(item.gameObject);
+        }
         yield return new WaitForSeconds(0.5f);
         BaseDefenceManager.GetInstance().LookAtField();
         // spawn dying xin
@@ -216,6 +222,7 @@ public class XinController : EnemyControllerBase
     // xin die , win
     protected override void OnDead(){
         base.OnDead();
+        Destroy(this.gameObject,0.1f);
         
     }
 

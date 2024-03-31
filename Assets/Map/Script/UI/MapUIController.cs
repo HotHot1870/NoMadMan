@@ -174,7 +174,7 @@ public class MapUIController : MonoBehaviour
                 //no selected weapon
                 m_ChooseWeaponBtns[index].Init(index , null);
             }else{
-                m_ChooseWeaponBtns[index].Init(index ,targetGunScriptable.DisplayImage);
+                m_ChooseWeaponBtns[index].Init(index ,targetGunScriptable.WhiteImage ,targetGunScriptable.DisplayImage);
 
             }
             

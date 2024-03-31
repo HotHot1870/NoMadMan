@@ -11,6 +11,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private TMP_Text m_ResultTitle;
+    [SerializeField] private TMP_Text m_ScrapGainBouns;
     [SerializeField] private TMP_Text m_HpLeft;
     [SerializeField] private TMP_Text m_DifficultyBouns;
     [SerializeField] private TMP_Text m_TotalGainText;
@@ -50,7 +51,6 @@ public class BaseDefenceResultPanel : MonoBehaviour
         if (!isWin)
         {
             // lose
-            m_CloseBtn.gameObject.SetActive(true);
             MainGameManager.GetInstance().ChangeBGM(BGM.Defeated,0f);
         }else{
             // win BGM
@@ -62,18 +62,19 @@ public class BaseDefenceResultPanel : MonoBehaviour
         m_ResultTitle.text = isWin?"Coast Clear":"Defeated";
         m_DifficultyBouns.text = "";
         m_HpLeft.text = "";
+        m_ScrapGainBouns.text = "";
 
         for (int i = 0; i < m_EnemyBlockParent.childCount; i++)
         {
             Destroy(m_EnemyBlockParent.GetChild(i).gameObject);
         }
         m_TotalGainText.text = "";
-        if(isWin)
-            StartCoroutine(ShowEnemyBlockOneByOne());
+        StartCoroutine(ShowEnemyBlockOneByOne());
     }
      
     private IEnumerator ShowEnemyBlockOneByOne(){
         yield return new WaitForSeconds(1.25f);
+
         var allenemy = MainGameManager.GetInstance().GetAllEnemy();
         foreach (var item in m_AllKilledEnemy.Distinct())
         {
@@ -87,22 +88,22 @@ public class BaseDefenceResultPanel : MonoBehaviour
             enemyBlockController.Init(enemyScriptable);
             yield return new WaitForSeconds(0.15f);
             int currentCount = 1;
+            m_TotalGain+=item.GooOnKill;
+            m_ScrapGainBouns.text = "Scrap Gain : "+m_TotalGain;
             enemyBlockController.SetText( currentCount.ToString() );
 
             int totalKillCount = m_AllKilledEnemy.Where(x => x == item).Count();
+            
             while (currentCount<totalKillCount)
             {
                 m_AudioPlayer.PlayOneShot(m_SpawnSound);
+                m_TotalGain+=item.GooOnKill;
+                m_ScrapGainBouns.text = "Scrap Gain : "+m_TotalGain;
                 currentCount++;
                 enemyBlockController.SetText( currentCount.ToString() );
                 enemyBlockController.PlayGrowAnimation();
                 yield return new WaitForSeconds(0.15f);
             }
-        }
-        
-        foreach (var item in m_AllKilledEnemy)
-        {
-            m_TotalGain += item.GooOnKill;
         }
 
 

@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 742f5454c003b87459f6aee8fd21a416, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: a5f44aac251411741b997536f263f4e5, type: 2}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Get 10k goo
+  m_text: Get 100k Scrap
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -273,10 +273,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.4
+  m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -9893,6 +9893,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5640ead02c02648458e3e2ea5246035c, type: 2}
   - {fileID: 11400000, guid: 49d76e28b8b9bb54ea308eef1e264acb, type: 2}
   - {fileID: 11400000, guid: 6e63d1e21afaa914eaf9a13eae94d498, type: 2}
+  - {fileID: 11400000, guid: ba12c099e3db0624ea106a8c8bb8a9aa, type: 2}
   m_LoadingCanvas: {fileID: 1435346224}
   m_LoadAmountImage: {fileID: 190365640}
   m_BgAnimator: {fileID: 1870043632}
@@ -9904,6 +9905,8 @@ MonoBehaviour:
   m_BattleBGM: {fileID: 8300000, guid: 7b4866e44a7e6754c89520d2f27cdab2, type: 3}
   m_DefeatedBGM: {fileID: 8300000, guid: ff62009a4e5f5374cbaebfc4a88d3364, type: 3}
   m_BGMplayer: {fileID: 556049539}
+  m_RedFog: {r: 0.5882353, g: 0, b: 0, a: 1}
+  m_WhiteFog: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!114 &1526301688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17899,7 +17902,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!33 &480398261909874241
 MeshFilter:
@@ -18437,7 +18440,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3206639075553749737
 Transform:
@@ -18519,7 +18522,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3588152434714540430
 Transform:

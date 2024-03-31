@@ -25,6 +25,7 @@ public class GunScriptable : ScriptableObject
     public string DisplayName;
     public float UnlockCost = 10;
     public Sprite DisplayImage;
+    public Sprite WhiteImage;
     public GameObject FPSPrefab;
     public AudioClip ShootSound;
 

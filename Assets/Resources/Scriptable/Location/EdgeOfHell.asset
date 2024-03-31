@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 19
   DisplayName: EdgeOfHell
-  LockBy: 06000000
+  LockBy: 12000000
   Level: 3
   Prefab: {fileID: 4132685869403777302, guid: 079b83cec01edb04ba13218ddda3ade9, type: 3}
   Pos: {x: -20, y: 0, z: 0}
   StartDialogId: 20
   EndDialogId: -1
-  HealthMutation: 0
+  HealthMutation: 100
   DamageMutation: 200
-  SpeedMutation: 50
+  SpeedMutation: 20
   ExtraReward: 1.9
   NormalWavesCount: 2
-  NormalWavesStrength: 30
+  NormalWavesStrength: 65
   NormalWaveEnemy: 00000000010000000200000005000000
-  FinalWaveStrength: 35
-  FinalWaveEnemy: 00000000010000000200000005000000
+  FinalWaveStrength: 71
+  FinalWaveEnemy: 0000000001000000020000000500000009000000

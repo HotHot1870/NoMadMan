@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 21
   DisplayName: InMemoryOf
-  LockBy: 08000000
+  LockBy: ffffffff
   Level: 3
   Prefab: {fileID: 8425076174121835332, guid: 831153cb2dda77845adbecf817027f97, type: 3}
   Pos: {x: 113, y: 0, z: 0}
   StartDialogId: -1
   EndDialogId: -1
-  HealthMutation: 0
+  HealthMutation: 25
   DamageMutation: 0
-  SpeedMutation: 0
-  ExtraReward: 0
+  SpeedMutation: 25
+  ExtraReward: 1
   NormalWavesCount: 2
   NormalWavesStrength: 35
-  NormalWaveEnemy: 00000000010000000200000005000000
-  FinalWaveStrength: 35
-  FinalWaveEnemy: 00000000010000000200000005000000
+  NormalWaveEnemy: 0000000001000000020000000500000009000000
+  FinalWaveStrength: 1
+  FinalWaveEnemy: 0000000001000000020000000500000009000000

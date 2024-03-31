@@ -140,16 +140,16 @@ public class MapManager : MonoBehaviour
             return;
         }
         // Red fog in level 2 and 3 (last 2 level)
-        RenderSettings.fogColor = selectedLevel <2?m_WhiteFog:m_RedFog;
         RenderSettings.fogStartDistance = selectedLevel <2?35f:60f;
         RenderSettings.fogEndDistance = selectedLevel <2?100f:125f;
+        RenderSettings.skybox= targetEnvironment.SkyBox ;
+        
+        MainGameManager.GetInstance().SetFog(selectedLevel>=2);
 
         m_SpawnedEnvironment = Instantiate(targetEnvironment.Prefeb,m_MapEnvironemntParent);
         // change sky box
-        RenderSettings.skybox= targetEnvironment.SkyBox ;
-        ChangeSkyBox();
     }
-    
+    /*
     private void ChangeSkyBox() {
         if(baker == null)
             baker = gameObject.AddComponent<ReflectionProbe>();
@@ -170,5 +170,5 @@ public class MapManager : MonoBehaviour
         baker.RenderProbe();
         yield return new WaitForEndOfFrame();
         RenderSettings.customReflectionTexture= baker.texture;
-    }
+    }*/
 }

@@ -16,7 +16,6 @@ public class ElwoodController : EnemyControllerBase
     public override void Init(EnemyControllerInitConfig config)
     {
         base.Init(config);
-        
         m_AttackDelay = config.scriptable.AttackDelay + m_AttackStartUp;
     }
     
@@ -28,10 +27,16 @@ public class ElwoodController : EnemyControllerBase
         yield return null;
 
         m_Self.transform.LookAt(new Vector3(CameraPos.x,m_Self.transform.position.y,CameraPos.z));
+        var randomLook = Vector3.up*Random.Range(-180f,180);
+        m_Self.transform.localEulerAngles = randomLook;
+        HpCanvas.transform.localEulerAngles -=randomLook;
         
     }
     
     private void Update() {
+        if(BaseDefenceManager.GetInstance().GetCurHp()<=0)
+            this.enabled = false;
+            
         if( IsThisDead )
             return;
 

@@ -25,6 +25,7 @@ public class SwitchWeaponController : MonoBehaviour
             {
                 m_AllWeaponSlot[index].Init(
                     index,
+                    targetGunScriptable.WhiteImage,
                     targetGunScriptable.DisplayImage
                 ); 
                 BaseDefenceManager.GetInstance().GetGunShootController().SetUpGun(index,targetGunScriptable );
@@ -32,6 +33,7 @@ public class SwitchWeaponController : MonoBehaviour
                 // no selected weapon
                 m_AllWeaponSlot[index].Init(
                     index,
+                    null,
                     null
                 ); 
             }

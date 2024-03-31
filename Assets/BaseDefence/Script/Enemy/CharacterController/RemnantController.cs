@@ -74,6 +74,9 @@ public class RemnantController : EnemyControllerBase
     }
 
     private void Update() {
+        if(BaseDefenceManager.GetInstance().GetCurHp()<=0)
+            this.enabled = false;
+            
         if( IsThisDead )
             return;
 
@@ -155,7 +158,7 @@ public class RemnantController : EnemyControllerBase
     }
 
     public IEnumerator Attack(){
-        while (!IsThisDead)
+        while (!IsThisDead && BaseDefenceManager.GetInstance().GetCurHp()>0)
         {
             if(m_IsNeted){
                 yield return null;
