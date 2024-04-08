@@ -271,7 +271,7 @@ public class GunShootController : MonoBehaviour
                 var bullet = Instantiate(m_AllProjectile[BulletType.BasicBullet].Prefab);
                 // set spawn point to gun point
                 bullet.transform.position = BaseDefenceManager.GetInstance().GetGunModelController().GetGunPoint();
-                bullet.GetComponent<BulletController>().Init(hitEnvironmentAndEnemy.point);
+                bullet.GetComponent<BulletController>().Init(hitEnvironment.point);
             break;
             case BulletType.Puncture:
                 RaycastHit[] hits;

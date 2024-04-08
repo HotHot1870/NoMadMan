@@ -50,7 +50,16 @@ public class CreditController : MonoBehaviour
         if(showBG)
             StartCoroutine(ShowBG());
 
-        StartCoroutine(ShowCridit());
+        
+        for (int i = 0; i < m_AllTextGroup.Count; i++)
+        {
+            m_AllTextGroup[i].alpha = 0;
+        }
+        m_PlayerTitleCanvas.alpha = 0;
+        m_PlayerContentCanvas.alpha = 0;
+        m_PlayerNameCanvas.alpha = 0;
+        
+        m_ShowCridit = StartCoroutine(ShowCridit());
     }
 
     private IEnumerator ShowBG(){

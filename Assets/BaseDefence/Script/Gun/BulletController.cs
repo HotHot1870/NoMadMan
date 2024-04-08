@@ -17,9 +17,10 @@ public class BulletController : MonoBehaviour
         m_Destination = destination;
         m_StartDistince = Vector3.Distance(m_Self.position, m_Destination);
         m_TimeNeedToReach = m_StartDistince / m_Speed;
-        if(m_StartDistince<3){
+        if(m_StartDistince<2.5f){
             // too close , instade delete instead, or bullet looks odd
-            StartCoroutine(RemoveEarly());
+            Destroy(this.gameObject);
+            //StartCoroutine(RemoveEarly());
             return;
         }
         StartCoroutine(Move());

@@ -14,6 +14,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button m_ClearDataBtn;
     [SerializeField] private Button m_GainGooBtn;
     [SerializeField] private Button m_UnlockAllLevelBtn;
+    [SerializeField] private Button m_ADToggleBtn;
+    [SerializeField] private TMP_Text m_ADToggleText;
     [SerializeField] private Image m_Black;
     [SerializeField] private AnimationCurve m_BlackFadeCurve;
     [SerializeField] private GameObject m_OptionPanel;
@@ -31,6 +33,9 @@ public class MainMenuController : MonoBehaviour
         });
         m_UnlockAllLevelBtn.onClick.AddListener(MainGameManager.GetInstance().UnlockAllLevel);
 
+        string toggleText = (int)MainGameManager.GetInstance().GetData<int>("AD")==1?"ON":"OFF";
+        m_ADToggleText.text = "AD " +toggleText;
+        m_ADToggleBtn.onClick.AddListener(ToggleAd);
 
         m_ClearDataBtn.onClick.AddListener(()=>{
             PlayerPrefs.DeleteAll();
@@ -64,6 +69,14 @@ public class MainMenuController : MonoBehaviour
 
         MainGameManager.GetInstance().AddOnClickBaseAction(m_CreditBtn,m_CreditBtn.GetComponent<RectTransform>());
         m_CreditBtn.onClick.AddListener(ShowCredit);
+    }
+
+    private void ToggleAd(){
+        MainGameManager.GetInstance().SaveData<int>("AD",
+        (int)MainGameManager.GetInstance().GetData<int>("AD")==1?0:1);
+
+        string toggleText = (int)MainGameManager.GetInstance().GetData<int>("AD")==1?"ON":"OFF";
+        m_ADToggleText.text = "AD " +toggleText;
     }
 
     private void ShowCredit(){

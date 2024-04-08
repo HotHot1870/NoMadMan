@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ExtendedButtons;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -12,11 +13,12 @@ public class AdSliderAndBtn
     public Button2D StopBtn;
 }
 
-public class AdPanel : MonoBehaviour
+public class AdPanel : MonoBehaviour , IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private List<AdSliderAndBtn> m_AllSlider = new List<AdSliderAndBtn>();
     [SerializeField] private Button2D m_SkipBtn;
+    [SerializeField] private Button2D m_ClaimBtn;
     [SerializeField] private GameObject m_TotalGainPanel;
     [SerializeField] private AnimationCurve m_Curve;
     [SerializeField] private TMP_Text m_TotalGainText;
@@ -24,13 +26,17 @@ public class AdPanel : MonoBehaviour
     [SerializeField] private AudioSource m_AudioSource;
     [SerializeField] private AudioClip m_Hit;
     [SerializeField] private AudioClip m_Miss;
+    [SerializeField] string _androidAdUnitId = "Rewarded_Android";
+    [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     private int m_ShowSliderIndex = -1;
     private int m_PlayerHitCount = 0;
     private float m_TimePass = 0;
     private float m_OneLoopTimeNeed = 2f;
     private float m_BaseGain = 0;
+    private string m_ADUnitId = null; // This will remain null for unsupported platforms
 
     public void Init(float baseGain){
+        Advertisement.Load(m_ADUnitId, this);
         m_Self.SetActive(true);
         m_Ring.sizeDelta = Vector2.zero;
         m_BaseGain = baseGain;
@@ -46,6 +52,54 @@ public class AdPanel : MonoBehaviour
         ShowNextSlider();
     }
     
+    public void OnUnityAdsAdLoaded(string adUnitId)
+    {
+    #if UNITY_EDITOR
+        Debug.Log("Ad Loaded: " + adUnitId);
+ 
+    #endif
+        if (adUnitId.Equals(m_ADUnitId))
+        {
+            m_ClaimBtn.onClick.AddListener(ShowAd);
+        }
+    }
+
+    public void ShowAd()
+    {
+        m_ClaimBtn.interactable = false;
+        if((int)MainGameManager.GetInstance().GetData<int>("AD")==1){
+            // Then show the ad:
+            Advertisement.Show(m_ADUnitId, this);
+        }else{
+            MainGameManager.GetInstance().ChangeGooAmount(m_BaseGain);
+        }
+        MainGameManager.GetInstance().LoadSceneWithTransition("Map",()=>MapManager.GetInstance().ShowEndDefenceDialog());
+        MainGameManager.GetInstance().ChangeBGM(BGM.Map);
+    }
+
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (adUnitId.Equals(m_ADUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        {
+            // Grant a reward.
+            MainGameManager.GetInstance().ChangeGooAmount(m_BaseGain);
+        }
+    }
+    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
+ 
+    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
+ 
+    public void OnUnityAdsShowStart(string adUnitId) { }
+    public void OnUnityAdsShowClick(string adUnitId) { }
+ 
 
     private void OnClickSkip(){
         MainGameManager.GetInstance().LoadSceneWithTransition("Map",()=>MapManager.GetInstance().ShowEndDefenceDialog());
@@ -69,8 +123,14 @@ public class AdPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_IOS
+        m_ADUnitId = _iOSAdUnitId;
+#elif UNITY_ANDROID
+        m_ADUnitId = _androidAdUnitId;
+#endif
         MainGameManager.GetInstance().AddNewAudioSource(m_AudioSource);
         MainGameManager.GetInstance().AddOnClickBaseAction(m_SkipBtn, m_SkipBtn.GetComponent<RectTransform>());
+        MainGameManager.GetInstance().AddOnClickBaseAction(m_ClaimBtn,m_ClaimBtn.GetComponent<RectTransform>());
         m_SkipBtn.onClick.AddListener(OnClickSkip);
         for (int i = 0; i < m_AllSlider.Count; i++)
         {

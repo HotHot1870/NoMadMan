@@ -46,6 +46,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
     public void Init(bool isWin){
         if(m_Self.activeSelf)
             return;
+        MainGameManager.GetInstance().InitAd();
 
         // End game Music
         if (!isWin)
@@ -125,7 +126,6 @@ public class BaseDefenceResultPanel : MonoBehaviour
         m_AudioPlayer.PlayOneShot(m_ShotSound);
         
         
-        MainGameManager.GetInstance().ChangeGooAmount(m_TotalGain);
         m_CloseBtn.gameObject.SetActive(true);
     }
 
@@ -141,7 +141,7 @@ public class BaseDefenceResultPanel : MonoBehaviour
             MainGameManager.GetInstance().LoadSceneWithTransition("EndGame");
             MainGameManager.GetInstance().ChangeBGM(BGM.MainMenu);
         }else{
-            if(m_IsWin){
+            if(m_IsWin && MainGameManager.GetInstance().IsAdLoaded()){
                 // win , show ad panel if 
                 m_AdPanel.gameObject.SetActive(true);
                 m_AdPanel.Init(m_TotalGain);

@@ -55,6 +55,8 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private Color m_RedFog;
     [SerializeField] private Color m_WhiteFog;
     private ReflectionProbe baker;
+    [Header("AD")]
+    [SerializeField] private AdsInitializer m_AdsInitializer;
 
     
 #if UNITY_EDITOR
@@ -116,6 +118,14 @@ public class MainGameManager : MonoBehaviour
         });
     }
 
+    public void InitAd(){
+        m_AdsInitializer.InitializeAds();
+    }
+
+    public bool IsAdLoaded(){
+        return m_AdsInitializer.m_IsLoadAdSuccess;
+    }
+
     private void OnClickStartSound(RectTransform rectTransform = null){
         m_AudioPlayer.PlayOneShot(m_OnClickStartSound);
         if(rectTransform != null){
@@ -158,7 +168,7 @@ public class MainGameManager : MonoBehaviour
         }else{
             SaveData<float>("BGMVolume",0.5f);
         }
-		Application.targetFrameRate = 50;
+		Application.targetFrameRate = 45;
         
         // unlock pistol
         SaveData<int>("WeaponUnlock"+m_AllWeapon[0].Id.ToString(),1);
